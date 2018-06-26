@@ -11,7 +11,7 @@
     <module>cdc-modelo</module>
     <module>cdc-dao</module>
     <module>cdc-servicio</module>
-    <module>cdc-loginws</module>
+    <module>cdc-acuario</module>
   </modules>
   <dependencyManagement>
         <dependencies>        
@@ -36,6 +36,6 @@
         </dependencies>
     </dependencyManagement>
     <build>
-        <finalName>web</finalName>
+        <finalName>cdc</finalName>
     </build>
 </project>
