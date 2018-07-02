@@ -49,6 +49,8 @@ public class UsuarioResource {
     
     @Inject
     UsuarioService us;
+    // @Inject
+   // Usuario usuarioModelo;
     
    // @Inject
     private KeyGenerator keyGenerator;
@@ -108,10 +110,13 @@ public class UsuarioResource {
         @Consumes(MediaType.APPLICATION_JSON)
         @Produces(MediaType.APPLICATION_JSON)
 	public Response registrarUsuario(UsuarioReg usReg) throws JSONException {
-                System.out.println("***->registrando..."+usReg.correo);
+            
+               
+                System.out.println("***->registrando..."+usReg.getNombre());
+                
 		String result = "Product created : " + usReg;
               JSONObject object = new JSONObject();
-              object.put("correo", usReg.correo);
+              object.put("nombre", usReg.getNombre());
               
 		return Response.status(202).entity(object.toString()).build();
 		
