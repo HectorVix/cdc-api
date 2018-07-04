@@ -9,6 +9,7 @@ import cdc.com.api.servicio.UsuarioService;
 import cdc.com.api.modelo.Usuario;
 
 
+
 import java.security.Key;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -109,10 +110,10 @@ public class UsuarioResource {
 	@Path("/reg")
         @Consumes(MediaType.APPLICATION_JSON)
         @Produces(MediaType.APPLICATION_JSON)
-	public Response registrarUsuario(UsuarioReg usReg) throws JSONException {
+	public Response registrarUsuario(Usuario usReg) throws JSONException {
             
                
-                System.out.println("***->registrando..."+usReg.getNombre());
+                System.out.println("***->registrandoM..."+usReg.getNombre());
                 
 		String result = "Product created : " + usReg;
               JSONObject object = new JSONObject();

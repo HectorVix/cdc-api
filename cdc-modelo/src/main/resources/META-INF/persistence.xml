@@ -4,5 +4,7 @@
     <jta-data-source>dsCDC</jta-data-source>
     <class>cdc.com.api.modelo.Usuario</class>
     <class>cdc.com.api.modelo.Rol</class>
+    <class>cdc.com.api.modelo.Jerarquizacion</class>
+    <class>cdc.com.api.modelo.RastreoElemento</class>
   </persistence-unit>
 </persistence>
