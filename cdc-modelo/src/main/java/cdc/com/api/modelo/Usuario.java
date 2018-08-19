@@ -7,6 +7,7 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -62,6 +65,14 @@ public class Usuario implements Serializable {
     private String email;
     @Column(name = "contrasena")
     private String contrasena;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Accion> accionList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Fuente> fuenteList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Elemento> elementoList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Contactos> contactosList;
     @JoinColumn(name = "Rol_rol_id", referencedColumnName = "rol_id")
     @ManyToOne(optional = false)
     private Rol rolrolid;
@@ -135,6 +146,42 @@ public class Usuario implements Serializable {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    @XmlTransient
+    public List<Accion> getAccionList() {
+        return accionList;
+    }
+
+    public void setAccionList(List<Accion> accionList) {
+        this.accionList = accionList;
+    }
+
+    @XmlTransient
+    public List<Fuente> getFuenteList() {
+        return fuenteList;
+    }
+
+    public void setFuenteList(List<Fuente> fuenteList) {
+        this.fuenteList = fuenteList;
+    }
+
+    @XmlTransient
+    public List<Elemento> getElementoList() {
+        return elementoList;
+    }
+
+    public void setElementoList(List<Elemento> elementoList) {
+        this.elementoList = elementoList;
+    }
+
+    @XmlTransient
+    public List<Contactos> getContactosList() {
+        return contactosList;
+    }
+
+    public void setContactosList(List<Contactos> contactosList) {
+        this.contactosList = contactosList;
     }
 
     public Rol getRolrolid() {

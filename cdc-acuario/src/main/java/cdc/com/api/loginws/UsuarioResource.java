@@ -6,8 +6,9 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 
 import cdc.com.api.servicio.UsuarioService;
+import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Usuario;
-
+import cdc.com.api.modelo.Elemento;
 
 
 import java.security.Key;
@@ -50,8 +51,8 @@ public class UsuarioResource {
     
     @Inject
     UsuarioService us;
-    // @Inject
-   // Usuario usuarioModelo;
+    @Inject
+    ElementoService elementoservicio;
     
    // @Inject
     private KeyGenerator keyGenerator;
@@ -110,18 +111,29 @@ public class UsuarioResource {
 	@Path("/reg")
         @Consumes(MediaType.APPLICATION_JSON)
         @Produces(MediaType.APPLICATION_JSON)
-	public Response registrarUsuario(Usuario usReg) throws JSONException {
-            
-               
+	public Response registrarUsuario(Usuario usReg) throws JSONException {                         
                 System.out.println("***->registrandoM..."+usReg.getNombre());
-                
-		String result = "Product created : " + usReg;
+                us.save(usReg);              
               JSONObject object = new JSONObject();
               object.put("nombre", usReg.getNombre());
               
 		return Response.status(202).entity(object.toString()).build();
 		
 	}
+          @POST
+    @Path("/regelemento")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response registrarElemento(Elemento elemento) throws JSONException {
+        System.out.println("***->Registrando Elemento..." + elemento.getCodigo());
+      Usuario us1 = new Usuario ();
+         us1.setUsuarioId(1);
+         elemento.setUSUARIOusuarioid(us1);
+      elementoservicio.save(elemento);
+        JSONObject object = new JSONObject();
+        object.put("Elemento creado", elemento.getCodigo());
+        return Response.status(202).entity(object.toString()).build();
+    }
       
       
 }

@@ -6,5 +6,32 @@
     <class>cdc.com.api.modelo.Rol</class>
     <class>cdc.com.api.modelo.Jerarquizacion</class>
     <class>cdc.com.api.modelo.RastreoElemento</class>
+    <class>cdc.com.api.modelo.Elemento</class>
+    <class>cdc.com.api.modelo.Planta</class>
+    <class>cdc.com.api.modelo.Vertebrado</class>
+    <class>cdc.com.api.modelo.Sitio</class>
+    <class>cdc.com.api.modelo.Area</class>
+    <class>cdc.com.api.modelo.Foto</class>
+    <class>cdc.com.api.modelo.Caracterizacion</class>
+    <class>cdc.com.api.modelo.Proteccion</class>
+    <class>cdc.com.api.modelo.Accion</class>
+    <class>cdc.com.api.modelo.Dispersion</class>
+    <class>cdc.com.api.modelo.Contactos</class>
+    <class>cdc.com.api.modelo.Subnacional</class>
+    <class>cdc.com.api.modelo.Rastreo</class>
+    <class>cdc.com.api.modelo.Proyecto</class>
+    <class>cdc.com.api.modelo.Protocolo</class>
+    <class>cdc.com.api.modelo.Global</class>
+    <class>cdc.com.api.modelo.Identificador</class>
+    <class>cdc.com.api.modelo.Ecovisita</class>
+    <class>cdc.com.api.modelo.Ecomonitoreo</class>
+    <class>cdc.com.api.modelo.Fuente</class>
+    <class>cdc.com.api.modelo.Transaccion</class>
+    <class>cdc.com.api.modelo.Lotes</class>
+    <class>cdc.com.api.modelo.Localizacion</class>
+    <class>cdc.com.api.modelo.Distribucion</class>
+    <class>cdc.com.api.modelo.Localizador</class>
+    <class>cdc.com.api.modelo.Nacional</class>
+    <class>cdc.com.api.modelo.Componente</class>
   </persistence-unit>
 </persistence>
