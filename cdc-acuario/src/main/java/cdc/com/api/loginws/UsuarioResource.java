@@ -77,17 +77,14 @@ public class UsuarioResource {
     @Produces(APPLICATION_JSON)
     public Response authenticateUser(@FormParam("username") String username,
             @FormParam("password") String password) {
-
+        System.out.println("***->logiando..." + username);
         try {
-
-            // Issue a token for the user
             String token = issueToken(username);
             JSONObject object = new JSONObject();
-            object.put("Elemento creado", token);
-            // return Response.status(202).entity(object.toString()).build();
-            // Return the token on the response
-            return Response.ok().entity(object.toString()).header(AUTHORIZATION, "Bearer " + token).build();
-
+            object.put("access_token", token);
+            object.put("token_type", "bearer");
+            object.put("expires_in", 3599);
+           return Response.ok().entity(object.toString()).header(AUTHORIZATION, "Bearer " + token).build();
         } catch (Exception e) {
             return Response.status(UNAUTHORIZED).build();
         }
