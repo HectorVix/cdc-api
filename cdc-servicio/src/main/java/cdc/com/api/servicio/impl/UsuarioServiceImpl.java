@@ -20,29 +20,37 @@ import javax.inject.Inject;
 public class UsuarioServiceImpl implements UsuarioService{
     
   @Inject
-  private   UsuarioDao usuarioDao1;
+  private   UsuarioDao usuarioDao;
     
 
     public void save(Usuario usuario) {
-      usuarioDao1.save(usuario);
+      usuarioDao.save(usuario);
     }
 
     public void update(Usuario usuario) {
-    usuarioDao1.update(usuario);
+    usuarioDao.update(usuario);
     }
 
     public void delete(Long id) {
      
-    usuarioDao1.delete(id);
+    usuarioDao.delete(id);
     }
 
     public Usuario find(Long id) {
-      return usuarioDao1.find(id);
+      return usuarioDao.find(id);
     }
+    public boolean find_Usuario(String email, String contrasena) {
+       return usuarioDao.find_Usuario(email, contrasena);
+   }
 
+    public int getUsuario_id() {
+        return usuarioDao.getUsuario_id();
+    }
       @Override
     public List<Usuario> all() {
-        return usuarioDao1.all();
+        return usuarioDao.all();
     }
+
+   
 
 }

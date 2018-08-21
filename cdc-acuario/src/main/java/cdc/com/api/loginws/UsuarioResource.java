@@ -8,8 +8,6 @@ import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Usuario;
 import cdc.com.api.modelo.Elemento;
 
-
-
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
 
@@ -47,7 +45,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 public class UsuarioResource {
 
     @Inject
-    UsuarioService us;
+    UsuarioService usuarioService;
     @Inject
     ElementoService elementoservicio;
 
@@ -60,7 +58,7 @@ public class UsuarioResource {
     @Produces(APPLICATION_JSON)
     public java.util.List<Usuario> all() {
         System.out.println("***->Lista de usuarios");
-        return us.all();
+        return usuarioService.all();
     }
 
     @GET
@@ -68,7 +66,7 @@ public class UsuarioResource {
     @Produces(APPLICATION_JSON)
     public Usuario find(@FormParam("id") Long id) {
         System.out.println("***->Lista de usuarios");
-        return us.find(id);
+        return usuarioService.find(id);
     }
 
     @Path("/token")
@@ -78,27 +76,32 @@ public class UsuarioResource {
     public Response authenticateUser(@FormParam("username") String username,
             @FormParam("password") String password) {
         System.out.println("***->logiando..." + username);
+        System.out.println("***->logiando..." + password);
         try {
-            String token = issueToken(username);
+            authenticate(username, password);
+            String token = issueToken(username, usuarioService.getUsuario_id());
             JSONObject object = new JSONObject();
             object.put("access_token", token);
             object.put("token_type", "bearer");
             object.put("expires_in", 3599);
-           return Response.ok().entity(object.toString()).header(AUTHORIZATION, "Bearer " + token).build();
+            return Response.ok().entity(object.toString()).header(AUTHORIZATION, "Bearer " + token).build();
         } catch (Exception e) {
             return Response.status(UNAUTHORIZED).build();
         }
     }
 
     private void authenticate(String username, String password) throws Exception {
-        // Authenticate against a database, LDAP, file or whatever
-        // Throw an Exception if the credentials are invalid
+        boolean us = usuarioService.find_Usuario(username, password);
+        if (us == false) {
+            throw new SecurityException("Usuario o password invalido");
+        }
     }
 
-    private String issueToken(String username) {
+    private String issueToken(String username, int Usuario_id) {
         Key key = keyGenerator.generateKey();
         String jwtToken = Jwts.builder()
                 .setSubject(username)
+                .setId(String.valueOf(Usuario_id))
                 .setIssuer(uriInfo.getAbsolutePath().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(toDate(LocalDateTime.now().plusMinutes(15L)))
@@ -119,10 +122,9 @@ public class UsuarioResource {
     @Produces(APPLICATION_JSON)
     public Response registrarUsuario(Usuario usReg) throws JSONException {
         System.out.println("***->registrandoM..." + usReg.getNombre());
-        us.save(usReg);
+        usuarioService.save(usReg);
         JSONObject object = new JSONObject();
         object.put("nombre", usReg.getNombre());
-
         return Response.status(202).entity(object.toString()).build();
 
     }

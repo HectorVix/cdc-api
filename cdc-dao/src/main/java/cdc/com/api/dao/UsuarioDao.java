@@ -19,6 +19,8 @@ public interface UsuarioDao {
     public void save(Usuario usuario);
     public void update(Usuario usuario);
     public void delete(Long id);
-    public Usuario find(Long id);  
+    public Usuario find(Long id);
+    public boolean find_Usuario(String email, String contrasena);
+    public int getUsuario_id();
     public List<Usuario> all();
 }

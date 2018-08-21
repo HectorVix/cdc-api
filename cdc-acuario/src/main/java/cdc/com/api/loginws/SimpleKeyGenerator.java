@@ -14,7 +14,7 @@ public class SimpleKeyGenerator implements KeyGenerator {
     
     @Override
     public Key generateKey() {
-        String keyString = "simplekey";
+        String keyString = "cdc56up7345";
         Key key = new SecretKeySpec(keyString.getBytes(), 0, keyString.getBytes().length, "DES");
         return key;
     }
