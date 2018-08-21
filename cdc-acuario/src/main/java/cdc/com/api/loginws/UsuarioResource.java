@@ -62,11 +62,12 @@ public class UsuarioResource {
     }
 
     @GET
-    @Path("/usuarioaut")
+    @Path("/{id}")
     @Produces(APPLICATION_JSON)
-    public Usuario find(@FormParam("id") Long id) {
-        System.out.println("***->Lista de usuarios");
-        return usuarioService.find(id);
+    public Usuario find(@PathParam("id") Long id) {
+        System.out.println("***->Usuario get");
+        Usuario us = usuarioService.find(id);
+        return us;
     }
 
     @Path("/token")

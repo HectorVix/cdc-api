@@ -36,9 +36,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
         Usuario usuario = find(id);
         entityManager.remove(usuario);
     }
-
+ 
     public Usuario find(Long id) {
-        return entityManager.find(Usuario.class, id);
+         TypedQuery<Usuario> query = entityManager.createQuery("SELECT u FROM Usuario u WHERE u.usuarioId = :usuarioId", Usuario.class);
+        query.setParameter("usuarioId", id);     
+        Usuario user = query.getSingleResult();
+        return user;
     }
 
     public boolean find_Usuario(String email, String contrasena) {

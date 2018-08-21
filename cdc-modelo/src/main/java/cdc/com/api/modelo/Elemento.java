@@ -54,7 +54,7 @@ public class Elemento implements Serializable {
     @Column(name = "comentario")
     private String comentario;
     @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
