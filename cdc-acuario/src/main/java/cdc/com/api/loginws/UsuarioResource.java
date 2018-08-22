@@ -65,7 +65,7 @@ public class UsuarioResource {
     @Path("/{id}")
     @Produces(APPLICATION_JSON)
     public Usuario find(@PathParam("id") Long id) {
-        System.out.println("***->Usuario get");
+        System.out.println("***->Usuario");
         Usuario us = usuarioService.find(id);
         return us;
     }
@@ -94,7 +94,7 @@ public class UsuarioResource {
     private void authenticate(String username, String password) throws Exception {
         boolean us = usuarioService.find_Usuario(username, password);
         if (us == false) {
-            throw new SecurityException("Usuario o password invalido");
+            throw new SecurityException("Correo o password invalido");
         }
     }
 
@@ -122,7 +122,7 @@ public class UsuarioResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarUsuario(Usuario usReg) throws JSONException {
-        System.out.println("***->registrandoM..." + usReg.getNombre());
+        System.out.println("***->registrando Usuario..." + usReg.getNombre());
         usuarioService.save(usReg);
         JSONObject object = new JSONObject();
         object.put("nombre", usReg.getNombre());
@@ -131,14 +131,13 @@ public class UsuarioResource {
     }
 
     @POST
-    @Path("/regelemento")
+    @Path("/reg/elemento/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarElemento(Elemento elemento) throws JSONException {
+    public Response registrarElemento(Elemento elemento, @PathParam("id") int id) throws JSONException {
         System.out.println("***->Registrando Elemento..." + elemento.getCodigo());
-        Usuario us1 = new Usuario();
-        us1.setUsuarioId(1);
-        elemento.setUSUARIOusuarioid(us1);
+        Usuario us= new Usuario();
+        us.setUsuarioId(id);
         elementoservicio.save(elemento);
         JSONObject object = new JSONObject();
         object.put("Elemento creado", elemento.getCodigo());
