@@ -4,20 +4,25 @@
  * and open the template in the editor.
  */
 package cdc.com.api.dao.impl;
+
 import cdc.com.api.dao.ElementoDao;
 import cdc.com.api.modelo.Elemento;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
  * @author Héctor Vix
- */@Stateless
+ */
+@Stateless
 public class ElementoDaoImpl implements ElementoDao {
-    @PersistenceContext(unitName ="cdcPU")
-     private EntityManager entityManager;
+
+    @PersistenceContext(unitName = "cdcPU")
+    private EntityManager entityManager;
+
     public void save(Elemento elemento) {
         entityManager.persist(elemento);
     }
@@ -27,17 +32,31 @@ public class ElementoDaoImpl implements ElementoDao {
     }
 
     public void delete(Long id) {
-        Elemento elemento = find (id);
+        Elemento elemento = find(id);
         entityManager.remove(elemento);
     }
 
     public Elemento find(Long id) {
-        return  entityManager.find(Elemento.class, id);
-   }
-@Override
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.elementoId = :elementoId", Elemento.class);
+        query.setParameter("elementoId", id);
+        Elemento elemento = query.getSingleResult();
+        return elemento;
+    }
+
+    @Override
     public List<Elemento> all() {
-          return entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class).getResultList();
-    
-   }
-    
+        return entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class).getResultList();
+
+    }
+
+    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico) {
+        System.out.print("codigo:" + codigo);
+        System.out.print("nombrecomun:" + nombrecomun);
+        System.out.print("nombrecientifico:" + nombrecientifico);
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e"
+                + " WHERE (e.codigo like '%" + codigo + "%'"
+                + "OR e.nombrecomun like '%" + nombrecomun + "%'"
+                + " OR e.nombrecientifico like '%" + nombrecientifico + "%')", Elemento.class);
+        return query.getResultList();
+    }
 }

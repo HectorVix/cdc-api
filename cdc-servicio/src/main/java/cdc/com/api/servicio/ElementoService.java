@@ -6,6 +6,7 @@
 package cdc.com.api.servicio;
 import java.util.List;
 import cdc.com.api.modelo.Elemento;
+
 /**
  *
  * @author Héctor Vix
@@ -18,4 +19,6 @@ public interface ElementoService {
     public void delete(Long id);
     public Elemento find(Long id);
     public List<Elemento> all();
+    public List<Elemento> buscarElemento(String codigo,String nombrecomun,String nombrecientifico);
+
 }

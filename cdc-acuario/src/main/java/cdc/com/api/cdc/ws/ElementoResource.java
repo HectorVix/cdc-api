@@ -12,7 +12,6 @@ import javax.ws.rs.Path;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Usuario;
-import cdc.com.api.modelo.Rol;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -42,17 +41,38 @@ public class ElementoResource {
         return elementoServicio.all();
     }
 
+    @GET
+    @Path("/buscar/{codigo}/{nombrecomun}/{nombrecientifico}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Elemento> buscarElemento(@PathParam("codigo") String codigo,
+            @PathParam("nombrecomun") String nombrecomun,
+            @PathParam("nombrecientifico") String nombrecientifico) {
+        System.out.println("***->Lista de Elementos buscados");
+        return elementoServicio.buscarElemento(codigo,nombrecomun,nombrecientifico);
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces(APPLICATION_JSON)
+    public Elemento find(@PathParam("id") Long id) {
+        System.out.println("***->Elemento" + id);
+        Elemento el = elementoServicio.find(id);
+        return el;
+    }
+
     @POST
     @Path("/registro/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarElemento(Elemento elemento, @PathParam("id") int id) throws JSONException {
         System.out.println("***->Registrando Elemento..." + elemento.getCodigo());
-        Usuario us= new Usuario();
+        Usuario us = new Usuario();
         us.setUsuarioId(id);
+        elemento.setUSUARIOusuarioid(us);
         elementoServicio.save(elemento);
         JSONObject object = new JSONObject();
-        object.put("Elemento creado", elemento.getCodigo());
+        object.put("codigo", elemento.getCodigo());
         return Response.status(202).entity(object.toString()).build();
     }
 }

@@ -23,4 +23,6 @@ public interface ElementoDao {
     public Elemento find(Long id);
 
     public List<Elemento> all();
+
+    public List<Elemento> buscarElemento(String codigo,String nombrecientifico,String nombrecomun);
 }

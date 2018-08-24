@@ -46,8 +46,6 @@ public class UsuarioResource {
 
     @Inject
     UsuarioService usuarioService;
-    @Inject
-    ElementoService elementoservicio;
 
     @Inject
     private KeyGenerator keyGenerator;
@@ -81,6 +79,7 @@ public class UsuarioResource {
         try {
             authenticate(username, password);
             String token = issueToken(username, usuarioService.getUsuario_id());
+            System.out.println("***->Id usuario..." + usuarioService.getUsuario_id());
             JSONObject object = new JSONObject();
             object.put("access_token", token);
             object.put("token_type", "bearer");
@@ -128,20 +127,6 @@ public class UsuarioResource {
         object.put("nombre", usReg.getNombre());
         return Response.status(202).entity(object.toString()).build();
 
-    }
-
-    @POST
-    @Path("/reg/elemento/{id}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public Response registrarElemento(Elemento elemento, @PathParam("id") int id) throws JSONException {
-        System.out.println("***->Registrando Elemento..." + elemento.getCodigo());
-        Usuario us= new Usuario();
-        us.setUsuarioId(id);
-        elementoservicio.save(elemento);
-        JSONObject object = new JSONObject();
-        object.put("Elemento creado", elemento.getCodigo());
-        return Response.status(202).entity(object.toString()).build();
     }
 
 }
