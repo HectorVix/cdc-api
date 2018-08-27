@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cdc.com.api.dao;
+package cdc.com.api.servicio;
+
+import cdc.com.api.modelo.Global;
+import java.util.List;
 
 /**
  *
  * @author Héctor Vix
  */
-import cdc.com.api.modelo.Global;
-import java.util.List;
-
-public interface GlobalDao {
-
+public interface GlobalService {
+   
     public void save(Global global);
 
     public void update(Global global);
@@ -25,5 +25,4 @@ public interface GlobalDao {
     public List<Global> all();
 
     public List<Global> buscarGlobal(String codigo, String nombreGlobal);
-
 }

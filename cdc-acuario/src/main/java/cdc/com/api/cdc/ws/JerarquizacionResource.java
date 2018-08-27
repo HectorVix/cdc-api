@@ -13,7 +13,8 @@ import javax.ws.rs.Path;
 import cdc.com.api.servicio.JerarquizacionService;
 import cdc.com.api.modelo.Jerarquizacion;
 import cdc.com.api.servicio.ElementoService;
-
+import cdc.com.api.servicio.GlobalService;
+import cdc.com.api.modelo.Global;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
@@ -36,7 +37,8 @@ public class JerarquizacionResource {
     JerarquizacionService jerarquizacionServicio;
     @Inject
     ElementoService elementoServicio;
-
+   @Inject
+    GlobalService globalServicio;
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Jerarquizacion> all() {
@@ -45,26 +47,29 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/registro")
+    @Path("/registro/global")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarJerarquia(Jerarquizacion jerarquizacion) throws JSONException {
+    public Response registrarJerarquizacionGlobal(Jerarquizacion jerarquizacion) throws JSONException {
         Elemento elemento = new Elemento();
         String codigoe = jerarquizacion.getGlobalList().get(0).getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
         if (existe == false) {
             throw new SecurityException("No existe el elemento");
         }
-        elemento.setElementoId(elementoServicio.getElemento_id());
-        System.out.println("Registrando jeraquia:" + codigoe);
-        System.out.println("Elemento:" + elemento.getElementoId());
+        elemento.setElementoId(elementoServicio.getElemento_id());   
         Jerarquizacion jer = new Jerarquizacion();
         jer.setCodigoe(codigoe);
         jer.setELEMENTOelementoid(elemento);
-        int ligadura = jerarquizacionServicio.save(jer);
-        System.out.println("Ligadura Jerarquizacion:" + ligadura);
+        int jeraquia_id = jerarquizacionServicio.save(jer);
+        Global global = new Global();
+        global=jerarquizacion.getGlobalList().get(0);
+        jer.setJerarquizacionId(jeraquia_id);
+        global.setJERARQUIZACIONjerarquizacionid(jer);
+        globalServicio.save(global);
         JSONObject object = new JSONObject();
         object.put("codigoe", jerarquizacion.getCodigoe());
+        System.out.println("***->Registro jeraquizacion Global:" + codigoe);
         return Response.status(202).entity(object.toString()).build();
     }
 }
