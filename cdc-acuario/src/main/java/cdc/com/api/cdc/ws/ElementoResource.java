@@ -12,6 +12,8 @@ import javax.ws.rs.Path;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Usuario;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -22,6 +24,7 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 /**
  *
@@ -49,7 +52,7 @@ public class ElementoResource {
             @PathParam("nombrecomun") String nombrecomun,
             @PathParam("nombrecientifico") String nombrecientifico) {
         System.out.println("***->Lista de Elementos buscados");
-        return elementoServicio.buscarElemento(codigo,nombrecomun,nombrecientifico);
+        return elementoServicio.buscarElemento(codigo, nombrecomun, nombrecientifico);
     }
 
     @GET
@@ -59,6 +62,24 @@ public class ElementoResource {
         System.out.println("***->Elemento" + id);
         Elemento el = elementoServicio.find(id);
         return el;
+    }
+
+    @GET
+    @Path("/validar/{codigoe}")
+    @Produces(APPLICATION_JSON)
+    public Elemento findElemento(@PathParam("codigoe") String codigoe) throws JSONException, Exception {
+        System.out.println("***->Enontrando elemento:" + codigoe);
+        validarElemento(codigoe);
+        Elemento el = new Elemento();
+        el.setElementoId(elementoServicio.getElemento_id());
+        return el;
+    }
+
+    private void validarElemento(String codigoe) throws Exception {
+        boolean elemento = elementoServicio.findElemento(codigoe);
+        if (elemento == false) {
+            throw new SecurityException("No existe el elemento");
+        }
     }
 
     @POST

@@ -22,6 +22,7 @@ public class ElementoDaoImpl implements ElementoDao {
 
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
+    private int elemento_id;
 
     public void save(Elemento elemento) {
         entityManager.persist(elemento);
@@ -58,5 +59,20 @@ public class ElementoDaoImpl implements ElementoDao {
                 + "OR e.nombrecomun like '%" + nombrecomun + "%'"
                 + " OR e.nombrecientifico like '%" + nombrecientifico + "%')", Elemento.class);
         return query.getResultList();
+    }
+
+    public boolean findElemento(String codigoe) {
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.codigo = :codigo", Elemento.class);
+        query.setParameter("codigo", codigoe);
+        Elemento elemento = query.getSingleResult();
+        if (elemento == null) {
+            return false;
+        } else {
+            elemento_id = elemento.getElementoId();
+            return true;
+        }
+    }
+      public int getElemento_id() {
+        return elemento_id;
     }
 }

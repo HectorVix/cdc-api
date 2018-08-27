@@ -20,5 +20,7 @@ public interface ElementoService {
     public Elemento find(Long id);
     public List<Elemento> all();
     public List<Elemento> buscarElemento(String codigo,String nombrecomun,String nombrecientifico);
+    public boolean findElemento(String codigoe);
+    public int getElemento_id();
 
 }

@@ -34,6 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Jerarquizacion.findByJerarquizacionId", query = "SELECT j FROM Jerarquizacion j WHERE j.jerarquizacionId = :jerarquizacionId")})
 public class Jerarquizacion implements Serializable {
 
+    @Column(name = "codigoe")
+    private String codigoe;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -134,6 +137,14 @@ public class Jerarquizacion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Jerarquizacion[ jerarquizacionId=" + jerarquizacionId + " ]";
+    }
+
+    public String getCodigoe() {
+        return codigoe;
+    }
+
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
     
 }

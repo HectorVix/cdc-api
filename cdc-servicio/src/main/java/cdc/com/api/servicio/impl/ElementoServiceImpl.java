@@ -47,4 +47,12 @@ public class ElementoServiceImpl implements ElementoService {
         return elementoDao.buscarElemento(codigo, nombrecomun, nombrecientifico);
     }
 
+    public boolean findElemento(String codigoe) {
+       return elementoDao.findElemento(codigoe);
+    }
+
+    public int getElemento_id() {
+      return elementoDao.getElemento_id();
+    }
+
 }
