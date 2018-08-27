@@ -15,31 +15,33 @@ import javax.inject.Inject;
  *
  * @author Héctor Vix
  */
-public class JerarquizacionServiceImpl implements JerarquizacionService{
- @Inject
-  private   JerarquizacionDao jerarquizacionDao;
-    public void save(Jerarquizacion jerarquizacion) {
-       jerarquizacionDao.save(jerarquizacion);
+public class JerarquizacionServiceImpl implements JerarquizacionService {
+
+    @Inject
+    private JerarquizacionDao jerarquizacionDao;
+
+    public int save(Jerarquizacion jerarquizacion) {
+        return jerarquizacionDao.save(jerarquizacion);
     }
 
     public void update(Jerarquizacion jerarquizacion) {
-   jerarquizacionDao.update(jerarquizacion);
+        jerarquizacionDao.update(jerarquizacion);
     }
 
     public void delete(Long id) {
-   jerarquizacionDao.delete(id);
+        jerarquizacionDao.delete(id);
     }
 
     public Jerarquizacion find(Long id) {
-    return  jerarquizacionDao.find(id);
+        return jerarquizacionDao.find(id);
     }
 
     public List<Jerarquizacion> all() {
-       return jerarquizacionDao.all();
+        return jerarquizacionDao.all();
     }
 
     public List<Jerarquizacion> buscarJerarquia(String codigoe) {
-     return jerarquizacionDao.buscarJerarquia(codigoe);
+        return jerarquizacionDao.buscarJerarquia(codigoe);
     }
-    
+
 }

@@ -23,16 +23,11 @@ public class JerarquizacionDaoImpl implements JerarquizacionDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Jerarquizacion jerarquizacion) {
+    public int save(Jerarquizacion jerarquizacion) {
         entityManager.persist(jerarquizacion);
-        entityManager.flush();
-        
-        System.out.println("Id generado:"+jerarquizacion.getJerarquizacionId());
-     /*   TypedQuery query = entityManager.createQuery("INSERT INTO `cdc`.`jerarquizacion`(`codigoe`,`ELEMENTO_elemento_id`)\n"
-                + "VALUES('" + jerarquizacion.getCodigoe() + "'," + jerarquizacion.getELEMENTOelementoid().getElementoId() + ");\n"
-                + " SELECT DISTINCT LAST_INSERT_ID() FROM jerarquizacion ;", Jerarquizacion.class);*/
-
-        //   jerarquizacion = query.getSingleResult();
+        entityManager.flush();  
+        System.out.println("id generado jerarquia"+jerarquizacion.getJerarquizacionId());   
+        return jerarquizacion.getJerarquizacionId();
     }
 
     public void update(Jerarquizacion jerarquizacion) {

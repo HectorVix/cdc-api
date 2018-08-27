@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface JerarquizacionDao {
 
-    public void save(Jerarquizacion jerarquizacion);
+    public int save(Jerarquizacion jerarquizacion);
 
     public void update(Jerarquizacion jerarquizacion);
 

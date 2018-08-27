@@ -13,7 +13,8 @@ import java.util.List;
  * @author Héctor Vix
  */
 public interface JerarquizacionService {
-    public void save(Jerarquizacion jerarquizacion);
+
+    public int save(Jerarquizacion jerarquizacion);
 
     public void update(Jerarquizacion jerarquizacion);
 
