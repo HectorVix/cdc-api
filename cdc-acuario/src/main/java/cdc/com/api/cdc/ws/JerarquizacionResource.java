@@ -15,6 +15,8 @@ import cdc.com.api.modelo.Jerarquizacion;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.GlobalService;
 import cdc.com.api.modelo.Global;
+import cdc.com.api.modelo.Nacional;
+import cdc.com.api.servicio.NacionalService;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
@@ -37,8 +39,11 @@ public class JerarquizacionResource {
     JerarquizacionService jerarquizacionServicio;
     @Inject
     ElementoService elementoServicio;
-   @Inject
+    @Inject
     GlobalService globalServicio;
+    @Inject
+    NacionalService nacionalServicio;
+
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Jerarquizacion> all() {
@@ -57,13 +62,13 @@ public class JerarquizacionResource {
         if (existe == false) {
             throw new SecurityException("No existe el elemento");
         }
-        elemento.setElementoId(elementoServicio.getElemento_id());   
+        elemento.setElementoId(elementoServicio.getElemento_id());
         Jerarquizacion jer = new Jerarquizacion();
         jer.setCodigoe(codigoe);
         jer.setELEMENTOelementoid(elemento);
         int jeraquia_id = jerarquizacionServicio.save(jer);
         Global global = new Global();
-        global=jerarquizacion.getGlobalList().get(0);
+        global = jerarquizacion.getGlobalList().get(0);
         jer.setJerarquizacionId(jeraquia_id);
         global.setJERARQUIZACIONjerarquizacionid(jer);
         globalServicio.save(global);
@@ -72,4 +77,33 @@ public class JerarquizacionResource {
         System.out.println("***->Registro jeraquizacion Global:" + codigoe);
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @POST
+    @Path("/registro/nacional")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarJerarquizacionNacional(Jerarquizacion jerarquizacion) throws JSONException {
+        Elemento elemento = new Elemento();
+        String codigoe = jerarquizacion.getNacionalList().get(0).getCodigoe();
+        boolean existe = elementoServicio.findElemento(codigoe);
+        if (existe == false) {
+            throw new SecurityException("No existe el elemento");
+        }
+        elemento.setElementoId(elementoServicio.getElemento_id());
+        Jerarquizacion jer = new Jerarquizacion();
+        jer.setCodigoe(codigoe);
+        jer.setELEMENTOelementoid(elemento);
+        int jeraquia_id = jerarquizacionServicio.save(jer);
+        System.out.println("***->Id ligadura jerararquizacion nacional:" + jeraquia_id);
+        Nacional nacional = new Nacional();
+        nacional = jerarquizacion.getNacionalList().get(0);
+        jer.setJerarquizacionId(jeraquia_id);
+        nacional.setJERARQUIZACIONjerarquizacionid(jer);
+        nacionalServicio.save(nacional);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", jerarquizacion.getCodigoe());
+        System.out.println("***->Registro jeraquizacion Nacional:" + jerarquizacion.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
 }
