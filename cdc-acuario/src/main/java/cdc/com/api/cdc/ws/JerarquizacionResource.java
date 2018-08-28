@@ -16,7 +16,9 @@ import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.GlobalService;
 import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Nacional;
+import cdc.com.api.modelo.Subnacional;
 import cdc.com.api.servicio.NacionalService;
+import cdc.com.api.servicio.SubnacionalService;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
@@ -43,7 +45,9 @@ public class JerarquizacionResource {
     GlobalService globalServicio;
     @Inject
     NacionalService nacionalServicio;
-
+    @Inject
+    SubnacionalService subnacionalServicio;
+    
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Jerarquizacion> all() {
@@ -105,5 +109,30 @@ public class JerarquizacionResource {
         System.out.println("***->Registro jeraquizacion Nacional:" + jerarquizacion.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
-
+  @POST
+    @Path("/registro/subnacional")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarJerarquizacionSubNacional(Jerarquizacion jerarquizacion) throws JSONException {
+        Elemento elemento = new Elemento();        
+       String codigoe = jerarquizacion.getSubnacionalList().get(0).getCodigoe();
+        boolean existe = elementoServicio.findElemento(codigoe);
+        if (existe == false) {
+            throw new SecurityException("No existe el elemento");
+        }
+        elemento.setElementoId(elementoServicio.getElemento_id());
+        Jerarquizacion jer = new Jerarquizacion();
+        jer.setCodigoe(codigoe);
+        jer.setELEMENTOelementoid(elemento);
+        int jeraquia_id = jerarquizacionServicio.save(jer);
+        System.out.println("***->Id ligadura jerararquizacion sub nacional:" + jeraquia_id);
+        Subnacional subnacional = jerarquizacion.getSubnacionalList().get(0);
+        jer.setJerarquizacionId(jeraquia_id);
+        subnacional.setJERARQUIZACIONjerarquizacionid(jer);
+        subnacionalServicio.save(subnacional);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", jerarquizacion.getCodigoe());
+        System.out.println("***->Registro jeraquizacion Subnacional:" + jerarquizacion.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

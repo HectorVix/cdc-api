@@ -5,8 +5,8 @@
  */
 package cdc.com.api.dao.impl;
 
-import cdc.com.api.dao.GlobalDao;
-import cdc.com.api.modelo.Global;
+import cdc.com.api.dao.SubnacionalDao;
+import cdc.com.api.modelo.Subnacional;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,35 +17,32 @@ import javax.persistence.PersistenceContext;
  * @author Héctor Vix
  */
 @Stateless
-public class GlobalDaoImpl implements GlobalDao {
-
-    @PersistenceContext(unitName = "cdcPU")
+public class SubnacionalDaoImp implements SubnacionalDao{
+ @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
-
-    public void save(Global global) {
-        entityManager.persist(global);
+    public void save(Subnacional subnacional) {
+      entityManager.persist(subnacional);
     }
 
-    public void update(Global global) {
-        entityManager.merge(global);
+    public void update(Subnacional subnacional) {
+    entityManager.merge(subnacional);
     }
 
     public void delete(Long id) {
-        Global global = find(id);
-        entityManager.remove(global);
+        Subnacional subnacional = find(id);
+    entityManager.remove(subnacional);
     }
 
-    public Global find(Long id) {
+    public Subnacional find(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    @Override
-    public List<Global> all() {
-        return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
+  @Override
+    public List<Subnacional> all() {
+       return entityManager.createQuery("SELECT s FROM Subnacional s", Subnacional.class).getResultList();
+  }
 
-    }
-
-    public List<Global> buscarGlobal(String codigo, String nombreGlobal) {
+    public List<Subnacional> buscarSubnacional(String codigoe, String nombreSubnacional) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }
