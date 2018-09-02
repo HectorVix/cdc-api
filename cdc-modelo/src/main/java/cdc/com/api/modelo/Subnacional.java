@@ -31,9 +31,40 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Subnacional.findAll", query = "SELECT s FROM Subnacional s")
-    , @NamedQuery(name = "Subnacional.findBySubnacionalId", query = "SELECT s FROM Subnacional s WHERE s.subnacionalId = :subnacionalId")})
+    , @NamedQuery(name = "Subnacional.findBySubnacionalId", query = "SELECT s FROM Subnacional s WHERE s.subnacionalId = :subnacionalId")
+    , @NamedQuery(name = "Subnacional.findByCodigoe", query = "SELECT s FROM Subnacional s WHERE s.codigoe = :codigoe")
+    , @NamedQuery(name = "Subnacional.findByNacion", query = "SELECT s FROM Subnacional s WHERE s.nacion = :nacion")
+    , @NamedQuery(name = "Subnacional.findBySubnacion", query = "SELECT s FROM Subnacional s WHERE s.subnacion = :subnacion")
+    , @NamedQuery(name = "Subnacional.findByNombres", query = "SELECT s FROM Subnacional s WHERE s.nombres = :nombres")
+    , @NamedQuery(name = "Subnacional.findByLoctips", query = "SELECT s FROM Subnacional s WHERE s.loctips = :loctips")
+    , @NamedQuery(name = "Subnacional.findByLestims", query = "SELECT s FROM Subnacional s WHERE s.lestims = :lestims")
+    , @NamedQuery(name = "Subnacional.findByComlestims", query = "SELECT s FROM Subnacional s WHERE s.comlestims = :comlestims")
+    , @NamedQuery(name = "Subnacional.findByAbunds", query = "SELECT s FROM Subnacional s WHERE s.abunds = :abunds")
+    , @NamedQuery(name = "Subnacional.findByComabunds", query = "SELECT s FROM Subnacional s WHERE s.comabunds = :comabunds")
+    , @NamedQuery(name = "Subnacional.findByDists", query = "SELECT s FROM Subnacional s WHERE s.dists = :dists")
+    , @NamedQuery(name = "Subnacional.findByComdists", query = "SELECT s FROM Subnacional s WHERE s.comdists = :comdists")
+    , @NamedQuery(name = "Subnacional.findByLeprots", query = "SELECT s FROM Subnacional s WHERE s.leprots = :leprots")
+    , @NamedQuery(name = "Subnacional.findByComleprots", query = "SELECT s FROM Subnacional s WHERE s.comleprots = :comleprots")
+    , @NamedQuery(name = "Subnacional.findByAmenazs", query = "SELECT s FROM Subnacional s WHERE s.amenazs = :amenazs")
+    , @NamedQuery(name = "Subnacional.findByComamenazs", query = "SELECT s FROM Subnacional s WHERE s.comamenazs = :comamenazs")
+    , @NamedQuery(name = "Subnacional.findByOtraconsids", query = "SELECT s FROM Subnacional s WHERE s.otraconsids = :otraconsids")
+    , @NamedQuery(name = "Subnacional.findByRangos", query = "SELECT s FROM Subnacional s WHERE s.rangos = :rangos")
+    , @NamedQuery(name = "Subnacional.findByFecharevrs", query = "SELECT s FROM Subnacional s WHERE s.fecharevrs = :fecharevrs")
+    , @NamedQuery(name = "Subnacional.findByRazonrs", query = "SELECT s FROM Subnacional s WHERE s.razonrs = :razonrs")
+    , @NamedQuery(name = "Subnacional.findByNecprotecs", query = "SELECT s FROM Subnacional s WHERE s.necprotecs = :necprotecs")
+    , @NamedQuery(name = "Subnacional.findByNecinvents", query = "SELECT s FROM Subnacional s WHERE s.necinvents = :necinvents")
+    , @NamedQuery(name = "Subnacional.findByNecmanejos", query = "SELECT s FROM Subnacional s WHERE s.necmanejos = :necmanejos")
+    , @NamedQuery(name = "Subnacional.findByAutored", query = "SELECT s FROM Subnacional s WHERE s.autored = :autored")
+    , @NamedQuery(name = "Subnacional.findByEdicion", query = "SELECT s FROM Subnacional s WHERE s.edicion = :edicion")
+    , @NamedQuery(name = "Subnacional.findByActualizar", query = "SELECT s FROM Subnacional s WHERE s.actualizar = :actualizar")})
 public class Subnacional implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "subnacional_id")
+    private Integer subnacionalId;
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "nacion")
@@ -87,13 +118,6 @@ public class Subnacional implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "subnacional_id")
-    private Integer subnacionalId;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
@@ -111,39 +135,6 @@ public class Subnacional implements Serializable {
 
     public void setSubnacionalId(Integer subnacionalId) {
         this.subnacionalId = subnacionalId;
-    }
-
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
-    }
-
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (subnacionalId != null ? subnacionalId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Subnacional)) {
-            return false;
-        }
-        Subnacional other = (Subnacional) object;
-        if ((this.subnacionalId == null && other.subnacionalId != null) || (this.subnacionalId != null && !this.subnacionalId.equals(other.subnacionalId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Subnacional[ subnacionalId=" + subnacionalId + " ]";
     }
 
     public String getCodigoe() {
@@ -344,6 +335,39 @@ public class Subnacional implements Serializable {
 
     public void setActualizar(Date actualizar) {
         this.actualizar = actualizar;
+    }
+
+    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
+        return jERARQUIZACIONjerarquizacionid;
+    }
+
+    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
+        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (subnacionalId != null ? subnacionalId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Subnacional)) {
+            return false;
+        }
+        Subnacional other = (Subnacional) object;
+        if ((this.subnacionalId == null && other.subnacionalId != null) || (this.subnacionalId != null && !this.subnacionalId.equals(other.subnacionalId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Subnacional[ subnacionalId=" + subnacionalId + " ]";
     }
     
 }

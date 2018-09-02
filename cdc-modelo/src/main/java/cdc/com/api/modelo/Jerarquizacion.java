@@ -31,11 +31,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Jerarquizacion.findAll", query = "SELECT j FROM Jerarquizacion j")
-    , @NamedQuery(name = "Jerarquizacion.findByJerarquizacionId", query = "SELECT j FROM Jerarquizacion j WHERE j.jerarquizacionId = :jerarquizacionId")})
+    , @NamedQuery(name = "Jerarquizacion.findByJerarquizacionId", query = "SELECT j FROM Jerarquizacion j WHERE j.jerarquizacionId = :jerarquizacionId")
+    , @NamedQuery(name = "Jerarquizacion.findByCodigoe", query = "SELECT j FROM Jerarquizacion j WHERE j.codigoe = :codigoe")})
 public class Jerarquizacion implements Serializable {
 
-    @Column(name = "codigoe")
-    private String codigoe;
+    @Column(name = "estado")
+    private Integer estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,6 +44,11 @@ public class Jerarquizacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "jerarquizacion_id")
     private Integer jerarquizacionId;
+    @Column(name = "codigoe")
+    private String codigoe;
+    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
+    @ManyToOne
+    private Elemento eLEMENTOelementoid;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Global> globalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
@@ -51,9 +57,6 @@ public class Jerarquizacion implements Serializable {
     private List<Subnacional> subnacionalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Rastreo> rastreoList;
-    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
-    @ManyToOne
-    private Elemento eLEMENTOelementoid;
 
     public Jerarquizacion() {
     }
@@ -68,6 +71,22 @@ public class Jerarquizacion implements Serializable {
 
     public void setJerarquizacionId(Integer jerarquizacionId) {
         this.jerarquizacionId = jerarquizacionId;
+    }
+
+    public String getCodigoe() {
+        return codigoe;
+    }
+
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
+    }
+
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
+    }
+
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @XmlTransient
@@ -106,14 +125,6 @@ public class Jerarquizacion implements Serializable {
         this.rastreoList = rastreoList;
     }
 
-    public Elemento getELEMENTOelementoid() {
-        return eLEMENTOelementoid;
-    }
-
-    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
-        this.eLEMENTOelementoid = eLEMENTOelementoid;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -139,12 +150,12 @@ public class Jerarquizacion implements Serializable {
         return "cdc.com.api.modelo.Jerarquizacion[ jerarquizacionId=" + jerarquizacionId + " ]";
     }
 
-    public String getCodigoe() {
-        return codigoe;
+    public Integer getEstado() {
+        return estado;
     }
 
-    public void setCodigoe(String codigoe) {
-        this.codigoe = codigoe;
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
     
 }

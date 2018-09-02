@@ -31,9 +31,41 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nacional.findAll", query = "SELECT n FROM Nacional n")
-    , @NamedQuery(name = "Nacional.findByNacionalId", query = "SELECT n FROM Nacional n WHERE n.nacionalId = :nacionalId")})
+    , @NamedQuery(name = "Nacional.findByNacionalId", query = "SELECT n FROM Nacional n WHERE n.nacionalId = :nacionalId")
+    , @NamedQuery(name = "Nacional.findByCodigoe", query = "SELECT n FROM Nacional n WHERE n.codigoe = :codigoe")
+    , @NamedQuery(name = "Nacional.findByNombren", query = "SELECT n FROM Nacional n WHERE n.nombren = :nombren")
+    , @NamedQuery(name = "Nacional.findByNacion", query = "SELECT n FROM Nacional n WHERE n.nacion = :nacion")
+    , @NamedQuery(name = "Nacional.findByNloctip", query = "SELECT n FROM Nacional n WHERE n.nloctip = :nloctip")
+    , @NamedQuery(name = "Nacional.findByNlestim", query = "SELECT n FROM Nacional n WHERE n.nlestim = :nlestim")
+    , @NamedQuery(name = "Nacional.findByNlestimcom", query = "SELECT n FROM Nacional n WHERE n.nlestimcom = :nlestimcom")
+    , @NamedQuery(name = "Nacional.findByNabund", query = "SELECT n FROM Nacional n WHERE n.nabund = :nabund")
+    , @NamedQuery(name = "Nacional.findByNabundcom", query = "SELECT n FROM Nacional n WHERE n.nabundcom = :nabundcom")
+    , @NamedQuery(name = "Nacional.findByNdist", query = "SELECT n FROM Nacional n WHERE n.ndist = :ndist")
+    , @NamedQuery(name = "Nacional.findByNdistcom", query = "SELECT n FROM Nacional n WHERE n.ndistcom = :ndistcom")
+    , @NamedQuery(name = "Nacional.findByNleprot", query = "SELECT n FROM Nacional n WHERE n.nleprot = :nleprot")
+    , @NamedQuery(name = "Nacional.findByNleprotcom", query = "SELECT n FROM Nacional n WHERE n.nleprotcom = :nleprotcom")
+    , @NamedQuery(name = "Nacional.findByNamenaz", query = "SELECT n FROM Nacional n WHERE n.namenaz = :namenaz")
+    , @NamedQuery(name = "Nacional.findByNamenazcom", query = "SELECT n FROM Nacional n WHERE n.namenazcom = :namenazcom")
+    , @NamedQuery(name = "Nacional.findByNotroconsi", query = "SELECT n FROM Nacional n WHERE n.notroconsi = :notroconsi")
+    , @NamedQuery(name = "Nacional.findByRangon", query = "SELECT n FROM Nacional n WHERE n.rangon = :rangon")
+    , @NamedQuery(name = "Nacional.findByFecharn", query = "SELECT n FROM Nacional n WHERE n.fecharn = :fecharn")
+    , @NamedQuery(name = "Nacional.findByNranrzon", query = "SELECT n FROM Nacional n WHERE n.nranrzon = :nranrzon")
+    , @NamedQuery(name = "Nacional.findByNnecprotec", query = "SELECT n FROM Nacional n WHERE n.nnecprotec = :nnecprotec")
+    , @NamedQuery(name = "Nacional.findByNnecinvent", query = "SELECT n FROM Nacional n WHERE n.nnecinvent = :nnecinvent")
+    , @NamedQuery(name = "Nacional.findByNnecestudi", query = "SELECT n FROM Nacional n WHERE n.nnecestudi = :nnecestudi")
+    , @NamedQuery(name = "Nacional.findByNnecmaejo", query = "SELECT n FROM Nacional n WHERE n.nnecmaejo = :nnecmaejo")
+    , @NamedQuery(name = "Nacional.findByResrn", query = "SELECT n FROM Nacional n WHERE n.resrn = :resrn")
+    , @NamedQuery(name = "Nacional.findByEdautor", query = "SELECT n FROM Nacional n WHERE n.edautor = :edautor")
+    , @NamedQuery(name = "Nacional.findByEdicion", query = "SELECT n FROM Nacional n WHERE n.edicion = :edicion")
+    , @NamedQuery(name = "Nacional.findByActualizar", query = "SELECT n FROM Nacional n WHERE n.actualizar = :actualizar")})
 public class Nacional implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "nacional_id")
+    private Integer nacionalId;
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "nombren")
@@ -89,13 +121,6 @@ public class Nacional implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "nacional_id")
-    private Integer nacionalId;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
@@ -113,39 +138,6 @@ public class Nacional implements Serializable {
 
     public void setNacionalId(Integer nacionalId) {
         this.nacionalId = nacionalId;
-    }
-
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
-    }
-
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (nacionalId != null ? nacionalId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Nacional)) {
-            return false;
-        }
-        Nacional other = (Nacional) object;
-        if ((this.nacionalId == null && other.nacionalId != null) || (this.nacionalId != null && !this.nacionalId.equals(other.nacionalId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Nacional[ nacionalId=" + nacionalId + " ]";
     }
 
     public String getCodigoe() {
@@ -354,6 +346,39 @@ public class Nacional implements Serializable {
 
     public void setActualizar(Date actualizar) {
         this.actualizar = actualizar;
+    }
+
+    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
+        return jERARQUIZACIONjerarquizacionid;
+    }
+
+    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
+        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (nacionalId != null ? nacionalId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Nacional)) {
+            return false;
+        }
+        Nacional other = (Nacional) object;
+        if ((this.nacionalId == null && other.nacionalId != null) || (this.nacionalId != null && !this.nacionalId.equals(other.nacionalId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Nacional[ nacionalId=" + nacionalId + " ]";
     }
     
 }

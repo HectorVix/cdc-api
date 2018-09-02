@@ -30,8 +30,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Sitio.findAll", query = "SELECT s FROM Sitio s")
-    , @NamedQuery(name = "Sitio.findBySitioId", query = "SELECT s FROM Sitio s WHERE s.sitioId = :sitioId")})
+    , @NamedQuery(name = "Sitio.findBySitioId", query = "SELECT s FROM Sitio s WHERE s.sitioId = :sitioId")
+    , @NamedQuery(name = "Sitio.findByCodsitio", query = "SELECT s FROM Sitio s WHERE s.codsitio = :codsitio")})
 public class Sitio implements Serializable {
+
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Oberservaciones> oberservacionesList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -39,22 +43,14 @@ public class Sitio implements Serializable {
     @Basic(optional = false)
     @Column(name = "sitio_id")
     private Integer sitioId;
+    @Column(name = "codsitio")
+    private String codsitio;
     @ManyToMany(mappedBy = "sitioList")
     private List<Localizacion> localizacionList;
     @ManyToMany(mappedBy = "sitioList")
-    private List<Ecomonitoreo> ecomonitoreoList;
-    @ManyToMany(mappedBy = "sitioList")
-    private List<Lotes> lotesList;
-    @ManyToMany(mappedBy = "sitioList")
     private List<Area> areaList;
-    @ManyToMany(mappedBy = "sitioList")
-    private List<Proyecto> proyectoList;
-    @OneToMany(mappedBy = "sITIOsitioid")
-    private List<Localizador> localizadorList;
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<Foto> fotoList;
-    @OneToMany(mappedBy = "sITIOsitioid")
-    private List<Identificador> identificadorList;
 
     public Sitio() {
     }
@@ -71,6 +67,14 @@ public class Sitio implements Serializable {
         this.sitioId = sitioId;
     }
 
+    public String getCodsitio() {
+        return codsitio;
+    }
+
+    public void setCodsitio(String codsitio) {
+        this.codsitio = codsitio;
+    }
+
     @XmlTransient
     public List<Localizacion> getLocalizacionList() {
         return localizacionList;
@@ -78,24 +82,6 @@ public class Sitio implements Serializable {
 
     public void setLocalizacionList(List<Localizacion> localizacionList) {
         this.localizacionList = localizacionList;
-    }
-
-    @XmlTransient
-    public List<Ecomonitoreo> getEcomonitoreoList() {
-        return ecomonitoreoList;
-    }
-
-    public void setEcomonitoreoList(List<Ecomonitoreo> ecomonitoreoList) {
-        this.ecomonitoreoList = ecomonitoreoList;
-    }
-
-    @XmlTransient
-    public List<Lotes> getLotesList() {
-        return lotesList;
-    }
-
-    public void setLotesList(List<Lotes> lotesList) {
-        this.lotesList = lotesList;
     }
 
     @XmlTransient
@@ -108,39 +94,12 @@ public class Sitio implements Serializable {
     }
 
     @XmlTransient
-    public List<Proyecto> getProyectoList() {
-        return proyectoList;
-    }
-
-    public void setProyectoList(List<Proyecto> proyectoList) {
-        this.proyectoList = proyectoList;
-    }
-
-    @XmlTransient
-    public List<Localizador> getLocalizadorList() {
-        return localizadorList;
-    }
-
-    public void setLocalizadorList(List<Localizador> localizadorList) {
-        this.localizadorList = localizadorList;
-    }
-
-    @XmlTransient
     public List<Foto> getFotoList() {
         return fotoList;
     }
 
     public void setFotoList(List<Foto> fotoList) {
         this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Identificador> getIdentificadorList() {
-        return identificadorList;
-    }
-
-    public void setIdentificadorList(List<Identificador> identificadorList) {
-        this.identificadorList = identificadorList;
     }
 
     @Override
@@ -166,6 +125,15 @@ public class Sitio implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Sitio[ sitioId=" + sitioId + " ]";
+    }
+
+    @XmlTransient
+    public List<Oberservaciones> getOberservacionesList() {
+        return oberservacionesList;
+    }
+
+    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
+        this.oberservacionesList = oberservacionesList;
     }
     
 }

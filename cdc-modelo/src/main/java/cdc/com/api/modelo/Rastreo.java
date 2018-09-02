@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,9 +35,83 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Rastreo.findAll", query = "SELECT r FROM Rastreo r")
-    , @NamedQuery(name = "Rastreo.findByRastreoId", query = "SELECT r FROM Rastreo r WHERE r.rastreoId = :rastreoId")})
+    , @NamedQuery(name = "Rastreo.findByRastreoId", query = "SELECT r FROM Rastreo r WHERE r.rastreoId = :rastreoId")
+    , @NamedQuery(name = "Rastreo.findByCodigoe", query = "SELECT r FROM Rastreo r WHERE r.codigoe = :codigoe")
+    , @NamedQuery(name = "Rastreo.findByTropicos", query = "SELECT r FROM Rastreo r WHERE r.tropicos = :tropicos")
+    , @NamedQuery(name = "Rastreo.findByNacion", query = "SELECT r FROM Rastreo r WHERE r.nacion = :nacion")
+    , @NamedQuery(name = "Rastreo.findBySubnacion", query = "SELECT r FROM Rastreo r WHERE r.subnacion = :subnacion")
+    , @NamedQuery(name = "Rastreo.findByClasetax", query = "SELECT r FROM Rastreo r WHERE r.clasetax = :clasetax")
+    , @NamedQuery(name = "Rastreo.findByOrden", query = "SELECT r FROM Rastreo r WHERE r.orden = :orden")
+    , @NamedQuery(name = "Rastreo.findByFamilia", query = "SELECT r FROM Rastreo r WHERE r.familia = :familia")
+    , @NamedQuery(name = "Rastreo.findByGenero", query = "SELECT r FROM Rastreo r WHERE r.genero = :genero")
+    , @NamedQuery(name = "Rastreo.findByNombreg", query = "SELECT r FROM Rastreo r WHERE r.nombreg = :nombreg")
+    , @NamedQuery(name = "Rastreo.findByAutor", query = "SELECT r FROM Rastreo r WHERE r.autor = :autor")
+    , @NamedQuery(name = "Rastreo.findByFuentenom", query = "SELECT r FROM Rastreo r WHERE r.fuentenom = :fuentenom")
+    , @NamedQuery(name = "Rastreo.findByRefnombreg", query = "SELECT r FROM Rastreo r WHERE r.refnombreg = :refnombreg")
+    , @NamedQuery(name = "Rastreo.findByDisttax", query = "SELECT r FROM Rastreo r WHERE r.disttax = :disttax")
+    , @NamedQuery(name = "Rastreo.findByDudatax", query = "SELECT r FROM Rastreo r WHERE r.dudatax = :dudatax")
+    , @NamedQuery(name = "Rastreo.findByNomcomung", query = "SELECT r FROM Rastreo r WHERE r.nomcomung = :nomcomung")
+    , @NamedQuery(name = "Rastreo.findByComtaxg", query = "SELECT r FROM Rastreo r WHERE r.comtaxg = :comtaxg")
+    , @NamedQuery(name = "Rastreo.findByNombren", query = "SELECT r FROM Rastreo r WHERE r.nombren = :nombren")
+    , @NamedQuery(name = "Rastreo.findByNumsinn", query = "SELECT r FROM Rastreo r WHERE r.numsinn = :numsinn")
+    , @NamedQuery(name = "Rastreo.findByNomcomunn", query = "SELECT r FROM Rastreo r WHERE r.nomcomunn = :nomcomunn")
+    , @NamedQuery(name = "Rastreo.findByComtaxn", query = "SELECT r FROM Rastreo r WHERE r.comtaxn = :comtaxn")
+    , @NamedQuery(name = "Rastreo.findByRangog", query = "SELECT r FROM Rastreo r WHERE r.rangog = :rangog")
+    , @NamedQuery(name = "Rastreo.findByFecharevrg", query = "SELECT r FROM Rastreo r WHERE r.fecharevrg = :fecharevrg")
+    , @NamedQuery(name = "Rastreo.findByFormularg", query = "SELECT r FROM Rastreo r WHERE r.formularg = :formularg")
+    , @NamedQuery(name = "Rastreo.findByResprg", query = "SELECT r FROM Rastreo r WHERE r.resprg = :resprg")
+    , @NamedQuery(name = "Rastreo.findByAepeu", query = "SELECT r FROM Rastreo r WHERE r.aepeu = :aepeu")
+    , @NamedQuery(name = "Rastreo.findByFechaaepeu", query = "SELECT r FROM Rastreo r WHERE r.fechaaepeu = :fechaaepeu")
+    , @NamedQuery(name = "Rastreo.findByCites", query = "SELECT r FROM Rastreo r WHERE r.cites = :cites")
+    , @NamedQuery(name = "Rastreo.findByIucn", query = "SELECT r FROM Rastreo r WHERE r.iucn = :iucn")
+    , @NamedQuery(name = "Rastreo.findByPlanscons", query = "SELECT r FROM Rastreo r WHERE r.planscons = :planscons")
+    , @NamedQuery(name = "Rastreo.findByResplan", query = "SELECT r FROM Rastreo r WHERE r.resplan = :resplan")
+    , @NamedQuery(name = "Rastreo.findByResumenman", query = "SELECT r FROM Rastreo r WHERE r.resumenman = :resumenman")
+    , @NamedQuery(name = "Rastreo.findByResresumen", query = "SELECT r FROM Rastreo r WHERE r.resresumen = :resresumen")
+    , @NamedQuery(name = "Rastreo.findByExsitu", query = "SELECT r FROM Rastreo r WHERE r.exsitu = :exsitu")
+    , @NamedQuery(name = "Rastreo.findByInstexsitu", query = "SELECT r FROM Rastreo r WHERE r.instexsitu = :instexsitu")
+    , @NamedQuery(name = "Rastreo.findByEndemismo", query = "SELECT r FROM Rastreo r WHERE r.endemismo = :endemismo")
+    , @NamedQuery(name = "Rastreo.findByRangon", query = "SELECT r FROM Rastreo r WHERE r.rangon = :rangon")
+    , @NamedQuery(name = "Rastreo.findByFecharevrn", query = "SELECT r FROM Rastreo r WHERE r.fecharevrn = :fecharevrn")
+    , @NamedQuery(name = "Rastreo.findByFormularn", query = "SELECT r FROM Rastreo r WHERE r.formularn = :formularn")
+    , @NamedQuery(name = "Rastreo.findByRastreolen", query = "SELECT r FROM Rastreo r WHERE r.rastreolen = :rastreolen")
+    , @NamedQuery(name = "Rastreo.findByLestimn", query = "SELECT r FROM Rastreo r WHERE r.lestimn = :lestimn")
+    , @NamedQuery(name = "Rastreo.findByLeprotn", query = "SELECT r FROM Rastreo r WHERE r.leprotn = :leprotn")
+    , @NamedQuery(name = "Rastreo.findByAbundn", query = "SELECT r FROM Rastreo r WHERE r.abundn = :abundn")
+    , @NamedQuery(name = "Rastreo.findByProtnacion", query = "SELECT r FROM Rastreo r WHERE r.protnacion = :protnacion")
+    , @NamedQuery(name = "Rastreo.findByRefnombren", query = "SELECT r FROM Rastreo r WHERE r.refnombren = :refnombren")
+    , @NamedQuery(name = "Rastreo.findByTransparencian", query = "SELECT r FROM Rastreo r WHERE r.transparencian = :transparencian")
+    , @NamedQuery(name = "Rastreo.findByRangos", query = "SELECT r FROM Rastreo r WHERE r.rangos = :rangos")
+    , @NamedQuery(name = "Rastreo.findByFecharevrs", query = "SELECT r FROM Rastreo r WHERE r.fecharevrs = :fecharevrs")
+    , @NamedQuery(name = "Rastreo.findByFormulars", query = "SELECT r FROM Rastreo r WHERE r.formulars = :formulars")
+    , @NamedQuery(name = "Rastreo.findByRastreoles", query = "SELECT r FROM Rastreo r WHERE r.rastreoles = :rastreoles")
+    , @NamedQuery(name = "Rastreo.findByLestims", query = "SELECT r FROM Rastreo r WHERE r.lestims = :lestims")
+    , @NamedQuery(name = "Rastreo.findByLeprots", query = "SELECT r FROM Rastreo r WHERE r.leprots = :leprots")
+    , @NamedQuery(name = "Rastreo.findByAbunds", query = "SELECT r FROM Rastreo r WHERE r.abunds = :abunds")
+    , @NamedQuery(name = "Rastreo.findByProtsubnac", query = "SELECT r FROM Rastreo r WHERE r.protsubnac = :protsubnac")
+    , @NamedQuery(name = "Rastreo.findByRefnombres", query = "SELECT r FROM Rastreo r WHERE r.refnombres = :refnombres")
+    , @NamedQuery(name = "Rastreo.findByTransparencias", query = "SELECT r FROM Rastreo r WHERE r.transparencias = :transparencias")
+    , @NamedQuery(name = "Rastreo.findByReopc1", query = "SELECT r FROM Rastreo r WHERE r.reopc1 = :reopc1")
+    , @NamedQuery(name = "Rastreo.findByReopc2", query = "SELECT r FROM Rastreo r WHERE r.reopc2 = :reopc2")
+    , @NamedQuery(name = "Rastreo.findByReopc3", query = "SELECT r FROM Rastreo r WHERE r.reopc3 = :reopc3")
+    , @NamedQuery(name = "Rastreo.findByReopc4", query = "SELECT r FROM Rastreo r WHERE r.reopc4 = :reopc4")
+    , @NamedQuery(name = "Rastreo.findByReopc5", query = "SELECT r FROM Rastreo r WHERE r.reopc5 = :reopc5")
+    , @NamedQuery(name = "Rastreo.findByCodfuenten", query = "SELECT r FROM Rastreo r WHERE r.codfuenten = :codfuenten")
+    , @NamedQuery(name = "Rastreo.findByCodfuentes", query = "SELECT r FROM Rastreo r WHERE r.codfuentes = :codfuentes")
+    , @NamedQuery(name = "Rastreo.findByActualizag", query = "SELECT r FROM Rastreo r WHERE r.actualizag = :actualizag")
+    , @NamedQuery(name = "Rastreo.findByActualizan", query = "SELECT r FROM Rastreo r WHERE r.actualizan = :actualizan")
+    , @NamedQuery(name = "Rastreo.findByActualizas", query = "SELECT r FROM Rastreo r WHERE r.actualizas = :actualizas")})
 public class Rastreo implements Serializable {
 
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Oberservaciones> oberservacionesList;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "rastreo_id")
+    private Integer rastreoId;
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "tropicos")
@@ -174,18 +249,10 @@ public class Rastreo implements Serializable {
     @Column(name = "actualizas")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizas;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "rastreo_id")
-    private Integer rastreoId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rASTREOrastreoid")
+    private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Localizacion> localizacionList;
-    @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
-    @ManyToOne
-    private Caracterizacion cARACTERIZACIONcaracterizacionid;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
@@ -203,56 +270,6 @@ public class Rastreo implements Serializable {
 
     public void setRastreoId(Integer rastreoId) {
         this.rastreoId = rastreoId;
-    }
-
-    @XmlTransient
-    public List<Localizacion> getLocalizacionList() {
-        return localizacionList;
-    }
-
-    public void setLocalizacionList(List<Localizacion> localizacionList) {
-        this.localizacionList = localizacionList;
-    }
-
-    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
-        return cARACTERIZACIONcaracterizacionid;
-    }
-
-    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
-        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
-    }
-
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (rastreoId != null ? rastreoId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Rastreo)) {
-            return false;
-        }
-        Rastreo other = (Rastreo) object;
-        if ((this.rastreoId == null && other.rastreoId != null) || (this.rastreoId != null && !this.rastreoId.equals(other.rastreoId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Rastreo[ rastreoId=" + rastreoId + " ]";
     }
 
     public String getCodigoe() {
@@ -773,6 +790,66 @@ public class Rastreo implements Serializable {
 
     public void setActualizas(Date actualizas) {
         this.actualizas = actualizas;
+    }
+
+    @XmlTransient
+    public List<Fuente> getFuenteList() {
+        return fuenteList;
+    }
+
+    public void setFuenteList(List<Fuente> fuenteList) {
+        this.fuenteList = fuenteList;
+    }
+
+    @XmlTransient
+    public List<Localizacion> getLocalizacionList() {
+        return localizacionList;
+    }
+
+    public void setLocalizacionList(List<Localizacion> localizacionList) {
+        this.localizacionList = localizacionList;
+    }
+
+    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
+        return jERARQUIZACIONjerarquizacionid;
+    }
+
+    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
+        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (rastreoId != null ? rastreoId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Rastreo)) {
+            return false;
+        }
+        Rastreo other = (Rastreo) object;
+        if ((this.rastreoId == null && other.rastreoId != null) || (this.rastreoId != null && !this.rastreoId.equals(other.rastreoId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Rastreo[ rastreoId=" + rastreoId + " ]";
+    }
+
+    @XmlTransient
+    public List<Oberservaciones> getOberservacionesList() {
+        return oberservacionesList;
+    }
+
+    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
+        this.oberservacionesList = oberservacionesList;
     }
     
 }

@@ -32,8 +32,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a")
-    , @NamedQuery(name = "Area.findByAreaId", query = "SELECT a FROM Area a WHERE a.areaId = :areaId")})
+    , @NamedQuery(name = "Area.findByAreaId", query = "SELECT a FROM Area a WHERE a.areaId = :areaId")
+    , @NamedQuery(name = "Area.findByCodigoam", query = "SELECT a FROM Area a WHERE a.codigoam = :codigoam")})
 public class Area implements Serializable {
+
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<Oberservaciones> oberservacionesList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,20 +45,17 @@ public class Area implements Serializable {
     @Basic(optional = false)
     @Column(name = "area_id")
     private Integer areaId;
-    @JoinTable(name = "area_has_lotes", joinColumns = {
-        @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")}, inverseJoinColumns = {
-        @JoinColumn(name = "LOTES_lotes_id", referencedColumnName = "lotes_id")})
-    @ManyToMany
-    private List<Lotes> lotesList;
+    @Column(name = "codigoam")
+    private String codigoam;
     @JoinTable(name = "sitio_has_area", joinColumns = {
         @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")}, inverseJoinColumns = {
         @JoinColumn(name = "SITIO_sitio_id", referencedColumnName = "sitio_id")})
     @ManyToMany
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "aREAareaid")
-    private List<Componente> componenteList;
-    @OneToMany(mappedBy = "aREAareaid")
     private List<Foto> fotoList;
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<Componente> componenteList;
 
     public Area() {
     }
@@ -71,13 +72,12 @@ public class Area implements Serializable {
         this.areaId = areaId;
     }
 
-    @XmlTransient
-    public List<Lotes> getLotesList() {
-        return lotesList;
+    public String getCodigoam() {
+        return codigoam;
     }
 
-    public void setLotesList(List<Lotes> lotesList) {
-        this.lotesList = lotesList;
+    public void setCodigoam(String codigoam) {
+        this.codigoam = codigoam;
     }
 
     @XmlTransient
@@ -90,21 +90,21 @@ public class Area implements Serializable {
     }
 
     @XmlTransient
-    public List<Componente> getComponenteList() {
-        return componenteList;
-    }
-
-    public void setComponenteList(List<Componente> componenteList) {
-        this.componenteList = componenteList;
-    }
-
-    @XmlTransient
     public List<Foto> getFotoList() {
         return fotoList;
     }
 
     public void setFotoList(List<Foto> fotoList) {
         this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Componente> getComponenteList() {
+        return componenteList;
+    }
+
+    public void setComponenteList(List<Componente> componenteList) {
+        this.componenteList = componenteList;
     }
 
     @Override
@@ -130,6 +130,15 @@ public class Area implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Area[ areaId=" + areaId + " ]";
+    }
+
+    @XmlTransient
+    public List<Oberservaciones> getOberservacionesList() {
+        return oberservacionesList;
+    }
+
+    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
+        this.oberservacionesList = oberservacionesList;
     }
     
 }

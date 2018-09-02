@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Planta.findAll", query = "SELECT p FROM Planta p")
-    , @NamedQuery(name = "Planta.findByPlantaId", query = "SELECT p FROM Planta p WHERE p.plantaId = :plantaId")})
+    , @NamedQuery(name = "Planta.findByPlantaId", query = "SELECT p FROM Planta p WHERE p.plantaId = :plantaId")
+    , @NamedQuery(name = "Planta.findByCodigoe", query = "SELECT p FROM Planta p WHERE p.codigoe = :codigoe")})
 public class Planta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class Planta implements Serializable {
     @Basic(optional = false)
     @Column(name = "planta_id")
     private Integer plantaId;
+    @Column(name = "codigoe")
+    private String codigoe;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
@@ -61,6 +64,14 @@ public class Planta implements Serializable {
 
     public void setPlantaId(Integer plantaId) {
         this.plantaId = plantaId;
+    }
+
+    public String getCodigoe() {
+        return codigoe;
+    }
+
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
 
     public Caracterizacion getCARACTERIZACIONcaracterizacionid() {

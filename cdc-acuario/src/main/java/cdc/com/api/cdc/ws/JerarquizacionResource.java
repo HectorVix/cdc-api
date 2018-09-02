@@ -19,6 +19,7 @@ import cdc.com.api.modelo.Nacional;
 import cdc.com.api.modelo.Subnacional;
 import cdc.com.api.servicio.NacionalService;
 import cdc.com.api.servicio.SubnacionalService;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;

@@ -37,9 +37,9 @@ public class Fuente implements Serializable {
     @Basic(optional = false)
     @Column(name = "fuente_id")
     private Integer fuenteId;
-    @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
-    @ManyToOne
-    private Usuario uSUARIOusuarioid;
+    @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
+    @ManyToOne(optional = false)
+    private Rastreo rASTREOrastreoid;
 
     public Fuente() {
     }
@@ -56,12 +56,12 @@ public class Fuente implements Serializable {
         this.fuenteId = fuenteId;
     }
 
-    public Usuario getUSUARIOusuarioid() {
-        return uSUARIOusuarioid;
+    public Rastreo getRASTREOrastreoid() {
+        return rASTREOrastreoid;
     }
 
-    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
-        this.uSUARIOusuarioid = uSUARIOusuarioid;
+    public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
+        this.rASTREOrastreoid = rASTREOrastreoid;
     }
 
     @Override

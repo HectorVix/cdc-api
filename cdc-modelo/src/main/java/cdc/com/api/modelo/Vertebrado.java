@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Vertebrado.findAll", query = "SELECT v FROM Vertebrado v")
-    , @NamedQuery(name = "Vertebrado.findByVertebradoId", query = "SELECT v FROM Vertebrado v WHERE v.vertebradoId = :vertebradoId")})
+    , @NamedQuery(name = "Vertebrado.findByVertebradoId", query = "SELECT v FROM Vertebrado v WHERE v.vertebradoId = :vertebradoId")
+    , @NamedQuery(name = "Vertebrado.findByCodigoe", query = "SELECT v FROM Vertebrado v WHERE v.codigoe = :codigoe")})
 public class Vertebrado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class Vertebrado implements Serializable {
     @Basic(optional = false)
     @Column(name = "vertebrado_id")
     private Integer vertebradoId;
+    @Column(name = "codigoe")
+    private String codigoe;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
@@ -61,6 +64,14 @@ public class Vertebrado implements Serializable {
 
     public void setVertebradoId(Integer vertebradoId) {
         this.vertebradoId = vertebradoId;
+    }
+
+    public String getCodigoe() {
+        return codigoe;
+    }
+
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
 
     public Caracterizacion getCARACTERIZACIONcaracterizacionid() {

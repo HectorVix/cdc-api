@@ -31,9 +31,51 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Global.findAll", query = "SELECT g FROM Global g")
-    , @NamedQuery(name = "Global.findByGloblalId", query = "SELECT g FROM Global g WHERE g.globlalId = :globlalId")})
+    , @NamedQuery(name = "Global.findByGloblalId", query = "SELECT g FROM Global g WHERE g.globlalId = :globlalId")
+    , @NamedQuery(name = "Global.findByCodigoe", query = "SELECT g FROM Global g WHERE g.codigoe = :codigoe")
+    , @NamedQuery(name = "Global.findByNombreg", query = "SELECT g FROM Global g WHERE g.nombreg = :nombreg")
+    , @NamedQuery(name = "Global.findByDescrielem", query = "SELECT g FROM Global g WHERE g.descrielem = :descrielem")
+    , @NamedQuery(name = "Global.findByEspecle", query = "SELECT g FROM Global g WHERE g.especle = :especle")
+    , @NamedQuery(name = "Global.findByEspecranga", query = "SELECT g FROM Global g WHERE g.especranga = :especranga")
+    , @NamedQuery(name = "Global.findByEspecrangb", query = "SELECT g FROM Global g WHERE g.especrangb = :especrangb")
+    , @NamedQuery(name = "Global.findByEspecrangc", query = "SELECT g FROM Global g WHERE g.especrangc = :especrangc")
+    , @NamedQuery(name = "Global.findByEspecrangd", query = "SELECT g FROM Global g WHERE g.especrangd = :especrangd")
+    , @NamedQuery(name = "Global.findByHabitat", query = "SELECT g FROM Global g WHERE g.habitat = :habitat")
+    , @NamedQuery(name = "Global.findByPermanencia", query = "SELECT g FROM Global g WHERE g.permanencia = :permanencia")
+    , @NamedQuery(name = "Global.findByGloctip", query = "SELECT g FROM Global g WHERE g.gloctip = :gloctip")
+    , @NamedQuery(name = "Global.findByComtax", query = "SELECT g FROM Global g WHERE g.comtax = :comtax")
+    , @NamedQuery(name = "Global.findByGlestim", query = "SELECT g FROM Global g WHERE g.glestim = :glestim")
+    , @NamedQuery(name = "Global.findByGlestimcom", query = "SELECT g FROM Global g WHERE g.glestimcom = :glestimcom")
+    , @NamedQuery(name = "Global.findByGabund", query = "SELECT g FROM Global g WHERE g.gabund = :gabund")
+    , @NamedQuery(name = "Global.findByGabundcom", query = "SELECT g FROM Global g WHERE g.gabundcom = :gabundcom")
+    , @NamedQuery(name = "Global.findByGdist", query = "SELECT g FROM Global g WHERE g.gdist = :gdist")
+    , @NamedQuery(name = "Global.findByGdistcom", query = "SELECT g FROM Global g WHERE g.gdistcom = :gdistcom")
+    , @NamedQuery(name = "Global.findByGleprot", query = "SELECT g FROM Global g WHERE g.gleprot = :gleprot")
+    , @NamedQuery(name = "Global.findByGleprotcom", query = "SELECT g FROM Global g WHERE g.gleprotcom = :gleprotcom")
+    , @NamedQuery(name = "Global.findByGamenaz", query = "SELECT g FROM Global g WHERE g.gamenaz = :gamenaz")
+    , @NamedQuery(name = "Global.findByGamenazcom", query = "SELECT g FROM Global g WHERE g.gamenazcom = :gamenazcom")
+    , @NamedQuery(name = "Global.findByGfragil", query = "SELECT g FROM Global g WHERE g.gfragil = :gfragil")
+    , @NamedQuery(name = "Global.findByGfragilcom", query = "SELECT g FROM Global g WHERE g.gfragilcom = :gfragilcom")
+    , @NamedQuery(name = "Global.findByGotroconsi", query = "SELECT g FROM Global g WHERE g.gotroconsi = :gotroconsi")
+    , @NamedQuery(name = "Global.findByRangog", query = "SELECT g FROM Global g WHERE g.rangog = :rangog")
+    , @NamedQuery(name = "Global.findByFecharg", query = "SELECT g FROM Global g WHERE g.fecharg = :fecharg")
+    , @NamedQuery(name = "Global.findByGranrazon", query = "SELECT g FROM Global g WHERE g.granrazon = :granrazon")
+    , @NamedQuery(name = "Global.findByGnecprotec", query = "SELECT g FROM Global g WHERE g.gnecprotec = :gnecprotec")
+    , @NamedQuery(name = "Global.findByGnecinvent", query = "SELECT g FROM Global g WHERE g.gnecinvent = :gnecinvent")
+    , @NamedQuery(name = "Global.findByGnecestudi", query = "SELECT g FROM Global g WHERE g.gnecestudi = :gnecestudi")
+    , @NamedQuery(name = "Global.findByGnecmanejo", query = "SELECT g FROM Global g WHERE g.gnecmanejo = :gnecmanejo")
+    , @NamedQuery(name = "Global.findByResrg", query = "SELECT g FROM Global g WHERE g.resrg = :resrg")
+    , @NamedQuery(name = "Global.findByEdautor", query = "SELECT g FROM Global g WHERE g.edautor = :edautor")
+    , @NamedQuery(name = "Global.findByEdicion", query = "SELECT g FROM Global g WHERE g.edicion = :edicion")
+    , @NamedQuery(name = "Global.findByActualizar", query = "SELECT g FROM Global g WHERE g.actualizar = :actualizar")})
 public class Global implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "globlal_id")
+    private Integer globlalId;
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "nombreg")
@@ -109,13 +151,6 @@ public class Global implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "globlal_id")
-    private Integer globlalId;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
@@ -133,39 +168,6 @@ public class Global implements Serializable {
 
     public void setGloblalId(Integer globlalId) {
         this.globlalId = globlalId;
-    }
-
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
-    }
-
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (globlalId != null ? globlalId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Global)) {
-            return false;
-        }
-        Global other = (Global) object;
-        if ((this.globlalId == null && other.globlalId != null) || (this.globlalId != null && !this.globlalId.equals(other.globlalId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Global[ globlalId=" + globlalId + " ]";
     }
 
     public String getCodigoe() {
@@ -454,6 +456,39 @@ public class Global implements Serializable {
 
     public void setActualizar(Date actualizar) {
         this.actualizar = actualizar;
+    }
+
+    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
+        return jERARQUIZACIONjerarquizacionid;
+    }
+
+    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
+        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (globlalId != null ? globlalId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Global)) {
+            return false;
+        }
+        Global other = (Global) object;
+        if ((this.globlalId == null && other.globlalId != null) || (this.globlalId != null && !this.globlalId.equals(other.globlalId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Global[ globlalId=" + globlalId + " ]";
     }
     
 }

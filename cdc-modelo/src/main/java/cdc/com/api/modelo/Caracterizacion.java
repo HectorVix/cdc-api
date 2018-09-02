@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Caracterizacion.findAll", query = "SELECT c FROM Caracterizacion c")
-    , @NamedQuery(name = "Caracterizacion.findByCaracterizacionId", query = "SELECT c FROM Caracterizacion c WHERE c.caracterizacionId = :caracterizacionId")})
+    , @NamedQuery(name = "Caracterizacion.findByCaracterizacionId", query = "SELECT c FROM Caracterizacion c WHERE c.caracterizacionId = :caracterizacionId")
+    , @NamedQuery(name = "Caracterizacion.findByCodigoe", query = "SELECT c FROM Caracterizacion c WHERE c.codigoe = :codigoe")})
 public class Caracterizacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,8 +41,8 @@ public class Caracterizacion implements Serializable {
     @Basic(optional = false)
     @Column(name = "caracterizacion_id")
     private Integer caracterizacionId;
-    @OneToMany(mappedBy = "cARACTERIZACIONcaracterizacionid")
-    private List<Rastreo> rastreoList;
+    @Column(name = "codigoe")
+    private String codigoe;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne(optional = false)
     private Elemento eLEMENTOelementoid;
@@ -65,13 +66,12 @@ public class Caracterizacion implements Serializable {
         this.caracterizacionId = caracterizacionId;
     }
 
-    @XmlTransient
-    public List<Rastreo> getRastreoList() {
-        return rastreoList;
+    public String getCodigoe() {
+        return codigoe;
     }
 
-    public void setRastreoList(List<Rastreo> rastreoList) {
-        this.rastreoList = rastreoList;
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
 
     public Elemento getELEMENTOelementoid() {

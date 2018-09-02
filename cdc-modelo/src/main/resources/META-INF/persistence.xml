@@ -33,5 +33,11 @@
     <class>cdc.com.api.modelo.Localizador</class>
     <class>cdc.com.api.modelo.Nacional</class>
     <class>cdc.com.api.modelo.Componente</class>
+    <class>cdc.com.api.modelo.Usuario_1</class>
+    <class>cdc.com.api.modelo.Rastreo_1</class>
+    <class>cdc.com.api.modelo.Rol_1</class>
+    <class>cdc.com.api.modelo.Elemento_1</class>
+    <class>cdc.com.api.modelo.Jerarquizacion_1</class>
+    <class>cdc.com.api.modelo.Oberservaciones</class>
   </persistence-unit>
 </persistence>
