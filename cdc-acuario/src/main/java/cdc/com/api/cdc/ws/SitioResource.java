@@ -9,9 +9,8 @@ package cdc.com.api.cdc.ws;
  *
  * @author Héctor Vix
  */
-import cdc.com.api.modelo.Localizacion;
-import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.servicio.LocalizacionService;
+import cdc.com.api.modelo.Sitio;
+import cdc.com.api.servicio.SitioService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,33 +25,33 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-@Path("localizacion")
+@Path("sitio")
 @ManagedBean
-public class LocalizacionResource {
-    
+public class SitioResource {
+
     @Inject
-    LocalizacionService localizacionServicio;
-    
+    SitioService sitioServicio;
+
     @GET
     @Produces(APPLICATION_JSON)
-    public java.util.List<Localizacion> all() {
-        System.out.println("***->Lista de Localizacion");
-        return localizacionServicio.all();
+    public java.util.List<Sitio> all() {
+        System.out.println("***->Lista de Sitio");
+        return sitioServicio.all();
     }
 
     @POST
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Localizacion localizacion) throws JSONException {
+    public Response registrarLocalizacion(Sitio sitio) throws JSONException {
         JSONObject object = new JSONObject();
-        
-        Localizacion loc = new Localizacion();
-        loc.setCodigole("hola goooo");
-        
-        localizacionServicio.save(loc);
-        object.put("codigole", localizacion.getCodigole());
-        System.out.println("***->Registro Exitoso Localizacion :" + localizacion.getCodigole());
+
+        Sitio sit = new Sitio();
+        sit.setCodsitio("codigo sitio good");
+
+        sitioServicio.save(sit);
+        object.put("codsitio", sitio.getCodsitio());
+        System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
         //System.out.println("***->Prueba datos :" + localizacion.getRespdatos());
         return Response.status(202).entity(object.toString()).build();
     }
