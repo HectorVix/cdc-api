@@ -24,7 +24,9 @@ public interface ElementoDao {
 
     public List<Elemento> all();
 
-    public List<Elemento> buscarElemento(String codigo,String nombrecientifico,String nombrecomun);
+    public List<Elemento> buscarElemento(String codigo, String nombrecientifico, String nombrecomun);
+
     public boolean findElemento(String codigoe);
-    public int getElemento_id() ;
+
+    public int getElemento_id();
 }
