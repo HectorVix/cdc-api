@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Protocolo.findAll", query = "SELECT p FROM Protocolo p")
-    , @NamedQuery(name = "Protocolo.findByProtocoloId", query = "SELECT p FROM Protocolo p WHERE p.protocoloId = :protocoloId")})
+    , @NamedQuery(name = "Protocolo.findByProtocoloId", query = "SELECT p FROM Protocolo p WHERE p.protocoloId = :protocoloId")
+    , @NamedQuery(name = "Protocolo.findByCodigoe", query = "SELECT p FROM Protocolo p WHERE p.codigoe = :codigoe")})
 public class Protocolo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class Protocolo implements Serializable {
     @Basic(optional = false)
     @Column(name = "protocolo_id")
     private Integer protocoloId;
+    @Column(name = "codigoe")
+    private String codigoe;
     @JoinColumn(name = "LOCALIZACION_localizacion_id", referencedColumnName = "localizacion_id")
     @ManyToOne
     private Localizacion lOCALIZACIONlocalizacionid;
@@ -59,6 +62,14 @@ public class Protocolo implements Serializable {
 
     public void setProtocoloId(Integer protocoloId) {
         this.protocoloId = protocoloId;
+    }
+
+    public String getCodigoe() {
+        return codigoe;
+    }
+
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
 
     public Localizacion getLOCALIZACIONlocalizacionid() {

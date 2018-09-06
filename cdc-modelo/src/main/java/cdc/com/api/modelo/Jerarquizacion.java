@@ -32,11 +32,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Jerarquizacion.findAll", query = "SELECT j FROM Jerarquizacion j")
     , @NamedQuery(name = "Jerarquizacion.findByJerarquizacionId", query = "SELECT j FROM Jerarquizacion j WHERE j.jerarquizacionId = :jerarquizacionId")
-    , @NamedQuery(name = "Jerarquizacion.findByCodigoe", query = "SELECT j FROM Jerarquizacion j WHERE j.codigoe = :codigoe")})
+    , @NamedQuery(name = "Jerarquizacion.findByCodigoe", query = "SELECT j FROM Jerarquizacion j WHERE j.codigoe = :codigoe")
+    , @NamedQuery(name = "Jerarquizacion.findByEstado", query = "SELECT j FROM Jerarquizacion j WHERE j.estado = :estado")})
 public class Jerarquizacion implements Serializable {
-
-    @Column(name = "estado")
-    private Integer estado;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,6 +44,8 @@ public class Jerarquizacion implements Serializable {
     private Integer jerarquizacionId;
     @Column(name = "codigoe")
     private String codigoe;
+    @Column(name = "estado")
+    private Integer estado;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
     private Elemento eLEMENTOelementoid;
@@ -79,6 +79,14 @@ public class Jerarquizacion implements Serializable {
 
     public void setCodigoe(String codigoe) {
         this.codigoe = codigoe;
+    }
+
+    public Integer getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     public Elemento getELEMENTOelementoid() {
@@ -148,14 +156,6 @@ public class Jerarquizacion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Jerarquizacion[ jerarquizacionId=" + jerarquizacionId + " ]";
-    }
-
-    public Integer getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Integer estado) {
-        this.estado = estado;
     }
     
 }

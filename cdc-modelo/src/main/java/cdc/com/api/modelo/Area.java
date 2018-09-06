@@ -36,9 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Area.findByCodigoam", query = "SELECT a FROM Area a WHERE a.codigoam = :codigoam")})
 public class Area implements Serializable {
 
-    @OneToMany(mappedBy = "aREAareaid")
-    private List<Oberservaciones> oberservacionesList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,6 +51,8 @@ public class Area implements Serializable {
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<Foto> fotoList;
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<Observaciones> observacionesList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<Componente> componenteList;
 
@@ -99,6 +98,15 @@ public class Area implements Serializable {
     }
 
     @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
+    @XmlTransient
     public List<Componente> getComponenteList() {
         return componenteList;
     }
@@ -130,15 +138,6 @@ public class Area implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Area[ areaId=" + areaId + " ]";
-    }
-
-    @XmlTransient
-    public List<Oberservaciones> getOberservacionesList() {
-        return oberservacionesList;
-    }
-
-    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
-        this.oberservacionesList = oberservacionesList;
     }
     
 }

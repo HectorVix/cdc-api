@@ -37,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Localizacion.findByCodigole", query = "SELECT l FROM Localizacion l WHERE l.codigole = :codigole")})
 public class Localizacion implements Serializable {
 
-    @OneToMany(mappedBy = "lOCALIZACIONlocalizacionid")
-    private List<Oberservaciones> oberservacionesList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -60,6 +57,8 @@ public class Localizacion implements Serializable {
     @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
     @ManyToOne
     private Rastreo rASTREOrastreoid;
+    @OneToMany(mappedBy = "lOCALIZACIONlocalizacionid")
+    private List<Observaciones> observacionesList;
 
     public Localizacion() {
     }
@@ -119,6 +118,15 @@ public class Localizacion implements Serializable {
         this.rASTREOrastreoid = rASTREOrastreoid;
     }
 
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -142,15 +150,6 @@ public class Localizacion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Localizacion[ localizacionId=" + localizacionId + " ]";
-    }
-
-    @XmlTransient
-    public List<Oberservaciones> getOberservacionesList() {
-        return oberservacionesList;
-    }
-
-    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
-        this.oberservacionesList = oberservacionesList;
     }
     
 }

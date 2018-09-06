@@ -1,0 +1,30 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package cdc.com.api.dao;
+
+import cdc.com.api.modelo.Fuente;
+import java.util.List;
+
+/**
+ *
+ * @author Héctor Vix
+ */
+public interface FuenteDao {
+
+    public void save(Fuente fuente);
+
+    public void update(Fuente fuente);
+
+    public void delete(Long id);
+
+    public Fuente find(Long id);
+
+    public List<Fuente> all();
+
+    public List<Fuente> buscarFuente(String codfuente, String cita);
+
+    public boolean findFuente(String codfuente);
+}

@@ -34,9 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Sitio.findByCodsitio", query = "SELECT s FROM Sitio s WHERE s.codsitio = :codsitio")})
 public class Sitio implements Serializable {
 
-    @OneToMany(mappedBy = "sITIOsitioid")
-    private List<Oberservaciones> oberservacionesList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +48,8 @@ public class Sitio implements Serializable {
     private List<Area> areaList;
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<Foto> fotoList;
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Observaciones> observacionesList;
 
     public Sitio() {
     }
@@ -102,6 +101,15 @@ public class Sitio implements Serializable {
         this.fotoList = fotoList;
     }
 
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -125,15 +133,6 @@ public class Sitio implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Sitio[ sitioId=" + sitioId + " ]";
-    }
-
-    @XmlTransient
-    public List<Oberservaciones> getOberservacionesList() {
-        return oberservacionesList;
-    }
-
-    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
-        this.oberservacionesList = oberservacionesList;
     }
     
 }

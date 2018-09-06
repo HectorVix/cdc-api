@@ -103,9 +103,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rastreo.findByActualizas", query = "SELECT r FROM Rastreo r WHERE r.actualizas = :actualizas")})
 public class Rastreo implements Serializable {
 
-    @OneToMany(mappedBy = "rASTREOrastreoid")
-    private List<Oberservaciones> oberservacionesList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -253,6 +250,8 @@ public class Rastreo implements Serializable {
     private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Localizacion> localizacionList;
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Observaciones> observacionesList;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
@@ -810,6 +809,15 @@ public class Rastreo implements Serializable {
         this.localizacionList = localizacionList;
     }
 
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
     public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
         return jERARQUIZACIONjerarquizacionid;
     }
@@ -841,15 +849,6 @@ public class Rastreo implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Rastreo[ rastreoId=" + rastreoId + " ]";
-    }
-
-    @XmlTransient
-    public List<Oberservaciones> getOberservacionesList() {
-        return oberservacionesList;
-    }
-
-    public void setOberservacionesList(List<Oberservaciones> oberservacionesList) {
-        this.oberservacionesList = oberservacionesList;
     }
     
 }

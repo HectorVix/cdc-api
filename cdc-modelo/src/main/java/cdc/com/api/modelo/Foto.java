@@ -30,15 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Foto.findAll", query = "SELECT f FROM Foto f")
     , @NamedQuery(name = "Foto.findByFotoId", query = "SELECT f FROM Foto f WHERE f.fotoId = :fotoId")
-    , @NamedQuery(name = "Foto.findByVERTEBRADOvertebradoid", query = "SELECT f FROM Foto f WHERE f.vERTEBRADOvertebradoid = :vERTEBRADOvertebradoid")
     , @NamedQuery(name = "Foto.findByNombre", query = "SELECT f FROM Foto f WHERE f.nombre = :nombre")
     , @NamedQuery(name = "Foto.findByAutor", query = "SELECT f FROM Foto f WHERE f.autor = :autor")
     , @NamedQuery(name = "Foto.findByDescripcion", query = "SELECT f FROM Foto f WHERE f.descripcion = :descripcion")})
 public class Foto implements Serializable {
-
-    @Lob
-    @Column(name = "imagen")
-    private byte[] imagen;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,15 +41,15 @@ public class Foto implements Serializable {
     @Basic(optional = false)
     @Column(name = "foto_id")
     private Integer fotoId;
-    @Basic(optional = false)
-    @Column(name = "VERTEBRADO_vertebrado_id")
-    private int vERTEBRADOvertebradoid;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "autor")
     private String autor;
     @Column(name = "descripcion")
     private String descripcion;
+    @Lob
+    @Column(name = "imagen")
+    private byte[] imagen;
     @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")
     @ManyToOne
     private Area aREAareaid;
@@ -67,9 +62,9 @@ public class Foto implements Serializable {
     @JoinColumn(name = "SITIO_sitio_id", referencedColumnName = "sitio_id")
     @ManyToOne
     private Sitio sITIOsitioid;
-    @JoinColumn(name = "VERTEBRADO_vertebrado_id1", referencedColumnName = "vertebrado_id")
+    @JoinColumn(name = "VERTEBRADO_vertebrado_id", referencedColumnName = "vertebrado_id")
     @ManyToOne
-    private Vertebrado vERTEBRADOvertebradoid1;
+    private Vertebrado vERTEBRADOvertebradoid;
 
     public Foto() {
     }
@@ -78,25 +73,12 @@ public class Foto implements Serializable {
         this.fotoId = fotoId;
     }
 
-    public Foto(Integer fotoId, int vERTEBRADOvertebradoid) {
-        this.fotoId = fotoId;
-        this.vERTEBRADOvertebradoid = vERTEBRADOvertebradoid;
-    }
-
     public Integer getFotoId() {
         return fotoId;
     }
 
     public void setFotoId(Integer fotoId) {
         this.fotoId = fotoId;
-    }
-
-    public int getVERTEBRADOvertebradoid() {
-        return vERTEBRADOvertebradoid;
-    }
-
-    public void setVERTEBRADOvertebradoid(int vERTEBRADOvertebradoid) {
-        this.vERTEBRADOvertebradoid = vERTEBRADOvertebradoid;
     }
 
     public String getNombre() {
@@ -123,6 +105,13 @@ public class Foto implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 
     public Area getAREAareaid() {
         return aREAareaid;
@@ -156,12 +145,12 @@ public class Foto implements Serializable {
         this.sITIOsitioid = sITIOsitioid;
     }
 
-    public Vertebrado getVERTEBRADOvertebradoid1() {
-        return vERTEBRADOvertebradoid1;
+    public Vertebrado getVERTEBRADOvertebradoid() {
+        return vERTEBRADOvertebradoid;
     }
 
-    public void setVERTEBRADOvertebradoid1(Vertebrado vERTEBRADOvertebradoid1) {
-        this.vERTEBRADOvertebradoid1 = vERTEBRADOvertebradoid1;
+    public void setVERTEBRADOvertebradoid(Vertebrado vERTEBRADOvertebradoid) {
+        this.vERTEBRADOvertebradoid = vERTEBRADOvertebradoid;
     }
 
     @Override
@@ -187,14 +176,6 @@ public class Foto implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Foto[ fotoId=" + fotoId + " ]";
-    }
-
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
     }
     
 }

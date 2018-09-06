@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Fuente.findAll", query = "SELECT f FROM Fuente f")
-    , @NamedQuery(name = "Fuente.findByFuenteId", query = "SELECT f FROM Fuente f WHERE f.fuenteId = :fuenteId")})
+    , @NamedQuery(name = "Fuente.findByFuenteId", query = "SELECT f FROM Fuente f WHERE f.fuenteId = :fuenteId")
+    , @NamedQuery(name = "Fuente.findByCodfuente", query = "SELECT f FROM Fuente f WHERE f.codfuente = :codfuente")})
 public class Fuente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,8 @@ public class Fuente implements Serializable {
     @Basic(optional = false)
     @Column(name = "fuente_id")
     private Integer fuenteId;
+    @Column(name = "codfuente")
+    private String codfuente;
     @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
     @ManyToOne(optional = false)
     private Rastreo rASTREOrastreoid;
@@ -54,6 +57,14 @@ public class Fuente implements Serializable {
 
     public void setFuenteId(Integer fuenteId) {
         this.fuenteId = fuenteId;
+    }
+
+    public String getCodfuente() {
+        return codfuente;
+    }
+
+    public void setCodfuente(String codfuente) {
+        this.codfuente = codfuente;
     }
 
     public Rastreo getRASTREOrastreoid() {

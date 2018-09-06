@@ -22,19 +22,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Héctor Vix
  */
 @Entity
-@Table(name = "oberservaciones")
+@Table(name = "observaciones")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Oberservaciones.findAll", query = "SELECT o FROM Oberservaciones o")
-    , @NamedQuery(name = "Oberservaciones.findByOberservacionesId", query = "SELECT o FROM Oberservaciones o WHERE o.oberservacionesId = :oberservacionesId")
-    , @NamedQuery(name = "Oberservaciones.findByNombre", query = "SELECT o FROM Oberservaciones o WHERE o.nombre = :nombre")})
-public class Oberservaciones implements Serializable {
+    @NamedQuery(name = "Observaciones.findAll", query = "SELECT o FROM Observaciones o")
+    , @NamedQuery(name = "Observaciones.findByObservacionesId", query = "SELECT o FROM Observaciones o WHERE o.observacionesId = :observacionesId")
+    , @NamedQuery(name = "Observaciones.findByNombre", query = "SELECT o FROM Observaciones o WHERE o.nombre = :nombre")})
+public class Observaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "oberservaciones_id")
-    private Integer oberservacionesId;
+    @Column(name = "observaciones_id")
+    private Integer observacionesId;
     @Column(name = "nombre")
     private String nombre;
     @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")
@@ -50,19 +50,19 @@ public class Oberservaciones implements Serializable {
     @ManyToOne
     private Sitio sITIOsitioid;
 
-    public Oberservaciones() {
+    public Observaciones() {
     }
 
-    public Oberservaciones(Integer oberservacionesId) {
-        this.oberservacionesId = oberservacionesId;
+    public Observaciones(Integer observacionesId) {
+        this.observacionesId = observacionesId;
     }
 
-    public Integer getOberservacionesId() {
-        return oberservacionesId;
+    public Integer getObservacionesId() {
+        return observacionesId;
     }
 
-    public void setOberservacionesId(Integer oberservacionesId) {
-        this.oberservacionesId = oberservacionesId;
+    public void setObservacionesId(Integer observacionesId) {
+        this.observacionesId = observacionesId;
     }
 
     public String getNombre() {
@@ -108,18 +108,18 @@ public class Oberservaciones implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (oberservacionesId != null ? oberservacionesId.hashCode() : 0);
+        hash += (observacionesId != null ? observacionesId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Oberservaciones)) {
+        if (!(object instanceof Observaciones)) {
             return false;
         }
-        Oberservaciones other = (Oberservaciones) object;
-        if ((this.oberservacionesId == null && other.oberservacionesId != null) || (this.oberservacionesId != null && !this.oberservacionesId.equals(other.oberservacionesId))) {
+        Observaciones other = (Observaciones) object;
+        if ((this.observacionesId == null && other.observacionesId != null) || (this.observacionesId != null && !this.observacionesId.equals(other.observacionesId))) {
             return false;
         }
         return true;
@@ -127,7 +127,7 @@ public class Oberservaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Oberservaciones[ oberservacionesId=" + oberservacionesId + " ]";
+        return "cdc.com.api.modelo.Observaciones[ observacionesId=" + observacionesId + " ]";
     }
     
 }

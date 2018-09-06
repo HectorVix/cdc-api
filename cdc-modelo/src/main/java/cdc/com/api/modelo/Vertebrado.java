@@ -46,7 +46,7 @@ public class Vertebrado implements Serializable {
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
-    @OneToMany(mappedBy = "vERTEBRADOvertebradoid1")
+    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
     private List<Foto> fotoList;
     @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
     private List<Distribucion> distribucionList;

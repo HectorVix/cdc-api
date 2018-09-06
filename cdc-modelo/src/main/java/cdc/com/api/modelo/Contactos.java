@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Contactos.findAll", query = "SELECT c FROM Contactos c")
-    , @NamedQuery(name = "Contactos.findByContactosId", query = "SELECT c FROM Contactos c WHERE c.contactosId = :contactosId")})
+    , @NamedQuery(name = "Contactos.findByContactosId", query = "SELECT c FROM Contactos c WHERE c.contactosId = :contactosId")
+    , @NamedQuery(name = "Contactos.findByNumident", query = "SELECT c FROM Contactos c WHERE c.numident = :numident")})
 public class Contactos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +38,8 @@ public class Contactos implements Serializable {
     @Basic(optional = false)
     @Column(name = "contactos_id")
     private Integer contactosId;
+    @Column(name = "numident")
+    private String numident;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
@@ -54,6 +57,14 @@ public class Contactos implements Serializable {
 
     public void setContactosId(Integer contactosId) {
         this.contactosId = contactosId;
+    }
+
+    public String getNumident() {
+        return numident;
+    }
+
+    public void setNumident(String numident) {
+        this.numident = numident;
     }
 
     public Usuario getUSUARIOusuarioid() {
