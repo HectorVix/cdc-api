@@ -44,13 +44,9 @@ public class AreaResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarLocalizacion(Area area) throws JSONException {
-        JSONObject object = new JSONObject();
-
-        Area area1 = new Area();
-        area1.setCodigoam("codigo area aaaaa");
-
-        areaServicio.save(area1);
-        object.put("codsitio", area.getCodigoam());
+        JSONObject object = new JSONObject();     
+        areaServicio.save(area);
+        object.put("codigoam", area.getCodigoam());
         System.out.println("***->Registro Exitoso Area :" +area.getCodigoam());
         return Response.status(202).entity(object.toString()).build();
     }

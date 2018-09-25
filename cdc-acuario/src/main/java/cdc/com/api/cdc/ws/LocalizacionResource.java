@@ -46,11 +46,14 @@ public class LocalizacionResource {
     @Produces(APPLICATION_JSON)
     public Response registrarLocalizacion(Localizacion localizacion) throws JSONException {
         JSONObject object = new JSONObject();
-        
+       /* 
         Localizacion loc = new Localizacion();
-        loc.setCodigole("hola goooo");
+        loc.setCodigole("ok1");
+        loc.setCuenca(localizacion.getCuenca());
+       */
+       
         
-        localizacionServicio.save(loc);
+        localizacionServicio.save(localizacion);
         object.put("codigole", localizacion.getCodigole());
         System.out.println("***->Registro Exitoso Localizacion :" + localizacion.getCodigole());
         //System.out.println("***->Prueba datos :" + localizacion.getRespdatos());
