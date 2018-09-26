@@ -37,25 +37,120 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Area.findAll", query = "SELECT a FROM Area a")
     , @NamedQuery(name = "Area.findByAreaId", query = "SELECT a FROM Area a WHERE a.areaId = :areaId")
     , @NamedQuery(name = "Area.findByCodigoam", query = "SELECT a FROM Area a WHERE a.codigoam = :codigoam")
-    , @NamedQuery(name = "Area.findByNombream", query = "SELECT a FROM Area a WHERE a.nombream = :nombream")})
+    , @NamedQuery(name = "Area.findByNombream", query = "SELECT a FROM Area a WHERE a.nombream = :nombream")
+    , @NamedQuery(name = "Area.findBySinam", query = "SELECT a FROM Area a WHERE a.sinam = :sinam")
+    , @NamedQuery(name = "Area.findByAmmayor", query = "SELECT a FROM Area a WHERE a.ammayor = :ammayor")
+    , @NamedQuery(name = "Area.findByCoddueno", query = "SELECT a FROM Area a WHERE a.coddueno = :coddueno")
+    , @NamedQuery(name = "Area.findByCodsitio", query = "SELECT a FROM Area a WHERE a.codsitio = :codsitio")
+    , @NamedQuery(name = "Area.findByNomsitio", query = "SELECT a FROM Area a WHERE a.nomsitio = :nomsitio")
+    , @NamedQuery(name = "Area.findByNacion", query = "SELECT a FROM Area a WHERE a.nacion = :nacion")
+    , @NamedQuery(name = "Area.findBySubnacion", query = "SELECT a FROM Area a WHERE a.subnacion = :subnacion")
+    , @NamedQuery(name = "Area.findBySubdivision", query = "SELECT a FROM Area a WHERE a.subdivision = :subdivision")
+    , @NamedQuery(name = "Area.findByNommapa", query = "SELECT a FROM Area a WHERE a.nommapa = :nommapa")
+    , @NamedQuery(name = "Area.findByCodmapa", query = "SELECT a FROM Area a WHERE a.codmapa = :codmapa")
+    , @NamedQuery(name = "Area.findByNummarg", query = "SELECT a FROM Area a WHERE a.nummarg = :nummarg")
+    , @NamedQuery(name = "Area.findByLat", query = "SELECT a FROM Area a WHERE a.lat = :lat")
+    , @NamedQuery(name = "Area.findByLong1", query = "SELECT a FROM Area a WHERE a.long1 = :long1")
+    , @NamedQuery(name = "Area.findByCoords", query = "SELECT a FROM Area a WHERE a.coords = :coords")
+    , @NamedQuery(name = "Area.findByCoordn", query = "SELECT a FROM Area a WHERE a.coordn = :coordn")
+    , @NamedQuery(name = "Area.findByCoorde", query = "SELECT a FROM Area a WHERE a.coorde = :coorde")
+    , @NamedQuery(name = "Area.findByCoordo", query = "SELECT a FROM Area a WHERE a.coordo = :coordo")
+    , @NamedQuery(name = "Area.findByDescripcion", query = "SELECT a FROM Area a WHERE a.descripcion = :descripcion")
+    , @NamedQuery(name = "Area.findByAreatot1", query = "SELECT a FROM Area a WHERE a.areatot1 = :areatot1")
+    , @NamedQuery(name = "Area.findByAreatot2", query = "SELECT a FROM Area a WHERE a.areatot2 = :areatot2")
+    , @NamedQuery(name = "Area.findByAreasubnac1", query = "SELECT a FROM Area a WHERE a.areasubnac1 = :areasubnac1")
+    , @NamedQuery(name = "Area.findByAreasubnac2", query = "SELECT a FROM Area a WHERE a.areasubnac2 = :areasubnac2")
+    , @NamedQuery(name = "Area.findByMultisubnac", query = "SELECT a FROM Area a WHERE a.multisubnac = :multisubnac")
+    , @NamedQuery(name = "Area.findByLimites", query = "SELECT a FROM Area a WHERE a.limites = :limites")
+    , @NamedQuery(name = "Area.findByContinua", query = "SELECT a FROM Area a WHERE a.continua = :continua")
+    , @NamedQuery(name = "Area.findByInvoltnc", query = "SELECT a FROM Area a WHERE a.involtnc = :involtnc")
+    , @NamedQuery(name = "Area.findByComentario", query = "SELECT a FROM Area a WHERE a.comentario = :comentario")
+    , @NamedQuery(name = "Area.findByFechaesta", query = "SELECT a FROM Area a WHERE a.fechaesta = :fechaesta")
+    , @NamedQuery(name = "Area.findByProtasign", query = "SELECT a FROM Area a WHERE a.protasign = :protasign")
+    , @NamedQuery(name = "Area.findByAdministrador", query = "SELECT a FROM Area a WHERE a.administrador = :administrador")
+    , @NamedQuery(name = "Area.findByInstadmin", query = "SELECT a FROM Area a WHERE a.instadmin = :instadmin")
+    , @NamedQuery(name = "Area.findByDiradmin1", query = "SELECT a FROM Area a WHERE a.diradmin1 = :diradmin1")
+    , @NamedQuery(name = "Area.findByDiradmin2", query = "SELECT a FROM Area a WHERE a.diradmin2 = :diradmin2")
+    , @NamedQuery(name = "Area.findByCiudadadmin", query = "SELECT a FROM Area a WHERE a.ciudadadmin = :ciudadadmin")
+    , @NamedQuery(name = "Area.findBySubnacadmin", query = "SELECT a FROM Area a WHERE a.subnacadmin = :subnacadmin")
+    , @NamedQuery(name = "Area.findByCodpostaladmin", query = "SELECT a FROM Area a WHERE a.codpostaladmin = :codpostaladmin")
+    , @NamedQuery(name = "Area.findByTelefadminist", query = "SELECT a FROM Area a WHERE a.telefadminist = :telefadminist")
+    , @NamedQuery(name = "Area.findByAccesopub", query = "SELECT a FROM Area a WHERE a.accesopub = :accesopub")
+    , @NamedQuery(name = "Area.findByInstcoop", query = "SELECT a FROM Area a WHERE a.instcoop = :instcoop")
+    , @NamedQuery(name = "Area.findByCommanejo", query = "SELECT a FROM Area a WHERE a.commanejo = :commanejo")
+    , @NamedQuery(name = "Area.findByAmopc1", query = "SELECT a FROM Area a WHERE a.amopc1 = :amopc1")
+    , @NamedQuery(name = "Area.findByAmopc2", query = "SELECT a FROM Area a WHERE a.amopc2 = :amopc2")
+    , @NamedQuery(name = "Area.findByAmopc3", query = "SELECT a FROM Area a WHERE a.amopc3 = :amopc3")
+    , @NamedQuery(name = "Area.findByAmopc4", query = "SELECT a FROM Area a WHERE a.amopc4 = :amopc4")
+    , @NamedQuery(name = "Area.findByAmopc5", query = "SELECT a FROM Area a WHERE a.amopc5 = :amopc5")
+    , @NamedQuery(name = "Area.findByRespdatos", query = "SELECT a FROM Area a WHERE a.respdatos = :respdatos")
+    , @NamedQuery(name = "Area.findByActualizar", query = "SELECT a FROM Area a WHERE a.actualizar = :actualizar")})
 public class Area implements Serializable {
 
-    @Column(name = "amopc1")
-    private String amopc1;
-    @Column(name = "amopc2")
-    private String amopc2;
-    @Column(name = "amopc3")
-    private String amopc3;
-    @Column(name = "amopc4")
-    private String amopc4;
-    @Column(name = "amopc5")
-    private String amopc5;
-    @Column(name = "respdatos")
-    private String respdatos;
-    @Column(name = "actualizar")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date actualizar;
-
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "area_id")
+    private Integer areaId;
+    @Column(name = "codigoam")
+    private String codigoam;
+    @Column(name = "nombream")
+    private String nombream;
+    @Column(name = "sinam")
+    private String sinam;
+    @Column(name = "ammayor")
+    private String ammayor;
+    @Column(name = "coddueno")
+    private String coddueno;
+    @Column(name = "codsitio")
+    private String codsitio;
+    @Column(name = "nomsitio")
+    private String nomsitio;
+    @Column(name = "nacion")
+    private String nacion;
+    @Column(name = "subnacion")
+    private String subnacion;
+    @Column(name = "subdivision")
+    private String subdivision;
+    @Column(name = "nommapa")
+    private String nommapa;
+    @Column(name = "codmapa")
+    private String codmapa;
+    @Column(name = "nummarg")
+    private String nummarg;
+    @Column(name = "lat")
+    private String lat;
+    @Column(name = "long1")
+    private String long1;
+    @Column(name = "coords")
+    private String coords;
+    @Column(name = "coordn")
+    private String coordn;
+    @Column(name = "coorde")
+    private String coorde;
+    @Column(name = "coordo")
+    private String coordo;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "areatot1")
+    private Integer areatot1;
+    @Column(name = "areatot2")
+    private Integer areatot2;
+    @Column(name = "areasubnac1")
+    private Integer areasubnac1;
+    @Column(name = "areasubnac2")
+    private Integer areasubnac2;
+    @Column(name = "multisubnac")
+    private Boolean multisubnac;
+    @Column(name = "limites")
+    private Boolean limites;
+    @Column(name = "continua")
+    private Boolean continua;
+    @Column(name = "involtnc")
+    private Boolean involtnc;
+    @Column(name = "comentario")
+    private String comentario;
     @Column(name = "fechaesta")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaesta;
@@ -83,74 +178,21 @@ public class Area implements Serializable {
     private String instcoop;
     @Column(name = "commanejo")
     private String commanejo;
-
-    @Column(name = "descripcion")
-    private String descripcion;
-    @Column(name = "areatot1")
-    private Integer areatot1;
-    @Column(name = "areatot2")
-    private Integer areatot2;
-    @Column(name = "areasubnac1")
-    private Integer areasubnac1;
-    @Column(name = "areasubnac2")
-    private Integer areasubnac2;
-    @Column(name = "multisubnac")
-    private Boolean multisubnac;
-    @Column(name = "limites")
-    private Boolean limites;
-    @Column(name = "continua")
-    private Boolean continua;
-    @Column(name = "involtnc")
-    private Boolean involtnc;
-    @Column(name = "comentario")
-    private String comentario;
-
-    @Column(name = "nacion")
-    private String nacion;
-    @Column(name = "subnacion")
-    private String subnacion;
-    @Column(name = "subdivision")
-    private String subdivision;
-    @Column(name = "nommapa")
-    private String nommapa;
-    @Column(name = "codmapa")
-    private String codmapa;
-    @Column(name = "nummarg")
-    private String nummarg;
-    @Column(name = "lat")
-    private String lat;
-    @Column(name = "long1")
-    private String long1;
-    @Column(name = "coords")
-    private String coords;
-    @Column(name = "coordn")
-    private String coordn;
-    @Column(name = "coorde")
-    private String coorde;
-    @Column(name = "coordo")
-    private String coordo;
-
-    @Column(name = "sinam")
-    private String sinam;
-    @Column(name = "ammayor")
-    private String ammayor;
-    @Column(name = "coddueno")
-    private String coddueno;
-    @Column(name = "codsitio")
-    private String codsitio;
-    @Column(name = "nomsitio")
-    private String nomsitio;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "area_id")
-    private Integer areaId;
-    @Column(name = "codigoam")
-    private String codigoam;
-    @Column(name = "nombream")
-    private String nombream;
+    @Column(name = "amopc1")
+    private String amopc1;
+    @Column(name = "amopc2")
+    private String amopc2;
+    @Column(name = "amopc3")
+    private String amopc3;
+    @Column(name = "amopc4")
+    private String amopc4;
+    @Column(name = "amopc5")
+    private String amopc5;
+    @Column(name = "respdatos")
+    private String respdatos;
+    @Column(name = "actualizar")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date actualizar;
     @JoinTable(name = "sitio_has_area", joinColumns = {
         @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")}, inverseJoinColumns = {
         @JoinColumn(name = "SITIO_sitio_id", referencedColumnName = "sitio_id")})
@@ -192,67 +234,6 @@ public class Area implements Serializable {
 
     public void setNombream(String nombream) {
         this.nombream = nombream;
-    }
-
-    @XmlTransient
-    public List<Sitio> getSitioList() {
-        return sitioList;
-    }
-
-    public void setSitioList(List<Sitio> sitioList) {
-        this.sitioList = sitioList;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Observaciones> getObservacionesList() {
-        return observacionesList;
-    }
-
-    public void setObservacionesList(List<Observaciones> observacionesList) {
-        this.observacionesList = observacionesList;
-    }
-
-    @XmlTransient
-    public List<Componente> getComponenteList() {
-        return componenteList;
-    }
-
-    public void setComponenteList(List<Componente> componenteList) {
-        this.componenteList = componenteList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (areaId != null ? areaId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Area)) {
-            return false;
-        }
-        Area other = (Area) object;
-        if ((this.areaId == null && other.areaId != null) || (this.areaId != null && !this.areaId.equals(other.areaId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Area[ areaId=" + areaId + " ]";
     }
 
     public String getSinam() {
@@ -629,6 +610,67 @@ public class Area implements Serializable {
 
     public void setActualizar(Date actualizar) {
         this.actualizar = actualizar;
+    }
+
+    @XmlTransient
+    public List<Sitio> getSitioList() {
+        return sitioList;
+    }
+
+    public void setSitioList(List<Sitio> sitioList) {
+        this.sitioList = sitioList;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
+    @XmlTransient
+    public List<Componente> getComponenteList() {
+        return componenteList;
+    }
+
+    public void setComponenteList(List<Componente> componenteList) {
+        this.componenteList = componenteList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (areaId != null ? areaId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Area)) {
+            return false;
+        }
+        Area other = (Area) object;
+        if ((this.areaId == null && other.areaId != null) || (this.areaId != null && !this.areaId.equals(other.areaId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Area[ areaId=" + areaId + " ]";
     }
     
 }

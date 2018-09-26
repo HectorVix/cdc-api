@@ -45,14 +45,9 @@ public class SitioResource {
     @Produces(APPLICATION_JSON)
     public Response registrarLocalizacion(Sitio sitio) throws JSONException {
         JSONObject object = new JSONObject();
-
-        Sitio sit = new Sitio();
-        sit.setCodsitio("codigo sitio good");
-
-        sitioServicio.save(sit);
+        sitioServicio.save(sitio);
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
-        //System.out.println("***->Prueba datos :" + localizacion.getRespdatos());
         return Response.status(202).entity(object.toString()).build();
     }
 }
