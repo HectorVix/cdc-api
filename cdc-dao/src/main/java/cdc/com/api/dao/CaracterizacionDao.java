@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface CaracterizacionDao {
 
-    public void save(Caracterizacion caracterizacion);
+    public int save(Caracterizacion caracterizacion);
 
     public void update(Caracterizacion caracterizacion);
 

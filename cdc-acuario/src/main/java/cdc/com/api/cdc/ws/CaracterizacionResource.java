@@ -6,9 +6,11 @@
 package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Caracterizacion;
+import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Planta;
 import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.CaracterizacionService;
+import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.PlantaService;
 import cdc.com.api.servicio.VertebradoService;
 import javax.annotation.ManagedBean;
@@ -39,6 +41,8 @@ public class CaracterizacionResource {
     PlantaService plantaServicio;
     @Inject
     VertebradoService vertebradoServicio;
+    @Inject
+    ElementoService elementoServicio;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -64,10 +68,40 @@ public class CaracterizacionResource {
     }
 
     @POST
-    @Path("/registro")
+    @Path("/registro/planta")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Caracterizacion caracterizacion) throws JSONException {
+    public Response registrarCaracterizacion_Planta(Caracterizacion caracterizacion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Elemento elemento = new Elemento();
+        Planta planta = new Planta();
+        Caracterizacion caracterizacionBase = new Caracterizacion();
+
+        planta = caracterizacion.getPlantaList().get(0);
+        String codigoe = planta.getCodigoe();
+        boolean existe = elementoServicio.findElemento(codigoe);
+        if (existe == false) {
+            throw new SecurityException("No existe el elemento");
+        }
+        elemento.setElementoId(elementoServicio.getElemento_id());
+
+        caracterizacionBase.setCodigoe(planta.getCodigoe());
+        caracterizacionBase.setELEMENTOelementoid(elemento);
+        int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
+        caracterizacionBase.setCaracterizacionId(caracterizacion_id);
+        planta.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
+        plantaServicio.save(planta);
+
+        object.put("codigoe", caracterizacionBase.getCodigoe());
+        System.out.println("***->Registro Exitoso Caracterizacion:" + caracterizacionBase.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/registro/vertebrado")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarCaracterizacion_Vertebrado(Caracterizacion caracterizacion) throws JSONException {
         JSONObject object = new JSONObject();
 
         Caracterizacion caracterizacion1 = new Caracterizacion();
@@ -78,4 +112,5 @@ public class CaracterizacionResource {
         System.out.println("***->Registro Exitoso Caracterizacion:" + caracterizacion1.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
+
 }

@@ -22,8 +22,8 @@ public class CaracterizacionServiceImpl implements CaracterizacionService {
     @Inject
     private CaracterizacionDao caracterizacionDao;
 
-    public void save(Caracterizacion caracterizacion) {
-        caracterizacionDao.save(caracterizacion);
+    public int save(Caracterizacion caracterizacion) {
+        return caracterizacionDao.save(caracterizacion);
     }
 
     public void update(Caracterizacion caracterizacion) {

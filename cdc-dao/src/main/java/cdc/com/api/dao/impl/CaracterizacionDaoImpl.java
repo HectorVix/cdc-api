@@ -23,8 +23,11 @@ public class CaracterizacionDaoImpl implements CaracterizacionDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Caracterizacion caracterizacion) {
+    public int save(Caracterizacion caracterizacion) {
         entityManager.persist(caracterizacion);
+        entityManager.flush();
+        return caracterizacion.getCaracterizacionId();
+
     }
 
     public void update(Caracterizacion caracterizacion) {
