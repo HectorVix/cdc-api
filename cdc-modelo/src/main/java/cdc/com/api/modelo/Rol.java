@@ -8,7 +8,6 @@ package cdc.com.api.modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,7 +41,7 @@ public class Rol implements Serializable {
     private Integer rolId;
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rolrolid")
+    @OneToMany(mappedBy = "rolrolid")
     private List<Usuario> usuarioList;
 
     public Rol() {

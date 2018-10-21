@@ -6,6 +6,7 @@
 package cdc.com.api.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -29,7 +32,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Fuente.findAll", query = "SELECT f FROM Fuente f")
     , @NamedQuery(name = "Fuente.findByFuenteId", query = "SELECT f FROM Fuente f WHERE f.fuenteId = :fuenteId")
-    , @NamedQuery(name = "Fuente.findByCodfuente", query = "SELECT f FROM Fuente f WHERE f.codfuente = :codfuente")})
+    , @NamedQuery(name = "Fuente.findByCodfuente", query = "SELECT f FROM Fuente f WHERE f.codfuente = :codfuente")
+    , @NamedQuery(name = "Fuente.findByCita", query = "SELECT f FROM Fuente f WHERE f.cita = :cita")
+    , @NamedQuery(name = "Fuente.findByArchivado", query = "SELECT f FROM Fuente f WHERE f.archivado = :archivado")})
 public class Fuente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +45,18 @@ public class Fuente implements Serializable {
     private Integer fuenteId;
     @Column(name = "codfuente")
     private String codfuente;
+    @Column(name = "cita")
+    private String cita;
+    @Column(name = "archivado")
+    private String archivado;
     @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Rastreo rASTREOrastreoid;
+    @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
+    @ManyToOne
+    private Usuario uSUARIOusuarioid;
+    @OneToMany(mappedBy = "fUENTEfuenteid")
+    private List<Archivo> archivoList;
 
     public Fuente() {
     }
@@ -67,12 +81,45 @@ public class Fuente implements Serializable {
         this.codfuente = codfuente;
     }
 
+    public String getCita() {
+        return cita;
+    }
+
+    public void setCita(String cita) {
+        this.cita = cita;
+    }
+
+    public String getArchivado() {
+        return archivado;
+    }
+
+    public void setArchivado(String archivado) {
+        this.archivado = archivado;
+    }
+
     public Rastreo getRASTREOrastreoid() {
         return rASTREOrastreoid;
     }
 
     public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
         this.rASTREOrastreoid = rASTREOrastreoid;
+    }
+
+    public Usuario getUSUARIOusuarioid() {
+        return uSUARIOusuarioid;
+    }
+
+    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
+        this.uSUARIOusuarioid = uSUARIOusuarioid;
+    }
+
+    @XmlTransient
+    public List<Archivo> getArchivoList() {
+        return archivoList;
+    }
+
+    public void setArchivoList(List<Archivo> archivoList) {
+        this.archivoList = archivoList;
     }
 
     @Override

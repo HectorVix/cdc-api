@@ -46,5 +46,6 @@
     <class>cdc.com.api.modelo.Caracterizacion_1</class>
     <class>cdc.com.api.modelo.Planta_1</class>
     <class>cdc.com.api.modelo.Vertebrado_1</class>
+    <class>cdc.com.api.modelo.Archivo</class>
   </persistence-unit>
 </persistence>

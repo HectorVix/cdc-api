@@ -46,9 +46,6 @@ public class Jerarquizacion implements Serializable {
     private String codigoe;
     @Column(name = "estado")
     private Integer estado;
-    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
-    @ManyToOne
-    private Elemento eLEMENTOelementoid;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Global> globalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
@@ -57,6 +54,9 @@ public class Jerarquizacion implements Serializable {
     private List<Subnacional> subnacionalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Rastreo> rastreoList;
+    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
+    @ManyToOne
+    private Elemento eLEMENTOelementoid;
 
     public Jerarquizacion() {
     }
@@ -87,14 +87,6 @@ public class Jerarquizacion implements Serializable {
 
     public void setEstado(Integer estado) {
         this.estado = estado;
-    }
-
-    public Elemento getELEMENTOelementoid() {
-        return eLEMENTOelementoid;
-    }
-
-    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
-        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @XmlTransient
@@ -131,6 +123,14 @@ public class Jerarquizacion implements Serializable {
 
     public void setRastreoList(List<Rastreo> rastreoList) {
         this.rastreoList = rastreoList;
+    }
+
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
+    }
+
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @Override

@@ -6,6 +6,8 @@
 package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Fuente;
+import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.FuenteService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -28,30 +30,30 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("fuente")
 @ManagedBean
 public class FuenteResource {
-
+    
     @Inject
     FuenteService fuenteServicio;
-
+    
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Fuente> all() {
         System.out.println("***->Lista de Fuente");
         return fuenteServicio.all();
     }
-
+    
     @POST
-    @Path("/registro")
+    @Path("/registro/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Fuente fuente) throws JSONException {
+    public Response registrarLocalizacion(Fuente fuente, @PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
-
-        Fuente fuente1 = new Fuente();
-        fuente1.setCodfuente("codigo fuente bienbien");
-
-        fuenteServicio.save(fuente1);
+        
+        Usuario us = new Usuario();
+        us.setUsuarioId(id);
+        fuente.setUSUARIOusuarioid(us);
+        fuenteServicio.save(fuente);
         object.put("codfuente", fuente.getCodfuente());
-        System.out.println("***->Registro Exitoso Fuente :" + fuente.getCodfuente());
+        System.out.println("***->Registro Exitoso Fuente prueba2 :" + fuente.getCodfuente());
         return Response.status(202).entity(object.toString()).build();
     }
 }

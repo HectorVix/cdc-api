@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Caracterizacion.findAll", query = "SELECT c FROM Caracterizacion c")
     , @NamedQuery(name = "Caracterizacion.findByCaracterizacionId", query = "SELECT c FROM Caracterizacion c WHERE c.caracterizacionId = :caracterizacionId")
-    , @NamedQuery(name = "Caracterizacion.findByCodigoe", query = "SELECT c FROM Caracterizacion c WHERE c.codigoe = :codigoe")})
+    , @NamedQuery(name = "Caracterizacion.findByCodigoe", query = "SELECT c FROM Caracterizacion c WHERE c.codigoe = :codigoe")
+    , @NamedQuery(name = "Caracterizacion.findByTipo", query = "SELECT c FROM Caracterizacion c WHERE c.tipo = :tipo")})
 public class Caracterizacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +44,8 @@ public class Caracterizacion implements Serializable {
     private Integer caracterizacionId;
     @Column(name = "codigoe")
     private String codigoe;
+    @Column(name = "tipo")
+    private Integer tipo;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne(optional = false)
     private Elemento eLEMENTOelementoid;
@@ -72,6 +75,14 @@ public class Caracterizacion implements Serializable {
 
     public void setCodigoe(String codigoe) {
         this.codigoe = codigoe;
+    }
+
+    public Integer getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
     }
 
     public Elemento getELEMENTOelementoid() {

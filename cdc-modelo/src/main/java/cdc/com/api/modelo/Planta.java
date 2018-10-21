@@ -35,12 +35,137 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Planta.findAll", query = "SELECT p FROM Planta p")
     , @NamedQuery(name = "Planta.findByPlantaId", query = "SELECT p FROM Planta p WHERE p.plantaId = :plantaId")
-    , @NamedQuery(name = "Planta.findByCodigoe", query = "SELECT p FROM Planta p WHERE p.codigoe = :codigoe")})
+    , @NamedQuery(name = "Planta.findByCodigoe", query = "SELECT p FROM Planta p WHERE p.codigoe = :codigoe")
+    , @NamedQuery(name = "Planta.findByNacion", query = "SELECT p FROM Planta p WHERE p.nacion = :nacion")
+    , @NamedQuery(name = "Planta.findByNombren", query = "SELECT p FROM Planta p WHERE p.nombren = :nombren")
+    , @NamedQuery(name = "Planta.findByNomcomunn", query = "SELECT p FROM Planta p WHERE p.nomcomunn = :nomcomunn")
+    , @NamedQuery(name = "Planta.findByComsubespn", query = "SELECT p FROM Planta p WHERE p.comsubespn = :comsubespn")
+    , @NamedQuery(name = "Planta.findByTaxasimiln", query = "SELECT p FROM Planta p WHERE p.taxasimiln = :taxasimiln")
+    , @NamedQuery(name = "Planta.findByComidentn", query = "SELECT p FROM Planta p WHERE p.comidentn = :comidentn")
+    , @NamedQuery(name = "Planta.findByComtaxn", query = "SELECT p FROM Planta p WHERE p.comtaxn = :comtaxn")
+    , @NamedQuery(name = "Planta.findByRangog", query = "SELECT p FROM Planta p WHERE p.rangog = :rangog")
+    , @NamedQuery(name = "Planta.findByRangon", query = "SELECT p FROM Planta p WHERE p.rangon = :rangon")
+    , @NamedQuery(name = "Planta.findByAepeu", query = "SELECT p FROM Planta p WHERE p.aepeu = :aepeu")
+    , @NamedQuery(name = "Planta.findByCites", query = "SELECT p FROM Planta p WHERE p.cites = :cites")
+    , @NamedQuery(name = "Planta.findByUicn", query = "SELECT p FROM Planta p WHERE p.uicn = :uicn")
+    , @NamedQuery(name = "Planta.findByRastreolen", query = "SELECT p FROM Planta p WHERE p.rastreolen = :rastreolen")
+    , @NamedQuery(name = "Planta.findByProtnacion", query = "SELECT p FROM Planta p WHERE p.protnacion = :protnacion")
+    , @NamedQuery(name = "Planta.findByMalezan", query = "SELECT p FROM Planta p WHERE p.malezan = :malezan")
+    , @NamedQuery(name = "Planta.findByClasifinstn", query = "SELECT p FROM Planta p WHERE p.clasifinstn = :clasifinstn")
+    , @NamedQuery(name = "Planta.findByComstatn", query = "SELECT p FROM Planta p WHERE p.comstatn = :comstatn")
+    , @NamedQuery(name = "Planta.findByPriinventn", query = "SELECT p FROM Planta p WHERE p.priinventn = :priinventn")
+    , @NamedQuery(name = "Planta.findByNecinventn", query = "SELECT p FROM Planta p WHERE p.necinventn = :necinventn")
+    , @NamedQuery(name = "Planta.findByCominventn", query = "SELECT p FROM Planta p WHERE p.cominventn = :cominventn")
+    , @NamedQuery(name = "Planta.findByRespropn", query = "SELECT p FROM Planta p WHERE p.respropn = :respropn")
+    , @NamedQuery(name = "Planta.findByElevminn", query = "SELECT p FROM Planta p WHERE p.elevminn = :elevminn")
+    , @NamedQuery(name = "Planta.findByElevmaxn", query = "SELECT p FROM Planta p WHERE p.elevmaxn = :elevmaxn")
+    , @NamedQuery(name = "Planta.findByDisyuntn", query = "SELECT p FROM Planta p WHERE p.disyuntn = :disyuntn")
+    , @NamedQuery(name = "Planta.findByPeriferican", query = "SELECT p FROM Planta p WHERE p.periferican = :periferican")
+    , @NamedQuery(name = "Planta.findByComdistn", query = "SELECT p FROM Planta p WHERE p.comdistn = :comdistn")
+    , @NamedQuery(name = "Planta.findByMarinon", query = "SELECT p FROM Planta p WHERE p.marinon = :marinon")
+    , @NamedQuery(name = "Planta.findByEstuarinon", query = "SELECT p FROM Planta p WHERE p.estuarinon = :estuarinon")
+    , @NamedQuery(name = "Planta.findByFluvialn", query = "SELECT p FROM Planta p WHERE p.fluvialn = :fluvialn")
+    , @NamedQuery(name = "Planta.findByLacustren", query = "SELECT p FROM Planta p WHERE p.lacustren = :lacustren")
+    , @NamedQuery(name = "Planta.findByPalustren", query = "SELECT p FROM Planta p WHERE p.palustren = :palustren")
+    , @NamedQuery(name = "Planta.findByTerrestren", query = "SELECT p FROM Planta p WHERE p.terrestren = :terrestren")
+    , @NamedQuery(name = "Planta.findByComhabn", query = "SELECT p FROM Planta p WHERE p.comhabn = :comhabn")
+    , @NamedQuery(name = "Planta.findByComecoln", query = "SELECT p FROM Planta p WHERE p.comecoln = :comecoln")
+    , @NamedQuery(name = "Planta.findByComfenoln", query = "SELECT p FROM Planta p WHERE p.comfenoln = :comfenoln")
+    , @NamedQuery(name = "Planta.findByComrepn", query = "SELECT p FROM Planta p WHERE p.comrepn = :comrepn")
+    , @NamedQuery(name = "Planta.findByCommanejon", query = "SELECT p FROM Planta p WHERE p.commanejon = :commanejon")
+    , @NamedQuery(name = "Planta.findByRcpnopc1", query = "SELECT p FROM Planta p WHERE p.rcpnopc1 = :rcpnopc1")
+    , @NamedQuery(name = "Planta.findByRcpnopc2", query = "SELECT p FROM Planta p WHERE p.rcpnopc2 = :rcpnopc2")
+    , @NamedQuery(name = "Planta.findByRcpnopc3", query = "SELECT p FROM Planta p WHERE p.rcpnopc3 = :rcpnopc3")
+    , @NamedQuery(name = "Planta.findByRcpnopc4", query = "SELECT p FROM Planta p WHERE p.rcpnopc4 = :rcpnopc4")
+    , @NamedQuery(name = "Planta.findByRcpnopc5", query = "SELECT p FROM Planta p WHERE p.rcpnopc5 = :rcpnopc5")
+    , @NamedQuery(name = "Planta.findByCodfuente", query = "SELECT p FROM Planta p WHERE p.codfuente = :codfuente")
+    , @NamedQuery(name = "Planta.findByCita", query = "SELECT p FROM Planta p WHERE p.cita = :cita")
+    , @NamedQuery(name = "Planta.findByTransparen", query = "SELECT p FROM Planta p WHERE p.transparen = :transparen")
+    , @NamedQuery(name = "Planta.findByRefg", query = "SELECT p FROM Planta p WHERE p.refg = :refg")
+    , @NamedQuery(name = "Planta.findByRefn", query = "SELECT p FROM Planta p WHERE p.refn = :refn")
+    , @NamedQuery(name = "Planta.findByEdicionn", query = "SELECT p FROM Planta p WHERE p.edicionn = :edicionn")
+    , @NamedQuery(name = "Planta.findByAutoredn", query = "SELECT p FROM Planta p WHERE p.autoredn = :autoredn")
+    , @NamedQuery(name = "Planta.findByActualizan", query = "SELECT p FROM Planta p WHERE p.actualizan = :actualizan")})
 public class Planta implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "planta_id")
+    private Integer plantaId;
+    @Column(name = "codigoe")
+    private String codigoe;
+    @Column(name = "nacion")
+    private String nacion;
+    @Column(name = "nombren")
+    private String nombren;
+    @Column(name = "nomcomunn")
+    private String nomcomunn;
+    @Column(name = "comsubespn")
+    private String comsubespn;
+    @Column(name = "taxasimiln")
+    private String taxasimiln;
+    @Column(name = "comidentn")
+    private String comidentn;
+    @Column(name = "comtaxn")
+    private String comtaxn;
+    @Column(name = "rangog")
+    private String rangog;
+    @Column(name = "rangon")
+    private String rangon;
+    @Column(name = "aepeu")
+    private String aepeu;
+    @Column(name = "cites")
+    private String cites;
+    @Column(name = "uicn")
+    private String uicn;
+    @Column(name = "rastreolen")
+    private String rastreolen;
+    @Column(name = "protnacion")
+    private String protnacion;
+    @Column(name = "malezan")
+    private String malezan;
+    @Column(name = "clasifinstn")
+    private String clasifinstn;
+    @Column(name = "comstatn")
+    private String comstatn;
+    @Column(name = "priinventn")
+    private String priinventn;
+    @Column(name = "necinventn")
+    private String necinventn;
+    @Column(name = "cominventn")
+    private String cominventn;
+    @Column(name = "respropn")
+    private String respropn;
+    @Column(name = "elevminn")
+    private Integer elevminn;
+    @Column(name = "elevmaxn")
+    private Integer elevmaxn;
+    @Column(name = "disyuntn")
+    private String disyuntn;
+    @Column(name = "periferican")
+    private String periferican;
+    @Column(name = "comdistn")
+    private String comdistn;
+    @Column(name = "marinon")
+    private String marinon;
+    @Column(name = "estuarinon")
+    private String estuarinon;
+    @Column(name = "fluvialn")
+    private String fluvialn;
+    @Column(name = "lacustren")
+    private String lacustren;
+    @Column(name = "palustren")
+    private String palustren;
+    @Column(name = "terrestren")
+    private String terrestren;
+    @Column(name = "comhabn")
+    private String comhabn;
+    @Column(name = "comecoln")
+    private String comecoln;
     @Column(name = "comfenoln")
     private String comfenoln;
-    
     @Column(name = "comrepn")
     private String comrepn;
     @Column(name = "commanejon")
@@ -73,87 +198,6 @@ public class Planta implements Serializable {
     @Column(name = "actualizan")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizan;
-
-    @Column(name = "marinon")
-    private String marinon;
-    @Column(name = "estuarinon")
-    private String estuarinon;
-    @Column(name = "fluvialn")
-    private String fluvialn;
-    @Column(name = "lacustren")
-    private String lacustren;
-    @Column(name = "palustren")
-    private String palustren;
-    @Column(name = "terrestren")
-    private String terrestren;
-    @Column(name = "comhabn")
-    private String comhabn;
-    @Column(name = "comecoln")
-    private String comecoln;
-
-    @Column(name = "priinventn")
-    private String priinventn;
-    @Column(name = "necinventn")
-    private String necinventn;
-    @Column(name = "cominventn")
-    private String cominventn;
-    @Column(name = "respropn")
-    private String respropn;
-    @Column(name = "elevminn")
-    private Integer elevminn;
-    @Column(name = "elevmaxn")
-    private Integer elevmaxn;
-    @Column(name = "disyuntn")
-    private String disyuntn;
-    @Column(name = "periferican")
-    private String periferican;
-    @Column(name = "comdistn")
-    private String comdistn;
-
-    @Column(name = "rangog")
-    private String rangog;
-    @Column(name = "rangon")
-    private String rangon;
-    @Column(name = "aepeu")
-    private String aepeu;
-    @Column(name = "cites")
-    private String cites;
-    @Column(name = "uicn")
-    private String uicn;
-    @Column(name = "rastreolen")
-    private String rastreolen;
-    @Column(name = "protnacion")
-    private String protnacion;
-    @Column(name = "malezan")
-    private String malezan;
-    @Column(name = "clasifinstn")
-    private String clasifinstn;
-    @Column(name = "comstatn")
-    private String comstatn;
-
-    @Column(name = "nacion")
-    private String nacion;
-    @Column(name = "nombren")
-    private String nombren;
-    @Column(name = "nomcomunn")
-    private String nomcomunn;
-    @Column(name = "comsubespn")
-    private String comsubespn;
-    @Column(name = "taxasimiln")
-    private String taxasimiln;
-    @Column(name = "comidentn")
-    private String comidentn;
-    @Column(name = "comtaxn")
-    private String comtaxn;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "planta_id")
-    private Integer plantaId;
-    @Column(name = "codigoe")
-    private String codigoe;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
@@ -183,57 +227,6 @@ public class Planta implements Serializable {
 
     public void setCodigoe(String codigoe) {
         this.codigoe = codigoe;
-    }
-
-    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
-        return cARACTERIZACIONcaracterizacionid;
-    }
-
-    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
-        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Distribucion> getDistribucionList() {
-        return distribucionList;
-    }
-
-    public void setDistribucionList(List<Distribucion> distribucionList) {
-        this.distribucionList = distribucionList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (plantaId != null ? plantaId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Planta)) {
-            return false;
-        }
-        Planta other = (Planta) object;
-        if ((this.plantaId == null && other.plantaId != null) || (this.plantaId != null && !this.plantaId.equals(other.plantaId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
     }
 
     public String getNacion() {
@@ -634,6 +627,57 @@ public class Planta implements Serializable {
 
     public void setActualizan(Date actualizan) {
         this.actualizan = actualizan;
+    }
+
+    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
+        return cARACTERIZACIONcaracterizacionid;
+    }
+
+    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
+        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Distribucion> getDistribucionList() {
+        return distribucionList;
+    }
+
+    public void setDistribucionList(List<Distribucion> distribucionList) {
+        this.distribucionList = distribucionList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (plantaId != null ? plantaId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Planta)) {
+            return false;
+        }
+        Planta other = (Planta) object;
+        if ((this.plantaId == null && other.plantaId != null) || (this.plantaId != null && !this.plantaId.equals(other.plantaId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
     }
     
 }

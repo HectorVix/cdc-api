@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -246,15 +245,15 @@ public class Rastreo implements Serializable {
     @Column(name = "actualizas")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rASTREOrastreoid")
+    @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Localizacion> localizacionList;
-    @OneToMany(mappedBy = "rASTREOrastreoid")
-    private List<Observaciones> observacionesList;
     @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
     @ManyToOne
     private Jerarquizacion jERARQUIZACIONjerarquizacionid;
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Observaciones> observacionesList;
 
     public Rastreo() {
     }
@@ -809,6 +808,14 @@ public class Rastreo implements Serializable {
         this.localizacionList = localizacionList;
     }
 
+    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
+        return jERARQUIZACIONjerarquizacionid;
+    }
+
+    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
+        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    }
+
     @XmlTransient
     public List<Observaciones> getObservacionesList() {
         return observacionesList;
@@ -816,14 +823,6 @@ public class Rastreo implements Serializable {
 
     public void setObservacionesList(List<Observaciones> observacionesList) {
         this.observacionesList = observacionesList;
-    }
-
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
-    }
-
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
     }
 
     @Override

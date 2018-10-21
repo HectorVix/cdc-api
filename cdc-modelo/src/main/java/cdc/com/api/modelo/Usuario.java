@@ -68,11 +68,13 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Accion> accionList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Fuente> fuenteList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Elemento> elementoList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Contactos> contactosList;
     @JoinColumn(name = "Rol_rol_id", referencedColumnName = "rol_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Rol rolrolid;
 
     public Usuario() {
@@ -153,6 +155,15 @@ public class Usuario implements Serializable {
 
     public void setAccionList(List<Accion> accionList) {
         this.accionList = accionList;
+    }
+
+    @XmlTransient
+    public List<Fuente> getFuenteList() {
+        return fuenteList;
+    }
+
+    public void setFuenteList(List<Fuente> fuenteList) {
+        this.fuenteList = fuenteList;
     }
 
     @XmlTransient
