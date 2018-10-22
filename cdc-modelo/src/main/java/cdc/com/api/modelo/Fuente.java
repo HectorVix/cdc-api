@@ -35,14 +35,48 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Fuente.findAll", query = "SELECT f FROM Fuente f")
     , @NamedQuery(name = "Fuente.findByFuenteId", query = "SELECT f FROM Fuente f WHERE f.fuenteId = :fuenteId")
+    , @NamedQuery(name = "Fuente.findByNaturalezadocumento", query = "SELECT f FROM Fuente f WHERE f.naturalezadocumento = :naturalezadocumento")
     , @NamedQuery(name = "Fuente.findByCodfuente", query = "SELECT f FROM Fuente f WHERE f.codfuente = :codfuente")
     , @NamedQuery(name = "Fuente.findByCita", query = "SELECT f FROM Fuente f WHERE f.cita = :cita")
-    , @NamedQuery(name = "Fuente.findByArchivado", query = "SELECT f FROM Fuente f WHERE f.archivado = :archivado")})
+    , @NamedQuery(name = "Fuente.findByArchivado", query = "SELECT f FROM Fuente f WHERE f.archivado = :archivado")
+    , @NamedQuery(name = "Fuente.findByCobgeo", query = "SELECT f FROM Fuente f WHERE f.cobgeo = :cobgeo")
+    , @NamedQuery(name = "Fuente.findByCoords", query = "SELECT f FROM Fuente f WHERE f.coords = :coords")
+    , @NamedQuery(name = "Fuente.findByCoordn", query = "SELECT f FROM Fuente f WHERE f.coordn = :coordn")
+    , @NamedQuery(name = "Fuente.findByCoorde", query = "SELECT f FROM Fuente f WHERE f.coorde = :coorde")
+    , @NamedQuery(name = "Fuente.findByCoordo", query = "SELECT f FROM Fuente f WHERE f.coordo = :coordo")
+    , @NamedQuery(name = "Fuente.findByResumen", query = "SELECT f FROM Fuente f WHERE f.resumen = :resumen")
+    , @NamedQuery(name = "Fuente.findByVarios", query = "SELECT f FROM Fuente f WHERE f.varios = :varios")
+    , @NamedQuery(name = "Fuente.findByPublicacioncdc", query = "SELECT f FROM Fuente f WHERE f.publicacioncdc = :publicacioncdc")
+    , @NamedQuery(name = "Fuente.findByValor", query = "SELECT f FROM Fuente f WHERE f.valor = :valor")
+    , @NamedQuery(name = "Fuente.findByClave", query = "SELECT f FROM Fuente f WHERE f.clave = :clave")
+    , @NamedQuery(name = "Fuente.findByComentario", query = "SELECT f FROM Fuente f WHERE f.comentario = :comentario")
+    , @NamedQuery(name = "Fuente.findByNotadigest", query = "SELECT f FROM Fuente f WHERE f.notadigest = :notadigest")
+    , @NamedQuery(name = "Fuente.findByActualizar", query = "SELECT f FROM Fuente f WHERE f.actualizar = :actualizar")
+    , @NamedQuery(name = "Fuente.findByControl", query = "SELECT f FROM Fuente f WHERE f.control = :control")
+    , @NamedQuery(name = "Fuente.findByBcd", query = "SELECT f FROM Fuente f WHERE f.bcd = :bcd")})
 public class Fuente implements Serializable {
 
-    @Column(name = "publicacioncdc")
-    private Boolean publicacioncdc;
+    @Column(name = "flora")
+    private Boolean flora;
+    @Column(name = "fauna")
+    private Boolean fauna;
+    @Column(name = "otros")
+    private Boolean otros;
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "fuente_id")
+    private Integer fuenteId;
+    @Column(name = "naturalezadocumento")
+    private String naturalezadocumento;
+    @Column(name = "codfuente")
+    private String codfuente;
+    @Column(name = "cita")
+    private String cita;
+    @Column(name = "archivado")
+    private String archivado;
     @Column(name = "cobgeo")
     private String cobgeo;
     @Column(name = "coords")
@@ -55,6 +89,10 @@ public class Fuente implements Serializable {
     private String coordo;
     @Column(name = "resumen")
     private String resumen;
+    @Column(name = "varios")
+    private Boolean varios;
+    @Column(name = "publicacioncdc")
+    private Boolean publicacioncdc;
     @Column(name = "valor")
     private String valor;
     @Column(name = "clave")
@@ -71,19 +109,6 @@ public class Fuente implements Serializable {
     private Date control;
     @Column(name = "bcd")
     private String bcd;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "fuente_id")
-    private Integer fuenteId;
-    @Column(name = "codfuente")
-    private String codfuente;
-    @Column(name = "cita")
-    private String cita;
-    @Column(name = "archivado")
-    private String archivado;
     @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
     @ManyToOne
     private Rastreo rASTREOrastreoid;
@@ -92,6 +117,8 @@ public class Fuente implements Serializable {
     private Usuario uSUARIOusuarioid;
     @OneToMany(mappedBy = "fUENTEfuenteid")
     private List<Archivo> archivoList;
+    @OneToMany(mappedBy = "fUENTEfuenteid")
+    private List<Tema> temaList;
 
     public Fuente() {
     }
@@ -106,6 +133,14 @@ public class Fuente implements Serializable {
 
     public void setFuenteId(Integer fuenteId) {
         this.fuenteId = fuenteId;
+    }
+
+    public String getNaturalezadocumento() {
+        return naturalezadocumento;
+    }
+
+    public void setNaturalezadocumento(String naturalezadocumento) {
+        this.naturalezadocumento = naturalezadocumento;
     }
 
     public String getCodfuente() {
@@ -130,56 +165,6 @@ public class Fuente implements Serializable {
 
     public void setArchivado(String archivado) {
         this.archivado = archivado;
-    }
-
-    public Rastreo getRASTREOrastreoid() {
-        return rASTREOrastreoid;
-    }
-
-    public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
-        this.rASTREOrastreoid = rASTREOrastreoid;
-    }
-
-    public Usuario getUSUARIOusuarioid() {
-        return uSUARIOusuarioid;
-    }
-
-    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
-        this.uSUARIOusuarioid = uSUARIOusuarioid;
-    }
-
-    @XmlTransient
-    public List<Archivo> getArchivoList() {
-        return archivoList;
-    }
-
-    public void setArchivoList(List<Archivo> archivoList) {
-        this.archivoList = archivoList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (fuenteId != null ? fuenteId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fuente)) {
-            return false;
-        }
-        Fuente other = (Fuente) object;
-        if ((this.fuenteId == null && other.fuenteId != null) || (this.fuenteId != null && !this.fuenteId.equals(other.fuenteId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Fuente[ fuenteId=" + fuenteId + " ]";
     }
 
     public String getCobgeo() {
@@ -230,6 +215,21 @@ public class Fuente implements Serializable {
         this.resumen = resumen;
     }
 
+    public Boolean getVarios() {
+        return varios;
+    }
+
+    public void setVarios(Boolean varios) {
+        this.varios = varios;
+    }
+
+    public Boolean getPublicacioncdc() {
+        return publicacioncdc;
+    }
+
+    public void setPublicacioncdc(Boolean publicacioncdc) {
+        this.publicacioncdc = publicacioncdc;
+    }
 
     public String getValor() {
         return valor;
@@ -287,12 +287,87 @@ public class Fuente implements Serializable {
         this.bcd = bcd;
     }
 
-    public Boolean getPublicacioncdc() {
-        return publicacioncdc;
+    public Rastreo getRASTREOrastreoid() {
+        return rASTREOrastreoid;
     }
 
-    public void setPublicacioncdc(Boolean publicacioncdc) {
-        this.publicacioncdc = publicacioncdc;
+    public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
+        this.rASTREOrastreoid = rASTREOrastreoid;
+    }
+
+    public Usuario getUSUARIOusuarioid() {
+        return uSUARIOusuarioid;
+    }
+
+    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
+        this.uSUARIOusuarioid = uSUARIOusuarioid;
+    }
+
+    @XmlTransient
+    public List<Archivo> getArchivoList() {
+        return archivoList;
+    }
+
+    public void setArchivoList(List<Archivo> archivoList) {
+        this.archivoList = archivoList;
+    }
+
+    @XmlTransient
+    public List<Tema> getTemaList() {
+        return temaList;
+    }
+
+    public void setTemaList(List<Tema> temaList) {
+        this.temaList = temaList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (fuenteId != null ? fuenteId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Fuente)) {
+            return false;
+        }
+        Fuente other = (Fuente) object;
+        if ((this.fuenteId == null && other.fuenteId != null) || (this.fuenteId != null && !this.fuenteId.equals(other.fuenteId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Fuente[ fuenteId=" + fuenteId + " ]";
+    }
+
+    public Boolean getFlora() {
+        return flora;
+    }
+
+    public void setFlora(Boolean flora) {
+        this.flora = flora;
+    }
+
+    public Boolean getFauna() {
+        return fauna;
+    }
+
+    public void setFauna(Boolean fauna) {
+        this.fauna = fauna;
+    }
+
+    public Boolean getOtros() {
+        return otros;
+    }
+
+    public void setOtros(Boolean otros) {
+        this.otros = otros;
     }
     
 }

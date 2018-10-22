@@ -175,7 +175,7 @@ public class Rastreo implements Serializable {
     @Column(name = "resresumen")
     private String resresumen;
     @Column(name = "exsitu")
-    private String exsitu;
+    private Boolean exsitu;
     @Column(name = "instexsitu")
     private String instexsitu;
     @Column(name = "endemismo")
@@ -200,7 +200,7 @@ public class Rastreo implements Serializable {
     @Column(name = "refnombren")
     private String refnombren;
     @Column(name = "transparencian")
-    private String transparencian;
+    private Boolean transparencian;
     @Column(name = "rangos")
     private String rangos;
     @Column(name = "fecharevrs")
@@ -221,7 +221,7 @@ public class Rastreo implements Serializable {
     @Column(name = "refnombres")
     private String refnombres;
     @Column(name = "transparencias")
-    private String transparencias;
+    private Boolean transparencias;
     @Column(name = "reopc1")
     private String reopc1;
     @Column(name = "reopc2")
@@ -526,11 +526,11 @@ public class Rastreo implements Serializable {
         this.resresumen = resresumen;
     }
 
-    public String getExsitu() {
+    public Boolean getExsitu() {
         return exsitu;
     }
 
-    public void setExsitu(String exsitu) {
+    public void setExsitu(Boolean exsitu) {
         this.exsitu = exsitu;
     }
 
@@ -622,11 +622,11 @@ public class Rastreo implements Serializable {
         this.refnombren = refnombren;
     }
 
-    public String getTransparencian() {
+    public Boolean getTransparencian() {
         return transparencian;
     }
 
-    public void setTransparencian(String transparencian) {
+    public void setTransparencian(Boolean transparencian) {
         this.transparencian = transparencian;
     }
 
@@ -702,11 +702,11 @@ public class Rastreo implements Serializable {
         this.refnombres = refnombres;
     }
 
-    public String getTransparencias() {
+    public Boolean getTransparencias() {
         return transparencias;
     }
 
-    public void setTransparencias(String transparencias) {
+    public void setTransparencias(Boolean transparencias) {
         this.transparencias = transparencias;
     }
 

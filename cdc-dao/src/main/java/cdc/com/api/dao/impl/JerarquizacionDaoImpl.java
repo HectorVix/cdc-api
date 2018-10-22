@@ -25,8 +25,7 @@ public class JerarquizacionDaoImpl implements JerarquizacionDao {
 
     public int save(Jerarquizacion jerarquizacion) {
         entityManager.persist(jerarquizacion);
-        entityManager.flush();  
-        System.out.println("id generado jerarquia"+jerarquizacion.getJerarquizacionId());   
+        entityManager.flush();   
         return jerarquizacion.getJerarquizacionId();
     }
 

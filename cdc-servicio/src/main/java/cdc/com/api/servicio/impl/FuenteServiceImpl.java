@@ -22,8 +22,8 @@ public class FuenteServiceImpl implements FuenteService {
     @Inject
     private FuenteDao fuenteDao;
 
-    public void save(Fuente fuente) {
-        fuenteDao.save(fuente);
+    public int save(Fuente fuente) {
+        return   fuenteDao.save(fuente);
     }
 
     public void update(Fuente fuente) {

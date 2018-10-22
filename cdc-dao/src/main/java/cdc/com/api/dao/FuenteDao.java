@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface FuenteDao {
 
-    public void save(Fuente fuente);
+    public int save(Fuente fuente);
 
     public void update(Fuente fuente);
 

@@ -24,8 +24,10 @@ public class FuenteDaoImpl implements FuenteDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Fuente fuente) {
+    public int save(Fuente fuente) {
         entityManager.persist(fuente);
+        entityManager.flush();
+        return fuente.getFuenteId();
     }
 
     public void update(Fuente fuente) {
