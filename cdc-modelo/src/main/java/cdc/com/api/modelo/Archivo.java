@@ -5,6 +5,7 @@
  */
 package cdc.com.api.modelo;
 
+import java.io.File;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -31,6 +32,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Archivo.findByNombre", query = "SELECT a FROM Archivo a WHERE a.nombre = :nombre")})
 public class Archivo implements Serializable {
 
+    @Lob
+    @Column(name = "archivocdc")
+    private byte[] archivocdc;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -38,13 +43,14 @@ public class Archivo implements Serializable {
     private Integer archivoId;
     @Column(name = "nombre")
     private String nombre;
-    @Lob
-    @Column(name = "pdf")
-    private byte[] pdf;
     @JoinColumn(name = "FUENTE_fuente_id", referencedColumnName = "fuente_id")
     @ManyToOne
     private Fuente fUENTEfuenteid;
+    
 
+   
+
+   
     public Archivo() {
     }
 
@@ -66,14 +72,6 @@ public class Archivo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public byte[] getPdf() {
-        return pdf;
-    }
-
-    public void setPdf(byte[] pdf) {
-        this.pdf = pdf;
     }
 
     public Fuente getFUENTEfuenteid() {
@@ -107,6 +105,14 @@ public class Archivo implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Archivo[ archivoId=" + archivoId + " ]";
+    }
+
+    public byte[] getArchivocdc() {
+        return archivocdc;
+    }
+
+    public void setArchivocdc(byte[] archivocdc) {
+        this.archivocdc = archivocdc;
     }
     
 }

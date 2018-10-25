@@ -5,12 +5,23 @@
  */
 package cdc.com.api.cdc.ws;
 
+import cdc.com.api.modelo.Archivo;
 import cdc.com.api.modelo.Fuente;
 import cdc.com.api.modelo.Rastreo;
 import cdc.com.api.modelo.Tema;
 import cdc.com.api.modelo.Usuario;
+import cdc.com.api.servicio.ArchivoService;
 import cdc.com.api.servicio.FuenteService;
 import cdc.com.api.servicio.TemaService;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -18,10 +29,12 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
@@ -38,6 +51,8 @@ public class FuenteResource {
     FuenteService fuenteServicio;
     @Inject
     TemaService temaServicio;
+    @Inject
+    ArchivoService archivoServicio;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -55,7 +70,6 @@ public class FuenteResource {
         Usuario us = new Usuario();
         List<Tema> temaList = fuente.getTemaList();
         Tema tema = new Tema();
-        
         us.setUsuarioId(id);
         fuente.setUSUARIOusuarioid(us);
         fuente.setTemaList(null);
@@ -70,5 +84,52 @@ public class FuenteResource {
         object.put("codfuente", fuente.getCodfuente());
         System.out.println("***->Registro Exitoso Fuente:" + fuente.getCodfuente());
         return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/cargarArchivos")
+    @Consumes(MULTIPART_FORM_DATA)
+    @Produces(APPLICATION_JSON)
+    public Response uploadFile(
+            @HeaderParam("content-length") long contentLength,
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail)
+            throws JSONException, FileNotFoundException, IOException {
+        JSONObject object = new JSONObject();
+        String uploadedFileLocation = "c://temporal/" + fileDetail.getFileName();
+        //tamaño maximo 3355544432 bytes
+        int tam = (int) contentLength;
+        escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
+        File ruta = new File(uploadedFileLocation);
+        byte[] pdf = new byte[(int) ruta.length()];
+        InputStream input = new FileInputStream(ruta);
+        input.read(pdf);
+        Archivo arch = new Archivo();
+        Fuente fuente = new Fuente();
+        fuente.setFuenteId(1);
+        arch.setArchivocdc(pdf);
+        arch.setNombre(fileDetail.getFileName());
+        arch.setFUENTEfuenteid(fuente);
+        archivoServicio.save(arch);
+        object.put("archivo",fileDetail.getFileName());
+        System.out.println("***->Arhivo cargado exitosamente:" + fileDetail.getFileName());
+        return Response.status(200).entity(object.toString()).build();
+
+    }
+
+    private void escribirArchivoTemporal(InputStream uploadedInputStream,
+            String uploadedFileLocation, int tam) {
+        try {
+            int read = 0;
+            byte[] bytes = new byte[tam];
+            OutputStream out = new FileOutputStream(new File(uploadedFileLocation));
+            while ((read = uploadedInputStream.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
