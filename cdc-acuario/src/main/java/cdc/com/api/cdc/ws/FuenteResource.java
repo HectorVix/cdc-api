@@ -47,6 +47,8 @@ import org.codehaus.jettison.json.JSONObject;
 @ManagedBean
 public class FuenteResource {
 
+    private int fuenteId;
+
     @Inject
     FuenteService fuenteServicio;
     @Inject
@@ -74,6 +76,7 @@ public class FuenteResource {
         fuente.setUSUARIOusuarioid(us);
         fuente.setTemaList(null);
         int fuente_id = fuenteServicio.save(fuente);
+        setFuenteId(fuente_id);
         fuente.setFuenteId(fuente_id);
         tema.setFUENTEfuenteid(fuente);
         for (int _i = 0; _i < temaList.size(); _i++) {
@@ -82,18 +85,20 @@ public class FuenteResource {
             temaServicio.save(tema);
         }
         object.put("codfuente", fuente.getCodfuente());
+        object.put("fuenteId", fuente_id);
         System.out.println("***->Registro Exitoso Fuente:" + fuente.getCodfuente());
         return Response.status(202).entity(object.toString()).build();
     }
 
     @POST
-    @Path("/cargarArchivos")
+    @Path("/cargarArchivos/{fuenteid}")
     @Consumes(MULTIPART_FORM_DATA)
     @Produces(APPLICATION_JSON)
     public Response uploadFile(
             @HeaderParam("content-length") long contentLength,
             @FormDataParam("file") InputStream uploadedInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail)
+            @FormDataParam("file") FormDataContentDisposition fileDetail,
+            @PathParam("fuenteid") int fuenteId)
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         String uploadedFileLocation = "c://temporal/" + fileDetail.getFileName();
@@ -101,17 +106,19 @@ public class FuenteResource {
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
         File ruta = new File(uploadedFileLocation);
-        byte[] pdf = new byte[(int) ruta.length()];
+        byte[] archivo = new byte[(int) ruta.length()];
         InputStream input = new FileInputStream(ruta);
-        input.read(pdf);
+        input.read(archivo);
         Archivo arch = new Archivo();
         Fuente fuente = new Fuente();
-        fuente.setFuenteId(1);
-        arch.setArchivocdc(pdf);
+        fuente.setFuenteId(fuenteId);
+        arch.setArchivocdc(archivo);
         arch.setNombre(fileDetail.getFileName());
         arch.setFUENTEfuenteid(fuente);
         archivoServicio.save(arch);
-        object.put("archivo",fileDetail.getFileName());
+        ruta.delete();
+        input.close();
+        object.put("archivo", fileDetail.getFileName());
         System.out.println("***->Arhivo cargado exitosamente:" + fileDetail.getFileName());
         return Response.status(200).entity(object.toString()).build();
 
@@ -131,5 +138,13 @@ public class FuenteResource {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getFuenteId() {
+        return fuenteId;
+    }
+
+    public void setFuenteId(int fuenteId) {
+        this.fuenteId = fuenteId;
     }
 }
