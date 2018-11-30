@@ -46,9 +46,4 @@ public class FotoServiceImpl implements FotoService {
     public List<Foto> buscarFotoId(String elementoId, String plantaId, String sitioId, String areaId, String vertebradoId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public List<Foto> buscarFotoNombre(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

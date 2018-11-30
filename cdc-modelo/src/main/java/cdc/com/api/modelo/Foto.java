@@ -6,6 +6,7 @@
 package cdc.com.api.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +19,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -30,10 +33,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Foto.findAll", query = "SELECT f FROM Foto f")
     , @NamedQuery(name = "Foto.findByFotoId", query = "SELECT f FROM Foto f WHERE f.fotoId = :fotoId")
-    , @NamedQuery(name = "Foto.findByNombre", query = "SELECT f FROM Foto f WHERE f.nombre = :nombre")
     , @NamedQuery(name = "Foto.findByAutor", query = "SELECT f FROM Foto f WHERE f.autor = :autor")
     , @NamedQuery(name = "Foto.findByDescripcion", query = "SELECT f FROM Foto f WHERE f.descripcion = :descripcion")})
 public class Foto implements Serializable {
+
+    @Column(name = "comentario")
+    private String comentario;
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @Lob
+    @Column(name = "imagen")
+    private byte[] imagen;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,15 +52,10 @@ public class Foto implements Serializable {
     @Basic(optional = false)
     @Column(name = "foto_id")
     private Integer fotoId;
-    @Column(name = "nombre")
-    private String nombre;
     @Column(name = "autor")
     private String autor;
     @Column(name = "descripcion")
     private String descripcion;
-    @Lob
-    @Column(name = "imagen")
-    private byte[] imagen;
     @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")
     @ManyToOne
     private Area aREAareaid;
@@ -81,14 +87,6 @@ public class Foto implements Serializable {
         this.fotoId = fotoId;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getAutor() {
         return autor;
     }
@@ -105,13 +103,6 @@ public class Foto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
 
     public Area getAREAareaid() {
         return aREAareaid;
@@ -176,6 +167,30 @@ public class Foto implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Foto[ fotoId=" + fotoId + " ]";
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
     }
     
 }

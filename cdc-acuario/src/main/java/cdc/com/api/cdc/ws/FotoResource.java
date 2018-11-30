@@ -39,19 +39,4 @@ public class FotoResource {
         return fotoServicio.all();
     }
 
-    @POST
-    @Path("/registro")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Foto foto) throws JSONException {
-        JSONObject object = new JSONObject();
-
-        Foto foto1 = new Foto();
-        foto1.setNombre("foto 0.1");
-
-        fotoServicio.save(foto1);
-        object.put("nombre", foto.getNombre());
-        System.out.println("***->Registro Exitoso Foto :" + foto.getNombre());
-        return Response.status(202).entity(object.toString()).build();
-    }
 }

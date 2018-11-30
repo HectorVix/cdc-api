@@ -11,7 +11,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Elemento;
+import cdc.com.api.modelo.Foto;
 import cdc.com.api.modelo.Usuario;
+import cdc.com.api.servicio.FotoService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,22 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
+import static javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA;
+import java.io.InputStream;
+import java.io.OutputStream;
+import com.sun.jersey.multipart.FormDataParam;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import javax.ws.rs.HeaderParam;
+import static jdk.nashorn.internal.objects.Global.undefined;
+
 /**
  *
  * @author Héctor Vix
@@ -36,6 +54,8 @@ public class ElementoResource {
 
     @Inject
     ElementoService elementoServicio;
+    @Inject
+    FotoService fotoServicio;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -87,7 +107,7 @@ public class ElementoResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarElemento(Elemento elemento, @PathParam("id") int id) throws JSONException {
-        System.out.println("***->Registrando Elemento..." + elemento.getCodigo());
+        System.out.println("***->Registro Elemento Exitoso" + elemento.getCodigo());
         Usuario us = new Usuario();
         us.setUsuarioId(id);
         elemento.setUSUARIOusuarioid(us);
@@ -95,5 +115,75 @@ public class ElementoResource {
         JSONObject object = new JSONObject();
         object.put("codigo", elemento.getCodigo());
         return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/cargarFoto/{elementoid}")
+    @Consumes(MULTIPART_FORM_DATA)
+    @Produces(APPLICATION_JSON)
+    public Response uploadFile(
+            @HeaderParam("content-length") long contentLength,
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail,
+            @FormDataParam("descripcion") String descripcion,
+            @FormDataParam("comentario") String comentario,
+            @FormDataParam("autor") String autor,
+            @FormDataParam("fecha") String fecha,
+            @PathParam("elementoid") int elementoid)
+            throws JSONException, FileNotFoundException, IOException {
+        JSONObject object = new JSONObject();
+        // String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
+        int tam = (int) contentLength;
+        Date fechaCreacion = toFecha(fecha);
+        Foto foto = new Foto();
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elementoid);
+        foto.setELEMENTOelementoid(elemento);
+        foto.setDescripcion(descripcion);
+        foto.setComentario(comentario);
+        foto.setAutor(autor);
+        if (fechaCreacion != null) {
+            foto.setFecha(fechaCreacion);
+        }
+        fotoServicio.save(foto);
+        System.out.println("***->Descripcion:" + descripcion);
+        System.out.println("***->Comentario:" + comentario);
+        System.out.println("***->Autor:" + autor);
+        System.out.println("***->Fecha:" + fecha);
+
+        escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
+
+        object.put("foto", fileDetail.getFileName());
+        System.out.println("***->Foto cargada exitosamente:" + fileDetail.getFileName());
+        return Response.status(200).entity(object.toString()).build();
+    }
+
+    private Date toFecha(String fecha) {
+        SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaCreacion;
+        try {
+            fechaCreacion = formatter1.parse(fecha);
+            return fechaCreacion;
+        } catch (ParseException ex) {
+            // Logger.getLogger(ElementoResource.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    private void escribirArchivoTemporal(InputStream uploadedInputStream,
+            String uploadedFileLocation, int tam) {
+        try {
+            int read = 0;
+            byte[] bytes = new byte[tam];
+            OutputStream out = new FileOutputStream(new File(uploadedFileLocation));
+            while ((read = uploadedInputStream.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            out.flush();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

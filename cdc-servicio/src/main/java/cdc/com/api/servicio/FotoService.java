@@ -26,5 +26,4 @@ public interface FotoService {
 
     public List<Foto> buscarFotoId(String elementoId, String plantaId, String sitioId, String areaId, String vertebradoId);
 
-    public List<Foto> buscarFotoNombre(String nombre);
 }

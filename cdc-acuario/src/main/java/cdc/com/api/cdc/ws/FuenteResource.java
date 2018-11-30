@@ -101,7 +101,8 @@ public class FuenteResource {
             @PathParam("fuenteid") int fuenteId)
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
-        String uploadedFileLocation = "c://temporal/" + fileDetail.getFileName();
+        // String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
         //tamaño maximo 3355544432 bytes
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
@@ -116,10 +117,10 @@ public class FuenteResource {
         arch.setNombre(fileDetail.getFileName());
         arch.setFUENTEfuenteid(fuente);
         archivoServicio.save(arch);
-        ruta.delete();
         input.close();
+        ruta.delete();
         object.put("archivo", fileDetail.getFileName());
-        System.out.println("***->Arhivo cargado exitosamente:" + fileDetail.getFileName());
+        System.out.println("***->Archivo cargado exitosamente:" + fileDetail.getFileName());
         return Response.status(200).entity(object.toString()).build();
 
     }
