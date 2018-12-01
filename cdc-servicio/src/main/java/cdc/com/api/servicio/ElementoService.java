@@ -14,7 +14,7 @@ import cdc.com.api.modelo.Elemento;
 
 
 public interface ElementoService {
-    public void save(Elemento elemento);
+    public int save(Elemento elemento);
     public void update(Elemento elemento);
     public void delete(Long id);
     public Elemento find(Long id);

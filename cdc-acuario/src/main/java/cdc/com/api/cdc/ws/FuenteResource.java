@@ -67,7 +67,7 @@ public class FuenteResource {
     @Path("/registro/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Fuente fuente, @PathParam("id") int id) throws JSONException {
+    public Response registrarFuente(Fuente fuente, @PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
         Usuario us = new Usuario();
         List<Tema> temaList = fuente.getTemaList();

@@ -111,9 +111,10 @@ public class ElementoResource {
         Usuario us = new Usuario();
         us.setUsuarioId(id);
         elemento.setUSUARIOusuarioid(us);
-        elementoServicio.save(elemento);
+        int elemento_id = elementoServicio.save(elemento);
         JSONObject object = new JSONObject();
         object.put("codigo", elemento.getCodigo());
+        object.put("elementoId", elemento_id);
         return Response.status(202).entity(object.toString()).build();
     }
 
@@ -135,6 +136,11 @@ public class ElementoResource {
         // String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
         String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
         int tam = (int) contentLength;
+        escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
+        File ruta = new File(uploadedFileLocation);
+        byte[] archivo = new byte[(int) ruta.length()];
+        InputStream input = new FileInputStream(ruta);
+        input.read(archivo);
         Date fechaCreacion = toFecha(fecha);
         Foto foto = new Foto();
         Elemento elemento = new Elemento();
@@ -146,13 +152,10 @@ public class ElementoResource {
         if (fechaCreacion != null) {
             foto.setFecha(fechaCreacion);
         }
+        foto.setImagen(archivo);
         fotoServicio.save(foto);
-        System.out.println("***->Descripcion:" + descripcion);
-        System.out.println("***->Comentario:" + comentario);
-        System.out.println("***->Autor:" + autor);
-        System.out.println("***->Fecha:" + fecha);
-
-        escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
+        input.close();
+        ruta.delete();
 
         object.put("foto", fileDetail.getFileName());
         System.out.println("***->Foto cargada exitosamente:" + fileDetail.getFileName());

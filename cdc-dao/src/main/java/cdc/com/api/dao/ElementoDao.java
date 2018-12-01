@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface ElementoDao {
 
-    public void save(Elemento elemento);
+    public int save(Elemento elemento);
 
     public void update(Elemento elemento);
 

@@ -22,8 +22,8 @@ public class ElementoServiceImpl implements ElementoService {
     @Inject
     private ElementoDao elementoDao;
 
-    public void save(Elemento elemento) {
-        elementoDao.save(elemento);
+    public int save(Elemento elemento) {
+       return elementoDao.save(elemento);
     }
 
     public void update(Elemento elemento) {

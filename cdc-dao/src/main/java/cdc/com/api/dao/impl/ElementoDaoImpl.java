@@ -24,8 +24,10 @@ public class ElementoDaoImpl implements ElementoDao {
     private EntityManager entityManager;
     private int elemento_id;
 
-    public void save(Elemento elemento) {
+    public int save(Elemento elemento) {
         entityManager.persist(elemento);
+        entityManager.flush();
+        return elemento.getElementoId();
     }
 
     public void update(Elemento elemento) {
