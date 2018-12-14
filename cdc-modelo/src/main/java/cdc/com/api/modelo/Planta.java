@@ -88,6 +88,55 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Planta.findByActualizan", query = "SELECT p FROM Planta p WHERE p.actualizan = :actualizan")})
 public class Planta implements Serializable {
 
+    @Column(name = "nenea1")
+    private String nenea1;
+    @Column(name = "nenea2")
+    private String nenea2;
+    @Column(name = "nenea3")
+    private String nenea3;
+    @Column(name = "nenea4")
+    private String nenea4;
+    @Column(name = "nmara1")
+    private String nmara1;
+    @Column(name = "nmara2")
+    private String nmara2;
+    @Column(name = "nmara3")
+    private String nmara3;
+    @Column(name = "nmara4")
+    private String nmara4;
+    @Column(name = "nmaya1")
+    private String nmaya1;
+    @Column(name = "nmaya2")
+    private String nmaya2;
+    @Column(name = "nmaya3")
+    private String nmaya3;
+    @Column(name = "nmaya4")
+    private String nmaya4;
+    @Column(name = "njula1")
+    private String njula1;
+    @Column(name = "njula2")
+    private String njula2;
+    @Column(name = "njula3")
+    private String njula3;
+    @Column(name = "njula4")
+    private String njula4;
+    @Column(name = "nseta1")
+    private String nseta1;
+    @Column(name = "nseta2")
+    private String nseta2;
+    @Column(name = "nseta3")
+    private String nseta3;
+    @Column(name = "nseta4")
+    private String nseta4;
+    @Column(name = "nnova1")
+    private String nnova1;
+    @Column(name = "nnova2")
+    private String nnova2;
+    @Column(name = "nnova3")
+    private String nnova3;
+    @Column(name = "nnova4")
+    private String nnova4;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -678,6 +727,198 @@ public class Planta implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
+    }
+
+    public String getNenea1() {
+        return nenea1;
+    }
+
+    public void setNenea1(String nenea1) {
+        this.nenea1 = nenea1;
+    }
+
+    public String getNenea2() {
+        return nenea2;
+    }
+
+    public void setNenea2(String nenea2) {
+        this.nenea2 = nenea2;
+    }
+
+    public String getNenea3() {
+        return nenea3;
+    }
+
+    public void setNenea3(String nenea3) {
+        this.nenea3 = nenea3;
+    }
+
+    public String getNenea4() {
+        return nenea4;
+    }
+
+    public void setNenea4(String nenea4) {
+        this.nenea4 = nenea4;
+    }
+
+    public String getNmara1() {
+        return nmara1;
+    }
+
+    public void setNmara1(String nmara1) {
+        this.nmara1 = nmara1;
+    }
+
+    public String getNmara2() {
+        return nmara2;
+    }
+
+    public void setNmara2(String nmara2) {
+        this.nmara2 = nmara2;
+    }
+
+    public String getNmara3() {
+        return nmara3;
+    }
+
+    public void setNmara3(String nmara3) {
+        this.nmara3 = nmara3;
+    }
+
+    public String getNmara4() {
+        return nmara4;
+    }
+
+    public void setNmara4(String nmara4) {
+        this.nmara4 = nmara4;
+    }
+
+    public String getNmaya1() {
+        return nmaya1;
+    }
+
+    public void setNmaya1(String nmaya1) {
+        this.nmaya1 = nmaya1;
+    }
+
+    public String getNmaya2() {
+        return nmaya2;
+    }
+
+    public void setNmaya2(String nmaya2) {
+        this.nmaya2 = nmaya2;
+    }
+
+    public String getNmaya3() {
+        return nmaya3;
+    }
+
+    public void setNmaya3(String nmaya3) {
+        this.nmaya3 = nmaya3;
+    }
+
+    public String getNmaya4() {
+        return nmaya4;
+    }
+
+    public void setNmaya4(String nmaya4) {
+        this.nmaya4 = nmaya4;
+    }
+
+    public String getNjula1() {
+        return njula1;
+    }
+
+    public void setNjula1(String njula1) {
+        this.njula1 = njula1;
+    }
+
+    public String getNjula2() {
+        return njula2;
+    }
+
+    public void setNjula2(String njula2) {
+        this.njula2 = njula2;
+    }
+
+    public String getNjula3() {
+        return njula3;
+    }
+
+    public void setNjula3(String njula3) {
+        this.njula3 = njula3;
+    }
+
+    public String getNjula4() {
+        return njula4;
+    }
+
+    public void setNjula4(String njula4) {
+        this.njula4 = njula4;
+    }
+
+    public String getNseta1() {
+        return nseta1;
+    }
+
+    public void setNseta1(String nseta1) {
+        this.nseta1 = nseta1;
+    }
+
+    public String getNseta2() {
+        return nseta2;
+    }
+
+    public void setNseta2(String nseta2) {
+        this.nseta2 = nseta2;
+    }
+
+    public String getNseta3() {
+        return nseta3;
+    }
+
+    public void setNseta3(String nseta3) {
+        this.nseta3 = nseta3;
+    }
+
+    public String getNseta4() {
+        return nseta4;
+    }
+
+    public void setNseta4(String nseta4) {
+        this.nseta4 = nseta4;
+    }
+
+    public String getNnova1() {
+        return nnova1;
+    }
+
+    public void setNnova1(String nnova1) {
+        this.nnova1 = nnova1;
+    }
+
+    public String getNnova2() {
+        return nnova2;
+    }
+
+    public void setNnova2(String nnova2) {
+        this.nnova2 = nnova2;
+    }
+
+    public String getNnova3() {
+        return nnova3;
+    }
+
+    public void setNnova3(String nnova3) {
+        this.nnova3 = nnova3;
+    }
+
+    public String getNnova4() {
+        return nnova4;
+    }
+
+    public void setNnova4(String nnova4) {
+        this.nnova4 = nnova4;
     }
     
 }

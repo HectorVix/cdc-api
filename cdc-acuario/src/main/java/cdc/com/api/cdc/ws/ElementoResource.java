@@ -33,15 +33,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.core.header.FormDataContentDisposition;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import javax.imageio.ImageIO;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.StreamingOutput;
 import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
@@ -71,7 +79,7 @@ public class ElementoResource {
     public java.util.List<Elemento> buscarElemento(@PathParam("codigo") String codigo,
             @PathParam("nombrecomun") String nombrecomun,
             @PathParam("nombrecientifico") String nombrecientifico) {
-        System.out.println("***->Lista de Elementos buscados");
+        System.out.println("***->Busqueda Exitosa de Elementos");
         return elementoServicio.buscarElemento(codigo, nombrecomun, nombrecientifico);
     }
 
@@ -189,4 +197,84 @@ public class ElementoResource {
             e.printStackTrace();
         }
     }
+
+    @GET
+    @Path("/imagen/{id}")
+    @Produces({"image/png", "image/jpg"})
+    public Response getFoto(@PathParam("id") long foto_id) throws JSONException {
+        Foto foto = fotoServicio.find(foto_id);
+        byte[] imagenData = foto.getImagen();
+
+        /*BufferedImage image = null;
+            
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            try {
+            ImageIO.write(image, "png", baos);
+            } catch (IOException ex) {
+            Logger.getLogger(ElementoResource.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            byte[] imageData = baos.toByteArray();
+            
+            // uncomment line below to send non-streamed
+            // return Response.ok(imageData).build();
+            // uncomment line below to send streamed
+            return Response.ok(new ByteArrayInputStream(imageData)).build();
+            
+         */
+        JSONObject object = new JSONObject();
+        object.put("foto", "pruebas");
+        // object.put("imagen",imagenData);
+        System.out.println("***->Obteniendo foto:"+imagenData);
+        //return Response.ok(new ByteArrayInputStream(imagenData)).build();
+       // return Response.status(200).entity(object.toString()).build();      
+       // return Response.ok(imagenData).build();
+        // return Response.status(200).entity(object.toString()).build();
+        object.put("foto1",foto.getImagen()) ;
+         return Response
+            .ok()
+            //.type("image/*")
+            .entity(foto.getImagen()) // Assumes document is a byte array in the domain object.
+            .build();
+    }
+
+    @GET
+    @Path("/pdf")
+    public Response downloadPdfFile() {
+        StreamingOutput fileStream = new StreamingOutput() {
+            @Override
+            public void write(java.io.OutputStream output) throws IOException, WebApplicationException {
+                try {
+                    java.nio.file.Path path = Paths.get("C:/temporal/test.pdf");
+                    byte[] data = Files.readAllBytes(path);
+                    output.write(data);
+                    output.flush();
+                } catch (Exception e) {
+                    throw new WebApplicationException("File Not Found !!");
+                }
+            }
+        };
+        return Response
+                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
+                .header("content-disposition", "attachment; filename = myfile.pdf")
+                .build();
+    }
+
+    @GET
+    @Path("/fotoElemento/{id}")
+    @Produces({"image/png", "image/jpg"})
+    public File FotoElemento(@PathParam("id") long foto_id) {
+        File repositoryFile = new File("c:/temporal/bobby.jpg");
+        return repositoryFile;
+    }
+  /*  
+    @Path("upload/{id}")
+@GET
+public Response getPDF(@PathParam("id") Integer id) throws Exception {
+    ClientCaseDoc entity = find(id);
+    return Response
+            .ok()
+            .type("application/pdf")
+            .entity(entity.getDocument()) // Assumes document is a byte array in the domain object.
+            .build();
+}*/
 }
