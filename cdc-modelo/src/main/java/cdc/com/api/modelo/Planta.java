@@ -136,6 +136,104 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Planta.findByNnovb4", query = "SELECT p FROM Planta p WHERE p.nnovb4 = :nnovb4")})
 public class Planta implements Serializable {
 
+    @Column(name = "nfebb1")
+    private String nfebb1;
+    @Column(name = "nfebb2")
+    private String nfebb2;
+    @Column(name = "nfebb3")
+    private String nfebb3;
+    @Column(name = "nfebb4")
+    private String nfebb4;
+    @Column(name = "nabrb1")
+    private String nabrb1;
+    @Column(name = "nabrb2")
+    private String nabrb2;
+    @Column(name = "nabrb3")
+    private String nabrb3;
+    @Column(name = "nabrb4")
+    private String nabrb4;
+    @Column(name = "njunb1")
+    private String njunb1;
+    @Column(name = "njunb2")
+    private String njunb2;
+    @Column(name = "njunb3")
+    private String njunb3;
+    @Column(name = "njunb4")
+    private String njunb4;
+    @Column(name = "nagob1")
+    private String nagob1;
+    @Column(name = "nagob2")
+    private String nagob2;
+    @Column(name = "nagob3")
+    private String nagob3;
+    @Column(name = "nagob4")
+    private String nagob4;
+    @Column(name = "noctb1")
+    private String noctb1;
+    @Column(name = "noctb2")
+    private String noctb2;
+    @Column(name = "noctb3")
+    private String noctb3;
+    @Column(name = "noctb4")
+    private String noctb4;
+    @Column(name = "ndicb1")
+    private String ndicb1;
+    @Column(name = "ndicb2")
+    private String ndicb2;
+    @Column(name = "ndicb3")
+    private String ndicb3;
+    @Column(name = "ndicb4")
+    private String ndicb4;
+
+    @Column(name = "nfeba1")
+    private String nfeba1;
+    @Column(name = "nfeba2")
+    private String nfeba2;
+    @Column(name = "nfeba3")
+    private String nfeba3;
+    @Column(name = "nfeba4")
+    private String nfeba4;
+    @Column(name = "nabra1")
+    private String nabra1;
+    @Column(name = "nabra2")
+    private String nabra2;
+    @Column(name = "nabra3")
+    private String nabra3;
+    @Column(name = "nabra4")
+    private String nabra4;
+    @Column(name = "njuna1")
+    private String njuna1;
+    @Column(name = "njuna2")
+    private String njuna2;
+    @Column(name = "njuna3")
+    private String njuna3;
+    @Column(name = "njuna4")
+    private String njuna4;
+    @Column(name = "nagoa1")
+    private String nagoa1;
+    @Column(name = "nagoa2")
+    private String nagoa2;
+    @Column(name = "nagoa3")
+    private String nagoa3;
+    @Column(name = "nagoa4")
+    private String nagoa4;
+    @Column(name = "nocta1")
+    private String nocta1;
+    @Column(name = "nocta2")
+    private String nocta2;
+    @Column(name = "nocta3")
+    private String nocta3;
+    @Column(name = "nocta4")
+    private String nocta4;
+    @Column(name = "ndica1")
+    private String ndica1;
+    @Column(name = "ndica2")
+    private String ndica2;
+    @Column(name = "ndica3")
+    private String ndica3;
+    @Column(name = "ndica4")
+    private String ndica4;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -1206,6 +1304,390 @@ public class Planta implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
+    }
+
+    public String getNfeba1() {
+        return nfeba1;
+    }
+
+    public void setNfeba1(String nfeba1) {
+        this.nfeba1 = nfeba1;
+    }
+
+    public String getNfeba2() {
+        return nfeba2;
+    }
+
+    public void setNfeba2(String nfeba2) {
+        this.nfeba2 = nfeba2;
+    }
+
+    public String getNfeba3() {
+        return nfeba3;
+    }
+
+    public void setNfeba3(String nfeba3) {
+        this.nfeba3 = nfeba3;
+    }
+
+    public String getNfeba4() {
+        return nfeba4;
+    }
+
+    public void setNfeba4(String nfeba4) {
+        this.nfeba4 = nfeba4;
+    }
+
+    public String getNabra1() {
+        return nabra1;
+    }
+
+    public void setNabra1(String nabra1) {
+        this.nabra1 = nabra1;
+    }
+
+    public String getNabra2() {
+        return nabra2;
+    }
+
+    public void setNabra2(String nabra2) {
+        this.nabra2 = nabra2;
+    }
+
+    public String getNabra3() {
+        return nabra3;
+    }
+
+    public void setNabra3(String nabra3) {
+        this.nabra3 = nabra3;
+    }
+
+    public String getNabra4() {
+        return nabra4;
+    }
+
+    public void setNabra4(String nabra4) {
+        this.nabra4 = nabra4;
+    }
+
+    public String getNjuna1() {
+        return njuna1;
+    }
+
+    public void setNjuna1(String njuna1) {
+        this.njuna1 = njuna1;
+    }
+
+    public String getNjuna2() {
+        return njuna2;
+    }
+
+    public void setNjuna2(String njuna2) {
+        this.njuna2 = njuna2;
+    }
+
+    public String getNjuna3() {
+        return njuna3;
+    }
+
+    public void setNjuna3(String njuna3) {
+        this.njuna3 = njuna3;
+    }
+
+    public String getNjuna4() {
+        return njuna4;
+    }
+
+    public void setNjuna4(String njuna4) {
+        this.njuna4 = njuna4;
+    }
+
+    public String getNagoa1() {
+        return nagoa1;
+    }
+
+    public void setNagoa1(String nagoa1) {
+        this.nagoa1 = nagoa1;
+    }
+
+    public String getNagoa2() {
+        return nagoa2;
+    }
+
+    public void setNagoa2(String nagoa2) {
+        this.nagoa2 = nagoa2;
+    }
+
+    public String getNagoa3() {
+        return nagoa3;
+    }
+
+    public void setNagoa3(String nagoa3) {
+        this.nagoa3 = nagoa3;
+    }
+
+    public String getNagoa4() {
+        return nagoa4;
+    }
+
+    public void setNagoa4(String nagoa4) {
+        this.nagoa4 = nagoa4;
+    }
+
+    public String getNocta1() {
+        return nocta1;
+    }
+
+    public void setNocta1(String nocta1) {
+        this.nocta1 = nocta1;
+    }
+
+    public String getNocta2() {
+        return nocta2;
+    }
+
+    public void setNocta2(String nocta2) {
+        this.nocta2 = nocta2;
+    }
+
+    public String getNocta3() {
+        return nocta3;
+    }
+
+    public void setNocta3(String nocta3) {
+        this.nocta3 = nocta3;
+    }
+
+    public String getNocta4() {
+        return nocta4;
+    }
+
+    public void setNocta4(String nocta4) {
+        this.nocta4 = nocta4;
+    }
+
+    public String getNdica1() {
+        return ndica1;
+    }
+
+    public void setNdica1(String ndica1) {
+        this.ndica1 = ndica1;
+    }
+
+    public String getNdica2() {
+        return ndica2;
+    }
+
+    public void setNdica2(String ndica2) {
+        this.ndica2 = ndica2;
+    }
+
+    public String getNdica3() {
+        return ndica3;
+    }
+
+    public void setNdica3(String ndica3) {
+        this.ndica3 = ndica3;
+    }
+
+    public String getNdica4() {
+        return ndica4;
+    }
+
+    public void setNdica4(String ndica4) {
+        this.ndica4 = ndica4;
+    }
+
+    public String getNfebb1() {
+        return nfebb1;
+    }
+
+    public void setNfebb1(String nfebb1) {
+        this.nfebb1 = nfebb1;
+    }
+
+    public String getNfebb2() {
+        return nfebb2;
+    }
+
+    public void setNfebb2(String nfebb2) {
+        this.nfebb2 = nfebb2;
+    }
+
+    public String getNfebb3() {
+        return nfebb3;
+    }
+
+    public void setNfebb3(String nfebb3) {
+        this.nfebb3 = nfebb3;
+    }
+
+    public String getNfebb4() {
+        return nfebb4;
+    }
+
+    public void setNfebb4(String nfebb4) {
+        this.nfebb4 = nfebb4;
+    }
+
+    public String getNabrb1() {
+        return nabrb1;
+    }
+
+    public void setNabrb1(String nabrb1) {
+        this.nabrb1 = nabrb1;
+    }
+
+    public String getNabrb2() {
+        return nabrb2;
+    }
+
+    public void setNabrb2(String nabrb2) {
+        this.nabrb2 = nabrb2;
+    }
+
+    public String getNabrb3() {
+        return nabrb3;
+    }
+
+    public void setNabrb3(String nabrb3) {
+        this.nabrb3 = nabrb3;
+    }
+
+    public String getNabrb4() {
+        return nabrb4;
+    }
+
+    public void setNabrb4(String nabrb4) {
+        this.nabrb4 = nabrb4;
+    }
+
+    public String getNjunb1() {
+        return njunb1;
+    }
+
+    public void setNjunb1(String njunb1) {
+        this.njunb1 = njunb1;
+    }
+
+    public String getNjunb2() {
+        return njunb2;
+    }
+
+    public void setNjunb2(String njunb2) {
+        this.njunb2 = njunb2;
+    }
+
+    public String getNjunb3() {
+        return njunb3;
+    }
+
+    public void setNjunb3(String njunb3) {
+        this.njunb3 = njunb3;
+    }
+
+    public String getNjunb4() {
+        return njunb4;
+    }
+
+    public void setNjunb4(String njunb4) {
+        this.njunb4 = njunb4;
+    }
+
+    public String getNagob1() {
+        return nagob1;
+    }
+
+    public void setNagob1(String nagob1) {
+        this.nagob1 = nagob1;
+    }
+
+    public String getNagob2() {
+        return nagob2;
+    }
+
+    public void setNagob2(String nagob2) {
+        this.nagob2 = nagob2;
+    }
+
+    public String getNagob3() {
+        return nagob3;
+    }
+
+    public void setNagob3(String nagob3) {
+        this.nagob3 = nagob3;
+    }
+
+    public String getNagob4() {
+        return nagob4;
+    }
+
+    public void setNagob4(String nagob4) {
+        this.nagob4 = nagob4;
+    }
+
+    public String getNoctb1() {
+        return noctb1;
+    }
+
+    public void setNoctb1(String noctb1) {
+        this.noctb1 = noctb1;
+    }
+
+    public String getNoctb2() {
+        return noctb2;
+    }
+
+    public void setNoctb2(String noctb2) {
+        this.noctb2 = noctb2;
+    }
+
+    public String getNoctb3() {
+        return noctb3;
+    }
+
+    public void setNoctb3(String noctb3) {
+        this.noctb3 = noctb3;
+    }
+
+    public String getNoctb4() {
+        return noctb4;
+    }
+
+    public void setNoctb4(String noctb4) {
+        this.noctb4 = noctb4;
+    }
+
+    public String getNdicb1() {
+        return ndicb1;
+    }
+
+    public void setNdicb1(String ndicb1) {
+        this.ndicb1 = ndicb1;
+    }
+
+    public String getNdicb2() {
+        return ndicb2;
+    }
+
+    public void setNdicb2(String ndicb2) {
+        this.ndicb2 = ndicb2;
+    }
+
+    public String getNdicb3() {
+        return ndicb3;
+    }
+
+    public void setNdicb3(String ndicb3) {
+        this.ndicb3 = ndicb3;
+    }
+
+    public String getNdicb4() {
+        return ndicb4;
+    }
+
+    public void setNdicb4(String ndicb4) {
+        this.ndicb4 = ndicb4;
     }
     
 }
