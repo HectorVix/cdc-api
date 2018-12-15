@@ -46,6 +46,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fuente.findByCoordo", query = "SELECT f FROM Fuente f WHERE f.coordo = :coordo")
     , @NamedQuery(name = "Fuente.findByResumen", query = "SELECT f FROM Fuente f WHERE f.resumen = :resumen")
     , @NamedQuery(name = "Fuente.findByVarios", query = "SELECT f FROM Fuente f WHERE f.varios = :varios")
+    , @NamedQuery(name = "Fuente.findByFlora", query = "SELECT f FROM Fuente f WHERE f.flora = :flora")
+    , @NamedQuery(name = "Fuente.findByFauna", query = "SELECT f FROM Fuente f WHERE f.fauna = :fauna")
+    , @NamedQuery(name = "Fuente.findByOtros", query = "SELECT f FROM Fuente f WHERE f.otros = :otros")
     , @NamedQuery(name = "Fuente.findByPublicacioncdc", query = "SELECT f FROM Fuente f WHERE f.publicacioncdc = :publicacioncdc")
     , @NamedQuery(name = "Fuente.findByValor", query = "SELECT f FROM Fuente f WHERE f.valor = :valor")
     , @NamedQuery(name = "Fuente.findByClave", query = "SELECT f FROM Fuente f WHERE f.clave = :clave")
@@ -55,13 +58,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fuente.findByControl", query = "SELECT f FROM Fuente f WHERE f.control = :control")
     , @NamedQuery(name = "Fuente.findByBcd", query = "SELECT f FROM Fuente f WHERE f.bcd = :bcd")})
 public class Fuente implements Serializable {
-
-    @Column(name = "flora")
-    private Boolean flora;
-    @Column(name = "fauna")
-    private Boolean fauna;
-    @Column(name = "otros")
-    private Boolean otros;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -91,6 +87,12 @@ public class Fuente implements Serializable {
     private String resumen;
     @Column(name = "varios")
     private Boolean varios;
+    @Column(name = "flora")
+    private Boolean flora;
+    @Column(name = "fauna")
+    private Boolean fauna;
+    @Column(name = "otros")
+    private Boolean otros;
     @Column(name = "publicacioncdc")
     private Boolean publicacioncdc;
     @Column(name = "valor")
@@ -223,6 +225,30 @@ public class Fuente implements Serializable {
         this.varios = varios;
     }
 
+    public Boolean getFlora() {
+        return flora;
+    }
+
+    public void setFlora(Boolean flora) {
+        this.flora = flora;
+    }
+
+    public Boolean getFauna() {
+        return fauna;
+    }
+
+    public void setFauna(Boolean fauna) {
+        this.fauna = fauna;
+    }
+
+    public Boolean getOtros() {
+        return otros;
+    }
+
+    public void setOtros(Boolean otros) {
+        this.otros = otros;
+    }
+
     public Boolean getPublicacioncdc() {
         return publicacioncdc;
     }
@@ -344,30 +370,6 @@ public class Fuente implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Fuente[ fuenteId=" + fuenteId + " ]";
-    }
-
-    public Boolean getFlora() {
-        return flora;
-    }
-
-    public void setFlora(Boolean flora) {
-        this.flora = flora;
-    }
-
-    public Boolean getFauna() {
-        return fauna;
-    }
-
-    public void setFauna(Boolean fauna) {
-        this.fauna = fauna;
-    }
-
-    public Boolean getOtros() {
-        return otros;
-    }
-
-    public void setOtros(Boolean otros) {
-        this.otros = otros;
     }
     
 }

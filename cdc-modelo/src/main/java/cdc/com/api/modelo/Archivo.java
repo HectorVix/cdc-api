@@ -5,11 +5,12 @@
  */
 package cdc.com.api.modelo;
 
-import java.io.File;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
@@ -29,28 +30,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Archivo.findAll", query = "SELECT a FROM Archivo a")
     , @NamedQuery(name = "Archivo.findByArchivoId", query = "SELECT a FROM Archivo a WHERE a.archivoId = :archivoId")
-    , @NamedQuery(name = "Archivo.findByNombre", query = "SELECT a FROM Archivo a WHERE a.nombre = :nombre")})
+    , @NamedQuery(name = "Archivo.findByNombre", query = "SELECT a FROM Archivo a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Archivo.findByDescripcion", query = "SELECT a FROM Archivo a WHERE a.descripcion = :descripcion")
+    , @NamedQuery(name = "Archivo.findByDepartamento", query = "SELECT a FROM Archivo a WHERE a.departamento = :departamento")
+    , @NamedQuery(name = "Archivo.findByLocalizacion", query = "SELECT a FROM Archivo a WHERE a.localizacion = :localizacion")})
 public class Archivo implements Serializable {
-
-    @Lob
-    @Column(name = "archivocdc")
-    private byte[] archivocdc;
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "archivo_id")
     private Integer archivoId;
     @Column(name = "nombre")
     private String nombre;
+    @Column(name = "descripcion")
+    private String descripcion;
+    @Column(name = "departamento")
+    private String departamento;
+    @Column(name = "localizacion")
+    private String localizacion;
+    @Lob
+    @Column(name = "archivocdc")
+    private byte[] archivocdc;
     @JoinColumn(name = "FUENTE_fuente_id", referencedColumnName = "fuente_id")
     @ManyToOne
     private Fuente fUENTEfuenteid;
-    
 
-   
-
-   
     public Archivo() {
     }
 
@@ -72,6 +78,38 @@ public class Archivo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(String localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public byte[] getArchivocdc() {
+        return archivocdc;
+    }
+
+    public void setArchivocdc(byte[] archivocdc) {
+        this.archivocdc = archivocdc;
     }
 
     public Fuente getFUENTEfuenteid() {
@@ -105,14 +143,6 @@ public class Archivo implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Archivo[ archivoId=" + archivoId + " ]";
-    }
-
-    public byte[] getArchivocdc() {
-        return archivocdc;
-    }
-
-    public void setArchivocdc(byte[] archivocdc) {
-        this.archivocdc = archivocdc;
     }
     
 }

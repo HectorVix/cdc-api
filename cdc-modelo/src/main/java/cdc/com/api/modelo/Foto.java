@@ -33,18 +33,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Foto.findAll", query = "SELECT f FROM Foto f")
     , @NamedQuery(name = "Foto.findByFotoId", query = "SELECT f FROM Foto f WHERE f.fotoId = :fotoId")
+    , @NamedQuery(name = "Foto.findByDescripcion", query = "SELECT f FROM Foto f WHERE f.descripcion = :descripcion")
+    , @NamedQuery(name = "Foto.findByComentario", query = "SELECT f FROM Foto f WHERE f.comentario = :comentario")
     , @NamedQuery(name = "Foto.findByAutor", query = "SELECT f FROM Foto f WHERE f.autor = :autor")
-    , @NamedQuery(name = "Foto.findByDescripcion", query = "SELECT f FROM Foto f WHERE f.descripcion = :descripcion")})
+    , @NamedQuery(name = "Foto.findByFecha", query = "SELECT f FROM Foto f WHERE f.fecha = :fecha")})
 public class Foto implements Serializable {
-
-    @Column(name = "comentario")
-    private String comentario;
-    @Column(name = "fecha")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha;
-    @Lob
-    @Column(name = "imagen")
-    private byte[] imagen;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,10 +45,18 @@ public class Foto implements Serializable {
     @Basic(optional = false)
     @Column(name = "foto_id")
     private Integer fotoId;
-    @Column(name = "autor")
-    private String autor;
     @Column(name = "descripcion")
     private String descripcion;
+    @Column(name = "comentario")
+    private String comentario;
+    @Column(name = "autor")
+    private String autor;
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+    @Lob
+    @Column(name = "imagen")
+    private byte[] imagen;
     @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")
     @ManyToOne
     private Area aREAareaid;
@@ -87,14 +88,6 @@ public class Foto implements Serializable {
         this.fotoId = fotoId;
     }
 
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -103,6 +96,37 @@ public class Foto implements Serializable {
         this.descripcion = descripcion;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 
     public Area getAREAareaid() {
         return aREAareaid;
@@ -167,30 +191,6 @@ public class Foto implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Foto[ fotoId=" + fotoId + " ]";
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
     }
     
 }
