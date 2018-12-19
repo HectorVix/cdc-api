@@ -15,6 +15,7 @@ import cdc.com.api.servicio.DistribucionService;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.PlantaService;
 import cdc.com.api.servicio.VertebradoService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -47,6 +48,16 @@ public class CaracterizacionResource {
     ElementoService elementoServicio;
     @Inject
     DistribucionService distribucionServicio;
+    List<Distribucion> lista_distribucion;
+
+    //necesario dado que da error si se define de forma temporal
+    public List<Distribucion> getLista_distribucion() {
+        return lista_distribucion;
+    }
+
+    public void setLista_distribucion(List<Distribucion> lista_distribucion) {
+        this.lista_distribucion = lista_distribucion;
+    }
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -81,19 +92,10 @@ public class CaracterizacionResource {
         Planta planta = new Planta();
         Caracterizacion caracterizacionBase = new Caracterizacion();
         Distribucion distribucion = new Distribucion();
-      //  int tam_distribucion = planta.getDistribucionList().size();
-        // ArrayList<List> lista_Distribucion =new ArrayList<List>();
+
         planta = caracterizacion.getPlantaList().get(0);
         System.out.println("***->Distribucion Tam:" + planta.getDistribucionList().size());
-        /*if (planta.getDistribucionList().size() >= 1) {
-            for (int i = 0; i < tam_distribucion; i++) {
-            
-            }
-            distribucion = planta.getDistribucionList().get(0);
-            distribucionServicio.save(distribucion);
-            System.out.println("***->Registro Distribucion Exitoso:" + distribucion.getCodsubnac());
-        }*/
-
+        lista_distribucion = planta.getDistribucionList();
         planta.setDistribucionList(null);//neceario dado que se necesita :marked cascade PERSIST
         String codigoe = planta.getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
@@ -107,14 +109,17 @@ public class CaracterizacionResource {
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         planta.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
         plantaServicio.save(planta);
-
-        /*  for (int i = 0; i < listaDistribucion.size(); i++) {
-            distribucion = listaDistribucion.get(i);
-           // distribucionServicio.save(distribucion);
-            System.out.println("***->Registro Distribucion Exitoso:" + distribucion.getCodsubnac());
+        //Distribucion planta datos 
+        if (lista_distribucion.size() >= 1) {
+            int tam_distribucion = lista_distribucion.size();
+            for (int i = 0; i < tam_distribucion; i++) {
+                distribucion = lista_distribucion.get(i);
+                distribucionServicio.save(distribucion);
+                System.out.println("***->recorrido distribucion:" + i);
+                System.out.println("***->Infor distribucion:" + distribucion.getCodsubnac());
+                System.out.println("***->Registro exitoso distribucion:" + distribucion.getCodsubnac());
+            }
         }
-     
-         */
         object.put("codigoe", caracterizacionBase.getCodigoe());
         System.out.println("***->Registro Exitoso Caracterizacion Planta:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
