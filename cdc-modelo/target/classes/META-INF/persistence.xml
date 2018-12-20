@@ -50,5 +50,6 @@
     <class>cdc.com.api.modelo.Tema</class>
     <class>cdc.com.api.modelo.Fuente_1</class>
     <class>cdc.com.api.modelo.Varios</class>
+    <class>cdc.com.api.modelo.Distribucion2</class>
   </persistence-unit>
 </persistence>

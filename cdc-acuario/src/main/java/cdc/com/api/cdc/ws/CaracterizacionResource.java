@@ -7,10 +7,12 @@ package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Caracterizacion;
 import cdc.com.api.modelo.Distribucion;
+import cdc.com.api.modelo.Distribucion2;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Planta;
 import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.CaracterizacionService;
+import cdc.com.api.servicio.Distribucion2Service;
 import cdc.com.api.servicio.DistribucionService;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.PlantaService;
@@ -48,7 +50,11 @@ public class CaracterizacionResource {
     ElementoService elementoServicio;
     @Inject
     DistribucionService distribucionServicio;
+    @Inject
+    Distribucion2Service distribucion2Servicio;
+
     List<Distribucion> lista_distribucion;
+    List<Distribucion2> lista_distribucion2;
 
     //necesario dado que da error si se define de forma temporal
     public List<Distribucion> getLista_distribucion() {
@@ -57,6 +63,14 @@ public class CaracterizacionResource {
 
     public void setLista_distribucion(List<Distribucion> lista_distribucion) {
         this.lista_distribucion = lista_distribucion;
+    }
+
+    public List<Distribucion2> getLista_distribucion2() {
+        return lista_distribucion2;
+    }
+
+    public void setLista_distribucion2(List<Distribucion2> lista_distribucion2) {
+        this.lista_distribucion2 = lista_distribucion2;
     }
 
     @GET
@@ -92,10 +106,13 @@ public class CaracterizacionResource {
         Planta planta = new Planta();
         Caracterizacion caracterizacionBase = new Caracterizacion();
         Distribucion distribucion = new Distribucion();
+        Distribucion2 distribucion2 = new Distribucion2();
 
         planta = caracterizacion.getPlantaList().get(0);
         lista_distribucion = planta.getDistribucionList();
+        lista_distribucion2 = planta.getDistribucion2List();
         planta.setDistribucionList(null);//necesario dado que se necesita :marked cascade PERSIST
+        planta.setDistribucion2List(null);
         String codigoe = planta.getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
         if (existe == false) {
@@ -109,7 +126,7 @@ public class CaracterizacionResource {
         planta.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
         int planta_id = plantaServicio.save(planta);
         planta.setPlantaId(planta_id);
-        //Distribución planta datos 
+        //Distribución 1 planta datos 
         if (lista_distribucion.size() >= 1) {
             int tam_distribucion = lista_distribucion.size();
             for (int i = 0; i < tam_distribucion; i++) {
@@ -117,6 +134,16 @@ public class CaracterizacionResource {
                 distribucion.setPLANTAplantaid(planta);
                 distribucionServicio.save(distribucion);
                 System.out.println("***->Registro exitoso distribucion:" + distribucion.getCodsubnac());
+            }
+        }
+        //Distribución 2 planta datos 
+        if (lista_distribucion2.size() >= 1) {
+            int tam_distribucion2 = lista_distribucion2.size();
+            for (int i = 0; i < tam_distribucion2; i++) {
+                distribucion2 = lista_distribucion2.get(i);
+                distribucion2.setPLANTAplantaid(planta);
+                distribucion2Servicio.save(distribucion2);
+                System.out.println("***->Registro exitoso distribucion 2:" + distribucion2.getCodecoregn());
             }
         }
         object.put("codigoe", caracterizacionBase.getCodigoe());

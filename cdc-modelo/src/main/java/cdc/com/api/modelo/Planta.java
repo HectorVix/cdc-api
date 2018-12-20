@@ -133,106 +133,56 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Planta.findByNnovb1", query = "SELECT p FROM Planta p WHERE p.nnovb1 = :nnovb1")
     , @NamedQuery(name = "Planta.findByNnovb2", query = "SELECT p FROM Planta p WHERE p.nnovb2 = :nnovb2")
     , @NamedQuery(name = "Planta.findByNnovb3", query = "SELECT p FROM Planta p WHERE p.nnovb3 = :nnovb3")
-    , @NamedQuery(name = "Planta.findByNnovb4", query = "SELECT p FROM Planta p WHERE p.nnovb4 = :nnovb4")})
+    , @NamedQuery(name = "Planta.findByNnovb4", query = "SELECT p FROM Planta p WHERE p.nnovb4 = :nnovb4")
+    , @NamedQuery(name = "Planta.findByNfeba1", query = "SELECT p FROM Planta p WHERE p.nfeba1 = :nfeba1")
+    , @NamedQuery(name = "Planta.findByNfeba2", query = "SELECT p FROM Planta p WHERE p.nfeba2 = :nfeba2")
+    , @NamedQuery(name = "Planta.findByNfeba3", query = "SELECT p FROM Planta p WHERE p.nfeba3 = :nfeba3")
+    , @NamedQuery(name = "Planta.findByNfeba4", query = "SELECT p FROM Planta p WHERE p.nfeba4 = :nfeba4")
+    , @NamedQuery(name = "Planta.findByNabra1", query = "SELECT p FROM Planta p WHERE p.nabra1 = :nabra1")
+    , @NamedQuery(name = "Planta.findByNabra2", query = "SELECT p FROM Planta p WHERE p.nabra2 = :nabra2")
+    , @NamedQuery(name = "Planta.findByNabra3", query = "SELECT p FROM Planta p WHERE p.nabra3 = :nabra3")
+    , @NamedQuery(name = "Planta.findByNabra4", query = "SELECT p FROM Planta p WHERE p.nabra4 = :nabra4")
+    , @NamedQuery(name = "Planta.findByNjuna1", query = "SELECT p FROM Planta p WHERE p.njuna1 = :njuna1")
+    , @NamedQuery(name = "Planta.findByNjuna2", query = "SELECT p FROM Planta p WHERE p.njuna2 = :njuna2")
+    , @NamedQuery(name = "Planta.findByNjuna3", query = "SELECT p FROM Planta p WHERE p.njuna3 = :njuna3")
+    , @NamedQuery(name = "Planta.findByNjuna4", query = "SELECT p FROM Planta p WHERE p.njuna4 = :njuna4")
+    , @NamedQuery(name = "Planta.findByNagoa1", query = "SELECT p FROM Planta p WHERE p.nagoa1 = :nagoa1")
+    , @NamedQuery(name = "Planta.findByNagoa2", query = "SELECT p FROM Planta p WHERE p.nagoa2 = :nagoa2")
+    , @NamedQuery(name = "Planta.findByNagoa3", query = "SELECT p FROM Planta p WHERE p.nagoa3 = :nagoa3")
+    , @NamedQuery(name = "Planta.findByNagoa4", query = "SELECT p FROM Planta p WHERE p.nagoa4 = :nagoa4")
+    , @NamedQuery(name = "Planta.findByNocta1", query = "SELECT p FROM Planta p WHERE p.nocta1 = :nocta1")
+    , @NamedQuery(name = "Planta.findByNocta2", query = "SELECT p FROM Planta p WHERE p.nocta2 = :nocta2")
+    , @NamedQuery(name = "Planta.findByNocta3", query = "SELECT p FROM Planta p WHERE p.nocta3 = :nocta3")
+    , @NamedQuery(name = "Planta.findByNocta4", query = "SELECT p FROM Planta p WHERE p.nocta4 = :nocta4")
+    , @NamedQuery(name = "Planta.findByNdica1", query = "SELECT p FROM Planta p WHERE p.ndica1 = :ndica1")
+    , @NamedQuery(name = "Planta.findByNdica2", query = "SELECT p FROM Planta p WHERE p.ndica2 = :ndica2")
+    , @NamedQuery(name = "Planta.findByNdica3", query = "SELECT p FROM Planta p WHERE p.ndica3 = :ndica3")
+    , @NamedQuery(name = "Planta.findByNdica4", query = "SELECT p FROM Planta p WHERE p.ndica4 = :ndica4")
+    , @NamedQuery(name = "Planta.findByNfebb1", query = "SELECT p FROM Planta p WHERE p.nfebb1 = :nfebb1")
+    , @NamedQuery(name = "Planta.findByNfebb2", query = "SELECT p FROM Planta p WHERE p.nfebb2 = :nfebb2")
+    , @NamedQuery(name = "Planta.findByNfebb3", query = "SELECT p FROM Planta p WHERE p.nfebb3 = :nfebb3")
+    , @NamedQuery(name = "Planta.findByNfebb4", query = "SELECT p FROM Planta p WHERE p.nfebb4 = :nfebb4")
+    , @NamedQuery(name = "Planta.findByNabrb1", query = "SELECT p FROM Planta p WHERE p.nabrb1 = :nabrb1")
+    , @NamedQuery(name = "Planta.findByNabrb2", query = "SELECT p FROM Planta p WHERE p.nabrb2 = :nabrb2")
+    , @NamedQuery(name = "Planta.findByNabrb3", query = "SELECT p FROM Planta p WHERE p.nabrb3 = :nabrb3")
+    , @NamedQuery(name = "Planta.findByNabrb4", query = "SELECT p FROM Planta p WHERE p.nabrb4 = :nabrb4")
+    , @NamedQuery(name = "Planta.findByNjunb1", query = "SELECT p FROM Planta p WHERE p.njunb1 = :njunb1")
+    , @NamedQuery(name = "Planta.findByNjunb2", query = "SELECT p FROM Planta p WHERE p.njunb2 = :njunb2")
+    , @NamedQuery(name = "Planta.findByNjunb3", query = "SELECT p FROM Planta p WHERE p.njunb3 = :njunb3")
+    , @NamedQuery(name = "Planta.findByNjunb4", query = "SELECT p FROM Planta p WHERE p.njunb4 = :njunb4")
+    , @NamedQuery(name = "Planta.findByNagob1", query = "SELECT p FROM Planta p WHERE p.nagob1 = :nagob1")
+    , @NamedQuery(name = "Planta.findByNagob2", query = "SELECT p FROM Planta p WHERE p.nagob2 = :nagob2")
+    , @NamedQuery(name = "Planta.findByNagob3", query = "SELECT p FROM Planta p WHERE p.nagob3 = :nagob3")
+    , @NamedQuery(name = "Planta.findByNagob4", query = "SELECT p FROM Planta p WHERE p.nagob4 = :nagob4")
+    , @NamedQuery(name = "Planta.findByNoctb1", query = "SELECT p FROM Planta p WHERE p.noctb1 = :noctb1")
+    , @NamedQuery(name = "Planta.findByNoctb2", query = "SELECT p FROM Planta p WHERE p.noctb2 = :noctb2")
+    , @NamedQuery(name = "Planta.findByNoctb3", query = "SELECT p FROM Planta p WHERE p.noctb3 = :noctb3")
+    , @NamedQuery(name = "Planta.findByNoctb4", query = "SELECT p FROM Planta p WHERE p.noctb4 = :noctb4")
+    , @NamedQuery(name = "Planta.findByNdicb1", query = "SELECT p FROM Planta p WHERE p.ndicb1 = :ndicb1")
+    , @NamedQuery(name = "Planta.findByNdicb2", query = "SELECT p FROM Planta p WHERE p.ndicb2 = :ndicb2")
+    , @NamedQuery(name = "Planta.findByNdicb3", query = "SELECT p FROM Planta p WHERE p.ndicb3 = :ndicb3")
+    , @NamedQuery(name = "Planta.findByNdicb4", query = "SELECT p FROM Planta p WHERE p.ndicb4 = :ndicb4")})
 public class Planta implements Serializable {
-
-    @Column(name = "nfebb1")
-    private String nfebb1;
-    @Column(name = "nfebb2")
-    private String nfebb2;
-    @Column(name = "nfebb3")
-    private String nfebb3;
-    @Column(name = "nfebb4")
-    private String nfebb4;
-    @Column(name = "nabrb1")
-    private String nabrb1;
-    @Column(name = "nabrb2")
-    private String nabrb2;
-    @Column(name = "nabrb3")
-    private String nabrb3;
-    @Column(name = "nabrb4")
-    private String nabrb4;
-    @Column(name = "njunb1")
-    private String njunb1;
-    @Column(name = "njunb2")
-    private String njunb2;
-    @Column(name = "njunb3")
-    private String njunb3;
-    @Column(name = "njunb4")
-    private String njunb4;
-    @Column(name = "nagob1")
-    private String nagob1;
-    @Column(name = "nagob2")
-    private String nagob2;
-    @Column(name = "nagob3")
-    private String nagob3;
-    @Column(name = "nagob4")
-    private String nagob4;
-    @Column(name = "noctb1")
-    private String noctb1;
-    @Column(name = "noctb2")
-    private String noctb2;
-    @Column(name = "noctb3")
-    private String noctb3;
-    @Column(name = "noctb4")
-    private String noctb4;
-    @Column(name = "ndicb1")
-    private String ndicb1;
-    @Column(name = "ndicb2")
-    private String ndicb2;
-    @Column(name = "ndicb3")
-    private String ndicb3;
-    @Column(name = "ndicb4")
-    private String ndicb4;
-
-    @Column(name = "nfeba1")
-    private String nfeba1;
-    @Column(name = "nfeba2")
-    private String nfeba2;
-    @Column(name = "nfeba3")
-    private String nfeba3;
-    @Column(name = "nfeba4")
-    private String nfeba4;
-    @Column(name = "nabra1")
-    private String nabra1;
-    @Column(name = "nabra2")
-    private String nabra2;
-    @Column(name = "nabra3")
-    private String nabra3;
-    @Column(name = "nabra4")
-    private String nabra4;
-    @Column(name = "njuna1")
-    private String njuna1;
-    @Column(name = "njuna2")
-    private String njuna2;
-    @Column(name = "njuna3")
-    private String njuna3;
-    @Column(name = "njuna4")
-    private String njuna4;
-    @Column(name = "nagoa1")
-    private String nagoa1;
-    @Column(name = "nagoa2")
-    private String nagoa2;
-    @Column(name = "nagoa3")
-    private String nagoa3;
-    @Column(name = "nagoa4")
-    private String nagoa4;
-    @Column(name = "nocta1")
-    private String nocta1;
-    @Column(name = "nocta2")
-    private String nocta2;
-    @Column(name = "nocta3")
-    private String nocta3;
-    @Column(name = "nocta4")
-    private String nocta4;
-    @Column(name = "ndica1")
-    private String ndica1;
-    @Column(name = "ndica2")
-    private String ndica2;
-    @Column(name = "ndica3")
-    private String ndica3;
-    @Column(name = "ndica4")
-    private String ndica4;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -440,6 +390,104 @@ public class Planta implements Serializable {
     private String nnovb3;
     @Column(name = "nnovb4")
     private String nnovb4;
+    @Column(name = "nfeba1")
+    private String nfeba1;
+    @Column(name = "nfeba2")
+    private String nfeba2;
+    @Column(name = "nfeba3")
+    private String nfeba3;
+    @Column(name = "nfeba4")
+    private String nfeba4;
+    @Column(name = "nabra1")
+    private String nabra1;
+    @Column(name = "nabra2")
+    private String nabra2;
+    @Column(name = "nabra3")
+    private String nabra3;
+    @Column(name = "nabra4")
+    private String nabra4;
+    @Column(name = "njuna1")
+    private String njuna1;
+    @Column(name = "njuna2")
+    private String njuna2;
+    @Column(name = "njuna3")
+    private String njuna3;
+    @Column(name = "njuna4")
+    private String njuna4;
+    @Column(name = "nagoa1")
+    private String nagoa1;
+    @Column(name = "nagoa2")
+    private String nagoa2;
+    @Column(name = "nagoa3")
+    private String nagoa3;
+    @Column(name = "nagoa4")
+    private String nagoa4;
+    @Column(name = "nocta1")
+    private String nocta1;
+    @Column(name = "nocta2")
+    private String nocta2;
+    @Column(name = "nocta3")
+    private String nocta3;
+    @Column(name = "nocta4")
+    private String nocta4;
+    @Column(name = "ndica1")
+    private String ndica1;
+    @Column(name = "ndica2")
+    private String ndica2;
+    @Column(name = "ndica3")
+    private String ndica3;
+    @Column(name = "ndica4")
+    private String ndica4;
+    @Column(name = "nfebb1")
+    private String nfebb1;
+    @Column(name = "nfebb2")
+    private String nfebb2;
+    @Column(name = "nfebb3")
+    private String nfebb3;
+    @Column(name = "nfebb4")
+    private String nfebb4;
+    @Column(name = "nabrb1")
+    private String nabrb1;
+    @Column(name = "nabrb2")
+    private String nabrb2;
+    @Column(name = "nabrb3")
+    private String nabrb3;
+    @Column(name = "nabrb4")
+    private String nabrb4;
+    @Column(name = "njunb1")
+    private String njunb1;
+    @Column(name = "njunb2")
+    private String njunb2;
+    @Column(name = "njunb3")
+    private String njunb3;
+    @Column(name = "njunb4")
+    private String njunb4;
+    @Column(name = "nagob1")
+    private String nagob1;
+    @Column(name = "nagob2")
+    private String nagob2;
+    @Column(name = "nagob3")
+    private String nagob3;
+    @Column(name = "nagob4")
+    private String nagob4;
+    @Column(name = "noctb1")
+    private String noctb1;
+    @Column(name = "noctb2")
+    private String noctb2;
+    @Column(name = "noctb3")
+    private String noctb3;
+    @Column(name = "noctb4")
+    private String noctb4;
+    @Column(name = "ndicb1")
+    private String ndicb1;
+    @Column(name = "ndicb2")
+    private String ndicb2;
+    @Column(name = "ndicb3")
+    private String ndicb3;
+    @Column(name = "ndicb4")
+    private String ndicb4;
+    @OneToMany(mappedBy = "pLANTAplantaid")
+    private List<Distribucion2> distribucion2List;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
@@ -1255,57 +1303,6 @@ public class Planta implements Serializable {
         this.nnovb4 = nnovb4;
     }
 
-    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
-        return cARACTERIZACIONcaracterizacionid;
-    }
-
-    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
-        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Distribucion> getDistribucionList() {
-        return distribucionList;
-    }
-
-    public void setDistribucionList(List<Distribucion> distribucionList) {
-        this.distribucionList = distribucionList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (plantaId != null ? plantaId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Planta)) {
-            return false;
-        }
-        Planta other = (Planta) object;
-        if ((this.plantaId == null && other.plantaId != null) || (this.plantaId != null && !this.plantaId.equals(other.plantaId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
-    }
-
     public String getNfeba1() {
         return nfeba1;
     }
@@ -1688,6 +1685,66 @@ public class Planta implements Serializable {
 
     public void setNdicb4(String ndicb4) {
         this.ndicb4 = ndicb4;
+    }
+
+    @XmlTransient
+    public List<Distribucion2> getDistribucion2List() {
+        return distribucion2List;
+    }
+
+    public void setDistribucion2List(List<Distribucion2> distribucion2List) {
+        this.distribucion2List = distribucion2List;
+    }
+
+    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
+        return cARACTERIZACIONcaracterizacionid;
+    }
+
+    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
+        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Distribucion> getDistribucionList() {
+        return distribucionList;
+    }
+
+    public void setDistribucionList(List<Distribucion> distribucionList) {
+        this.distribucionList = distribucionList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (plantaId != null ? plantaId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Planta)) {
+            return false;
+        }
+        Planta other = (Planta) object;
+        if ((this.plantaId == null && other.plantaId != null) || (this.plantaId != null && !this.plantaId.equals(other.plantaId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Planta[ plantaId=" + plantaId + " ]";
     }
     
 }

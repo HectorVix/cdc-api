@@ -28,15 +28,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Distribucion.findAll", query = "SELECT d FROM Distribucion d")
-    , @NamedQuery(name = "Distribucion.findByDistribucionId", query = "SELECT d FROM Distribucion d WHERE d.distribucionId = :distribucionId")})
+    , @NamedQuery(name = "Distribucion.findByDistribucionId", query = "SELECT d FROM Distribucion d WHERE d.distribucionId = :distribucionId")
+    , @NamedQuery(name = "Distribucion.findByCodsubnac", query = "SELECT d FROM Distribucion d WHERE d.codsubnac = :codsubnac")
+    , @NamedQuery(name = "Distribucion.findByNomsubnac", query = "SELECT d FROM Distribucion d WHERE d.nomsubnac = :nomsubnac")
+    , @NamedQuery(name = "Distribucion.findByStatsubnac", query = "SELECT d FROM Distribucion d WHERE d.statsubnac = :statsubnac")})
 public class Distribucion implements Serializable {
-
-    @Column(name = "codsubnac")
-    private String codsubnac;
-    @Column(name = "nomsubnac")
-    private String nomsubnac;
-    @Column(name = "statsubnac")
-    private String statsubnac;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,6 +40,12 @@ public class Distribucion implements Serializable {
     @Basic(optional = false)
     @Column(name = "distribucion_id")
     private Integer distribucionId;
+    @Column(name = "codsubnac")
+    private String codsubnac;
+    @Column(name = "nomsubnac")
+    private String nomsubnac;
+    @Column(name = "statsubnac")
+    private String statsubnac;
     @JoinColumn(name = "PLANTA_planta_id", referencedColumnName = "planta_id")
     @ManyToOne
     private Planta pLANTAplantaid;
@@ -64,6 +66,30 @@ public class Distribucion implements Serializable {
 
     public void setDistribucionId(Integer distribucionId) {
         this.distribucionId = distribucionId;
+    }
+
+    public String getCodsubnac() {
+        return codsubnac;
+    }
+
+    public void setCodsubnac(String codsubnac) {
+        this.codsubnac = codsubnac;
+    }
+
+    public String getNomsubnac() {
+        return nomsubnac;
+    }
+
+    public void setNomsubnac(String nomsubnac) {
+        this.nomsubnac = nomsubnac;
+    }
+
+    public String getStatsubnac() {
+        return statsubnac;
+    }
+
+    public void setStatsubnac(String statsubnac) {
+        this.statsubnac = statsubnac;
     }
 
     public Planta getPLANTAplantaid() {
@@ -105,30 +131,6 @@ public class Distribucion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Distribucion[ distribucionId=" + distribucionId + " ]";
-    }
-
-    public String getCodsubnac() {
-        return codsubnac;
-    }
-
-    public void setCodsubnac(String codsubnac) {
-        this.codsubnac = codsubnac;
-    }
-
-    public String getNomsubnac() {
-        return nomsubnac;
-    }
-
-    public void setNomsubnac(String nomsubnac) {
-        this.nomsubnac = nomsubnac;
-    }
-
-    public String getStatsubnac() {
-        return statsubnac;
-    }
-
-    public void setStatsubnac(String statsubnac) {
-        this.statsubnac = statsubnac;
     }
     
 }
