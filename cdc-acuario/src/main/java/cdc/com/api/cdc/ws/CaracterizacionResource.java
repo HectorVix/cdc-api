@@ -94,9 +94,8 @@ public class CaracterizacionResource {
         Distribucion distribucion = new Distribucion();
 
         planta = caracterizacion.getPlantaList().get(0);
-        System.out.println("***->Distribucion Tam:" + planta.getDistribucionList().size());
         lista_distribucion = planta.getDistribucionList();
-        planta.setDistribucionList(null);//neceario dado que se necesita :marked cascade PERSIST
+        planta.setDistribucionList(null);//necesario dado que se necesita :marked cascade PERSIST
         String codigoe = planta.getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
         if (existe == false) {
@@ -108,15 +107,15 @@ public class CaracterizacionResource {
         int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         planta.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
-        plantaServicio.save(planta);
-        //Distribucion planta datos 
+        int planta_id = plantaServicio.save(planta);
+        planta.setPlantaId(planta_id);
+        //Distribución planta datos 
         if (lista_distribucion.size() >= 1) {
             int tam_distribucion = lista_distribucion.size();
             for (int i = 0; i < tam_distribucion; i++) {
                 distribucion = lista_distribucion.get(i);
+                distribucion.setPLANTAplantaid(planta);
                 distribucionServicio.save(distribucion);
-                System.out.println("***->recorrido distribucion:" + i);
-                System.out.println("***->Infor distribucion:" + distribucion.getCodsubnac());
                 System.out.println("***->Registro exitoso distribucion:" + distribucion.getCodsubnac());
             }
         }

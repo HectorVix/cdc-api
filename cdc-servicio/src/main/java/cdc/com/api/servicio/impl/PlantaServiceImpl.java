@@ -17,28 +17,30 @@ import javax.inject.Inject;
  * @author Héctor Vix
  */
 @Stateless
-public class PlantaServiceImpl implements PlantaService{
+public class PlantaServiceImpl implements PlantaService {
 
     @Inject
     private PlantaDao plantaDao;
-    public void save(Planta planta) {
-    plantaDao.save(planta);
+
+    public int save(Planta planta) {
+        return plantaDao.save(planta);
     }
 
     public void update(Planta planta) {
-     plantaDao.update(planta);
+        plantaDao.update(planta);
     }
 
     public void delete(Long id) {
-      plantaDao.delete(id);
+        plantaDao.delete(id);
     }
 
     public Planta find(Long id) {
-       return  plantaDao.find(id);
+        return plantaDao.find(id);
     }
+
     @Override
     public List<Planta> all() {
-      return plantaDao.all();
+        return plantaDao.all();
     }
 
     public List<Planta> buscarPlanta(String codigoe, String nombren) {
@@ -48,5 +50,5 @@ public class PlantaServiceImpl implements PlantaService{
     public boolean findPlanta(String codigoe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

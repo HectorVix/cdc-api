@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface PlantaDao {
 
-    public void save(Planta planta);
+    public int save(Planta planta);
 
     public void update(Planta planta);
 

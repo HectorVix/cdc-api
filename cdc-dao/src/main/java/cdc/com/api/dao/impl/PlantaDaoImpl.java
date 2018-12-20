@@ -23,8 +23,10 @@ public class PlantaDaoImpl implements PlantaDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Planta planta) {
+    public int save(Planta planta) {
         entityManager.persist(planta);
+        entityManager.flush();
+        return planta.getPlantaId();
     }
 
     public void update(Planta planta) {
