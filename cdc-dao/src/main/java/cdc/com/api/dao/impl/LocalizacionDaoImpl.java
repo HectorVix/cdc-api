@@ -22,8 +22,10 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Localizacion localizacion) {
+    public int save(Localizacion localizacion) {
         entityManager.persist(localizacion);
+        entityManager.flush();
+        return localizacion.getLocalizacionId();
     }
 
     public void update(Localizacion localizacion) {

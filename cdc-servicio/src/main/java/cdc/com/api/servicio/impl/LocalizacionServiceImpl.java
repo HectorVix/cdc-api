@@ -22,8 +22,8 @@ public class LocalizacionServiceImpl implements LocalizacionService {
     @Inject
     private LocalizacionDao localizacionDao;
 
-    public void save(Localizacion localizacion) {
-        localizacionDao.save(localizacion);
+    public int save(Localizacion localizacion) {
+       return localizacionDao.save(localizacion);
     }
 
     public void update(Localizacion localizacion) {

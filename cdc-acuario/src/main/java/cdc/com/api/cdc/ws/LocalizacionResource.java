@@ -10,8 +10,11 @@ package cdc.com.api.cdc.ws;
  * @author Héctor Vix
  */
 import cdc.com.api.modelo.Localizacion;
+import cdc.com.api.modelo.Proteccion;
 import cdc.com.api.modelo.Rastreo;
 import cdc.com.api.servicio.LocalizacionService;
+import cdc.com.api.servicio.ProteccionService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,10 +32,22 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("localizacion")
 @ManagedBean
 public class LocalizacionResource {
-    
+
     @Inject
     LocalizacionService localizacionServicio;
-    
+    @Inject
+    ProteccionService proteccionServicio;
+
+    List<Proteccion> lista_proteccion;
+
+    public List<Proteccion> getLista_proteccion() {
+        return lista_proteccion;
+    }
+
+    public void setLista_proteccion(List<Proteccion> lista_proteccion) {
+        this.lista_proteccion = lista_proteccion;
+    }
+
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Localizacion> all() {
@@ -46,17 +61,24 @@ public class LocalizacionResource {
     @Produces(APPLICATION_JSON)
     public Response registrarLocalizacion(Localizacion localizacion) throws JSONException {
         JSONObject object = new JSONObject();
-       /* 
-        Localizacion loc = new Localizacion();
-        loc.setCodigole("ok1");
-        loc.setCuenca(localizacion.getCuenca());
-       */
-       
-        
-        localizacionServicio.save(localizacion);
+        Proteccion proteccion = new Proteccion();
+
+        lista_proteccion = localizacion.getProteccionList();
+        localizacion.setProteccionList(null);
+        int localizacion_id = localizacionServicio.save(localizacion);
+        localizacion.setLocalizacionId(localizacion_id);
+        //Protecion LE
+        if (lista_proteccion.size() >= 1) {
+            int tam_proteccion = lista_proteccion.size();
+            for (int i = 0; i < tam_proteccion; i++) {
+                proteccion = lista_proteccion.get(i);
+                proteccion.setLOCALIZACIONlocalizacionid(localizacion);
+                proteccionServicio.save(proteccion);
+                System.out.println("***->Registro exitoso proteccion LE:" + proteccion.getCodigoam());
+            }
+        }
         object.put("codigole", localizacion.getCodigole());
         System.out.println("***->Registro Exitoso Localizacion :" + localizacion.getCodigole());
-        //System.out.println("***->Prueba datos :" + localizacion.getRespdatos());
         return Response.status(202).entity(object.toString()).build();
     }
 }

@@ -31,6 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Proteccion.findByProteccionId", query = "SELECT p FROM Proteccion p WHERE p.proteccionId = :proteccionId")})
 public class Proteccion implements Serializable {
 
+    @Column(name = "codigoam")
+    private String codigoam;
+    @Column(name = "nombream")
+    private String nombream;
+    @Column(name = "contenido")
+    private String contenido;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,6 +94,30 @@ public class Proteccion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Proteccion[ proteccionId=" + proteccionId + " ]";
+    }
+
+    public String getCodigoam() {
+        return codigoam;
+    }
+
+    public void setCodigoam(String codigoam) {
+        this.codigoam = codigoam;
+    }
+
+    public String getNombream() {
+        return nombream;
+    }
+
+    public void setNombream(String nombream) {
+        this.nombream = nombream;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
     
 }

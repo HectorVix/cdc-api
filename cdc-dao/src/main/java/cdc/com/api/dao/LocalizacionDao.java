@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface LocalizacionDao {
 
-    public void save(Localizacion localizacion);
+    public int save(Localizacion localizacion);
 
     public void update(Localizacion localizacion);
 
