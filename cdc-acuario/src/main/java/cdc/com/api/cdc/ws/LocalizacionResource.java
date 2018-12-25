@@ -67,7 +67,7 @@ public class LocalizacionResource {
         localizacion.setProteccionList(null);
         int localizacion_id = localizacionServicio.save(localizacion);
         localizacion.setLocalizacionId(localizacion_id);
-        //Protecion LE
+        //Protección LE
         if (lista_proteccion.size() >= 1) {
             int tam_proteccion = lista_proteccion.size();
             for (int i = 0; i < tam_proteccion; i++) {

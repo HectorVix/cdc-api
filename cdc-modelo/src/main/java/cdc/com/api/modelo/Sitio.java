@@ -90,6 +90,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Sitio.findByActualizar", query = "SELECT s FROM Sitio s WHERE s.actualizar = :actualizar")})
 public class Sitio implements Serializable {
 
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Subdivision> subdivisionList;
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Macsitio> macsitioList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -721,6 +726,24 @@ public class Sitio implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Sitio[ sitioId=" + sitioId + " ]";
+    }
+
+    @XmlTransient
+    public List<Subdivision> getSubdivisionList() {
+        return subdivisionList;
+    }
+
+    public void setSubdivisionList(List<Subdivision> subdivisionList) {
+        this.subdivisionList = subdivisionList;
+    }
+
+    @XmlTransient
+    public List<Macsitio> getMacsitioList() {
+        return macsitioList;
+    }
+
+    public void setMacsitioList(List<Macsitio> macsitioList) {
+        this.macsitioList = macsitioList;
     }
     
 }

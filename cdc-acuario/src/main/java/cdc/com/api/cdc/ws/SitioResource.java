@@ -9,8 +9,13 @@ package cdc.com.api.cdc.ws;
  *
  * @author Héctor Vix
  */
+import cdc.com.api.modelo.Macsitio;
 import cdc.com.api.modelo.Sitio;
+import cdc.com.api.modelo.Subdivision;
+import cdc.com.api.servicio.MacsitioService;
 import cdc.com.api.servicio.SitioService;
+import cdc.com.api.servicio.SubdivisionService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,6 +36,29 @@ public class SitioResource {
 
     @Inject
     SitioService sitioServicio;
+    @Inject
+    MacsitioService macsitioServicio;
+    @Inject
+    SubdivisionService subdivisionServicio;
+
+    List<Macsitio> lista_macsitio;
+    List<Subdivision> lista_subdivision;
+
+    public List<Macsitio> getLista_macsitio() {
+        return lista_macsitio;
+    }
+
+    public void setLista_macsitio(List<Macsitio> lista_macsitio) {
+        this.lista_macsitio = lista_macsitio;
+    }
+
+    public List<Subdivision> getLista_subdivision() {
+        return lista_subdivision;
+    }
+
+    public void setLista_subdivision(List<Subdivision> lista_subdivision) {
+        this.lista_subdivision = lista_subdivision;
+    }
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -44,8 +72,37 @@ public class SitioResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarLocalizacion(Sitio sitio) throws JSONException {
+        Macsitio macsitio = new Macsitio();
+        Subdivision subdivision = new Subdivision();
+
+        lista_macsitio = sitio.getMacsitioList();
+        lista_subdivision = sitio.getSubdivisionList();
+        sitio.setMacsitioList(null);
+        sitio.setSubdivisionList(null);
         JSONObject object = new JSONObject();
-        sitioServicio.save(sitio);
+        int sitio_id = sitioServicio.save(sitio);
+        sitio.setSitioId(sitio_id);
+        //Macsitio
+        if (lista_macsitio.size() >= 1) {
+            int tam_macsitio = lista_macsitio.size();
+            for (int i = 0; i < tam_macsitio; i++) {
+                macsitio = lista_macsitio.get(i);
+                macsitio.setSITIOsitioid(sitio);
+                macsitioServicio.save(macsitio);
+                System.out.println("***->Registro exitoso macsitio:" + macsitio.getCodmacsitio());
+            }
+        }
+        //Subdivision
+        if (lista_subdivision.size() >= 1) {
+            int tam_subdivision = lista_subdivision.size();
+            for (int i = 0; i < tam_subdivision; i++) {
+                subdivision = lista_subdivision.get(i);
+                subdivision.setSITIOsitioid(sitio);
+                subdivisionServicio.save(subdivision);
+                System.out.println("***->Registro exitoso subdivision:" + macsitio.getCodmacsitio());
+            }
+        }
+
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
         return Response.status(202).entity(object.toString()).build();

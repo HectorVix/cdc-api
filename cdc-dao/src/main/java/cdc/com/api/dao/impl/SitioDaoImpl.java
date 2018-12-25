@@ -24,8 +24,10 @@ public class SitioDaoImpl implements SitioDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Sitio sitio) {
+    public int save(Sitio sitio) {
         entityManager.persist(sitio);
+        entityManager.flush();
+        return sitio.getSitioId();
     }
 
     public void update(Sitio sitio) {

@@ -5,26 +5,22 @@
  */
 package cdc.com.api.servicio;
 
-import cdc.com.api.modelo.Sitio;
+import cdc.com.api.modelo.Subdivision;
 import java.util.List;
 
 /**
  *
  * @author Héctor Vix
  */
-public interface SitioService {
+public interface SubdivisionService {
 
-    public int save(Sitio sitio);
+    public void save(Subdivision subdivision);
 
-    public void update(Sitio sitio);
+    public void update(Subdivision subdivision);
 
     public void delete(Long id);
 
-    public Sitio find(Long id);
+    public Subdivision find(Long id);
 
-    public boolean find_Sitio(String codigositio, String nombre);
-
-    public int getSitio_id();
-
-    public List<Sitio> all();
+    public List<Subdivision> all();
 }

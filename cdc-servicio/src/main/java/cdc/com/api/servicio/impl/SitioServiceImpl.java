@@ -22,8 +22,8 @@ public class SitioServiceImpl implements SitioService {
     @Inject
     private SitioDao sitioDao;
 
-    public void save(Sitio sitio) {
-        sitioDao.save(sitio);
+    public int save(Sitio sitio) {
+        return sitioDao.save(sitio);
     }
 
     public void update(Sitio sitio) {
