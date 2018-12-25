@@ -199,7 +199,7 @@ public class Area implements Serializable {
     @ManyToMany
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "aREAareaid")
-    private List<Componente> componenteList;
+    private List<ListaElemento> listaElementoList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<Foto> fotoList;
     @OneToMany(mappedBy = "aREAareaid")
@@ -622,12 +622,12 @@ public class Area implements Serializable {
     }
 
     @XmlTransient
-    public List<Componente> getComponenteList() {
-        return componenteList;
+    public List<ListaElemento> getListaElementoList() {
+        return listaElementoList;
     }
 
-    public void setComponenteList(List<Componente> componenteList) {
-        this.componenteList = componenteList;
+    public void setListaElementoList(List<ListaElemento> listaElementoList) {
+        this.listaElementoList = listaElementoList;
     }
 
     @XmlTransient

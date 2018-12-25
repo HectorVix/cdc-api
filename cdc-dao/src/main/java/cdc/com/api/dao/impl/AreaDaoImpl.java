@@ -23,8 +23,10 @@ public class AreaDaoImpl implements AreaDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Area area) {
+    public int save(Area area) {
         entityManager.persist(area);
+        entityManager.flush();
+        return area.getAreaId();
     }
 
     public void update(Area area) {

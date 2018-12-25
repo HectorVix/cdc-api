@@ -53,5 +53,6 @@
     <class>cdc.com.api.modelo.Distribucion2</class>
     <class>cdc.com.api.modelo.Macsitio</class>
     <class>cdc.com.api.modelo.Subdivision</class>
+    <class>cdc.com.api.modelo.ListaElemento</class>
   </persistence-unit>
 </persistence>

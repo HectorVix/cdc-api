@@ -28,15 +28,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proteccion.findAll", query = "SELECT p FROM Proteccion p")
-    , @NamedQuery(name = "Proteccion.findByProteccionId", query = "SELECT p FROM Proteccion p WHERE p.proteccionId = :proteccionId")})
+    , @NamedQuery(name = "Proteccion.findByProteccionId", query = "SELECT p FROM Proteccion p WHERE p.proteccionId = :proteccionId")
+    , @NamedQuery(name = "Proteccion.findByCodigoam", query = "SELECT p FROM Proteccion p WHERE p.codigoam = :codigoam")
+    , @NamedQuery(name = "Proteccion.findByNombream", query = "SELECT p FROM Proteccion p WHERE p.nombream = :nombream")
+    , @NamedQuery(name = "Proteccion.findByContenido", query = "SELECT p FROM Proteccion p WHERE p.contenido = :contenido")})
 public class Proteccion implements Serializable {
-
-    @Column(name = "codigoam")
-    private String codigoam;
-    @Column(name = "nombream")
-    private String nombream;
-    @Column(name = "contenido")
-    private String contenido;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,6 +40,12 @@ public class Proteccion implements Serializable {
     @Basic(optional = false)
     @Column(name = "proteccion_id")
     private Integer proteccionId;
+    @Column(name = "codigoam")
+    private String codigoam;
+    @Column(name = "nombream")
+    private String nombream;
+    @Column(name = "contenido")
+    private String contenido;
     @JoinColumn(name = "LOCALIZACION_localizacion_id", referencedColumnName = "localizacion_id")
     @ManyToOne
     private Localizacion lOCALIZACIONlocalizacionid;
@@ -61,6 +63,30 @@ public class Proteccion implements Serializable {
 
     public void setProteccionId(Integer proteccionId) {
         this.proteccionId = proteccionId;
+    }
+
+    public String getCodigoam() {
+        return codigoam;
+    }
+
+    public void setCodigoam(String codigoam) {
+        this.codigoam = codigoam;
+    }
+
+    public String getNombream() {
+        return nombream;
+    }
+
+    public void setNombream(String nombream) {
+        this.nombream = nombream;
+    }
+
+    public String getContenido() {
+        return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
     }
 
     public Localizacion getLOCALIZACIONlocalizacionid() {
@@ -94,30 +120,6 @@ public class Proteccion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Proteccion[ proteccionId=" + proteccionId + " ]";
-    }
-
-    public String getCodigoam() {
-        return codigoam;
-    }
-
-    public void setCodigoam(String codigoam) {
-        this.codigoam = codigoam;
-    }
-
-    public String getNombream() {
-        return nombream;
-    }
-
-    public void setNombream(String nombream) {
-        this.nombream = nombream;
-    }
-
-    public String getContenido() {
-        return contenido;
-    }
-
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
     }
     
 }

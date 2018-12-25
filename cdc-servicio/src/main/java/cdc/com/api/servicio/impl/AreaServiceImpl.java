@@ -22,8 +22,8 @@ public class AreaServiceImpl implements AreaService {
     @Inject
     private AreaDao areaDao;
 
-    public void save(Area area) {
-        areaDao.save(area);
+    public int save(Area area) {
+        return areaDao.save(area);
     }
 
     public void update(Area area) {

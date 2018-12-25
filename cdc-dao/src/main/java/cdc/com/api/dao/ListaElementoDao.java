@@ -5,26 +5,23 @@
  */
 package cdc.com.api.dao;
 
-import cdc.com.api.modelo.Area;
+import cdc.com.api.modelo.ListaElemento;
 import java.util.List;
 
 /**
  *
  * @author Héctor Vix
  */
-public interface AreaDao {
+public interface ListaElementoDao {
 
-    public int save(Area area);
+    public void save(ListaElemento listaElemento);
 
-    public void update(Area area);
+    public void update(ListaElemento listaElemento);
 
     public void delete(Long id);
 
-    public Area find(Long id);
+    public ListaElemento find(Long id);
 
-    public List<Area> all();
+    public List<ListaElemento> all();
 
-    public List<Area> buscarArea(String codigoam, String nombream);
-
-    public boolean findArea(String codigoam);
 }

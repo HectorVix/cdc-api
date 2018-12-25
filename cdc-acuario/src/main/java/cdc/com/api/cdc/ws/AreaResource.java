@@ -6,7 +6,10 @@
 package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Area;
+import cdc.com.api.modelo.ListaElemento;
 import cdc.com.api.servicio.AreaService;
+import cdc.com.api.servicio.ListaElementoService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,6 +34,18 @@ public class AreaResource {
 
     @Inject
     AreaService areaServicio;
+    @Inject
+    ListaElementoService listaElementoServicio;
+
+    List<ListaElemento> lista_elemento;
+
+    public List<ListaElemento> getLista_elemento() {
+        return lista_elemento;
+    }
+
+    public void setLista_elemento(List<ListaElemento> lista_elemento) {
+        this.lista_elemento = lista_elemento;
+    }
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -43,11 +58,27 @@ public class AreaResource {
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Area area) throws JSONException {
-        JSONObject object = new JSONObject();     
-        areaServicio.save(area);
+    public Response registrarAreasManejadas(Area area) throws JSONException {
+        ListaElemento listaElemento = new ListaElemento();
+
+        lista_elemento = area.getListaElementoList();
+        area.setListaElementoList(null);
+        JSONObject object = new JSONObject();
+        int areaManejada_id = areaServicio.save(area);
+        area.setAreaId(areaManejada_id);
+
+        //Lista elementos
+        if (lista_elemento.size() >= 1) {
+            int tam_listaElemento = lista_elemento.size();
+            for (int i = 0; i < tam_listaElemento; i++) {
+                listaElemento = lista_elemento.get(i);
+                listaElemento.setAREAareaid(area);
+                listaElementoServicio.save(listaElemento);
+                System.out.println("***->Registro exitoso lista elementos:" + listaElemento.getCodigoe());
+            }
+        }
         object.put("codigoam", area.getCodigoam());
-        System.out.println("***->Registro Exitoso Area :" +area.getCodigoam());
+        System.out.println("***->Registro Exitoso Area :" + area.getCodigoam());
         return Response.status(202).entity(object.toString()).build();
     }
 }
