@@ -38,6 +38,55 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vertebrado.findByCodigoe", query = "SELECT v FROM Vertebrado v WHERE v.codigoe = :codigoe")})
 public class Vertebrado implements Serializable {
 
+    @Column(name = "nenea")
+    private String nenea;
+    @Column(name = "nabra")
+    private String nabra;
+    @Column(name = "njula")
+    private String njula;
+    @Column(name = "nocta")
+    private String nocta;
+    @Column(name = "neneb")
+    private String neneb;
+    @Column(name = "nabrb")
+    private String nabrb;
+    @Column(name = "njulb")
+    private String njulb;
+    @Column(name = "noctb")
+    private String noctb;
+    @Column(name = "nfeba")
+    private String nfeba;
+    @Column(name = "nmaya")
+    private String nmaya;
+    @Column(name = "nagoa")
+    private String nagoa;
+    @Column(name = "nnova")
+    private String nnova;
+    @Column(name = "nfebb")
+    private String nfebb;
+    @Column(name = "nmayb")
+    private String nmayb;
+    @Column(name = "nagob")
+    private String nagob;
+    @Column(name = "nnovb")
+    private String nnovb;
+    @Column(name = "nmara")
+    private String nmara;
+    @Column(name = "njuna")
+    private String njuna;
+    @Column(name = "nseta")
+    private String nseta;
+    @Column(name = "ndica")
+    private String ndica;
+    @Column(name = "nmarb")
+    private String nmarb;
+    @Column(name = "njunb")
+    private String njunb;
+    @Column(name = "nsetb")
+    private String nsetb;
+    @Column(name = "ndicb")
+    private String ndicb;
+
     @Column(name = "elevminn")
     private Integer elevminn;
     @Column(name = "elevmaxn")
@@ -935,6 +984,198 @@ public class Vertebrado implements Serializable {
 
     public void setPeso(Integer peso) {
         this.peso = peso;
+    }
+
+    public String getNenea() {
+        return nenea;
+    }
+
+    public void setNenea(String nenea) {
+        this.nenea = nenea;
+    }
+
+    public String getNabra() {
+        return nabra;
+    }
+
+    public void setNabra(String nabra) {
+        this.nabra = nabra;
+    }
+
+    public String getNjula() {
+        return njula;
+    }
+
+    public void setNjula(String njula) {
+        this.njula = njula;
+    }
+
+    public String getNocta() {
+        return nocta;
+    }
+
+    public void setNocta(String nocta) {
+        this.nocta = nocta;
+    }
+
+    public String getNeneb() {
+        return neneb;
+    }
+
+    public void setNeneb(String neneb) {
+        this.neneb = neneb;
+    }
+
+    public String getNabrb() {
+        return nabrb;
+    }
+
+    public void setNabrb(String nabrb) {
+        this.nabrb = nabrb;
+    }
+
+    public String getNjulb() {
+        return njulb;
+    }
+
+    public void setNjulb(String njulb) {
+        this.njulb = njulb;
+    }
+
+    public String getNoctb() {
+        return noctb;
+    }
+
+    public void setNoctb(String noctb) {
+        this.noctb = noctb;
+    }
+
+    public String getNfeba() {
+        return nfeba;
+    }
+
+    public void setNfeba(String nfeba) {
+        this.nfeba = nfeba;
+    }
+
+    public String getNmaya() {
+        return nmaya;
+    }
+
+    public void setNmaya(String nmaya) {
+        this.nmaya = nmaya;
+    }
+
+    public String getNagoa() {
+        return nagoa;
+    }
+
+    public void setNagoa(String nagoa) {
+        this.nagoa = nagoa;
+    }
+
+    public String getNnova() {
+        return nnova;
+    }
+
+    public void setNnova(String nnova) {
+        this.nnova = nnova;
+    }
+
+    public String getNfebb() {
+        return nfebb;
+    }
+
+    public void setNfebb(String nfebb) {
+        this.nfebb = nfebb;
+    }
+
+    public String getNmayb() {
+        return nmayb;
+    }
+
+    public void setNmayb(String nmayb) {
+        this.nmayb = nmayb;
+    }
+
+    public String getNagob() {
+        return nagob;
+    }
+
+    public void setNagob(String nagob) {
+        this.nagob = nagob;
+    }
+
+    public String getNnovb() {
+        return nnovb;
+    }
+
+    public void setNnovb(String nnovb) {
+        this.nnovb = nnovb;
+    }
+
+    public String getNmara() {
+        return nmara;
+    }
+
+    public void setNmara(String nmara) {
+        this.nmara = nmara;
+    }
+
+    public String getNjuna() {
+        return njuna;
+    }
+
+    public void setNjuna(String njuna) {
+        this.njuna = njuna;
+    }
+
+    public String getNseta() {
+        return nseta;
+    }
+
+    public void setNseta(String nseta) {
+        this.nseta = nseta;
+    }
+
+    public String getNdica() {
+        return ndica;
+    }
+
+    public void setNdica(String ndica) {
+        this.ndica = ndica;
+    }
+
+    public String getNmarb() {
+        return nmarb;
+    }
+
+    public void setNmarb(String nmarb) {
+        this.nmarb = nmarb;
+    }
+
+    public String getNjunb() {
+        return njunb;
+    }
+
+    public void setNjunb(String njunb) {
+        this.njunb = njunb;
+    }
+
+    public String getNsetb() {
+        return nsetb;
+    }
+
+    public void setNsetb(String nsetb) {
+        this.nsetb = nsetb;
+    }
+
+    public String getNdicb() {
+        return ndicb;
+    }
+
+    public void setNdicb(String ndicb) {
+        this.ndicb = ndicb;
     }
 
 }
