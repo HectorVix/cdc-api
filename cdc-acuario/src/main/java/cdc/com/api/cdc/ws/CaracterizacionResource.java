@@ -120,12 +120,13 @@ public class CaracterizacionResource {
         }
         elemento.setElementoId(elementoServicio.getElemento_id());
         caracterizacionBase.setCodigoe(planta.getCodigoe());
+        caracterizacionBase.setTipo(1);//tipo planta
         caracterizacionBase.setELEMENTOelementoid(elemento);
         int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         planta.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
         int planta_id = plantaServicio.save(planta);
-        planta.setPlantaId(planta_id);
+        planta.setPlantaId(planta_id);//para las distribuciones
         //Distribución 1 planta datos 
         if (lista_distribucion.size() >= 1) {
             int tam_distribucion = lista_distribucion.size();
@@ -157,13 +158,26 @@ public class CaracterizacionResource {
     @Produces(APPLICATION_JSON)
     public Response registrarCaracterizacion_Vertebrado(Caracterizacion caracterizacion) throws JSONException {
         JSONObject object = new JSONObject();
+        Elemento elemento = new Elemento();
+        Vertebrado vertebrado = new Vertebrado();
+        Caracterizacion caracterizacionBase = new Caracterizacion();
 
-        Caracterizacion caracterizacion1 = new Caracterizacion();
-        caracterizacion1.setCodigoe("codigo caracterizacion good");
-
-        caracterizacionServicio.save(caracterizacion1);
-        object.put("codsitio", caracterizacion1.getCodigoe());
-        System.out.println("***->Registro Exitoso Caracterizacion Vertebrado:" + caracterizacion1.getCodigoe());
+        vertebrado = caracterizacion.getVertebradoList().get(0);
+        String codigoe = vertebrado.getCodigoe();
+        boolean existe = elementoServicio.findElemento(codigoe);
+        if (existe == false) {
+           throw new SecurityException("No existe el elemento");
+        }
+        elemento.setElementoId(elementoServicio.getElemento_id());
+        caracterizacionBase.setCodigoe(codigoe);
+        caracterizacionBase.setTipo(2);//tipo vertebrado
+        caracterizacionBase.setELEMENTOelementoid(elemento);
+        int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
+        caracterizacionBase.setCaracterizacionId(caracterizacion_id);
+        vertebrado.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
+        vertebradoServicio.save(vertebrado);
+        object.put("codigoe", caracterizacionBase.getCodigoe());
+        System.out.println("***->Registro Exitoso Caracterizacion Vertebrado:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
 
