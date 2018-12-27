@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
@@ -25,7 +24,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("contactos")
+@Path("contacto")
 @ManagedBean
 public class ConctactosResource {
 
@@ -40,18 +39,18 @@ public class ConctactosResource {
     }
 
     @POST
-    @Path("/registro")
+    @Path("/registro/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Contactos contactos) throws JSONException {
+    public Response registrarContacto(Contactos contactos,@PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
 
-        Contactos contactos1 = new Contactos();
-        contactos1.setNumident("xdxdxd");
+      // Contactos contactos1 = new Contactos();
+       // contactos1.setNumident("xdxdxd");
 
-        contactosServicio.save(contactos1);
-        object.put("codsitio", contactos.getNumident());
-        System.out.println("***->Registro Exitoso Contactos :" + contactos.getNumident());
+       // contactosServicio.save(contactos1);
+        object.put("numident", contactos.getNumident());
+        System.out.println("***->Registro Exitoso Contacto:" + contactos.getNumident());
         return Response.status(202).entity(object.toString()).build();
     }
 }
