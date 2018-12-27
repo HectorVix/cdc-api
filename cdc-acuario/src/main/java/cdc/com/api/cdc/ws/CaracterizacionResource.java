@@ -144,6 +144,8 @@ public class CaracterizacionResource {
         Elemento elemento = new Elemento();
         Vertebrado vertebrado = new Vertebrado();
         Caracterizacion caracterizacionBase = new Caracterizacion();
+        Distribucion distribucion = new Distribucion();
+        Distribucion2 distribucion2 = new Distribucion2();
 
         vertebrado = caracterizacion.getVertebradoList().get(0);
         lista_distribucion = vertebrado.getDistribucionList();
@@ -162,8 +164,29 @@ public class CaracterizacionResource {
         int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         vertebrado.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
-        vertebradoServicio.save(vertebrado);
-        //para las distribuciones
+        int vertebrado_id=vertebradoServicio.save(vertebrado);
+        vertebrado.setVertebradoId(vertebrado_id);//para las distribuciones
+        
+        //Distribución 1 vertebrado datos 
+        if (lista_distribucion.size() >= 1) {
+            int tam_distribucion = lista_distribucion.size();
+            for (int i = 0; i < tam_distribucion; i++) {
+                distribucion = lista_distribucion.get(i);
+                distribucion.setVERTEBRADOvertebradoid(vertebrado);
+                distribucionServicio.save(distribucion);
+                System.out.println("***->Registro exitoso distribucion:" + distribucion.getCodsubnac());
+            }
+        }
+        //Distribución 2 vertebrado datos 
+        if (lista_distribucion2.size() >= 1) {
+            int tam_distribucion2 = lista_distribucion2.size();
+            for (int i = 0; i < tam_distribucion2; i++) {
+                distribucion2 = lista_distribucion2.get(i);
+                distribucion2.setVERTEBRADOvertebradoid(vertebrado);
+                distribucion2Servicio.save(distribucion2);
+                System.out.println("***->Registro exitoso distribucion 2:" + distribucion2.getCodecoregn());
+            }
+        }
         object.put("codigoe", caracterizacionBase.getCodigoe());
         System.out.println("***->Registro Exitoso Caracterizacion Vertebrado:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();

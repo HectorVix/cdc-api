@@ -23,8 +23,10 @@ public class VertebradoDaoImpl implements VertebradoDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Vertebrado vertebrado) {
+    public int save(Vertebrado vertebrado) {
         entityManager.persist(vertebrado);
+        entityManager.flush();
+        return vertebrado.getVertebradoId();
     }
 
     public void update(Vertebrado vertebrado) {

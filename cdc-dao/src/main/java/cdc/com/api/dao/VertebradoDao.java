@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface VertebradoDao {
 
-    public void save(Vertebrado vertebrado);
+    public int save(Vertebrado vertebrado);
 
     public void update(Vertebrado vertebrado);
 

@@ -22,8 +22,8 @@ public class VertebradoServiceImpl implements VertebradoService {
     @Inject
     private VertebradoDao vertebradoDao;
 
-    public void save(Vertebrado vertebrado) {
-        vertebradoDao.save(vertebrado);
+    public int save(Vertebrado vertebrado) {
+        return vertebradoDao.save(vertebrado);
     }
 
     public void update(Vertebrado vertebrado) {

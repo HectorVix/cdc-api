@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface VertebradoService {
 
-    public void save(Vertebrado vertebrado);
+    public int save(Vertebrado vertebrado);
 
     public void update(Vertebrado vertebrado);
 
