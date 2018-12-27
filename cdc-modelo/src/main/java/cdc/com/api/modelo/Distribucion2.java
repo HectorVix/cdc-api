@@ -35,6 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Distribucion2.findByStatcuencan", query = "SELECT d FROM Distribucion2 d WHERE d.statcuencan = :statcuencan")})
 public class Distribucion2 implements Serializable {
 
+    @JoinColumn(name = "VERTEBRADO_vertebrado_id", referencedColumnName = "vertebrado_id")
+    @ManyToOne
+    private Vertebrado vERTEBRADOvertebradoid;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -131,6 +135,14 @@ public class Distribucion2 implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Distribucion2[ distribucion2Id=" + distribucion2Id + " ]";
+    }
+
+    public Vertebrado getVERTEBRADOvertebradoid() {
+        return vERTEBRADOvertebradoid;
+    }
+
+    public void setVERTEBRADOvertebradoid(Vertebrado vERTEBRADOvertebradoid) {
+        this.vERTEBRADOvertebradoid = vERTEBRADOvertebradoid;
     }
     
 }

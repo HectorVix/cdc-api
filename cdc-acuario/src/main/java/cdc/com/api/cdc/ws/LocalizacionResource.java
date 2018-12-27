@@ -40,14 +40,6 @@ public class LocalizacionResource {
 
     List<Proteccion> lista_proteccion;
 
-    public List<Proteccion> getLista_proteccion() {
-        return lista_proteccion;
-    }
-
-    public void setLista_proteccion(List<Proteccion> lista_proteccion) {
-        this.lista_proteccion = lista_proteccion;
-    }
-
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Localizacion> all() {

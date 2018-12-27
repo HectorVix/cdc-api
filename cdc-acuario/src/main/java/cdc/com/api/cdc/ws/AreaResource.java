@@ -39,14 +39,6 @@ public class AreaResource {
 
     List<ListaElemento> lista_elemento;
 
-    public List<ListaElemento> getLista_elemento() {
-        return lista_elemento;
-    }
-
-    public void setLista_elemento(List<ListaElemento> lista_elemento) {
-        this.lista_elemento = lista_elemento;
-    }
-
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Area> all() {

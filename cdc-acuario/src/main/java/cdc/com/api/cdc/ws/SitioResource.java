@@ -44,22 +44,6 @@ public class SitioResource {
     List<Macsitio> lista_macsitio;
     List<Subdivision> lista_subdivision;
 
-    public List<Macsitio> getLista_macsitio() {
-        return lista_macsitio;
-    }
-
-    public void setLista_macsitio(List<Macsitio> lista_macsitio) {
-        this.lista_macsitio = lista_macsitio;
-    }
-
-    public List<Subdivision> getLista_subdivision() {
-        return lista_subdivision;
-    }
-
-    public void setLista_subdivision(List<Subdivision> lista_subdivision) {
-        this.lista_subdivision = lista_subdivision;
-    }
-
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Sitio> all() {

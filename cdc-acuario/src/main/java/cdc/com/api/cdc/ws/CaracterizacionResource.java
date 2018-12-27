@@ -56,23 +56,6 @@ public class CaracterizacionResource {
     List<Distribucion> lista_distribucion;
     List<Distribucion2> lista_distribucion2;
 
-    //necesario dado que da error si se define de forma temporal
-    public List<Distribucion> getLista_distribucion() {
-        return lista_distribucion;
-    }
-
-    public void setLista_distribucion(List<Distribucion> lista_distribucion) {
-        this.lista_distribucion = lista_distribucion;
-    }
-
-    public List<Distribucion2> getLista_distribucion2() {
-        return lista_distribucion2;
-    }
-
-    public void setLista_distribucion2(List<Distribucion2> lista_distribucion2) {
-        this.lista_distribucion2 = lista_distribucion2;
-    }
-
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Caracterizacion> all() {
@@ -163,10 +146,14 @@ public class CaracterizacionResource {
         Caracterizacion caracterizacionBase = new Caracterizacion();
 
         vertebrado = caracterizacion.getVertebradoList().get(0);
+        lista_distribucion = vertebrado.getDistribucionList();
+        lista_distribucion2 = vertebrado.getDistribucion2List();
+        vertebrado.setDistribucionList(null);//necesario dado que se necesita :marked cascade PERSIST
+        vertebrado.setDistribucion2List(null);
         String codigoe = vertebrado.getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
         if (existe == false) {
-           throw new SecurityException("No existe el elemento");
+            throw new SecurityException("No existe el elemento");
         }
         elemento.setElementoId(elementoServicio.getElemento_id());
         caracterizacionBase.setCodigoe(codigoe);
@@ -176,6 +163,7 @@ public class CaracterizacionResource {
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         vertebrado.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
         vertebradoServicio.save(vertebrado);
+        //para las distribuciones
         object.put("codigoe", caracterizacionBase.getCodigoe());
         System.out.println("***->Registro Exitoso Caracterizacion Vertebrado:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();

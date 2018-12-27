@@ -38,6 +38,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Vertebrado.findByCodigoe", query = "SELECT v FROM Vertebrado v WHERE v.codigoe = :codigoe")})
 public class Vertebrado implements Serializable {
 
+    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
+    private List<Distribucion2> distribucion2List;
+
     @Column(name = "nenea")
     private String nenea;
     @Column(name = "nabra")
@@ -1176,6 +1179,15 @@ public class Vertebrado implements Serializable {
 
     public void setNdicb(String ndicb) {
         this.ndicb = ndicb;
+    }
+
+    @XmlTransient
+    public List<Distribucion2> getDistribucion2List() {
+        return distribucion2List;
+    }
+
+    public void setDistribucion2List(List<Distribucion2> distribucion2List) {
+        this.distribucion2List = distribucion2List;
     }
 
 }
