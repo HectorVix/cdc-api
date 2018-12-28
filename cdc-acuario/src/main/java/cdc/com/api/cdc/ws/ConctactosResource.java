@@ -6,6 +6,7 @@
 package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Contactos;
+import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.ContactosService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -42,13 +43,12 @@ public class ConctactosResource {
     @Path("/registro/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarContacto(Contactos contactos,@PathParam("id") int id) throws JSONException {
+    public Response registrarContacto(Contactos contactos, @PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
-
-      // Contactos contactos1 = new Contactos();
-       // contactos1.setNumident("xdxdxd");
-
-       // contactosServicio.save(contactos1);
+        Usuario us = new Usuario();
+        us.setUsuarioId(id);
+        contactos.setUSUARIOusuarioid(us);
+        contactosServicio.save(contactos);
         object.put("numident", contactos.getNumident());
         System.out.println("***->Registro Exitoso Contacto:" + contactos.getNumident());
         return Response.status(202).entity(object.toString()).build();
