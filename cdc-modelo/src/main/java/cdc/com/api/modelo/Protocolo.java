@@ -35,9 +35,23 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Protocolo.findAll", query = "SELECT p FROM Protocolo p")
     , @NamedQuery(name = "Protocolo.findByProtocoloId", query = "SELECT p FROM Protocolo p WHERE p.protocoloId = :protocoloId")
-    , @NamedQuery(name = "Protocolo.findByCodigoe", query = "SELECT p FROM Protocolo p WHERE p.codigoe = :codigoe")})
+    , @NamedQuery(name = "Protocolo.findByCodigoe", query = "SELECT p FROM Protocolo p WHERE p.codigoe = :codigoe")
+    , @NamedQuery(name = "Protocolo.findByRangog", query = "SELECT p FROM Protocolo p WHERE p.rangog = :rangog")
+    , @NamedQuery(name = "Protocolo.findByRangon", query = "SELECT p FROM Protocolo p WHERE p.rangon = :rangon")
+    , @NamedQuery(name = "Protocolo.findByRangos", query = "SELECT p FROM Protocolo p WHERE p.rangos = :rangos")
+    , @NamedQuery(name = "Protocolo.findByNombre", query = "SELECT p FROM Protocolo p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Protocolo.findByNomcomun", query = "SELECT p FROM Protocolo p WHERE p.nomcomun = :nomcomun")
+    , @NamedQuery(name = "Protocolo.findByFecha", query = "SELECT p FROM Protocolo p WHERE p.fecha = :fecha")})
 public class Protocolo implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "protocolo_id")
+    private Integer protocoloId;
+    @Column(name = "codigoe")
+    private String codigoe;
     @Column(name = "rangog")
     private String rangog;
     @Column(name = "rangon")
@@ -51,15 +65,6 @@ public class Protocolo implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "protocolo_id")
-    private Integer protocoloId;
-    @Column(name = "codigoe")
-    private String codigoe;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
     private Elemento eLEMENTOelementoid;
@@ -87,48 +92,6 @@ public class Protocolo implements Serializable {
 
     public void setCodigoe(String codigoe) {
         this.codigoe = codigoe;
-    }
-
-    public Elemento getELEMENTOelementoid() {
-        return eLEMENTOelementoid;
-    }
-
-    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
-        this.eLEMENTOelementoid = eLEMENTOelementoid;
-    }
-
-    @XmlTransient
-    public List<Dispersion> getDispersionList() {
-        return dispersionList;
-    }
-
-    public void setDispersionList(List<Dispersion> dispersionList) {
-        this.dispersionList = dispersionList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (protocoloId != null ? protocoloId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Protocolo)) {
-            return false;
-        }
-        Protocolo other = (Protocolo) object;
-        if ((this.protocoloId == null && other.protocoloId != null) || (this.protocoloId != null && !this.protocoloId.equals(other.protocoloId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Protocolo[ protocoloId=" + protocoloId + " ]";
     }
 
     public String getRangog() {
@@ -177,6 +140,48 @@ public class Protocolo implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
+    }
+
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
+    }
+
+    @XmlTransient
+    public List<Dispersion> getDispersionList() {
+        return dispersionList;
+    }
+
+    public void setDispersionList(List<Dispersion> dispersionList) {
+        this.dispersionList = dispersionList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (protocoloId != null ? protocoloId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Protocolo)) {
+            return false;
+        }
+        Protocolo other = (Protocolo) object;
+        if ((this.protocoloId == null && other.protocoloId != null) || (this.protocoloId != null && !this.protocoloId.equals(other.protocoloId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Protocolo[ protocoloId=" + protocoloId + " ]";
     }
     
 }

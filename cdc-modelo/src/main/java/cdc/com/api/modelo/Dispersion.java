@@ -28,7 +28,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Dispersion.findAll", query = "SELECT d FROM Dispersion d")
-    , @NamedQuery(name = "Dispersion.findByDispersionId", query = "SELECT d FROM Dispersion d WHERE d.dispersionId = :dispersionId")})
+    , @NamedQuery(name = "Dispersion.findByDispersionId", query = "SELECT d FROM Dispersion d WHERE d.dispersionId = :dispersionId")
+    , @NamedQuery(name = "Dispersion.findByLe", query = "SELECT d FROM Dispersion d WHERE d.le = :le")
+    , @NamedQuery(name = "Dispersion.findByNommapanummarg", query = "SELECT d FROM Dispersion d WHERE d.nommapanummarg = :nommapanummarg")
+    , @NamedQuery(name = "Dispersion.findByProv", query = "SELECT d FROM Dispersion d WHERE d.prov = :prov")
+    , @NamedQuery(name = "Dispersion.findByDireccion", query = "SELECT d FROM Dispersion d WHERE d.direccion = :direccion")
+    , @NamedQuery(name = "Dispersion.findByUltobs", query = "SELECT d FROM Dispersion d WHERE d.ultobs = :ultobs")})
 public class Dispersion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,6 +42,16 @@ public class Dispersion implements Serializable {
     @Basic(optional = false)
     @Column(name = "dispersion_id")
     private Integer dispersionId;
+    @Column(name = "le")
+    private String le;
+    @Column(name = "nommapanummarg")
+    private String nommapanummarg;
+    @Column(name = "prov")
+    private String prov;
+    @Column(name = "direccion")
+    private String direccion;
+    @Column(name = "ultobs")
+    private String ultobs;
     @JoinColumn(name = "PROTOCOLO_protocolo_id", referencedColumnName = "protocolo_id")
     @ManyToOne
     private Protocolo pROTOCOLOprotocoloid;
@@ -54,6 +69,46 @@ public class Dispersion implements Serializable {
 
     public void setDispersionId(Integer dispersionId) {
         this.dispersionId = dispersionId;
+    }
+
+    public String getLe() {
+        return le;
+    }
+
+    public void setLe(String le) {
+        this.le = le;
+    }
+
+    public String getNommapanummarg() {
+        return nommapanummarg;
+    }
+
+    public void setNommapanummarg(String nommapanummarg) {
+        this.nommapanummarg = nommapanummarg;
+    }
+
+    public String getProv() {
+        return prov;
+    }
+
+    public void setProv(String prov) {
+        this.prov = prov;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getUltobs() {
+        return ultobs;
+    }
+
+    public void setUltobs(String ultobs) {
+        this.ultobs = ultobs;
     }
 
     public Protocolo getPROTOCOLOprotocoloid() {

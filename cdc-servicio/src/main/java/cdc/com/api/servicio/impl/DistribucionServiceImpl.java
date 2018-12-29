@@ -38,6 +38,7 @@ public class DistribucionServiceImpl implements DistribucionService {
         return distribucionDao.find(id);
     }
 
+    @Override
     public List<Distribucion> all() {
         return distribucionDao.all();
     }

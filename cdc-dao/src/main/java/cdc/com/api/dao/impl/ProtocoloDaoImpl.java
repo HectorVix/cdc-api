@@ -23,8 +23,10 @@ public class ProtocoloDaoImpl implements ProtocoloDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public void save(Protocolo protocolo) {
+    public int save(Protocolo protocolo) {
         entityManager.persist(protocolo);
+        entityManager.flush();
+        return protocolo.getProtocoloId();
     }
 
     public void update(Protocolo protocolo) {

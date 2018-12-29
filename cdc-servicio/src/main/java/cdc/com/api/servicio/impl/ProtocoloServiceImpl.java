@@ -22,8 +22,8 @@ public class ProtocoloServiceImpl implements ProtocoloService {
     @Inject
     private ProtocoloDao protocoloDao;
 
-    public void save(Protocolo protocolo) {
-        protocoloDao.save(protocolo);
+    public int save(Protocolo protocolo) {
+        return protocoloDao.save(protocolo);
     }
 
     public void update(Protocolo protocolo) {

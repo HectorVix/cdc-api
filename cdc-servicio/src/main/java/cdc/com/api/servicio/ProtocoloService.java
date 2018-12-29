@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ProtocoloService {
 
-    public void save(Protocolo protocolo);
+    public int save(Protocolo protocolo);
 
     public void update(Protocolo protocolo);
 

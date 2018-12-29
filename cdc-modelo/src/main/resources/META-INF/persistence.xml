@@ -54,5 +54,6 @@
     <class>cdc.com.api.modelo.Macsitio</class>
     <class>cdc.com.api.modelo.Subdivision</class>
     <class>cdc.com.api.modelo.ListaElemento</class>
+    <class>cdc.com.api.modelo.Protocolo_1</class>
   </persistence-unit>
 </persistence>
