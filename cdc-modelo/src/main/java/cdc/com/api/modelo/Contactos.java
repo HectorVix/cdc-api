@@ -32,12 +32,42 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Contactos.findAll", query = "SELECT c FROM Contactos c")
     , @NamedQuery(name = "Contactos.findByContactosId", query = "SELECT c FROM Contactos c WHERE c.contactosId = :contactosId")
-    , @NamedQuery(name = "Contactos.findByNumident", query = "SELECT c FROM Contactos c WHERE c.numident = :numident")})
+    , @NamedQuery(name = "Contactos.findByNumident", query = "SELECT c FROM Contactos c WHERE c.numident = :numident")
+    , @NamedQuery(name = "Contactos.findByNombreident", query = "SELECT c FROM Contactos c WHERE c.nombreident = :nombreident")
+    , @NamedQuery(name = "Contactos.findByTitulo", query = "SELECT c FROM Contactos c WHERE c.titulo = :titulo")
+    , @NamedQuery(name = "Contactos.findByNombre", query = "SELECT c FROM Contactos c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Contactos.findByApellido1", query = "SELECT c FROM Contactos c WHERE c.apellido1 = :apellido1")
+    , @NamedQuery(name = "Contactos.findByApellido2", query = "SELECT c FROM Contactos c WHERE c.apellido2 = :apellido2")
+    , @NamedQuery(name = "Contactos.findBySufijo", query = "SELECT c FROM Contactos c WHERE c.sufijo = :sufijo")
+    , @NamedQuery(name = "Contactos.findByPosicion", query = "SELECT c FROM Contactos c WHERE c.posicion = :posicion")
+    , @NamedQuery(name = "Contactos.findByInstitucion", query = "SELECT c FROM Contactos c WHERE c.institucion = :institucion")
+    , @NamedQuery(name = "Contactos.findByEmail", query = "SELECT c FROM Contactos c WHERE c.email = :email")
+    , @NamedQuery(name = "Contactos.findByDir1", query = "SELECT c FROM Contactos c WHERE c.dir1 = :dir1")
+    , @NamedQuery(name = "Contactos.findByDir2", query = "SELECT c FROM Contactos c WHERE c.dir2 = :dir2")
+    , @NamedQuery(name = "Contactos.findByDir3", query = "SELECT c FROM Contactos c WHERE c.dir3 = :dir3")
+    , @NamedQuery(name = "Contactos.findByPais", query = "SELECT c FROM Contactos c WHERE c.pais = :pais")
+    , @NamedQuery(name = "Contactos.findByCiudad", query = "SELECT c FROM Contactos c WHERE c.ciudad = :ciudad")
+    , @NamedQuery(name = "Contactos.findBySubnacion", query = "SELECT c FROM Contactos c WHERE c.subnacion = :subnacion")
+    , @NamedQuery(name = "Contactos.findByCodpostal", query = "SELECT c FROM Contactos c WHERE c.codpostal = :codpostal")
+    , @NamedQuery(name = "Contactos.findByMasident", query = "SELECT c FROM Contactos c WHERE c.masident = :masident")
+    , @NamedQuery(name = "Contactos.findBySmsa", query = "SELECT c FROM Contactos c WHERE c.smsa = :smsa")
+    , @NamedQuery(name = "Contactos.findByTeleftrabajo", query = "SELECT c FROM Contactos c WHERE c.teleftrabajo = :teleftrabajo")
+    , @NamedQuery(name = "Contactos.findByTelefhogar", query = "SELECT c FROM Contactos c WHERE c.telefhogar = :telefhogar")
+    , @NamedQuery(name = "Contactos.findByTipocont", query = "SELECT c FROM Contactos c WHERE c.tipocont = :tipocont")
+    , @NamedQuery(name = "Contactos.findByActivcont", query = "SELECT c FROM Contactos c WHERE c.activcont = :activcont")
+    , @NamedQuery(name = "Contactos.findByResumen", query = "SELECT c FROM Contactos c WHERE c.resumen = :resumen")
+    , @NamedQuery(name = "Contactos.findByCoddirp", query = "SELECT c FROM Contactos c WHERE c.coddirp = :coddirp")
+    , @NamedQuery(name = "Contactos.findByActualizar", query = "SELECT c FROM Contactos c WHERE c.actualizar = :actualizar")})
 public class Contactos implements Serializable {
 
-    @Column(name = "dir2")
-    private String dir2;
-
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "contactos_id")
+    private Integer contactosId;
+    @Column(name = "numident")
+    private String numident;
     @Column(name = "nombreident")
     private String nombreident;
     @Column(name = "titulo")
@@ -58,6 +88,8 @@ public class Contactos implements Serializable {
     private String email;
     @Column(name = "dir1")
     private String dir1;
+    @Column(name = "dir2")
+    private String dir2;
     @Column(name = "dir3")
     private String dir3;
     @Column(name = "pais")
@@ -87,15 +119,6 @@ public class Contactos implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "contactos_id")
-    private Integer contactosId;
-    @Column(name = "numident")
-    private String numident;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
@@ -121,39 +144,6 @@ public class Contactos implements Serializable {
 
     public void setNumident(String numident) {
         this.numident = numident;
-    }
-
-    public Usuario getUSUARIOusuarioid() {
-        return uSUARIOusuarioid;
-    }
-
-    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
-        this.uSUARIOusuarioid = uSUARIOusuarioid;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (contactosId != null ? contactosId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contactos)) {
-            return false;
-        }
-        Contactos other = (Contactos) object;
-        if ((this.contactosId == null && other.contactosId != null) || (this.contactosId != null && !this.contactosId.equals(other.contactosId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Contactos[ contactosId=" + contactosId + " ]";
     }
 
     public String getNombreident() {
@@ -234,6 +224,14 @@ public class Contactos implements Serializable {
 
     public void setDir1(String dir1) {
         this.dir1 = dir1;
+    }
+
+    public String getDir2() {
+        return dir2;
+    }
+
+    public void setDir2(String dir2) {
+        this.dir2 = dir2;
     }
 
     public String getDir3() {
@@ -348,12 +346,37 @@ public class Contactos implements Serializable {
         this.actualizar = actualizar;
     }
 
-    public String getDir2() {
-        return dir2;
+    public Usuario getUSUARIOusuarioid() {
+        return uSUARIOusuarioid;
     }
 
-    public void setDir2(String dir2) {
-        this.dir2 = dir2;
+    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
+        this.uSUARIOusuarioid = uSUARIOusuarioid;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (contactosId != null ? contactosId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Contactos)) {
+            return false;
+        }
+        Contactos other = (Contactos) object;
+        if ((this.contactosId == null && other.contactosId != null) || (this.contactosId != null && !this.contactosId.equals(other.contactosId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Contactos[ contactosId=" + contactosId + " ]";
+    }
+    
 }

@@ -6,6 +6,7 @@
 package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Protocolo;
+import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.ProtocoloService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -31,6 +32,8 @@ public class ProtocoloResource {
 
     @Inject
     ProtocoloService protocoloServicio;
+    @Inject
+    ElementoService elementoServicio;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -43,13 +46,13 @@ public class ProtocoloResource {
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Protocolo protocolo) throws JSONException {
+    public Response registrarProtocolo(Protocolo protocolo) throws JSONException {
         JSONObject object = new JSONObject();
-
-        Protocolo protocolo1 = new Protocolo();
-        protocolo1.setCodigoe("codigo protocolo");
-
-        protocoloServicio.save(protocolo1);
+        boolean existe = elementoServicio.findElemento(protocolo.getCodigoe());
+        if (existe == false) {
+            throw new SecurityException("No existe el elemento");
+        }
+        protocoloServicio.save(protocolo);
         object.put("codigoe", protocolo.getCodigoe());
         System.out.println("***->Registro Exitoso Protocolo :" + protocolo.getCodigoe());
         return Response.status(202).entity(object.toString()).build();

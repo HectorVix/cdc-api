@@ -60,6 +60,10 @@ public class Elemento implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Protocolo> protocoloList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Rastreo> rastreoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "eLEMENTOelementoid")
     private List<Caracterizacion> caracterizacionList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
@@ -123,6 +127,24 @@ public class Elemento implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    @XmlTransient
+    public List<Protocolo> getProtocoloList() {
+        return protocoloList;
+    }
+
+    public void setProtocoloList(List<Protocolo> protocoloList) {
+        this.protocoloList = protocoloList;
+    }
+
+    @XmlTransient
+    public List<Rastreo> getRastreoList() {
+        return rastreoList;
+    }
+
+    public void setRastreoList(List<Rastreo> rastreoList) {
+        this.rastreoList = rastreoList;
     }
 
     @XmlTransient

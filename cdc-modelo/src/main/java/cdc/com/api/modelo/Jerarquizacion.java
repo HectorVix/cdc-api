@@ -52,8 +52,6 @@ public class Jerarquizacion implements Serializable {
     private List<Nacional> nacionalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Subnacional> subnacionalList;
-    @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
-    private List<Rastreo> rastreoList;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
     private Elemento eLEMENTOelementoid;
@@ -114,15 +112,6 @@ public class Jerarquizacion implements Serializable {
 
     public void setSubnacionalList(List<Subnacional> subnacionalList) {
         this.subnacionalList = subnacionalList;
-    }
-
-    @XmlTransient
-    public List<Rastreo> getRastreoList() {
-        return rastreoList;
-    }
-
-    public void setRastreoList(List<Rastreo> rastreoList) {
-        this.rastreoList = rastreoList;
     }
 
     public Elemento getELEMENTOelementoid() {

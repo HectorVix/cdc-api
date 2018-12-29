@@ -6,6 +6,7 @@
 package cdc.com.api.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -35,6 +38,20 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Protocolo.findByCodigoe", query = "SELECT p FROM Protocolo p WHERE p.codigoe = :codigoe")})
 public class Protocolo implements Serializable {
 
+    @Column(name = "rangog")
+    private String rangog;
+    @Column(name = "rangon")
+    private String rangon;
+    @Column(name = "rangos")
+    private String rangos;
+    @Column(name = "nombre")
+    private String nombre;
+    @Column(name = "nomcomun")
+    private String nomcomun;
+    @Column(name = "fecha")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +60,9 @@ public class Protocolo implements Serializable {
     private Integer protocoloId;
     @Column(name = "codigoe")
     private String codigoe;
-    @JoinColumn(name = "LOCALIZACION_localizacion_id", referencedColumnName = "localizacion_id")
+    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
-    private Localizacion lOCALIZACIONlocalizacionid;
+    private Elemento eLEMENTOelementoid;
     @OneToMany(mappedBy = "pROTOCOLOprotocoloid")
     private List<Dispersion> dispersionList;
 
@@ -72,12 +89,12 @@ public class Protocolo implements Serializable {
         this.codigoe = codigoe;
     }
 
-    public Localizacion getLOCALIZACIONlocalizacionid() {
-        return lOCALIZACIONlocalizacionid;
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
     }
 
-    public void setLOCALIZACIONlocalizacionid(Localizacion lOCALIZACIONlocalizacionid) {
-        this.lOCALIZACIONlocalizacionid = lOCALIZACIONlocalizacionid;
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @XmlTransient
@@ -112,6 +129,54 @@ public class Protocolo implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Protocolo[ protocoloId=" + protocoloId + " ]";
+    }
+
+    public String getRangog() {
+        return rangog;
+    }
+
+    public void setRangog(String rangog) {
+        this.rangog = rangog;
+    }
+
+    public String getRangon() {
+        return rangon;
+    }
+
+    public void setRangon(String rangon) {
+        this.rangon = rangon;
+    }
+
+    public String getRangos() {
+        return rangos;
+    }
+
+    public void setRangos(String rangos) {
+        this.rangos = rangos;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNomcomun() {
+        return nomcomun;
+    }
+
+    public void setNomcomun(String nomcomun) {
+        this.nomcomun = nomcomun;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
     
 }

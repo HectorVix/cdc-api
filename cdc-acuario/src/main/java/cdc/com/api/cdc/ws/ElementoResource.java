@@ -96,7 +96,7 @@ public class ElementoResource {
     @Path("/validar/{codigoe}")
     @Produces(APPLICATION_JSON)
     public Elemento findElemento(@PathParam("codigoe") String codigoe) throws JSONException, Exception {
-        System.out.println("***->Enontrando elemento:" + codigoe);
+        System.out.println("***->Encontrando elemento:" + codigoe);
         validarElemento(codigoe);
         Elemento el = new Elemento();
         el.setElementoId(elementoServicio.getElemento_id());

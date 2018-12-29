@@ -28,22 +28,23 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("rastreo")
 @ManagedBean
 public class RastreoResource {
-     @Inject
-      RastreoService rastreoServicio;
-     
+
+    @Inject
+    RastreoService rastreoServicio;
+
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Rastreo> all() {
         System.out.println("***->Lista de Rastreo");
         return rastreoServicio.all();
-    } 
+    }
+
     @POST
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarRastreo(Rastreo rastreo) throws JSONException {
         JSONObject object = new JSONObject();
-        //falta validar codigo localizacion del elemento
         rastreoServicio.save(rastreo);
         object.put("codigoe", rastreo.getCodigoe());
         System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());

@@ -35,70 +35,121 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Vertebrado.findAll", query = "SELECT v FROM Vertebrado v")
     , @NamedQuery(name = "Vertebrado.findByVertebradoId", query = "SELECT v FROM Vertebrado v WHERE v.vertebradoId = :vertebradoId")
-    , @NamedQuery(name = "Vertebrado.findByCodigoe", query = "SELECT v FROM Vertebrado v WHERE v.codigoe = :codigoe")})
+    , @NamedQuery(name = "Vertebrado.findByCodigoe", query = "SELECT v FROM Vertebrado v WHERE v.codigoe = :codigoe")
+    , @NamedQuery(name = "Vertebrado.findByNacion", query = "SELECT v FROM Vertebrado v WHERE v.nacion = :nacion")
+    , @NamedQuery(name = "Vertebrado.findByNombreg", query = "SELECT v FROM Vertebrado v WHERE v.nombreg = :nombreg")
+    , @NamedQuery(name = "Vertebrado.findByAutor", query = "SELECT v FROM Vertebrado v WHERE v.autor = :autor")
+    , @NamedQuery(name = "Vertebrado.findByNombren", query = "SELECT v FROM Vertebrado v WHERE v.nombren = :nombren")
+    , @NamedQuery(name = "Vertebrado.findByNomcomunn", query = "SELECT v FROM Vertebrado v WHERE v.nomcomunn = :nomcomunn")
+    , @NamedQuery(name = "Vertebrado.findByClasetax", query = "SELECT v FROM Vertebrado v WHERE v.clasetax = :clasetax")
+    , @NamedQuery(name = "Vertebrado.findByOrden", query = "SELECT v FROM Vertebrado v WHERE v.orden = :orden")
+    , @NamedQuery(name = "Vertebrado.findByFamilia", query = "SELECT v FROM Vertebrado v WHERE v.familia = :familia")
+    , @NamedQuery(name = "Vertebrado.findByGenero", query = "SELECT v FROM Vertebrado v WHERE v.genero = :genero")
+    , @NamedQuery(name = "Vertebrado.findByComtaxg", query = "SELECT v FROM Vertebrado v WHERE v.comtaxg = :comtaxg")
+    , @NamedQuery(name = "Vertebrado.findByComsubespn", query = "SELECT v FROM Vertebrado v WHERE v.comsubespn = :comsubespn")
+    , @NamedQuery(name = "Vertebrado.findByRangog", query = "SELECT v FROM Vertebrado v WHERE v.rangog = :rangog")
+    , @NamedQuery(name = "Vertebrado.findByCites", query = "SELECT v FROM Vertebrado v WHERE v.cites = :cites")
+    , @NamedQuery(name = "Vertebrado.findByUicn", query = "SELECT v FROM Vertebrado v WHERE v.uicn = :uicn")
+    , @NamedQuery(name = "Vertebrado.findByAepeu", query = "SELECT v FROM Vertebrado v WHERE v.aepeu = :aepeu")
+    , @NamedQuery(name = "Vertebrado.findByFechaaepeu", query = "SELECT v FROM Vertebrado v WHERE v.fechaaepeu = :fechaaepeu")
+    , @NamedQuery(name = "Vertebrado.findByEndemismo", query = "SELECT v FROM Vertebrado v WHERE v.endemismo = :endemismo")
+    , @NamedQuery(name = "Vertebrado.findByComstatg", query = "SELECT v FROM Vertebrado v WHERE v.comstatg = :comstatg")
+    , @NamedQuery(name = "Vertebrado.findByRangon", query = "SELECT v FROM Vertebrado v WHERE v.rangon = :rangon")
+    , @NamedQuery(name = "Vertebrado.findByProtnacion", query = "SELECT v FROM Vertebrado v WHERE v.protnacion = :protnacion")
+    , @NamedQuery(name = "Vertebrado.findByRastreolen", query = "SELECT v FROM Vertebrado v WHERE v.rastreolen = :rastreolen")
+    , @NamedQuery(name = "Vertebrado.findByEspdeportn", query = "SELECT v FROM Vertebrado v WHERE v.espdeportn = :espdeportn")
+    , @NamedQuery(name = "Vertebrado.findByEspcomern", query = "SELECT v FROM Vertebrado v WHERE v.espcomern = :espcomern")
+    , @NamedQuery(name = "Vertebrado.findByPezdeport", query = "SELECT v FROM Vertebrado v WHERE v.pezdeport = :pezdeport")
+    , @NamedQuery(name = "Vertebrado.findByNdeportpro", query = "SELECT v FROM Vertebrado v WHERE v.ndeportpro = :ndeportpro")
+    , @NamedQuery(name = "Vertebrado.findByCazapieln", query = "SELECT v FROM Vertebrado v WHERE v.cazapieln = :cazapieln")
+    , @NamedQuery(name = "Vertebrado.findByPesten", query = "SELECT v FROM Vertebrado v WHERE v.pesten = :pesten")
+    , @NamedQuery(name = "Vertebrado.findByComstatn", query = "SELECT v FROM Vertebrado v WHERE v.comstatn = :comstatn")
+    , @NamedQuery(name = "Vertebrado.findByElevminn", query = "SELECT v FROM Vertebrado v WHERE v.elevminn = :elevminn")
+    , @NamedQuery(name = "Vertebrado.findByElevmaxn", query = "SELECT v FROM Vertebrado v WHERE v.elevmaxn = :elevmaxn")
+    , @NamedQuery(name = "Vertebrado.findByComdistg", query = "SELECT v FROM Vertebrado v WHERE v.comdistg = :comdistg")
+    , @NamedQuery(name = "Vertebrado.findByComdistn", query = "SELECT v FROM Vertebrado v WHERE v.comdistn = :comdistn")
+    , @NamedQuery(name = "Vertebrado.findByResidente", query = "SELECT v FROM Vertebrado v WHERE v.residente = :residente")
+    , @NamedQuery(name = "Vertebrado.findByMiglocal", query = "SELECT v FROM Vertebrado v WHERE v.miglocal = :miglocal")
+    , @NamedQuery(name = "Vertebrado.findByMigdist", query = "SELECT v FROM Vertebrado v WHERE v.migdist = :migdist")
+    , @NamedQuery(name = "Vertebrado.findByRepn", query = "SELECT v FROM Vertebrado v WHERE v.repn = :repn")
+    , @NamedQuery(name = "Vertebrado.findByNorepn", query = "SELECT v FROM Vertebrado v WHERE v.norepn = :norepn")
+    , @NamedQuery(name = "Vertebrado.findByTransmign", query = "SELECT v FROM Vertebrado v WHERE v.transmign = :transmign")
+    , @NamedQuery(name = "Vertebrado.findByAparirregn", query = "SELECT v FROM Vertebrado v WHERE v.aparirregn = :aparirregn")
+    , @NamedQuery(name = "Vertebrado.findByMign", query = "SELECT v FROM Vertebrado v WHERE v.mign = :mign")
+    , @NamedQuery(name = "Vertebrado.findByCommigg", query = "SELECT v FROM Vertebrado v WHERE v.commigg = :commigg")
+    , @NamedQuery(name = "Vertebrado.findByCommign", query = "SELECT v FROM Vertebrado v WHERE v.commign = :commign")
+    , @NamedQuery(name = "Vertebrado.findByMarino", query = "SELECT v FROM Vertebrado v WHERE v.marino = :marino")
+    , @NamedQuery(name = "Vertebrado.findByEstuarino", query = "SELECT v FROM Vertebrado v WHERE v.estuarino = :estuarino")
+    , @NamedQuery(name = "Vertebrado.findByFluvial", query = "SELECT v FROM Vertebrado v WHERE v.fluvial = :fluvial")
+    , @NamedQuery(name = "Vertebrado.findByLacustre", query = "SELECT v FROM Vertebrado v WHERE v.lacustre = :lacustre")
+    , @NamedQuery(name = "Vertebrado.findByPalustre", query = "SELECT v FROM Vertebrado v WHERE v.palustre = :palustre")
+    , @NamedQuery(name = "Vertebrado.findByTerrestre", query = "SELECT v FROM Vertebrado v WHERE v.terrestre = :terrestre")
+    , @NamedQuery(name = "Vertebrado.findBySubterran", query = "SELECT v FROM Vertebrado v WHERE v.subterran = :subterran")
+    , @NamedQuery(name = "Vertebrado.findByFactorespe", query = "SELECT v FROM Vertebrado v WHERE v.factorespe = :factorespe")
+    , @NamedQuery(name = "Vertebrado.findByComhabg", query = "SELECT v FROM Vertebrado v WHERE v.comhabg = :comhabg")
+    , @NamedQuery(name = "Vertebrado.findByComhabrep", query = "SELECT v FROM Vertebrado v WHERE v.comhabrep = :comhabrep")
+    , @NamedQuery(name = "Vertebrado.findByComhabn", query = "SELECT v FROM Vertebrado v WHERE v.comhabn = :comhabn")
+    , @NamedQuery(name = "Vertebrado.findByHabitosalim", query = "SELECT v FROM Vertebrado v WHERE v.habitosalim = :habitosalim")
+    , @NamedQuery(name = "Vertebrado.findByComalimg", query = "SELECT v FROM Vertebrado v WHERE v.comalimg = :comalimg")
+    , @NamedQuery(name = "Vertebrado.findByComalimn", query = "SELECT v FROM Vertebrado v WHERE v.comalimn = :comalimn")
+    , @NamedQuery(name = "Vertebrado.findByComecolg", query = "SELECT v FROM Vertebrado v WHERE v.comecolg = :comecolg")
+    , @NamedQuery(name = "Vertebrado.findByComecoln", query = "SELECT v FROM Vertebrado v WHERE v.comecoln = :comecoln")
+    , @NamedQuery(name = "Vertebrado.findByFenologia", query = "SELECT v FROM Vertebrado v WHERE v.fenologia = :fenologia")
+    , @NamedQuery(name = "Vertebrado.findByComfenolg", query = "SELECT v FROM Vertebrado v WHERE v.comfenolg = :comfenolg")
+    , @NamedQuery(name = "Vertebrado.findByComfenoln", query = "SELECT v FROM Vertebrado v WHERE v.comfenoln = :comfenoln")
+    , @NamedQuery(name = "Vertebrado.findByColrep", query = "SELECT v FROM Vertebrado v WHERE v.colrep = :colrep")
+    , @NamedQuery(name = "Vertebrado.findByComrepg", query = "SELECT v FROM Vertebrado v WHERE v.comrepg = :comrepg")
+    , @NamedQuery(name = "Vertebrado.findByComrepn", query = "SELECT v FROM Vertebrado v WHERE v.comrepn = :comrepn")
+    , @NamedQuery(name = "Vertebrado.findByCommanejog", query = "SELECT v FROM Vertebrado v WHERE v.commanejog = :commanejog")
+    , @NamedQuery(name = "Vertebrado.findByCommanejon", query = "SELECT v FROM Vertebrado v WHERE v.commanejon = :commanejon")
+    , @NamedQuery(name = "Vertebrado.findByUsoeconom", query = "SELECT v FROM Vertebrado v WHERE v.usoeconom = :usoeconom")
+    , @NamedQuery(name = "Vertebrado.findByLongitud", query = "SELECT v FROM Vertebrado v WHERE v.longitud = :longitud")
+    , @NamedQuery(name = "Vertebrado.findByPeso", query = "SELECT v FROM Vertebrado v WHERE v.peso = :peso")
+    , @NamedQuery(name = "Vertebrado.findByRcvnopc1", query = "SELECT v FROM Vertebrado v WHERE v.rcvnopc1 = :rcvnopc1")
+    , @NamedQuery(name = "Vertebrado.findByRcvnopc2", query = "SELECT v FROM Vertebrado v WHERE v.rcvnopc2 = :rcvnopc2")
+    , @NamedQuery(name = "Vertebrado.findByRcvnopc3", query = "SELECT v FROM Vertebrado v WHERE v.rcvnopc3 = :rcvnopc3")
+    , @NamedQuery(name = "Vertebrado.findByRcvnopc4", query = "SELECT v FROM Vertebrado v WHERE v.rcvnopc4 = :rcvnopc4")
+    , @NamedQuery(name = "Vertebrado.findByRcvnopc5", query = "SELECT v FROM Vertebrado v WHERE v.rcvnopc5 = :rcvnopc5")
+    , @NamedQuery(name = "Vertebrado.findByRefg", query = "SELECT v FROM Vertebrado v WHERE v.refg = :refg")
+    , @NamedQuery(name = "Vertebrado.findByRefn", query = "SELECT v FROM Vertebrado v WHERE v.refn = :refn")
+    , @NamedQuery(name = "Vertebrado.findByEdiciong", query = "SELECT v FROM Vertebrado v WHERE v.ediciong = :ediciong")
+    , @NamedQuery(name = "Vertebrado.findByActualizag", query = "SELECT v FROM Vertebrado v WHERE v.actualizag = :actualizag")
+    , @NamedQuery(name = "Vertebrado.findByEdicionn", query = "SELECT v FROM Vertebrado v WHERE v.edicionn = :edicionn")
+    , @NamedQuery(name = "Vertebrado.findByActualizan", query = "SELECT v FROM Vertebrado v WHERE v.actualizan = :actualizan")
+    , @NamedQuery(name = "Vertebrado.findByNenea", query = "SELECT v FROM Vertebrado v WHERE v.nenea = :nenea")
+    , @NamedQuery(name = "Vertebrado.findByNabra", query = "SELECT v FROM Vertebrado v WHERE v.nabra = :nabra")
+    , @NamedQuery(name = "Vertebrado.findByNjula", query = "SELECT v FROM Vertebrado v WHERE v.njula = :njula")
+    , @NamedQuery(name = "Vertebrado.findByNocta", query = "SELECT v FROM Vertebrado v WHERE v.nocta = :nocta")
+    , @NamedQuery(name = "Vertebrado.findByNeneb", query = "SELECT v FROM Vertebrado v WHERE v.neneb = :neneb")
+    , @NamedQuery(name = "Vertebrado.findByNabrb", query = "SELECT v FROM Vertebrado v WHERE v.nabrb = :nabrb")
+    , @NamedQuery(name = "Vertebrado.findByNjulb", query = "SELECT v FROM Vertebrado v WHERE v.njulb = :njulb")
+    , @NamedQuery(name = "Vertebrado.findByNoctb", query = "SELECT v FROM Vertebrado v WHERE v.noctb = :noctb")
+    , @NamedQuery(name = "Vertebrado.findByNfeba", query = "SELECT v FROM Vertebrado v WHERE v.nfeba = :nfeba")
+    , @NamedQuery(name = "Vertebrado.findByNmaya", query = "SELECT v FROM Vertebrado v WHERE v.nmaya = :nmaya")
+    , @NamedQuery(name = "Vertebrado.findByNagoa", query = "SELECT v FROM Vertebrado v WHERE v.nagoa = :nagoa")
+    , @NamedQuery(name = "Vertebrado.findByNnova", query = "SELECT v FROM Vertebrado v WHERE v.nnova = :nnova")
+    , @NamedQuery(name = "Vertebrado.findByNfebb", query = "SELECT v FROM Vertebrado v WHERE v.nfebb = :nfebb")
+    , @NamedQuery(name = "Vertebrado.findByNmayb", query = "SELECT v FROM Vertebrado v WHERE v.nmayb = :nmayb")
+    , @NamedQuery(name = "Vertebrado.findByNagob", query = "SELECT v FROM Vertebrado v WHERE v.nagob = :nagob")
+    , @NamedQuery(name = "Vertebrado.findByNnovb", query = "SELECT v FROM Vertebrado v WHERE v.nnovb = :nnovb")
+    , @NamedQuery(name = "Vertebrado.findByNmara", query = "SELECT v FROM Vertebrado v WHERE v.nmara = :nmara")
+    , @NamedQuery(name = "Vertebrado.findByNjuna", query = "SELECT v FROM Vertebrado v WHERE v.njuna = :njuna")
+    , @NamedQuery(name = "Vertebrado.findByNseta", query = "SELECT v FROM Vertebrado v WHERE v.nseta = :nseta")
+    , @NamedQuery(name = "Vertebrado.findByNdica", query = "SELECT v FROM Vertebrado v WHERE v.ndica = :ndica")
+    , @NamedQuery(name = "Vertebrado.findByNmarb", query = "SELECT v FROM Vertebrado v WHERE v.nmarb = :nmarb")
+    , @NamedQuery(name = "Vertebrado.findByNjunb", query = "SELECT v FROM Vertebrado v WHERE v.njunb = :njunb")
+    , @NamedQuery(name = "Vertebrado.findByNsetb", query = "SELECT v FROM Vertebrado v WHERE v.nsetb = :nsetb")
+    , @NamedQuery(name = "Vertebrado.findByNdicb", query = "SELECT v FROM Vertebrado v WHERE v.ndicb = :ndicb")})
 public class Vertebrado implements Serializable {
 
-    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
-    private List<Distribucion2> distribucion2List;
-
-    @Column(name = "nenea")
-    private String nenea;
-    @Column(name = "nabra")
-    private String nabra;
-    @Column(name = "njula")
-    private String njula;
-    @Column(name = "nocta")
-    private String nocta;
-    @Column(name = "neneb")
-    private String neneb;
-    @Column(name = "nabrb")
-    private String nabrb;
-    @Column(name = "njulb")
-    private String njulb;
-    @Column(name = "noctb")
-    private String noctb;
-    @Column(name = "nfeba")
-    private String nfeba;
-    @Column(name = "nmaya")
-    private String nmaya;
-    @Column(name = "nagoa")
-    private String nagoa;
-    @Column(name = "nnova")
-    private String nnova;
-    @Column(name = "nfebb")
-    private String nfebb;
-    @Column(name = "nmayb")
-    private String nmayb;
-    @Column(name = "nagob")
-    private String nagob;
-    @Column(name = "nnovb")
-    private String nnovb;
-    @Column(name = "nmara")
-    private String nmara;
-    @Column(name = "njuna")
-    private String njuna;
-    @Column(name = "nseta")
-    private String nseta;
-    @Column(name = "ndica")
-    private String ndica;
-    @Column(name = "nmarb")
-    private String nmarb;
-    @Column(name = "njunb")
-    private String njunb;
-    @Column(name = "nsetb")
-    private String nsetb;
-    @Column(name = "ndicb")
-    private String ndicb;
-
-    @Column(name = "elevminn")
-    private Integer elevminn;
-    @Column(name = "elevmaxn")
-    private Integer elevmaxn;
-    @Column(name = "longitud")
-    private Integer longitud;
-    @Column(name = "peso")
-    private Integer peso;
-
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "vertebrado_id")
+    private Integer vertebradoId;
+    @Column(name = "codigoe")
+    private String codigoe;
     @Column(name = "nacion")
     private String nacion;
     @Column(name = "nombreg")
@@ -156,6 +207,10 @@ public class Vertebrado implements Serializable {
     private String pesten;
     @Column(name = "comstatn")
     private String comstatn;
+    @Column(name = "elevminn")
+    private Integer elevminn;
+    @Column(name = "elevmaxn")
+    private Integer elevmaxn;
     @Column(name = "comdistg")
     private String comdistg;
     @Column(name = "comdistn")
@@ -230,6 +285,10 @@ public class Vertebrado implements Serializable {
     private String commanejon;
     @Column(name = "usoeconom")
     private String usoeconom;
+    @Column(name = "longitud")
+    private Integer longitud;
+    @Column(name = "peso")
+    private Integer peso;
     @Column(name = "rcvnopc1")
     private String rcvnopc1;
     @Column(name = "rcvnopc2")
@@ -256,15 +315,56 @@ public class Vertebrado implements Serializable {
     @Column(name = "actualizan")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizan;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "vertebrado_id")
-    private Integer vertebradoId;
-    @Column(name = "codigoe")
-    private String codigoe;
+    @Column(name = "nenea")
+    private String nenea;
+    @Column(name = "nabra")
+    private String nabra;
+    @Column(name = "njula")
+    private String njula;
+    @Column(name = "nocta")
+    private String nocta;
+    @Column(name = "neneb")
+    private String neneb;
+    @Column(name = "nabrb")
+    private String nabrb;
+    @Column(name = "njulb")
+    private String njulb;
+    @Column(name = "noctb")
+    private String noctb;
+    @Column(name = "nfeba")
+    private String nfeba;
+    @Column(name = "nmaya")
+    private String nmaya;
+    @Column(name = "nagoa")
+    private String nagoa;
+    @Column(name = "nnova")
+    private String nnova;
+    @Column(name = "nfebb")
+    private String nfebb;
+    @Column(name = "nmayb")
+    private String nmayb;
+    @Column(name = "nagob")
+    private String nagob;
+    @Column(name = "nnovb")
+    private String nnovb;
+    @Column(name = "nmara")
+    private String nmara;
+    @Column(name = "njuna")
+    private String njuna;
+    @Column(name = "nseta")
+    private String nseta;
+    @Column(name = "ndica")
+    private String ndica;
+    @Column(name = "nmarb")
+    private String nmarb;
+    @Column(name = "njunb")
+    private String njunb;
+    @Column(name = "nsetb")
+    private String nsetb;
+    @Column(name = "ndicb")
+    private String ndicb;
+    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
+    private List<Distribucion2> distribucion2List;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
@@ -294,57 +394,6 @@ public class Vertebrado implements Serializable {
 
     public void setCodigoe(String codigoe) {
         this.codigoe = codigoe;
-    }
-
-    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
-        return cARACTERIZACIONcaracterizacionid;
-    }
-
-    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
-        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Distribucion> getDistribucionList() {
-        return distribucionList;
-    }
-
-    public void setDistribucionList(List<Distribucion> distribucionList) {
-        this.distribucionList = distribucionList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (vertebradoId != null ? vertebradoId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Vertebrado)) {
-            return false;
-        }
-        Vertebrado other = (Vertebrado) object;
-        if ((this.vertebradoId == null && other.vertebradoId != null) || (this.vertebradoId != null && !this.vertebradoId.equals(other.vertebradoId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "cdc.com.api.modelo.Vertebrado[ vertebradoId=" + vertebradoId + " ]";
     }
 
     public String getNacion() {
@@ -571,6 +620,21 @@ public class Vertebrado implements Serializable {
         this.comstatn = comstatn;
     }
 
+    public Integer getElevminn() {
+        return elevminn;
+    }
+
+    public void setElevminn(Integer elevminn) {
+        this.elevminn = elevminn;
+    }
+
+    public Integer getElevmaxn() {
+        return elevmaxn;
+    }
+
+    public void setElevmaxn(Integer elevmaxn) {
+        this.elevmaxn = elevmaxn;
+    }
 
     public String getComdistg() {
         return comdistg;
@@ -868,6 +932,21 @@ public class Vertebrado implements Serializable {
         this.usoeconom = usoeconom;
     }
 
+    public Integer getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Integer longitud) {
+        this.longitud = longitud;
+    }
+
+    public Integer getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Integer peso) {
+        this.peso = peso;
+    }
 
     public String getRcvnopc1() {
         return rcvnopc1;
@@ -955,38 +1034,6 @@ public class Vertebrado implements Serializable {
 
     public void setActualizan(Date actualizan) {
         this.actualizan = actualizan;
-    }
-
-    public Integer getElevminn() {
-        return elevminn;
-    }
-
-    public void setElevminn(Integer elevminn) {
-        this.elevminn = elevminn;
-    }
-
-    public Integer getElevmaxn() {
-        return elevmaxn;
-    }
-
-    public void setElevmaxn(Integer elevmaxn) {
-        this.elevmaxn = elevmaxn;
-    }
-
-    public Integer getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(Integer longitud) {
-        this.longitud = longitud;
-    }
-
-    public Integer getPeso() {
-        return peso;
-    }
-
-    public void setPeso(Integer peso) {
-        this.peso = peso;
     }
 
     public String getNenea() {
@@ -1190,4 +1237,55 @@ public class Vertebrado implements Serializable {
         this.distribucion2List = distribucion2List;
     }
 
+    public Caracterizacion getCARACTERIZACIONcaracterizacionid() {
+        return cARACTERIZACIONcaracterizacionid;
+    }
+
+    public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
+        this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Distribucion> getDistribucionList() {
+        return distribucionList;
+    }
+
+    public void setDistribucionList(List<Distribucion> distribucionList) {
+        this.distribucionList = distribucionList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (vertebradoId != null ? vertebradoId.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Vertebrado)) {
+            return false;
+        }
+        Vertebrado other = (Vertebrado) object;
+        if ((this.vertebradoId == null && other.vertebradoId != null) || (this.vertebradoId != null && !this.vertebradoId.equals(other.vertebradoId))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "cdc.com.api.modelo.Vertebrado[ vertebradoId=" + vertebradoId + " ]";
+    }
+    
 }

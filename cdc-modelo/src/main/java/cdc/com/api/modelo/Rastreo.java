@@ -249,9 +249,9 @@ public class Rastreo implements Serializable {
     private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Localizacion> localizacionList;
-    @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
+    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
-    private Jerarquizacion jERARQUIZACIONjerarquizacionid;
+    private Elemento eLEMENTOelementoid;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Observaciones> observacionesList;
 
@@ -808,12 +808,12 @@ public class Rastreo implements Serializable {
         this.localizacionList = localizacionList;
     }
 
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
     }
 
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @XmlTransient
