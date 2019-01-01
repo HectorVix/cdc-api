@@ -46,6 +46,7 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.WebApplicationException;
@@ -224,17 +225,17 @@ public class ElementoResource {
         JSONObject object = new JSONObject();
         object.put("foto", "pruebas");
         // object.put("imagen",imagenData);
-        System.out.println("***->Obteniendo foto:"+imagenData);
+        System.out.println("***->Obteniendo foto:" + imagenData);
         //return Response.ok(new ByteArrayInputStream(imagenData)).build();
-       // return Response.status(200).entity(object.toString()).build();      
-       // return Response.ok(imagenData).build();
+        // return Response.status(200).entity(object.toString()).build();      
+        // return Response.ok(imagenData).build();
         // return Response.status(200).entity(object.toString()).build();
-        object.put("foto1",foto.getImagen()) ;
-         return Response
-            .ok()
-            //.type("image/*")
-            .entity(foto.getImagen()) // Assumes document is a byte array in the domain object.
-            .build();
+        object.put("foto1", foto.getImagen());
+        return Response
+                .ok()
+                //.type("image/*")
+                .entity(foto.getImagen()) // Assumes document is a byte array in the domain object.
+                .build();
     }
 
     @GET
@@ -266,7 +267,8 @@ public class ElementoResource {
         File repositoryFile = new File("c:/temporal/bobby.jpg");
         return repositoryFile;
     }
-  /*  
+
+    /*  
     @Path("upload/{id}")
 @GET
 public Response getPDF(@PathParam("id") Integer id) throws Exception {
@@ -277,4 +279,18 @@ public Response getPDF(@PathParam("id") Integer id) throws Exception {
             .entity(entity.getDocument()) // Assumes document is a byte array in the domain object.
             .build();
 }*/
+    @GET
+    @Path("/buscarFotos/{elementoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Foto> buscarFoto_ElementoId(@PathParam("elementoId") Integer elementoId) {
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elementoId);
+        System.out.println("***->Busqueda Exitosa Fotos");
+        List<Foto> lista_Foto = fotoServicio.buscarFoto_ElementoId(elemento);
+        for (int i = 0; i < lista_Foto.size(); i++) {
+            lista_Foto.get(i).setImagen(null);//más eficaz
+        }
+        return lista_Foto;
+    }
 }

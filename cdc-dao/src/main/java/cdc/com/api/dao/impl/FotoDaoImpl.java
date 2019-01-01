@@ -6,7 +6,9 @@
 package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.FotoDao;
+import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
+import cdc.com.api.modelo.buscar.FotoId;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -49,12 +51,9 @@ public class FotoDaoImpl implements FotoDao {
 
     }
 
-    public List<Foto> buscarFotoId(String elementoId, String plantaId, String sitioId, String areaId, String vertebradoId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Foto> buscarFoto_ElementoId(Elemento elemento) {
+        TypedQuery<Foto> query = entityManager.createQuery("SELECT f FROM Foto f WHERE f.eLEMENTOelementoid = :elemento", Foto.class);
+        query.setParameter("elemento", elemento);
+        return query.getResultList();
     }
-
-    public List<Foto> buscarFotoNombre(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

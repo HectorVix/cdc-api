@@ -5,6 +5,7 @@
  */
 package cdc.com.api.servicio;
 
+import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
 import java.util.List;
 
@@ -24,6 +25,6 @@ public interface FotoService {
 
     public List<Foto> all();
 
-    public List<Foto> buscarFotoId(String elementoId, String plantaId, String sitioId, String areaId, String vertebradoId);
+   public List<Foto> buscarFoto_ElementoId(Elemento elemento) ;
 
 }

@@ -6,6 +6,7 @@
 package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.FotoDao;
+import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
 import cdc.com.api.servicio.FotoService;
 import java.util.List;
@@ -43,7 +44,7 @@ public class FotoServiceImpl implements FotoService {
         return fotoDao.all();
     }
 
-    public List<Foto> buscarFotoId(String elementoId, String plantaId, String sitioId, String areaId, String vertebradoId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Foto> buscarFoto_ElementoId(Elemento elemento) {
+        return fotoDao.buscarFoto_ElementoId(elemento);
     }
 }
