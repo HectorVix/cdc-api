@@ -52,7 +52,7 @@ public class FotoDaoImpl implements FotoDao {
     }
 
     public List<Foto> buscarFoto_ElementoId(Elemento elemento) {
-        TypedQuery<Foto> query = entityManager.createQuery("SELECT f FROM Foto f WHERE f.eLEMENTOelementoid = :elemento", Foto.class);
+        TypedQuery<Foto> query = entityManager.createQuery("SELECT f FROM Foto f WHERE f.eLEMENTOelementoid = :elemento ORDER BY f.posicion ASC", Foto.class);
         query.setParameter("elemento", elemento);
         return query.getResultList();
     }

@@ -39,6 +39,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Foto.findByFecha", query = "SELECT f FROM Foto f WHERE f.fecha = :fecha")})
 public class Foto implements Serializable {
 
+    @Lob
+    @Column(name = "imagen")
+    private byte[] imagen;
+    @Column(name = "posicion")
+    private Integer posicion;
+    @Column(name = "nombre")
+    private String nombre;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +62,6 @@ public class Foto implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @Lob
-    @Column(name = "imagen")
-    private byte[] imagen;
     @JoinColumn(name = "AREA_area_id", referencedColumnName = "area_id")
     @ManyToOne
     private Area aREAareaid;
@@ -120,13 +125,6 @@ public class Foto implements Serializable {
         this.fecha = fecha;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
 
     public Area getAREAareaid() {
         return aREAareaid;
@@ -191,6 +189,30 @@ public class Foto implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Foto[ fotoId=" + fotoId + " ]";
+    }
+
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
+
+    public Integer getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(Integer posicion) {
+        this.posicion = posicion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
 }

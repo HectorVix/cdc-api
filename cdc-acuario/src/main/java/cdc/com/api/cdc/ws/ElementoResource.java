@@ -138,8 +138,10 @@ public class ElementoResource {
             @FormDataParam("descripcion") String descripcion,
             @FormDataParam("comentario") String comentario,
             @FormDataParam("autor") String autor,
+            @FormDataParam("posicion") int posicion,
             @FormDataParam("fecha") String fecha,
-            @PathParam("elementoid") int elementoid)
+            @PathParam("elementoid") int elementoid
+    )
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         // String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
@@ -158,6 +160,8 @@ public class ElementoResource {
         foto.setDescripcion(descripcion);
         foto.setComentario(comentario);
         foto.setAutor(autor);
+        foto.setNombre(fileDetail.getFileName());
+        foto.setPosicion(posicion);
         if (fechaCreacion != null) {
             foto.setFecha(fechaCreacion);
         }
@@ -177,8 +181,7 @@ public class ElementoResource {
         try {
             fechaCreacion = formatter1.parse(fecha);
             return fechaCreacion;
-        } catch (ParseException ex) {
-            // Logger.getLogger(ElementoResource.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {        
             return null;
         }
     }
@@ -205,36 +208,13 @@ public class ElementoResource {
     public Response getFoto(@PathParam("id") long foto_id) throws JSONException {
         Foto foto = fotoServicio.find(foto_id);
         byte[] imagenData = foto.getImagen();
-
-        /*BufferedImage image = null;
-            
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            try {
-            ImageIO.write(image, "png", baos);
-            } catch (IOException ex) {
-            Logger.getLogger(ElementoResource.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            byte[] imageData = baos.toByteArray();
-            
-            // uncomment line below to send non-streamed
-            // return Response.ok(imageData).build();
-            // uncomment line below to send streamed
-            return Response.ok(new ByteArrayInputStream(imageData)).build();
-            
-         */
         JSONObject object = new JSONObject();
         object.put("foto", "pruebas");
-        // object.put("imagen",imagenData);
         System.out.println("***->Obteniendo foto:" + imagenData);
-        //return Response.ok(new ByteArrayInputStream(imagenData)).build();
-        // return Response.status(200).entity(object.toString()).build();      
-        // return Response.ok(imagenData).build();
-        // return Response.status(200).entity(object.toString()).build();
         object.put("foto1", foto.getImagen());
         return Response
-                .ok()
-                //.type("image/*")
-                .entity(foto.getImagen()) // Assumes document is a byte array in the domain object.
+                .ok()           
+                .entity(foto.getImagen())
                 .build();
     }
 
@@ -268,17 +248,6 @@ public class ElementoResource {
         return repositoryFile;
     }
 
-    /*  
-    @Path("upload/{id}")
-@GET
-public Response getPDF(@PathParam("id") Integer id) throws Exception {
-    ClientCaseDoc entity = find(id);
-    return Response
-            .ok()
-            .type("application/pdf")
-            .entity(entity.getDocument()) // Assumes document is a byte array in the domain object.
-            .build();
-}*/
     @GET
     @Path("/buscarFotos/{elementoId}")
     @Consumes(APPLICATION_JSON)
@@ -286,11 +255,7 @@ public Response getPDF(@PathParam("id") Integer id) throws Exception {
     public java.util.List<Foto> buscarFoto_ElementoId(@PathParam("elementoId") Integer elementoId) {
         Elemento elemento = new Elemento();
         elemento.setElementoId(elementoId);
-        System.out.println("***->Busqueda Exitosa Fotos");
-        List<Foto> lista_Foto = fotoServicio.buscarFoto_ElementoId(elemento);
-        for (int i = 0; i < lista_Foto.size(); i++) {
-            lista_Foto.get(i).setImagen(null);//más eficaz
-        }
-        return lista_Foto;
+        System.out.println("***->Busqueda Exitosa Fotos");  
+        return fotoServicio.buscarFoto_ElementoId(elemento); 
     }
 }
