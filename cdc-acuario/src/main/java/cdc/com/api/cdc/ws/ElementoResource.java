@@ -181,7 +181,7 @@ public class ElementoResource {
         try {
             fechaCreacion = formatter1.parse(fecha);
             return fechaCreacion;
-        } catch (ParseException ex) {        
+        } catch (ParseException ex) {
             return null;
         }
     }
@@ -213,7 +213,7 @@ public class ElementoResource {
         System.out.println("***->Obteniendo foto:" + imagenData);
         object.put("foto1", foto.getImagen());
         return Response
-                .ok()           
+                .ok()
                 .entity(foto.getImagen())
                 .build();
     }
@@ -255,7 +255,22 @@ public class ElementoResource {
     public java.util.List<Foto> buscarFoto_ElementoId(@PathParam("elementoId") Integer elementoId) {
         Elemento elemento = new Elemento();
         elemento.setElementoId(elementoId);
-        System.out.println("***->Busqueda Exitosa Fotos");  
-        return fotoServicio.buscarFoto_ElementoId(elemento); 
+        System.out.println("***->Busqueda Exitosa Fotos");
+        return fotoServicio.buscarFoto_ElementoId(elemento);
+    }
+
+    @POST
+    @Path("/editar/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarElemento(Elemento elemento, @PathParam("id") Integer usuarioId) throws JSONException {
+        Usuario us = new Usuario();   
+        us.setUsuarioId(usuarioId);
+        elemento.setUSUARIOusuarioid(us);
+        elementoServicio.update(elemento);
+        JSONObject object = new JSONObject();
+        object.put("codigo", elemento.getCodigo());
+        System.out.println("***->Editado exitoso:" + elemento.getCodigo());
+        return Response.status(202).entity(object.toString()).build();
     }
 }
