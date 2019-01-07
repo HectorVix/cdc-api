@@ -175,6 +175,56 @@ public class ElementoResource {
         return Response.status(200).entity(object.toString()).build();
     }
 
+    @POST
+    @Path("/updateFoto/{elementoid}/{fotoId}")
+    @Consumes(MULTIPART_FORM_DATA)
+    @Produces(APPLICATION_JSON)
+    public Response updateElementoFotos(
+            @HeaderParam("content-length") long contentLength,
+            @FormDataParam("file") InputStream uploadedInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail,
+            @FormDataParam("descripcion") String descripcion,
+            @FormDataParam("comentario") String comentario,
+            @FormDataParam("autor") String autor,
+            @FormDataParam("posicion") int posicion,
+            @FormDataParam("fecha") String fecha,
+            @PathParam("elementoid") int elementoid,
+            @PathParam("fotoId") int fotoId
+    )
+            throws JSONException, FileNotFoundException, IOException {
+        JSONObject object = new JSONObject();
+        // String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
+        int tam = (int) contentLength;
+        escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
+        File ruta = new File(uploadedFileLocation);
+        byte[] archivo = new byte[(int) ruta.length()];
+        InputStream input = new FileInputStream(ruta);
+        input.read(archivo);
+        Date fechaCreacion = toFecha(fecha);
+        Foto foto = new Foto();
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elementoid);
+        foto.setELEMENTOelementoid(elemento);
+        foto.setFotoId(fotoId);
+        foto.setDescripcion(descripcion);
+        foto.setComentario(comentario);
+        foto.setAutor(autor);
+        foto.setNombre(fileDetail.getFileName());
+        foto.setPosicion(posicion);
+        if (fechaCreacion != null) {
+            foto.setFecha(fechaCreacion);
+        }
+        foto.setImagen(archivo);
+        fotoServicio.update(foto);
+        input.close();
+        ruta.delete();
+
+        object.put("foto", fileDetail.getFileName());
+        System.out.println("***->Foto actualizada exitosamente:" + fileDetail.getFileName());
+        return Response.status(200).entity(object.toString()).build();
+    }
+
     private Date toFecha(String fecha) {
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaCreacion;
@@ -208,10 +258,7 @@ public class ElementoResource {
     public Response getFoto(@PathParam("id") long foto_id) throws JSONException {
         Foto foto = fotoServicio.find(foto_id);
         byte[] imagenData = foto.getImagen();
-        JSONObject object = new JSONObject();
-        object.put("foto", "pruebas");
-        System.out.println("***->Obteniendo foto:" + imagenData);
-        object.put("foto1", foto.getImagen());
+        System.out.println("***->Obteniendo foto:" + foto_id);
         return Response
                 .ok()
                 .entity(foto.getImagen())
@@ -264,7 +311,7 @@ public class ElementoResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarElemento(Elemento elemento, @PathParam("id") Integer usuarioId) throws JSONException {
-        Usuario us = new Usuario();   
+        Usuario us = new Usuario();
         us.setUsuarioId(usuarioId);
         elemento.setUSUARIOusuarioid(us);
         elementoServicio.update(elemento);
