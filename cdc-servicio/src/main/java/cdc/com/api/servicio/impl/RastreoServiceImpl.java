@@ -43,8 +43,8 @@ public class RastreoServiceImpl implements RastreoService {
         return rastreoDao.all();
     }
 
-    public List<Rastreo> buscarRastreo(String codigoe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombrecomunnn) {
+        return rastreoDao.buscarRastreo(codigoe, subnacion, nombreg, nombrecomunnn);
     }
 
 }

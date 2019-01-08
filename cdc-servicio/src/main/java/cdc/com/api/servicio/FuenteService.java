@@ -24,7 +24,7 @@ public interface FuenteService {
 
     public List<Fuente> all();
 
-    public List<Fuente> buscarFuente(String codfuente, String cita);
+    public List<Fuente> buscarFuente(String naturalezadocumento, String codfuente, String cita, String archivado, String clave);
 
     public boolean findFuente(String codfuente);
 }

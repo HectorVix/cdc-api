@@ -23,7 +23,7 @@ public class FuenteServiceImpl implements FuenteService {
     private FuenteDao fuenteDao;
 
     public int save(Fuente fuente) {
-        return   fuenteDao.save(fuente);
+        return fuenteDao.save(fuente);
     }
 
     public void update(Fuente fuente) {
@@ -43,8 +43,8 @@ public class FuenteServiceImpl implements FuenteService {
         return fuenteDao.all();
     }
 
-    public List<Fuente> buscarFuente(String codfuente, String cita) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Fuente> buscarFuente(String naturalezadocumento, String codfuente, String cita, String archivado, String clave) {
+        return fuenteDao.buscarFuente(naturalezadocumento, codfuente, cita, archivado, clave);
     }
 
     public boolean findFuente(String codfuente) {

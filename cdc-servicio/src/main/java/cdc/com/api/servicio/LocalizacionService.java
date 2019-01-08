@@ -24,6 +24,6 @@ public interface LocalizacionService {
 
     public List<Localizacion> all();
 
-    public List<Localizacion> buscarRastreo(String codigole);
+    public List<Localizacion> buscarLocalizacion(String codigole);
 
 }

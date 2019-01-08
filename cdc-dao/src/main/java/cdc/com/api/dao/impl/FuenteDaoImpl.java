@@ -52,8 +52,19 @@ public class FuenteDaoImpl implements FuenteDao {
 
     }
 
-    public List<Fuente> buscarFuente(String codfuente, String cita) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Fuente> buscarFuente(
+            String naturalezadocumento,
+            String codfuente,
+            String cita,
+            String archivado,
+            String clave) {
+        TypedQuery<Fuente> query = entityManager.createQuery("SELECT f FROM Rastreo f"
+                + " WHERE (f.naturalezadocumento like '%" + naturalezadocumento + "%'"
+                + "OR f.codfuente like '%" + codfuente + "%'"
+                + "OR f.cita like '%" + cita + "%'"
+                + "OR f.archivado like '%" + archivado + "%'"
+                + " OR f.clave like '%" + clave + "%')", Fuente.class);
+        return query.getResultList();
     }
 
     public boolean findFuente(String codfuente) {

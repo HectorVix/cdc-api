@@ -11,7 +11,6 @@ package cdc.com.api.cdc.ws;
  */
 import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
-import cdc.com.api.modelo.Rastreo;
 import cdc.com.api.servicio.LocalizacionService;
 import cdc.com.api.servicio.ProteccionService;
 import java.util.List;
@@ -72,5 +71,14 @@ public class LocalizacionResource {
         object.put("codigole", localizacion.getCodigole());
         System.out.println("***->Registro Exitoso Localizacion :" + localizacion.getCodigole());
         return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/{codigole}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Localizacion> buscarLocalizacion(@PathParam("codigole") String codigole) {
+        System.out.println("***->Busqueda Exitosa LE");
+        return localizacionServicio.buscarLocalizacion(codigole);
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -47,7 +48,10 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     }
 
     public List<Localizacion> buscarLocalizacion(String codigole) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("codigole:" + codigole);
+        TypedQuery<Localizacion> query = entityManager.createQuery("SELECT l FROM Localizacion l"
+                + " WHERE (l.codigole like '%" + codigole + "%')", Localizacion.class);
+        return query.getResultList();
     }
 
 }

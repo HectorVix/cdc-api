@@ -50,4 +50,18 @@ public class RastreoResource {
         System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/buscar/{codigoe}/{subnacion}/{nombreg}/{nombrecomunnn}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Rastreo> buscarRastreo(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("subnacion") String subnacion,
+            @PathParam("nombreg") String nombreg,
+            @PathParam("nombrecomunnn") String nombrecomunnn) {
+        System.out.println("***->Busqueda Exitosa de RE");
+        return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombrecomunnn);
+
+    }
 }

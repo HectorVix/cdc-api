@@ -148,4 +148,19 @@ public class FuenteResource {
     public void setFuenteId(int fuenteId) {
         this.fuenteId = fuenteId;
     }
+
+    @GET
+    @Path("/buscar/{naturalezadocumento}/{codfuente}/{cita}/{archivado}/{clave}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Fuente> buscarRastreo(
+            @PathParam("naturalezadocumento") String naturalezadocumento,
+            @PathParam("codfuente") String codfuente,
+            @PathParam("cita") String cita,
+            @PathParam("archivado") String archivado,
+            @PathParam("clave") String clave) {
+        System.out.println("***->Busqueda Exitosa de RE");
+        return fuenteServicio.buscarFuente(naturalezadocumento, codfuente, cita, archivado, clave);
+
+    }
 }

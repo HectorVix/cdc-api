@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -44,8 +45,16 @@ public class RastreoDaoImpl implements RastreoDao {
         return entityManager.createQuery("SELECT r FROM Rastreo r", Rastreo.class).getResultList();
     }
 
-    public List<Rastreo> buscarRastreo(String codigoe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombrecomunnn) {
+        System.out.print("codigoe:" + codigoe);
+        System.out.print("subnacion:" + subnacion);
+        System.out.print("nombreg:" + nombreg);
+        System.out.print("nombrecomunnn:" + nombrecomunnn);
+        TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r"
+                + " WHERE (r.codigoe like '%" + codigoe + "%'"
+                + "OR r.subnacion like '%" + subnacion + "%'"
+                + "OR r.nombreg like '%" + nombreg + "%'"
+                + " OR r.nomcomunn like '%" + nombrecomunnn + "%')", Rastreo.class);
+        return query.getResultList();
     }
-
 }

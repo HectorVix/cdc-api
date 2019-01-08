@@ -23,7 +23,7 @@ public class LocalizacionServiceImpl implements LocalizacionService {
     private LocalizacionDao localizacionDao;
 
     public int save(Localizacion localizacion) {
-       return localizacionDao.save(localizacion);
+        return localizacionDao.save(localizacion);
     }
 
     public void update(Localizacion localizacion) {
@@ -43,8 +43,8 @@ public class LocalizacionServiceImpl implements LocalizacionService {
         return localizacionDao.all();
     }
 
-    public List<Localizacion> buscarRastreo(String codigole) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Localizacion> buscarLocalizacion(String codigole) {
+        return localizacionDao.buscarLocalizacion(codigole);
     }
 
 }
