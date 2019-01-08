@@ -320,4 +320,15 @@ public class ElementoResource {
         System.out.println("***->Editado exitoso:" + elemento.getCodigo());
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @POST
+    @Path("/delete/{id}")
+    @Produces(APPLICATION_JSON)
+    public Response eliminarFoto(@PathParam("id") long id) throws JSONException {
+        fotoServicio.delete(id);
+        JSONObject object = new JSONObject();
+        object.put("fotoId", id);
+        System.out.println("***->Delete exitoso:" + id);
+        return Response.status(202).entity(object.toString()).build();
+    }
 }
