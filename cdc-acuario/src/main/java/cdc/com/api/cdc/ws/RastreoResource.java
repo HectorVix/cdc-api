@@ -9,7 +9,9 @@ package cdc.com.api.cdc.ws;
  *
  * @author Héctor Vix
  */
+import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.RastreoService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -31,6 +33,8 @@ public class RastreoResource {
 
     @Inject
     RastreoService rastreoServicio;
+    @Inject
+    ElementoService elementoServicio;
 
     @GET
     @Produces(APPLICATION_JSON)
@@ -43,8 +47,9 @@ public class RastreoResource {
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarRastreo(Rastreo rastreo) throws JSONException {
+    public Response registrarRastreo(Rastreo rastreo) throws JSONException, Exception {
         JSONObject object = new JSONObject();
+        validarElemento(rastreo.getCodigoe());
         rastreoServicio.save(rastreo);
         object.put("codigoe", rastreo.getCodigoe());
         System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
@@ -64,5 +69,27 @@ public class RastreoResource {
         System.out.println("***->Busqueda Exitosa de RE");
         return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
 
+    }
+
+    private void validarElemento(String codigoe) throws Exception {
+        boolean elemento = elementoServicio.findElemento(codigoe);
+        if (elemento == false) {
+            throw new SecurityException("No existe el elemento");
+        }
+    }
+
+    @POST
+    @Path("/editar")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarRastreoElemento(Rastreo re) throws JSONException {
+        //Elemento el = new Elemento();
+        // el.setElementoId(4);
+        // re.setELEMENTOelementoid(el);   
+        rastreoServicio.update(re);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", re.getCodigoe());
+        System.out.println("***->Editado exitoso RE:" + re.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
     }
 }
