@@ -45,7 +45,7 @@ public class RastreoDaoImpl implements RastreoDao {
         return entityManager.createQuery("SELECT r FROM Rastreo r", Rastreo.class).getResultList();
     }
 
-    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombrecomunnn) {
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn) {
         System.out.print("codigoe:" + codigoe);
         System.out.print("subnacion:" + subnacion);
         System.out.print("nombreg:" + nombreg);
@@ -54,6 +54,7 @@ public class RastreoDaoImpl implements RastreoDao {
                 + " WHERE (r.codigoe like '%" + codigoe + "%'"
                 + "OR r.subnacion like '%" + subnacion + "%'"
                 + "OR r.nombreg like '%" + nombreg + "%'"
+                + "OR r.nombren like '%" + nombren + "%'"
                 + " OR r.nomcomunn like '%" + nombrecomunnn + "%')", Rastreo.class);
         return query.getResultList();
     }

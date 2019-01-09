@@ -52,16 +52,17 @@ public class RastreoResource {
     }
 
     @GET
-    @Path("/buscar/{codigoe}/{subnacion}/{nombreg}/{nombrecomunnn}")
+    @Path("/buscar/{codigoe}/{subnacion}/{nombreg}/{nombren}/{nombrecomunnn}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Rastreo> buscarRastreo(
             @PathParam("codigoe") String codigoe,
             @PathParam("subnacion") String subnacion,
             @PathParam("nombreg") String nombreg,
+            @PathParam("nombren") String nombren,
             @PathParam("nombrecomunnn") String nombrecomunnn) {
         System.out.println("***->Busqueda Exitosa de RE");
-        return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombrecomunnn);
+        return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
 
     }
 }

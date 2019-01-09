@@ -24,5 +24,5 @@ public interface RastreoDao {
 
     public List<Rastreo> all();
 
-    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombrecomunnn);
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn);
 }
