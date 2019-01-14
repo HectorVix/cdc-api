@@ -81,4 +81,19 @@ public class LocalizacionResource {
         System.out.println("***->Busqueda Exitosa LE");
         return localizacionServicio.buscarLocalizacion(codigole);
     }
+
+    @POST
+    @Path("/editar")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarLocalizacionElemento(Localizacion le) throws JSONException {
+        //Elemento el = new Elemento();
+        // el.setElementoId(4);
+        // le.setELEMENTOelementoid(le);   
+        localizacionServicio.update(le);
+        JSONObject object = new JSONObject();
+        object.put("codigole", le.getCodigole());
+        System.out.println("***->Editado exitoso LE:" + le.getCodigole());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }
