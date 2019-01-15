@@ -159,8 +159,22 @@ public class FuenteResource {
             @PathParam("cita") String cita,
             @PathParam("archivado") String archivado,
             @PathParam("clave") String clave) {
-        System.out.println("***->Busqueda Exitosa de RE");
+        System.out.println("***->Busqueda Exitosa de Fuente");
         return fuenteServicio.buscarFuente(naturalezadocumento, codfuente, cita, archivado, clave);
+    }
 
+    @POST
+    @Path("/editar")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarFuente(Fuente fuente) throws JSONException {
+        Usuario us = new Usuario();
+        us.setUsuarioId(1);
+        fuente.setUSUARIOusuarioid(us);
+        fuenteServicio.update(fuente);
+        JSONObject object = new JSONObject();
+        object.put("codfuente", fuente.getCodfuente());
+        System.out.println("***->Editado exitoso fuente:" + fuente.getCodfuente());
+        return Response.status(202).entity(object.toString()).build();
     }
 }

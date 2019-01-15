@@ -58,7 +58,7 @@ public class FuenteDaoImpl implements FuenteDao {
             String cita,
             String archivado,
             String clave) {
-        TypedQuery<Fuente> query = entityManager.createQuery("SELECT f FROM Rastreo f"
+        TypedQuery<Fuente> query = entityManager.createQuery("SELECT f FROM Fuente f"
                 + " WHERE (f.naturalezadocumento like '%" + naturalezadocumento + "%'"
                 + "OR f.codfuente like '%" + codfuente + "%'"
                 + "OR f.cita like '%" + cita + "%'"
