@@ -51,12 +51,25 @@ public class VertebradoDaoImpl implements VertebradoDao {
 
     }
 
-    public List<Vertebrado> buscarVertebrado(String codigoe, String nombreg, String nombren, String nomcomun) {
+    public boolean findVertebrado(String codigoe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findVertebrado(String codigoe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Vertebrado> buscarVertebrado(
+            String codigoe,
+            String nacion,
+            String nombreg,
+            String autor,
+            String nombren,
+            String nomcomun) {
+        TypedQuery<Vertebrado> query = entityManager.createQuery("SELECT v FROM Vertebrado v"
+                + " WHERE (v.codigoe like '%" + codigoe + "%'"
+                + "OR v.nacion like '%" + nacion + "%'"
+                + "OR v.nombreg like '%" + nombreg + "%'"
+                + "OR v.autor like '%" + autor + "%'"
+                + "OR v.nombren like '%" + nombren + "%'"
+                + " OR v.nomcomun like '%" + nomcomun + "%')", Vertebrado.class);
+        return query.getResultList();
     }
 
 }

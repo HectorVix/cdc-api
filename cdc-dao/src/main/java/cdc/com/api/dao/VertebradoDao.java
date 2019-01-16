@@ -24,7 +24,13 @@ public interface VertebradoDao {
 
     public List<Vertebrado> all();
 
-    public List<Vertebrado> buscarVertebrado(String codigoe, String nombreg, String nombren, String nomcomun);
+    public List<Vertebrado> buscarVertebrado(
+            String codigoe,
+            String nacion,
+            String nombreg,
+            String autor,
+            String nombren,
+            String nomcomunn);
 
     public boolean findVertebrado(String codigoe);
 }

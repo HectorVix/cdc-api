@@ -62,7 +62,7 @@ public class ProtocoloResource {
         if (existe == false) {
             throw new SecurityException("No existe el elemento");
         }
-        int protocolo_id=protocoloServicio.save(protocolo);
+        int protocolo_id = protocoloServicio.save(protocolo);
         protocolo.setProtocoloId(protocolo_id);
         //Dispersión
         if (lista_dispersion.size() >= 1) {
@@ -74,9 +74,33 @@ public class ProtocoloResource {
                 System.out.println("***->Registro exitoso dispersion:" + dispersion.getLe());
             }
         }
-         
+
         object.put("codigoe", protocolo.getCodigoe());
         System.out.println("***->Registro Exitoso Protocolo :" + protocolo.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/{codigoe}/{nombre}/{nomcomun}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Protocolo> buscarProtocolo(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nombre") String nombre,
+            @PathParam("nomcomun") String nomcomun) {
+        System.out.println("***->Busqueda exitosa de protocolo");
+        return protocoloServicio.buscarProtocolo(codigoe, nombre, nomcomun);
+    }
+
+    @POST
+    @Path("/editar")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarProtocolo(Protocolo protocolo) throws JSONException {
+        protocoloServicio.update(protocolo);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", protocolo.getCodigoe());
+        System.out.println("***->Editado exitoso protocolo:" + protocolo.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
 }

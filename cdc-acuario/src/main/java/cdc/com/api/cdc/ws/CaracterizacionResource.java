@@ -26,7 +26,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
@@ -164,9 +164,9 @@ public class CaracterizacionResource {
         int caracterizacion_id = caracterizacionServicio.save(caracterizacionBase);
         caracterizacionBase.setCaracterizacionId(caracterizacion_id);
         vertebrado.setCARACTERIZACIONcaracterizacionid(caracterizacionBase);
-        int vertebrado_id=vertebradoServicio.save(vertebrado);
+        int vertebrado_id = vertebradoServicio.save(vertebrado);
         vertebrado.setVertebradoId(vertebrado_id);//para las distribuciones
-        
+
         //Distribución 1 vertebrado datos 
         if (lista_distribucion.size() >= 1) {
             int tam_distribucion = lista_distribucion.size();
@@ -192,4 +192,55 @@ public class CaracterizacionResource {
         return Response.status(202).entity(object.toString()).build();
     }
 
+    @GET
+    @Path("/buscar/planta/{codigoe}/{nacion}/{nombren}/{nomcomunn}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Planta> buscarPlanta(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nacion") String nacion,
+            @PathParam("nombren") String nombren,
+            @PathParam("nomcomunn") String nomcomunn) {
+        System.out.println("***->Busqueda exitosa de planta");
+        return plantaServicio.buscarPlanta(codigoe, nacion, nombren, nomcomunn);
+    }
+
+    @POST
+    @Path("/editar/planta/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarPlanta(Planta planta) throws JSONException {
+        plantaServicio.update(planta);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", planta.getCodigoe());
+        System.out.println("***->Editado exitoso planta:" + planta.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/vertebrado/{codigoe}/{nacion}/{nombreg}/{autor}/{nombren}/{nomcomunn}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Vertebrado> buscarVertebrado(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nacion") String nacion,
+            @PathParam("nombreg") String nombreg,
+            @PathParam("autor") String autor,
+            @PathParam("nombren") String nombren,
+            @PathParam("nomcomunn") String nomcomunn) {
+        System.out.println("***->Busqueda exitosa de vertebrado");
+        return vertebradoServicio.buscarVertebrado(codigoe, nacion, nombreg, autor, nombren, nomcomunn);
+    }
+
+    @POST
+    @Path("/editar/vertebrado/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarVertebrado(Vertebrado vertebrado) throws JSONException {
+        vertebradoServicio.update(vertebrado);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", vertebrado.getCodigoe());
+        System.out.println("***->Editado exitoso vertebrado:" + vertebrado.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

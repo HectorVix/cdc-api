@@ -43,12 +43,12 @@ public class VertebradoServiceImpl implements VertebradoService {
         return vertebradoDao.all();
     }
 
-    public List<Vertebrado> buscarVertebrado(String codigoe, String nombreg, String nombren, String nomcomun) {
+    public boolean findVertebrado(String codigoe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findVertebrado(String codigoe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Vertebrado> buscarVertebrado(String codigoe, String nacion, String nombreg, String autor, String nombren, String nomcomunn) {
+        return vertebradoDao.buscarVertebrado(codigoe, nacion, nombreg, autor, nombren, nomcomunn);
     }
 
 }

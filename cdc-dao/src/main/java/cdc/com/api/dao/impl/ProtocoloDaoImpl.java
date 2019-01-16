@@ -52,7 +52,11 @@ public class ProtocoloDaoImpl implements ProtocoloDao {
     }
 
     public List<Protocolo> buscarProtocolo(String codigoe, String nombre, String nomcomun) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Protocolo> query = entityManager.createQuery("SELECT p FROM Protocolo p"
+                + " WHERE (p.codigoe like '%" + codigoe + "%'"
+                + "OR p.nombre like '%" + nombre + "%'"
+                + " OR p.nomcomun like '%" + nomcomun + "%')", Protocolo.class);
+        return query.getResultList();
     }
 
     public boolean findProtocolo(String codigoe) {

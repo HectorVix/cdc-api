@@ -24,7 +24,11 @@ public interface PlantaDao {
 
     public List<Planta> all();
 
-    public List<Planta> buscarPlanta(String codigoe, String nombren);
+    public List<Planta> buscarPlanta(
+            String codigoe,
+            String nacion,
+            String nombren,
+            String nomcomunn);
 
     public boolean findPlanta(String codigoe);
 }

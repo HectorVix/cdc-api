@@ -51,12 +51,16 @@ public class PlantaDaoImpl implements PlantaDao {
 
     }
 
-    public List<Planta> buscarPlanta(String codigoe, String nombren) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public boolean findPlanta(String codigoe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public List<Planta> buscarPlanta(String codigoe, String nacion, String nombren, String nomcomunn) {
+        TypedQuery<Planta> query = entityManager.createQuery("SELECT p FROM Planta p"
+                + " WHERE (p.codigoe like '%" + codigoe + "%'"
+                + "OR p.nacion like '%" + nacion + "%'"
+                + "OR p.nombren like '%" + nombren + "%'"
+                + " OR p.nomcomunn like '%" + nomcomunn + "%')", Planta.class);
+        return query.getResultList();
+    }
 }

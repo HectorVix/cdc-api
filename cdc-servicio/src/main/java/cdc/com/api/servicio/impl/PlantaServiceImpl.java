@@ -43,12 +43,12 @@ public class PlantaServiceImpl implements PlantaService {
         return plantaDao.all();
     }
 
-    public List<Planta> buscarPlanta(String codigoe, String nombren) {
+    public boolean findPlanta(String codigoe) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findPlanta(String codigoe) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Planta> buscarPlanta(String codigoe, String nacion, String nombren, String nomcomunn) {
+        return plantaDao.buscarPlanta(codigoe, nacion, nombren, nomcomunn);
     }
 
 }

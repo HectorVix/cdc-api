@@ -44,7 +44,7 @@ public class ProtocoloServiceImpl implements ProtocoloService {
     }
 
     public List<Protocolo> buscarProtocolo(String codigoe, String nombre, String nomcomun) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return protocoloDao.buscarProtocolo(codigoe, nombre, nomcomun);
     }
 
     public boolean findProtocolo(String codigoe) {
