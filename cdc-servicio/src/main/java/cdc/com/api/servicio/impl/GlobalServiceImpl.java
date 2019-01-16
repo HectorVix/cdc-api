@@ -18,30 +18,33 @@ import javax.inject.Inject;
  */
 @Stateless
 public class GlobalServiceImpl implements GlobalService {
-@Inject
+
+    @Inject
     private GlobalDao globalDao;
+
     public void save(Global global) {
-          globalDao.save(global);
+        globalDao.save(global);
     }
 
     public void update(Global global) {
-       globalDao.update(global);
+        globalDao.update(global);
     }
 
     public void delete(Long id) {
-     globalDao.delete(id);
+        globalDao.delete(id);
     }
 
     public Global find(Long id) {
-     return globalDao.find(id);
-    }
-   @Override
-    public List<Global> all() {
-     return globalDao.all();
+        return globalDao.find(id);
     }
 
-    public List<Global> buscarGlobal(String codigo, String nombreGlobal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    @Override
+    public List<Global> all() {
+        return globalDao.all();
     }
-    
+
+    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem) {
+        return globalDao.buscarGlobal(codigo, nombreg, descrielem);
+    }
+
 }

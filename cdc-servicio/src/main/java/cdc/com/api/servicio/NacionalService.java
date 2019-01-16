@@ -24,5 +24,5 @@ public interface NacionalService {
 
     public List<Nacional> all();
 
-    public List<Nacional> buscarGlobal(String codigo, String nombreNacional);
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion);
 }

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -38,14 +39,19 @@ public class GlobalDaoImpl implements GlobalDao {
     public Global find(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     @Override
     public List<Global> all() {
         return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
 
     }
 
-    public List<Global> buscarGlobal(String codigo, String nombreGlobal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem) {
+        TypedQuery<Global> query = entityManager.createQuery("SELECT g FROM Global g"
+                + " WHERE (g.codigoe like '%" + codigoe + "%'"
+                + "OR g.nombreg like '%" + nombreg + "%'"
+                + " OR g.descrielem like '%" + descrielem + "%')", Global.class);
+        return query.getResultList();
     }
 
 }

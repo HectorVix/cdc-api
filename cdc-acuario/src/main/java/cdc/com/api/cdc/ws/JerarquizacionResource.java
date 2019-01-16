@@ -48,7 +48,7 @@ public class JerarquizacionResource {
     NacionalService nacionalServicio;
     @Inject
     SubnacionalService subnacionalServicio;
-    
+
     @GET
     @Produces(APPLICATION_JSON)
     public java.util.List<Jerarquizacion> all() {
@@ -110,13 +110,14 @@ public class JerarquizacionResource {
         System.out.println("***->Registro jeraquizacion Nacional:" + jerarquizacion.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
-  @POST
+
+    @POST
     @Path("/registro/subnacional")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarJerarquizacionSubNacional(Jerarquizacion jerarquizacion) throws JSONException {
-        Elemento elemento = new Elemento();        
-       String codigoe = jerarquizacion.getSubnacionalList().get(0).getCodigoe();
+        Elemento elemento = new Elemento();
+        String codigoe = jerarquizacion.getSubnacionalList().get(0).getCodigoe();
         boolean existe = elementoServicio.findElemento(codigoe);
         if (existe == false) {
             throw new SecurityException("No existe el elemento");
@@ -134,6 +135,89 @@ public class JerarquizacionResource {
         JSONObject object = new JSONObject();
         object.put("codigoe", jerarquizacion.getCodigoe());
         System.out.println("***->Registro jeraquizacion Subnacional:" + jerarquizacion.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/global/{codigoe}/{nombreg}/{descrielem}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Global> buscarJeraquizacion_Global(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nombreg") String nombre,
+            @PathParam("descrielem") String nomcomun) {
+        System.out.println("***->Busqueda exitosa jerarquizacion global");
+        return globalServicio.buscarGlobal(codigoe, nombre, nombre);
+    }
+
+    @POST
+    @Path("/editar/global")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarJerarquizacion_Global(Global global) throws JSONException {
+        Jerarquizacion jerarquizacion = new Jerarquizacion();
+        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
+        global.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+        globalServicio.update(global);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", global.getCodigoe());
+        System.out.println("***->Editado exitoso jerarquizacion global:" + global.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/nacional/{codigoe}/{nombren}/{nacion}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Nacional> buscarJeraquizacion_Nacional(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nombren") String nombre,
+            @PathParam("nacion") String nomcomun) {
+        System.out.println("***->Busqueda exitosa jerarquizacion nacional");
+        return nacionalServicio.buscarNacional(codigoe, nombre, nomcomun);
+    }
+
+    @POST
+    @Path("/editar/nacional")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarJerarquizacion_Nacional(Nacional nacional) throws JSONException {
+        Jerarquizacion jerarquizacion = new Jerarquizacion();
+        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
+        nacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+        nacionalServicio.update(nacional);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", nacional.getCodigoe());
+        System.out.println("***->Editado exitoso jerarquizacion nacional:" + nacional.getCodigoe());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/subnacional/{codigoe}/{nacion}/{subnacion}/{nombres}/{loctips}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Subnacional> buscarJeraquizacion_Subnacional(
+            @PathParam("codigoe") String codigoe,
+            @PathParam("nacion") String nacion,
+            @PathParam("subnacion") String subnacion,
+            @PathParam("nombres") String nombres,
+            @PathParam("loctips") String loctips) {
+        System.out.println("***->Busqueda exitosa jerarquizacion subnacional");
+        return subnacionalServicio.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips);
+    }
+
+    @POST
+    @Path("/editar/subnacional")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarJerarquizacion_Subnacional(Subnacional subnacional) throws JSONException {
+        Jerarquizacion jerarquizacion = new Jerarquizacion();
+        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
+        subnacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+        subnacionalServicio.update(subnacional);
+        JSONObject object = new JSONObject();
+        object.put("codigoe", subnacional.getCodigoe());
+        System.out.println("***->Editado exitoso jerarquizacion subnacional:" + subnacional.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
 }

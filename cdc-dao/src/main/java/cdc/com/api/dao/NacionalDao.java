@@ -24,6 +24,6 @@ public interface NacionalDao {
 
     public List<Nacional> all();
 
-    public List<Nacional> buscarNacional(String codigo, String nombreGlobal);
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion);
 
 }

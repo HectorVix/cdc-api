@@ -13,7 +13,7 @@ import java.util.List;
  * @author Héctor Vix
  */
 public interface GlobalService {
-   
+
     public void save(Global global);
 
     public void update(Global global);
@@ -24,5 +24,5 @@ public interface GlobalService {
 
     public List<Global> all();
 
-    public List<Global> buscarGlobal(String codigo, String nombreGlobal);
+    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem);
 }

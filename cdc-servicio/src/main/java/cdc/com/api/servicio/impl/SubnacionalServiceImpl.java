@@ -43,8 +43,7 @@ public class SubnacionalServiceImpl implements SubnacionalService {
         return subnacionalDao.all();
     }
 
-    public List<Subnacional> buscarSubnacional(String codigoe, String nombreSubnacional) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Subnacional> buscarSubnacional(String codigoe, String nacion, String subnacion, String nombres, String loctips) {
+        return subnacionalDao.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips);
     }
-
 }

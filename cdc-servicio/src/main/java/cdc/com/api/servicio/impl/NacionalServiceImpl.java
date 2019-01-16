@@ -43,8 +43,8 @@ public class NacionalServiceImpl implements NacionalService {
         return nacionalDao.all();
     }
 
-    public List<Nacional> buscarGlobal(String codigo, String nombreNacional) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion) {
+        return nacionalDao.buscarNacional(codigoe, nombren, nacion);
     }
 
 }

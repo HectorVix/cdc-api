@@ -24,6 +24,10 @@ public interface SubnacionalDao {
 
     public List<Subnacional> all();
 
-    public List<Subnacional> buscarSubnacional(String codigoe, String nombreSubnacional);
-
+    public List<Subnacional> buscarSubnacional(
+            String codigoe,
+            String nacion,
+            String subnacion,
+            String nombres,
+            String loctips);
 }

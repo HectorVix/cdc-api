@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -44,8 +45,11 @@ public class NacionalDaoImpl implements NacionalDao {
 
     }
 
-    public List<Nacional> buscarNacional(String codigo, String nombreGlobal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion) {
+        TypedQuery<Nacional> query = entityManager.createQuery("SELECT n FROM Nacional n"
+                + " WHERE (n.codigoe like '%" + codigoe + "%'"
+                + "OR n.nombren like '%" + nombren + "%'"
+                + " OR n.nacion like '%" + nacion + "%')", Nacional.class);
+        return query.getResultList();
     }
-
 }

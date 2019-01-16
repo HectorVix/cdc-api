@@ -24,6 +24,6 @@ public interface GlobalDao {
 
     public List<Global> all();
 
-    public List<Global> buscarGlobal(String codigo, String nombreGlobal);
+    public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem);
 
 }
