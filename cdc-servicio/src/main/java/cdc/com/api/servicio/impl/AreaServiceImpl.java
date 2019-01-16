@@ -43,12 +43,12 @@ public class AreaServiceImpl implements AreaService {
         return areaDao.all();
     }
 
-    public List<Area> buscarArea(String codigoam, String nombream) {
+    public boolean findArea(String codigoam) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findArea(String codigoam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Area> buscarArea(String codigoam, String nombream, String sinam, String codsitio, String nomsitio, String nacion, String subnacion, String subdivision) {
+        return areaDao.buscarArea(codigoam, nombream, sinam, codsitio, nomsitio, nacion, subnacion, subdivision);
     }
 
 }

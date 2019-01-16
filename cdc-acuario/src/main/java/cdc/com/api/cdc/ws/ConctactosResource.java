@@ -53,4 +53,31 @@ public class ConctactosResource {
         System.out.println("***->Registro Exitoso Contacto:" + contactos.getNumident());
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/buscar/{numident}/{nombreident}/{nombre}/{apellido1}/{apellido2}/{email}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Contactos> buscarContactos(
+            @PathParam("numident") String numident,
+            @PathParam("nombreident") String nombreident,
+            @PathParam("nombre") String nombre,
+            @PathParam("apellido1") String apellido1,
+            @PathParam("apellido2") String apellido2,
+            @PathParam("email") String email) {
+        System.out.println("***->Busqueda Exitosa de Contactos");
+        return contactosServicio.buscarContacto(numident, nombreident, nombre, apellido1, apellido2, email);
+    }
+
+    @POST
+    @Path("/editar/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarContactos(Contactos contacto) throws JSONException {
+        contactosServicio.update(contacto);
+        JSONObject object = new JSONObject();
+        object.put("numident", contacto.getNumident());
+        System.out.println("***->Editado exitoso contacto:" + contacto.getNumident());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

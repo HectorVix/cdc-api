@@ -24,7 +24,12 @@ public interface AreaService {
 
     public List<Area> all();
 
-    public List<Area> buscarArea(String codigoam, String nombream);
+    public List<Area> buscarArea(String codigoam,
+            String nombream,
+            String sinam,
+            String codsitio,
+            String nomsitio,
+            String nacion, String subnacion, String subdivision);
 
     public boolean findArea(String codigoam);
 }

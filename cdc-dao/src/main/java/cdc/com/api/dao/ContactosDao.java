@@ -24,7 +24,13 @@ public interface ContactosDao {
 
     public List<Contactos> all();
 
-    public List<Contactos> buscarContacto(String numident, String nombre, String apellido);
+    public List<Contactos> buscarContacto(
+            String numident, 
+            String nombreident, 
+            String nombre,
+            String apellido1,
+            String apellido2,
+            String email);
 
     public boolean findContacto(String numident);
 }

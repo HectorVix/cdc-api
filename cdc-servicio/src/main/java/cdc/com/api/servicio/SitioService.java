@@ -27,4 +27,6 @@ public interface SitioService {
     public int getSitio_id();
 
     public List<Sitio> all();
+
+    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String subnacion);
 }

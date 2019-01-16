@@ -61,4 +61,13 @@ public class SitioDaoImpl implements SitioDao {
 
     }
 
+    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String subnacion) {
+        TypedQuery<Sitio> query = entityManager.createQuery("SELECT s FROM Sitio s"
+                + " WHERE (s.codsitio like '%" + codSitio + "%'"
+                + "OR s.nomsitio like '%" + nomSitio + "%'"
+                + "OR s.sinsitio like '%" + sinSitio + "%'"
+                + " OR s.subnacion like '%" + subnacion + "%')", Sitio.class);
+        return query.getResultList();
+    }
+
 }

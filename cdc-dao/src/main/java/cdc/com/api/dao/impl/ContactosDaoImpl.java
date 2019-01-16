@@ -48,12 +48,25 @@ public class ContactosDaoImpl implements ContactosDao {
         return entityManager.createQuery("SELECT c FROM Contactos c", Contactos.class).getResultList();
     }
 
-    public List<Contactos> buscarContacto(String numident, String nombre, String apellido) {
+    public boolean findContacto(String numident) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findContacto(String numident) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Contactos> buscarContacto(
+            String numident,
+            String nombreident,
+            String nombre,
+            String apellido1,
+            String apellido2,
+            String email) {
+        TypedQuery<Contactos> query = entityManager.createQuery("SELECT c FROM Contactos c"
+                + " WHERE (c.numident like '%" + numident + "%'"
+                + "OR c.nombreident like '%" + nombreident + "%'"
+                + "OR c.nombre like '%" + nombre + "%'"
+                + "OR c.apellido1 like '%" + apellido1 + "%'"
+                + "OR c.apellido2 like '%" + apellido2 + "%'"
+                + " OR c.email like '%" + email + "%')", Contactos.class);
+        return query.getResultList();
     }
 
 }

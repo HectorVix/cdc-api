@@ -73,4 +73,33 @@ public class AreaResource {
         System.out.println("***->Registro Exitoso Area :" + area.getCodigoam());
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/buscar/{codigoam}/{nombream}/{sinam}/{codsitio}/{nomsitio}/{nacion}/{subnacion}/{subdivision}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Area> buscarArea(
+            @PathParam("codigoam") String codigoam,
+            @PathParam("nombream") String nombream,
+            @PathParam("sinam") String sinam,
+            @PathParam("codsitio") String codsitio,
+            @PathParam("nomsitio") String nomsitio,
+            @PathParam("nacion") String nacion,
+            @PathParam("subnacion") String subnacion,
+            @PathParam("subdivision") String subdivision) {
+        System.out.println("***->Busqueda Exitosa de Area");
+        return areaServicio.buscarArea(codigoam, nombream, sinam, codsitio, nomsitio, nacion, subnacion, subdivision);
+    }
+
+    @POST
+    @Path("/editar/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarArea(Area area) throws JSONException {
+        areaServicio.update(area);
+        JSONObject object = new JSONObject();
+        object.put("codigoam", area.getCodigoam());
+        System.out.println("***->Editado exitoso area:" + area.getCodigoam());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

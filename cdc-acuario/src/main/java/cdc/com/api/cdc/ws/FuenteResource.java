@@ -164,12 +164,12 @@ public class FuenteResource {
     }
 
     @POST
-    @Path("/editar")
+    @Path("/editar/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarFuente(Fuente fuente) throws JSONException {
+    public Response editarFuente(Fuente fuente, @PathParam("id") Integer id) throws JSONException {
         Usuario us = new Usuario();
-        us.setUsuarioId(1);
+        us.setUsuarioId(id);
         fuente.setUSUARIOusuarioid(us);
         fuenteServicio.update(fuente);
         JSONObject object = new JSONObject();

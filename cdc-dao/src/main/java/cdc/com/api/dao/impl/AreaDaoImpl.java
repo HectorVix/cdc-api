@@ -50,12 +50,26 @@ public class AreaDaoImpl implements AreaDao {
         return entityManager.createQuery("SELECT a FROM Area a", Area.class).getResultList();
     }
 
-    public List<Area> buscarArea(String codigoam, String nombream) {
+    public boolean findArea(String codigoam) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findArea(String codigoam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Area> buscarArea(String codigoam,
+            String nombream,
+            String sinam,
+            String codsitio,
+            String nomsitio,
+            String nacion, String subnacion, String subdivision) {
+        TypedQuery<Area> query = entityManager.createQuery("SELECT a FROM Area a"
+                + " WHERE (a.codigoam like '%" + codigoam + "%'"
+                + "OR a.nombream like '%" + nombream + "%'"
+                + "OR a.sinam like '%" + sinam + "%'"
+                + "OR a.codsitio like '%" + codsitio + "%'"
+                + "OR a.nomsitio like '%" + nomsitio + "%'"
+                + "OR a.nacion like '%" + nacion + "%'"
+                + "OR a.subnacion like '%" + subnacion + "%'"
+                + " OR a.subdivision like '%" + subdivision + "%')", Area.class);
+        return query.getResultList();
     }
 
 }

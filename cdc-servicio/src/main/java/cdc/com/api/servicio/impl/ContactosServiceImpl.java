@@ -43,12 +43,12 @@ public class ContactosServiceImpl implements ContactosService {
         return contactosDao.all();
     }
 
-    public List<Contactos> buscarContacto(String numident, String nombre, String apellido) {
+    public boolean findContacto(String numident) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public boolean findContacto(String numident) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Contactos> buscarContacto(String numident, String nombreident, String nombre, String apellido1, String apellido2, String email) {
+        return contactosDao.buscarContacto(numident, nombreident, nombre, apellido1, apellido2, email);
     }
 
 }

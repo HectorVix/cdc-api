@@ -55,7 +55,7 @@ public class SitioResource {
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarLocalizacion(Sitio sitio) throws JSONException {
+    public Response registrarSitio(Sitio sitio) throws JSONException {
         Macsitio macsitio = new Macsitio();
         Subdivision subdivision = new Subdivision();
 
@@ -89,6 +89,31 @@ public class SitioResource {
 
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscar/{codSitio}/{nomSitio}/{sinSitio}/{subnacion}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Sitio> buscarSitio(
+            @PathParam("codSitio") String codSitio,
+            @PathParam("nomSitio") String nomSitio,
+            @PathParam("sinSitio") String sinSitio,
+            @PathParam("subnacion") String subnacion) {
+        System.out.println("***->Busqueda Exitosa de Sitio");
+        return sitioServicio.buscarSitio(codSitio, nomSitio, sinSitio, subnacion);
+    }
+
+    @POST
+    @Path("/editar/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response editarSitio(Sitio sitio) throws JSONException {
+        sitioServicio.update(sitio);
+        JSONObject object = new JSONObject();
+        object.put("codsitio", sitio.getCodsitio());
+        System.out.println("***->Editado exitoso sitio:" + sitio.getCodsitio());
         return Response.status(202).entity(object.toString()).build();
     }
 }
