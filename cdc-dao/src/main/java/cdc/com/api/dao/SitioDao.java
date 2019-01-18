@@ -28,5 +28,5 @@ public interface SitioDao {
 
     public List<Sitio> all();
 
-    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String subnacion);
+    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String nacion, String subnacion);
 }

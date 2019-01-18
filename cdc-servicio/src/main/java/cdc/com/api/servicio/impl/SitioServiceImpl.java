@@ -51,8 +51,8 @@ public class SitioServiceImpl implements SitioService {
         return sitioDao.all();
     }
 
-    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String subnacion) {
-        return sitioDao.buscarSitio(codSitio, nomSitio, sinSitio, subnacion);
+    public List<Sitio> buscarSitio(String codSitio, String nomSitio, String sinSitio, String nacion, String subnacion) {
+        return sitioDao.buscarSitio(codSitio, nomSitio, sinSitio, nacion, subnacion);
     }
 
 }

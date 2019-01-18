@@ -40,7 +40,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
  *
  * @author Héctor Vix
  */
-@Path("us")
+@Path("usuario")
 @ManagedBean
 public class UsuarioResource {
 
@@ -117,16 +117,15 @@ public class UsuarioResource {
     }
 
     @POST
-    @Path("/reg")
+    @Path("/registrar")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarUsuario(Usuario usReg) throws JSONException {
-        System.out.println("***->registrando Usuario..." + usReg.getNombre());
-        usuarioService.save(usReg);
+    public Response registrarUsuario(Usuario usuario) throws JSONException {
+        usuarioService.save(usuario);
         JSONObject object = new JSONObject();
-        object.put("nombre", usReg.getNombre());
+        object.put("nombre", usuario.getNombre());
+        object.put("apellido", usuario.getApellido());
+        System.out.println("***->Registro exitoso usuario" + usuario.getNombre() + " " + usuario.getApellido());
         return Response.status(202).entity(object.toString()).build();
-
     }
-
 }

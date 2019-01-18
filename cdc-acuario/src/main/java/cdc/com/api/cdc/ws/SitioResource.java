@@ -93,20 +93,21 @@ public class SitioResource {
     }
 
     @GET
-    @Path("/buscar/{codSitio}/{nomSitio}/{sinSitio}/{subnacion}")
+    @Path("/buscar/{codSitio}/{nomSitio}/{sinSitio}/{nacion}/{subnacion}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Sitio> buscarSitio(
             @PathParam("codSitio") String codSitio,
             @PathParam("nomSitio") String nomSitio,
             @PathParam("sinSitio") String sinSitio,
+            @PathParam("nacion") String nacion,
             @PathParam("subnacion") String subnacion) {
         System.out.println("***->Busqueda Exitosa de Sitio");
-        return sitioServicio.buscarSitio(codSitio, nomSitio, sinSitio, subnacion);
+        return sitioServicio.buscarSitio(codSitio, nomSitio, sinSitio, nacion, subnacion);
     }
 
     @POST
-    @Path("/editar/{id}")
+    @Path("/editar")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarSitio(Sitio sitio) throws JSONException {
