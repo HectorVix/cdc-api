@@ -92,7 +92,7 @@ public class AreaResource {
     }
 
     @POST
-    @Path("/editar/{id}")
+    @Path("/editar")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarArea(Area area) throws JSONException {
