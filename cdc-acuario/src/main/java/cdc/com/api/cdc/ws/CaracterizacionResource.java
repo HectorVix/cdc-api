@@ -206,7 +206,7 @@ public class CaracterizacionResource {
     }
 
     @POST
-    @Path("/editar/planta/{id}")
+    @Path("/editar/planta")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarPlanta(Planta planta) throws JSONException {
@@ -233,7 +233,7 @@ public class CaracterizacionResource {
     }
 
     @POST
-    @Path("/editar/vertebrado/{id}")
+    @Path("/editar/vertebrado")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarVertebrado(Vertebrado vertebrado) throws JSONException {
