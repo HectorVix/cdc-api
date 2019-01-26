@@ -73,7 +73,10 @@ public class ConctactosResource {
     @Path("/editar/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarContactos(Contactos contacto) throws JSONException {
+    public Response editarContactos(Contactos contacto, @PathParam("id") Integer id) throws JSONException {
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(id);
+        contacto.setUSUARIOusuarioid(usuario);
         contactosServicio.update(contacto);
         JSONObject object = new JSONObject();
         object.put("numident", contacto.getNumident());

@@ -61,14 +61,14 @@ public class VertebradoDaoImpl implements VertebradoDao {
             String nombreg,
             String autor,
             String nombren,
-            String nomcomun) {
+            String nomcomunn) {
         TypedQuery<Vertebrado> query = entityManager.createQuery("SELECT v FROM Vertebrado v"
                 + " WHERE (v.codigoe like '%" + codigoe + "%'"
                 + "OR v.nacion like '%" + nacion + "%'"
                 + "OR v.nombreg like '%" + nombreg + "%'"
                 + "OR v.autor like '%" + autor + "%'"
                 + "OR v.nombren like '%" + nombren + "%'"
-                + " OR v.nomcomun like '%" + nomcomun + "%')", Vertebrado.class);
+                + " OR v.nomcomunn like '%" + nomcomunn + "%')", Vertebrado.class);
         return query.getResultList();
     }
 
