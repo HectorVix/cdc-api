@@ -8,11 +8,9 @@ package cdc.com.api.cdc.ws;
 import cdc.com.api.modelo.Archivo;
 import cdc.com.api.modelo.Fuente;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.Tema;
 import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.ArchivoService;
 import cdc.com.api.servicio.FuenteService;
-import cdc.com.api.servicio.TemaService;
 import com.sun.jersey.core.header.FormDataContentDisposition;
 import com.sun.jersey.multipart.FormDataParam;
 import java.io.File;
@@ -52,8 +50,6 @@ public class FuenteResource {
     @Inject
     FuenteService fuenteServicio;
     @Inject
-    TemaService temaServicio;
-    @Inject
     ArchivoService archivoServicio;
 
     @GET
@@ -69,21 +65,10 @@ public class FuenteResource {
     @Produces(APPLICATION_JSON)
     public Response registrarFuente(Fuente fuente, @PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
-        Usuario us = new Usuario();
-        List<Tema> temaList = fuente.getTemaList();
-        Tema tema = new Tema();
+        Usuario us = new Usuario();    
         us.setUsuarioId(id);
         fuente.setUSUARIOusuarioid(us);
-        fuente.setTemaList(null);
         int fuente_id = fuenteServicio.save(fuente);
-        setFuenteId(fuente_id);
-        fuente.setFuenteId(fuente_id);
-        tema.setFUENTEfuenteid(fuente);
-        for (int _i = 0; _i < temaList.size(); _i++) {
-            tema.setNombre(temaList.get(_i).getNombre());
-            tema.setTipo(temaList.get(_i).getTipo());
-            temaServicio.save(tema);
-        }
         object.put("codfuente", fuente.getCodfuente());
         object.put("fuenteId", fuente_id);
         System.out.println("***->Registro Exitoso Fuente:" + fuente.getCodfuente());
@@ -102,8 +87,8 @@ public class FuenteResource {
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
-        //String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
-        String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
         //tamaño maximo 3355544432 bytes
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);

@@ -145,8 +145,8 @@ public class ElementoResource {
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
-        //String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
-        String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
+        // String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
         File ruta = new File(uploadedFileLocation);
@@ -195,8 +195,8 @@ public class ElementoResource {
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
-        // String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
-        String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
         File ruta = new File(uploadedFileLocation);

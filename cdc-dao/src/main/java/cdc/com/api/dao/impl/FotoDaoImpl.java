@@ -8,7 +8,6 @@ package cdc.com.api.dao.impl;
 import cdc.com.api.dao.FotoDao;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
-import cdc.com.api.modelo.buscar.FotoId;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
