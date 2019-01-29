@@ -7,6 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.ArchivoDao;
 import cdc.com.api.modelo.Archivo;
+import cdc.com.api.modelo.Fuente;
 import cdc.com.api.servicio.ArchivoService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -43,8 +44,8 @@ public class ArchivoServiceImpl implements ArchivoService {
         return archivoDao.all();
     }
 
-    public List<Archivo> buscarArchivo(String nombre, String fuente_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Archivo> buscarArchivo_FuenteId(Fuente fuente) {
+        return archivoDao.buscarArchivo_FuenteId(fuente);
     }
 
 }
