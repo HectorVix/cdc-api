@@ -7,10 +7,12 @@ package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.ArchivoDao;
 import cdc.com.api.modelo.Archivo;
+import cdc.com.api.modelo.Fuente;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -44,8 +46,10 @@ public class ArchivoDaoImpl implements ArchivoDao {
         return entityManager.createQuery("SELECT a FROM Archivo a", Archivo.class).getResultList();
     }
 
-    public List<Archivo> buscarArchivo(String nombre, String fuente_id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Archivo> buscarArchivo_FuenteId(Fuente fuente) {
+        TypedQuery<Archivo> query = entityManager.createQuery("SELECT a FROM Archivo a WHERE a.fUENTEfuenteid = :fuente", Archivo.class);
+        query.setParameter("fuente", fuente);
+        return query.getResultList();
     }
 
 }

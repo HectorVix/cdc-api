@@ -6,6 +6,7 @@
 package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Archivo;
+import cdc.com.api.modelo.Fuente;
 import java.util.List;
 
 /**
@@ -24,5 +25,5 @@ public interface ArchivoService {
 
     public List<Archivo> all();
 
-    public List<Archivo> buscarArchivo(String nombre, String fuente_id);
+    public List<Archivo> buscarArchivo_FuenteId(Fuente fuente);
 }

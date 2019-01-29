@@ -20,6 +20,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -30,10 +32,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM;
 import static javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.StreamingOutput;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -65,7 +70,7 @@ public class FuenteResource {
     @Produces(APPLICATION_JSON)
     public Response registrarFuente(Fuente fuente, @PathParam("id") int id) throws JSONException {
         JSONObject object = new JSONObject();
-        Usuario us = new Usuario();    
+        Usuario us = new Usuario();
         us.setUsuarioId(id);
         fuente.setUSUARIOusuarioid(us);
         int fuente_id = fuenteServicio.save(fuente);
@@ -162,5 +167,16 @@ public class FuenteResource {
         object.put("codfuente", fuente.getCodfuente());
         System.out.println("***->Editado exitoso fuente:" + fuente.getCodfuente());
         return Response.status(202).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/buscarArchivos/{fuenteId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Archivo> buscarArchivo_FuenteId(@PathParam("fuenteId") Integer fuenteId) {
+        Fuente fuente = new Fuente();
+        fuente.setFuenteId(fuenteId);
+        System.out.println("***->Busqueda Exitosa Fuentes:" + fuenteId);
+        return archivoServicio.buscarArchivo_FuenteId(fuente);
     }
 }

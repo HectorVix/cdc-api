@@ -253,50 +253,7 @@ public class ElementoResource {
             e.printStackTrace();
         }
     }
-
-    @GET
-    @Path("/imagen/{id}")
-    @Produces({"image/png", "image/jpg"})
-    public Response getFoto(@PathParam("id") long foto_id) throws JSONException {
-        Foto foto = fotoServicio.find(foto_id);
-        byte[] imagenData = foto.getImagen();
-        System.out.println("***->Obteniendo foto:" + foto_id);
-        return Response
-                .ok()
-                .entity(foto.getImagen())
-                .build();
-    }
-
-    @GET
-    @Path("/pdf")
-    public Response downloadPdfFile() {
-        StreamingOutput fileStream = new StreamingOutput() {
-            @Override
-            public void write(java.io.OutputStream output) throws IOException, WebApplicationException {
-                try {
-                    java.nio.file.Path path = Paths.get("C:/temporal/test.pdf");
-                    byte[] data = Files.readAllBytes(path);
-                    output.write(data);
-                    output.flush();
-                } catch (Exception e) {
-                    throw new WebApplicationException("File Not Found !!");
-                }
-            }
-        };
-        return Response
-                .ok(fileStream, MediaType.APPLICATION_OCTET_STREAM)
-                .header("content-disposition", "attachment; filename = myfile.pdf")
-                .build();
-    }
-
-    @GET
-    @Path("/fotoElemento/{id}")
-    @Produces({"image/png", "image/jpg"})
-    public File FotoElemento(@PathParam("id") long foto_id) {
-        File repositoryFile = new File("c:/temporal/bobby.jpg");
-        return repositoryFile;
-    }
-
+   
     @GET
     @Path("/buscarFotos/{elementoId}")
     @Consumes(APPLICATION_JSON)
