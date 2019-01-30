@@ -90,10 +90,8 @@ public class FuenteResource {
             @FormDataParam("file") FormDataContentDisposition fileDetail,
             @PathParam("fuenteid") int fuenteId)
             throws JSONException, FileNotFoundException, IOException {
-        JSONObject object = new JSONObject();
-        //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
-        String uploadedFileLocation = "C://temporal/" + fileDetail.getFileName();
-        //String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        JSONObject object = new JSONObject();      
+        String uploadedFileLocation = "/" + fileDetail.getFileName();
         //tamaño maximo 3355544432 bytes
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
