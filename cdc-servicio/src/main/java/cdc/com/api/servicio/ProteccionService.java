@@ -5,6 +5,7 @@
  */
 package cdc.com.api.servicio;
 
+import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
 import java.util.List;
 
@@ -22,5 +23,5 @@ public interface ProteccionService {
 
     public Proteccion find(Long id);
 
-    public List<Proteccion> all();
+    public List<Proteccion> buscarProteccion_LocalizacionId(Localizacion localizacion);
 }

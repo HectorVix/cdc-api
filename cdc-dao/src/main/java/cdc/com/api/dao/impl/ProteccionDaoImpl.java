@@ -6,6 +6,7 @@
 package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.ProteccionDao;
+import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -44,9 +45,10 @@ public class ProteccionDaoImpl implements ProteccionDao {
         return proteccion;
     }
 
-    @Override
-    public List<Proteccion> all() {
-        return entityManager.createQuery("SELECT p FROM Proteccion p", Proteccion.class).getResultList();
+    public List<Proteccion> buscarProteccion_LocalizacionId(Localizacion localizacion) {
+        TypedQuery<Proteccion> query = entityManager.createQuery("SELECT p FROM Proteccion p WHERE p.lOCALIZACIONlocalizacionid = :localizacion", Proteccion.class);
+        query.setParameter("localizacion", localizacion);
+        return query.getResultList();
     }
 
 }

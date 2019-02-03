@@ -6,6 +6,7 @@
 package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.ProteccionDao;
+import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
 import cdc.com.api.servicio.ProteccionService;
 import java.util.List;
@@ -38,8 +39,9 @@ public class ProteccionServiceImpl implements ProteccionService {
         return proteccionDao.find(id);
     }
 
-    public List<Proteccion> all() {
-        return proteccionDao.all();
+    public List<Proteccion> buscarProteccion_LocalizacionId(Localizacion localizacion) {
+
+        return proteccionDao.buscarProteccion_LocalizacionId(localizacion);
     }
 
 }
