@@ -6,6 +6,7 @@
 package cdc.com.api.dao;
 
 import cdc.com.api.modelo.Dispersion;
+import cdc.com.api.modelo.Protocolo;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface DispersionDao {
     public Dispersion find(Long id);
 
     public List<Dispersion> all();
+
+    public List<Dispersion> buscarDispersion_ProtocoloId(Protocolo protocolo);
 }

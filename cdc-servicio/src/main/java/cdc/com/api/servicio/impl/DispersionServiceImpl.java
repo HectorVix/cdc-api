@@ -7,6 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.DispersionDao;
 import cdc.com.api.modelo.Dispersion;
+import cdc.com.api.modelo.Protocolo;
 import cdc.com.api.servicio.DispersionService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -41,6 +42,10 @@ public class DispersionServiceImpl implements DispersionService {
     @Override
     public List<Dispersion> all() {
         return dispersionDao.all();
+    }
+
+    public List<Dispersion> buscarDispersion_ProtocoloId(Protocolo protocolo) {
+        return dispersionDao.buscarDispersion_ProtocoloId(protocolo);
     }
 
 }

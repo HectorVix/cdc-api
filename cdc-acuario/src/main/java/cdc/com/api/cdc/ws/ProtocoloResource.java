@@ -103,4 +103,58 @@ public class ProtocoloResource {
         System.out.println("***->Editado exitoso protocolo:" + protocolo.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/dispersion/{protocoloId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Dispersion> buscarDispersion(@PathParam("protocoloId") Integer protocoloId) {
+        System.out.println("***->Busqueda Exitosa Dispersion:" + protocoloId);
+        Protocolo protocolo = new Protocolo();
+        protocolo.setProtocoloId(protocoloId);
+        return dispersionServicio.buscarDispersion_ProtocoloId(protocolo);
+    }
+
+    @POST
+    @Path("/registrar/dispersion/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarProteccion(@PathParam("id") Integer protocoloId, Dispersion dispersion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Protocolo protocolo = new Protocolo();
+        protocolo.setDispersionList(null);
+        protocolo.setProtocoloId(protocoloId);
+        dispersion.setPROTOCOLOprotocoloid(protocolo);
+        dispersionServicio.save(dispersion);
+        object.put("protocoloId", protocoloId);
+        System.out.println("***->Registro Exitoso Dispersion :" + protocoloId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/delete/dispersion/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response borrarDispersion(@PathParam("id") Long id) throws JSONException {
+        JSONObject object = new JSONObject();
+        dispersionServicio.delete(id);
+        object.put("dipsersionId", id);
+        System.out.println("***->Delete Exitoso Dispersion :" + id);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/update/dispersion/{id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarDispersion(@PathParam("id") Integer protocoloId, Dispersion dispersion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Protocolo protocolo = new Protocolo();
+        protocolo.setProtocoloId(protocoloId);
+        dispersion.setPROTOCOLOprotocoloid(protocolo);
+        dispersionServicio.update(dispersion);
+        object.put("dispersionId", dispersion.getDispersionId());
+        System.out.println("***->Update Exitoso Dispersion :" + dispersion.getDispersionId());
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

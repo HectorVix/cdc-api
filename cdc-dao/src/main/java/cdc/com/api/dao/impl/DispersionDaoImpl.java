@@ -7,6 +7,7 @@ package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.DispersionDao;
 import cdc.com.api.modelo.Dispersion;
+import cdc.com.api.modelo.Protocolo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,6 +47,12 @@ public class DispersionDaoImpl implements DispersionDao {
     @Override
     public List<Dispersion> all() {
         return entityManager.createQuery("SELECT d FROM Dispersion d", Dispersion.class).getResultList();
+    }
+
+    public List<Dispersion> buscarDispersion_ProtocoloId(Protocolo protocolo) {
+        TypedQuery<Dispersion> query = entityManager.createQuery("SELECT d FROM Dispersion d WHERE d.pROTOCOLOprotocoloid = :protocolo", Dispersion.class);
+        query.setParameter("protocolo", protocolo);
+        return query.getResultList();
     }
 
 }
