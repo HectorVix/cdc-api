@@ -6,6 +6,7 @@
 package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.ListaElementoDao;
+import cdc.com.api.modelo.Area;
 import cdc.com.api.modelo.ListaElemento;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -46,6 +47,12 @@ public class ListaElementoDaoImpl implements ListaElementoDao {
     @Override
     public List<ListaElemento> all() {
         return entityManager.createQuery("SELECT l FROM ListaElemento l", ListaElemento.class).getResultList();
+    }
+
+    public List<ListaElemento> buscarListaElemento_areaId(Area area) {
+        TypedQuery<ListaElemento> query = entityManager.createQuery("SELECT l FROM ListaElemento l WHERE l.aREAareaid = :area", ListaElemento.class);
+        query.setParameter("area", area);
+        return query.getResultList();
     }
 
 }

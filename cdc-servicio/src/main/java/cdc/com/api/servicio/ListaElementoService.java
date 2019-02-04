@@ -5,6 +5,7 @@
  */
 package cdc.com.api.servicio;
 
+import cdc.com.api.modelo.Area;
 import cdc.com.api.modelo.ListaElemento;
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface ListaElementoService {
     public ListaElemento find(Long id);
 
     public List<ListaElemento> all();
+
+    public List<ListaElemento> buscarListaElemento_areaId(Area area);
 }
