@@ -116,10 +116,10 @@ public class ProtocoloResource {
     }
 
     @POST
-    @Path("/registrar/dispersion/{id}")
+    @Path("/registrar/dispersion/{protocoloId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarProteccion(@PathParam("id") Integer protocoloId, Dispersion dispersion) throws JSONException {
+    public Response registrarProteccion(@PathParam("protocoloId") Integer protocoloId, Dispersion dispersion) throws JSONException {
         JSONObject object = new JSONObject();
         Protocolo protocolo = new Protocolo();
         protocolo.setDispersionList(null);
@@ -132,22 +132,22 @@ public class ProtocoloResource {
     }
 
     @POST
-    @Path("/delete/dispersion/{id}")
+    @Path("/delete/dispersion/{dispersionId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response borrarDispersion(@PathParam("id") Long id) throws JSONException {
+    public Response borrarDispersion(@PathParam("dispersionId") Long dispersionId) throws JSONException {
         JSONObject object = new JSONObject();
-        dispersionServicio.delete(id);
-        object.put("dipsersionId", id);
-        System.out.println("***->Delete Exitoso Dispersion :" + id);
+        dispersionServicio.delete(dispersionId);
+        object.put("dipsersionId", dispersionId);
+        System.out.println("***->Delete Exitoso Dispersion :" + dispersionId);
         return Response.status(202).entity(object.toString()).build();
     }
 
     @POST
-    @Path("/update/dispersion/{id}")
+    @Path("/update/dispersion/{protocoloId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response actualizarDispersion(@PathParam("id") Integer protocoloId, Dispersion dispersion) throws JSONException {
+    public Response actualizarDispersion(@PathParam("protocoloId") Integer protocoloId, Dispersion dispersion) throws JSONException {
         JSONObject object = new JSONObject();
         Protocolo protocolo = new Protocolo();
         protocolo.setProtocoloId(protocoloId);

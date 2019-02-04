@@ -109,11 +109,10 @@ public class LocalizacionResource {
     }
 
     @POST
-    @Path("/registrar/proteccion/{id}")
+    @Path("/registrar/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarProteccion(Proteccion proteccion,
-            @PathParam("id") Integer localizacionId) throws JSONException {
+    public Response registrarProteccion(@PathParam("localizacionId") Integer localizacionId, Proteccion proteccion) throws JSONException {
         JSONObject object = new JSONObject();
         Localizacion le = new Localizacion();
         le.setProteccionList(null);
@@ -126,22 +125,22 @@ public class LocalizacionResource {
     }
 
     @POST
-    @Path("/delete/proteccion/{id}")
+    @Path("/delete/proteccion/{proteccionId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response borrarProteccion(@PathParam("id") Long id) throws JSONException {
+    public Response borrarProteccion(@PathParam("proteccionId") Long proteccionId) throws JSONException {
         JSONObject object = new JSONObject();
-        proteccionServicio.delete(id);
-        object.put("proteccionId", id);
-        System.out.println("***->Delete Exitoso Proteccion :" + id);
+        proteccionServicio.delete(proteccionId);
+        object.put("proteccionId", proteccionId);
+        System.out.println("***->Delete Exitoso Proteccion :" + proteccionId);
         return Response.status(202).entity(object.toString()).build();
     }
 
     @POST
-    @Path("/update/proteccion/{id}")
+    @Path("/update/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response actualizarProteccion(@PathParam("id") Integer localizacionId, Proteccion proteccion) throws JSONException {
+    public Response actualizarProteccion(@PathParam("localizacionId") Integer localizacionId, Proteccion proteccion) throws JSONException {
         JSONObject object = new JSONObject();
         Localizacion le = new Localizacion();
         le.setLocalizacionId(localizacionId);

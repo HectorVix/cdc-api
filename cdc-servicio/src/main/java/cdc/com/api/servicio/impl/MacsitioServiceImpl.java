@@ -7,6 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.MacsitioDao;
 import cdc.com.api.modelo.Macsitio;
+import cdc.com.api.modelo.Sitio;
 import cdc.com.api.servicio.MacsitioService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +41,10 @@ public class MacsitioServiceImpl implements MacsitioService {
 
     public List<Macsitio> all() {
         return macsitioDao.all();
+    }
+
+    public List<Macsitio> buscarMacsitio_sitioId(Sitio sitio) {
+        return macsitioDao.buscarMacsitio_sitioId(sitio);
     }
 
 }

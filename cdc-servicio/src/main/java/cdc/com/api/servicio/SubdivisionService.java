@@ -5,6 +5,7 @@
  */
 package cdc.com.api.servicio;
 
+import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Subdivision;
 import java.util.List;
 
@@ -23,4 +24,6 @@ public interface SubdivisionService {
     public Subdivision find(Long id);
 
     public List<Subdivision> all();
+    
+    public List<Subdivision> buscarSubdivision_sitioId(Sitio sitio);
 }

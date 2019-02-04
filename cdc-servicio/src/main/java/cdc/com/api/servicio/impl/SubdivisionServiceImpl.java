@@ -6,6 +6,7 @@
 package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.SubdivisionDao;
+import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Subdivision;
 import cdc.com.api.servicio.SubdivisionService;
 import java.util.List;
@@ -40,6 +41,10 @@ public class SubdivisionServiceImpl implements SubdivisionService {
 
     public List<Subdivision> all() {
         return subdivisionDao.all();
+    }
+
+    public List<Subdivision> buscarSubdivision_sitioId(Sitio sitio) {
+        return subdivisionDao.buscarSubdivision_sitioId(sitio);
     }
 
 }

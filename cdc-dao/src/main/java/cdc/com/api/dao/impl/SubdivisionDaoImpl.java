@@ -6,6 +6,7 @@
 package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.SubdivisionDao;
+import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Subdivision;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -45,6 +46,12 @@ public class SubdivisionDaoImpl implements SubdivisionDao {
     
     public List<Subdivision> all() {
         return entityManager.createQuery("SELECT s FROM Subdivision s", Subdivision.class).getResultList();
+    }
+
+    public List<Subdivision> buscarSubdivision_sitioId(Sitio sitio) {
+        TypedQuery<Subdivision> query = entityManager.createQuery("SELECT s FROM Subdivision s WHERE s.sITIOsitioid = :sitio", Subdivision.class);
+        query.setParameter("sitio", sitio);
+        return query.getResultList();
     }
     
 }

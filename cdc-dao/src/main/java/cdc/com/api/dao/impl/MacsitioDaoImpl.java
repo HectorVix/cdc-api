@@ -7,6 +7,7 @@ package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.MacsitioDao;
 import cdc.com.api.modelo.Macsitio;
+import cdc.com.api.modelo.Sitio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,6 +47,12 @@ public class MacsitioDaoImpl implements MacsitioDao {
     @Override
     public List<Macsitio> all() {
         return entityManager.createQuery("SELECT m FROM Macsitio m", Macsitio.class).getResultList();
+    }
+
+    public List<Macsitio> buscarMacsitio_sitioId(Sitio sitio) {
+        TypedQuery<Macsitio> query = entityManager.createQuery("SELECT m FROM Macsitio m WHERE m.sITIOsitioid = :sitio", Macsitio.class);
+        query.setParameter("sitio", sitio);
+        return query.getResultList();
     }
 
 }
