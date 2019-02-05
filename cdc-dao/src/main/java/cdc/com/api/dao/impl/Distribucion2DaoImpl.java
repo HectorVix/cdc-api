@@ -7,6 +7,8 @@ package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.Distribucion2Dao;
 import cdc.com.api.modelo.Distribucion2;
+import cdc.com.api.modelo.Planta;
+import cdc.com.api.modelo.Vertebrado;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -46,6 +48,18 @@ public class Distribucion2DaoImpl implements Distribucion2Dao {
     @Override
     public List<Distribucion2> all() {
         return entityManager.createQuery("SELECT d FROM Distribucion2 d", Distribucion2.class).getResultList();
+    }
+
+    public List<Distribucion2> buscarDistribucion2_plantaId(Planta planta) {
+        TypedQuery<Distribucion2> query = entityManager.createQuery("SELECT d FROM Distribucion2 d WHERE d.pLANTAplantaid = :planta", Distribucion2.class);
+        query.setParameter("planta", planta);
+        return query.getResultList();
+    }
+
+    public List<Distribucion2> buscarDistribucion2_vertebradoId(Vertebrado vertebrado) {
+        TypedQuery<Distribucion2> query = entityManager.createQuery("SELECT d FROM Distribucion2 d WHERE d.vERTEBRADOvertebradoid = :vertebrado", Distribucion2.class);
+        query.setParameter("vertebrado", vertebrado);
+        return query.getResultList();
     }
 
 }

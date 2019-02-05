@@ -122,7 +122,7 @@ public class ProtocoloResource {
     public Response registrarProteccion(@PathParam("protocoloId") Integer protocoloId, Dispersion dispersion) throws JSONException {
         JSONObject object = new JSONObject();
         Protocolo protocolo = new Protocolo();
-        protocolo.setDispersionList(null);
+        protocolo.setDispersionList(null);//
         protocolo.setProtocoloId(protocoloId);
         dispersion.setPROTOCOLOprotocoloid(protocolo);
         dispersionServicio.save(dispersion);

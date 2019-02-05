@@ -243,4 +243,199 @@ public class CaracterizacionResource {
         System.out.println("***->Editado exitoso vertebrado:" + vertebrado.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
+    //----------------------Planta Get distribución 1 y 2---------------------------------------------------
+
+    @GET
+    @Path("/planta/distribucion1/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Distribucion> buscarDistribucion1_Planta(@PathParam("plantaId") Integer plantaId) {
+        System.out.println("***->Busqueda Exitosa Distribucion1:" + plantaId);
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        return distribucionServicio.buscarDistribucion1_plantaId(planta);
+    }
+
+    @GET
+    @Path("/planta/distribucion2/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Distribucion2> buscarDistribucion2_Planta(@PathParam("plantaId") Integer plantaId) {
+        System.out.println("***->Busqueda Exitosa Distribucion2:" + plantaId);
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        return distribucion2Servicio.buscarDistribucion2_plantaId(planta);
+    }
+    //----------------------Vertebrado Get distribución 1 y 2---------------------------------------------------
+
+    @GET
+    @Path("/vertebrado/distribucion1/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Distribucion> buscarDistribucion1_Vertebrado(@PathParam("vertebradoId") Integer vertebradoId) {
+        System.out.println("***->Busqueda Exitosa Distribucion1:" + vertebradoId);
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        return distribucionServicio.buscarDistribucion1_vertebradoId(vertebrado);
+    }
+
+    @GET
+    @Path("/vertebrado/distribucion2/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Distribucion2> buscarDistribucion2_Vertebrado(@PathParam("vertebradoId") Integer vertebradoId) {
+        System.out.println("***->Busqueda Exitosa Distribucion2:" + vertebradoId);
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        return distribucion2Servicio.buscarDistribucion2_vertebradoId(vertebrado);
+    }
+
+    //---------------Registrar distribuciónn 1 y 2 planta--------------------------
+    @POST
+    @Path("/planta/registrar/distribucion1/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarDistribucion1_Planta(@PathParam("plantaId") Integer plantaId, Distribucion distribucion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        distribucion.setPLANTAplantaid(planta);
+        distribucionServicio.save(distribucion);
+        object.put("plantaId", plantaId);
+        System.out.println("***->Registro Exitoso Distribucion1 :" + plantaId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/planta/registrar/distribucion2/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarDistribucion2_Planta(@PathParam("plantaId") Integer plantaId, Distribucion2 distribucion2) throws JSONException {
+        JSONObject object = new JSONObject();
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        distribucion2.setPLANTAplantaid(planta);
+        distribucion2Servicio.save(distribucion2);
+        object.put("plantaId", plantaId);
+        System.out.println("***->Registro Exitoso Distribucion2 :" + plantaId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+    //------------------Registrar distribución 1 y 2 vertebrado--------------
+
+    @POST
+    @Path("/vertebrado/registrar/distribucion1/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarDistribucion1_Vertebrado(@PathParam("vertebradoId") Integer vertebradoId, Distribucion distribucion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        distribucion.setVERTEBRADOvertebradoid(vertebrado);
+        distribucionServicio.save(distribucion);
+        object.put("vertebradoId", vertebradoId);
+        System.out.println("***->Registro Exitoso Distribucion1 :" + vertebradoId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/vertebrado/registrar/distribucion2/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response registrarDistribucion2_Vertebrado(@PathParam("vertebradoId") Integer vertebradoId, Distribucion2 distribucion2) throws JSONException {
+        JSONObject object = new JSONObject();
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        distribucion2.setVERTEBRADOvertebradoid(vertebrado);
+        distribucion2Servicio.save(distribucion2);
+        object.put("vertebradoId", vertebradoId);
+        System.out.println("***->Registro Exitoso Distribucion2 :" + vertebradoId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    //--------------Delete distribución 1 y 2 planta y vertebrado------------
+    @POST
+    @Path("/delete/distribucion1/{distribucion1Id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response borrarDistribucion1(@PathParam("distribucion1Id") Long distribucion1Id) throws JSONException {
+        JSONObject object = new JSONObject();
+        distribucionServicio.delete(distribucion1Id);
+        object.put("distribucion1Id", distribucion1Id);
+        System.out.println("***->Delete Exitoso Distribucion1 :" + distribucion1Id);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/delete/distribucion2/{distribucion2Id}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response borrarDistribucion2(@PathParam("distribucion2Id") Long distribucion2Id) throws JSONException {
+        JSONObject object = new JSONObject();
+        distribucion2Servicio.delete(distribucion2Id);
+        object.put("distribucion2Id", distribucion2Id);
+        System.out.println("***->Delete Exitoso Distribucion2 :" + distribucion2Id);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    //-----------Actualizar distribución 1 y 2 planta------------
+    @POST
+    @Path("/planta/update/distribucion1/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarDitribucion1_Planta(@PathParam("plantaId") Integer plantaId, Distribucion distribucion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        distribucion.setPLANTAplantaid(planta);
+        distribucionServicio.update(distribucion);
+        object.put("plantaId", plantaId);
+        System.out.println("***->Update Exitoso Distribucion :" + plantaId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/planta/update/distribucion2/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarDitribucion2_Planta(@PathParam("plantaId") Integer plantaId, Distribucion2 distribucion2) throws JSONException {
+        JSONObject object = new JSONObject();
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        distribucion2.setPLANTAplantaid(planta);
+        distribucion2Servicio.update(distribucion2);
+        object.put("plantaId", plantaId);
+        System.out.println("***->Update Exitoso Distribucion2:" + plantaId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+    //-----------Actualizar distribución 1 y 2 vertebrado------------
+
+    @POST
+    @Path("/vertebrado/update/distribucion1/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarDitribucion1_Veretebrado(@PathParam("vertebradoId") Integer vertebradoId, Distribucion distribucion) throws JSONException {
+        JSONObject object = new JSONObject();
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        distribucion.setVERTEBRADOvertebradoid(vertebrado);
+        distribucionServicio.update(distribucion);
+        object.put("vertebradoId", vertebradoId);
+        System.out.println("***->Update Exitoso Distribucion :" + vertebradoId);
+        return Response.status(202).entity(object.toString()).build();
+    }
+
+    @POST
+    @Path("/vertebrado/update/distribucion2/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarDitribucion2_Vertebrado(@PathParam("vertebradoId") Integer vertebradoId, Distribucion2 distribucion2) throws JSONException {
+        JSONObject object = new JSONObject();
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        distribucion2.setVERTEBRADOvertebradoid(vertebrado);
+        distribucion2Servicio.update(distribucion2);
+        object.put("vertebradoId", vertebradoId);
+        System.out.println("***->Update Exitoso Distribucion2:" + vertebradoId);
+        return Response.status(202).entity(object.toString()).build();
+    }
 }

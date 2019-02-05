@@ -7,6 +7,8 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.Distribucion2Dao;
 import cdc.com.api.modelo.Distribucion2;
+import cdc.com.api.modelo.Planta;
+import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.Distribucion2Service;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +42,14 @@ public class Distribucion2ServiceImpl implements Distribucion2Service {
 
     public List<Distribucion2> all() {
         return distribucion2Dao.all();
+    }
+
+    public List<Distribucion2> buscarDistribucion2_plantaId(Planta planta) {
+        return distribucion2Dao.buscarDistribucion2_plantaId(planta);
+    }
+
+    public List<Distribucion2> buscarDistribucion2_vertebradoId(Vertebrado vertebrado) {
+        return distribucion2Dao.buscarDistribucion2_vertebradoId(vertebrado);
     }
 
 }

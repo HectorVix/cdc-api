@@ -6,6 +6,8 @@
 package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Distribucion2;
+import cdc.com.api.modelo.Planta;
+import cdc.com.api.modelo.Vertebrado;
 import java.util.List;
 
 /**
@@ -23,4 +25,8 @@ public interface Distribucion2Service {
     public Distribucion2 find(Long id);
 
     public List<Distribucion2> all();
+
+    public List<Distribucion2> buscarDistribucion2_plantaId(Planta planta);
+
+    public List<Distribucion2> buscarDistribucion2_vertebradoId(Vertebrado vertebrado);
 }
