@@ -69,6 +69,7 @@ public class AreaResource {
                 System.out.println("***->Registro exitoso lista elementos:" + listaElemento.getCodigoe());
             }
         }
+        object.put("areaId", areaManejada_id);
         object.put("codigoam", area.getCodigoam());
         System.out.println("***->Registro Exitoso Area :" + area.getCodigoam());
         return Response.status(202).entity(object.toString()).build();

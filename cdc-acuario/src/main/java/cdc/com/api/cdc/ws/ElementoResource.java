@@ -9,6 +9,7 @@ import cdc.com.api.modelo.Area;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Elemento;
@@ -319,58 +320,45 @@ public class ElementoResource {
     }
 
     @GET
-    @Path("/buscarFotos/{elementoId}")
+    @Path("/buscarFotos/{id}/{tipo}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Foto> buscarFoto_ElementoId(@PathParam("elementoId") Integer elementoId) {
-        Elemento elemento = new Elemento();
-        elemento.setElementoId(elementoId);
-        System.out.println("***->Busqueda Exitosa Fotos");
-        return fotoServicio.buscarFoto_ElementoId(elemento);
-    }
+    public java.util.List<Foto> buscarFoto_Id(@PathParam("id") Integer id, @PathParam("tipo") Integer tipo) {
 
-    @GET
-    @Path("/buscarFotos/sitio/{sitioId}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Foto> buscarFoto_SitioId(@PathParam("sitioId") Integer sitioId) {
-        Sitio sitio = new Sitio();
-        sitio.setSitioId(sitioId);
         System.out.println("***->Busqueda Exitosa Fotos");
-        return fotoServicio.buscarFoto_SitioId(sitio);
-    }
+        switch (tipo) {
+            case 1: {
+                Elemento elemento = new Elemento();
+                elemento.setElementoId(id);
+                return fotoServicio.buscarFoto_ElementoId(elemento);
+            }
 
-    @GET
-    @Path("/buscarFotos/area/{areaId}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Foto> buscarFoto_AreaId(@PathParam("areaId") Integer areaId) {
-        Area area = new Area();
-        area.setAreaId(areaId);
-        System.out.println("***->Busqueda Exitosa Fotos");
-        return fotoServicio.buscarFoto_AreaId(area);
-    }
+            case 2: {
+                Sitio sitio = new Sitio();
+                sitio.setSitioId(id);
+                return fotoServicio.buscarFoto_SitioId(sitio);
+            }
 
-    @GET
-    @Path("/buscarFotos/planta/{plantaId}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Foto> buscarFoto_PlantaId(@PathParam("plantaId") Integer plantaId) {
-        Planta planta = new Planta();
-        planta.setPlantaId(plantaId);
-        System.out.println("***->Busqueda Exitosa Fotos");
-        return fotoServicio.buscarFoto_PlantaId(planta);
-    }
+            case 3: {
+                Area area = new Area();
+                area.setAreaId(id);
+                return fotoServicio.buscarFoto_AreaId(area);
+            }
 
-    @GET
-    @Path("/buscarFotos/vertebrado/{vertebradoId}")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Foto> buscarFoto_VertebradoId(@PathParam("vertebradoId") Integer vertebradoId) {
-        Vertebrado vertebrado = new Vertebrado();
-        vertebrado.setVertebradoId(vertebradoId);
-        System.out.println("***->Busqueda Exitosa Fotos");
-        return fotoServicio.buscarFoto_VertebradoId(vertebrado);
+            case 4: {
+                Planta planta = new Planta();
+                planta.setPlantaId(id);
+                return fotoServicio.buscarFoto_PlantaId(planta);
+            }
+
+            case 5: {
+                Vertebrado vertebrado = new Vertebrado();
+                vertebrado.setVertebradoId(id);
+                return fotoServicio.buscarFoto_VertebradoId(vertebrado);
+            }
+
+        }
+        return null;
     }
 
     @POST
@@ -388,7 +376,7 @@ public class ElementoResource {
         return Response.status(202).entity(object.toString()).build();
     }
 
-    @POST
+    @DELETE
     @Path("/delete/{id}")
     @Produces(APPLICATION_JSON)
     public Response eliminarFoto(@PathParam("id") long id) throws JSONException {

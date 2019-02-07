@@ -130,6 +130,7 @@ public class CaracterizacionResource {
                 System.out.println("***->Registro exitoso distribucion 2:" + distribucion2.getCodecoregn());
             }
         }
+        object.put("plantaId", planta_id);
         object.put("codigoe", caracterizacionBase.getCodigoe());
         System.out.println("***->Registro Exitoso Caracterizacion Planta:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
@@ -187,6 +188,7 @@ public class CaracterizacionResource {
                 System.out.println("***->Registro exitoso distribucion 2:" + distribucion2.getCodecoregn());
             }
         }
+        object.put("vertebradoId", vertebrado_id);
         object.put("codigoe", caracterizacionBase.getCodigoe());
         System.out.println("***->Registro Exitoso Caracterizacion Vertebrado:" + caracterizacionBase.getCodigoe());
         return Response.status(202).entity(object.toString()).build();

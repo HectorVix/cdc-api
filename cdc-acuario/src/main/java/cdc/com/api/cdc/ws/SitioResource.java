@@ -87,6 +87,7 @@ public class SitioResource {
             }
         }
 
+        object.put("sitioId", sitio_id);
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
         return Response.status(202).entity(object.toString()).build();
