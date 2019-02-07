@@ -5,6 +5,7 @@
  */
 package cdc.com.api.cdc.ws;
 
+import cdc.com.api.modelo.Area;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,7 +13,10 @@ import javax.ws.rs.Path;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
+import cdc.com.api.modelo.Planta;
+import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Usuario;
+import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.FotoService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -128,7 +132,7 @@ public class ElementoResource {
     }
 
     @POST
-    @Path("/cargarFoto/{elementoid}")
+    @Path("/cargarFoto/{id}/{tipo}")
     @Consumes(MULTIPART_FORM_DATA)
     @Produces(APPLICATION_JSON)
     public Response uploadFile(
@@ -140,7 +144,8 @@ public class ElementoResource {
             @FormDataParam("autor") String autor,
             @FormDataParam("posicion") int posicion,
             @FormDataParam("fecha") String fecha,
-            @PathParam("elementoid") int elementoid
+            @PathParam("id") int id, // el id puede ser de elemento, sitio, area, planta y vertebrado
+            @PathParam("tipo") int tipo // para diferenciar elemento, sitio, area, planta y vertebrado
     )
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
@@ -153,9 +158,40 @@ public class ElementoResource {
         input.read(archivo);
         Date fechaCreacion = toFecha(fecha);
         Foto foto = new Foto();
-        Elemento elemento = new Elemento();
-        elemento.setElementoId(elementoid);
-        foto.setELEMENTOelementoid(elemento);
+
+        switch (tipo) {
+            case 1: {
+                Elemento elemento = new Elemento();
+                elemento.setElementoId(id);
+                foto.setELEMENTOelementoid(elemento);
+            }
+            break;
+            case 2: {
+                Sitio sitio = new Sitio();
+                sitio.setSitioId(id);
+                foto.setSITIOsitioid(sitio);
+            }
+            break;
+            case 3: {
+                Area area = new Area();
+                area.setAreaId(id);
+                foto.setAREAareaid(area);
+            }
+            break;
+            case 4: {
+                Planta planta = new Planta();
+                planta.setPlantaId(id);
+                foto.setPLANTAplantaid(planta);
+            }
+            break;
+            case 5: {
+                Vertebrado vertebrado = new Vertebrado();
+                vertebrado.setVertebradoId(id);
+                foto.setVERTEBRADOvertebradoid(vertebrado);
+            }
+            break;
+        }
+
         foto.setDescripcion(descripcion);
         foto.setComentario(comentario);
         foto.setAutor(autor);
@@ -175,7 +211,7 @@ public class ElementoResource {
     }
 
     @POST
-    @Path("/updateFoto/{elementoid}/{fotoId}")
+    @Path("/updateFoto/{id}/{fotoId}/{tipo}")
     @Consumes(MULTIPART_FORM_DATA)
     @Produces(APPLICATION_JSON)
     public Response updateElementoFotos(
@@ -187,8 +223,9 @@ public class ElementoResource {
             @FormDataParam("autor") String autor,
             @FormDataParam("posicion") int posicion,
             @FormDataParam("fecha") String fecha,
-            @PathParam("elementoid") int elementoid,
-            @PathParam("fotoId") int fotoId
+            @PathParam("id") int id,// el id puede ser de elemento, sitio, area, planta y vertebrado
+            @PathParam("fotoId") int fotoId,
+            @PathParam("tipo") int tipo // para diferenciar elemento, sitio, area, planta y vertebrado
     )
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
@@ -201,9 +238,40 @@ public class ElementoResource {
         input.read(archivo);
         Date fechaCreacion = toFecha(fecha);
         Foto foto = new Foto();
-        Elemento elemento = new Elemento();
-        elemento.setElementoId(elementoid);
-        foto.setELEMENTOelementoid(elemento);
+        //
+        switch (tipo) {
+            case 1: {
+                Elemento elemento = new Elemento();
+                elemento.setElementoId(id);
+                foto.setELEMENTOelementoid(elemento);
+            }
+            break;
+            case 2: {
+                Sitio sitio = new Sitio();
+                sitio.setSitioId(id);
+                foto.setSITIOsitioid(sitio);
+            }
+            break;
+            case 3: {
+                Area area = new Area();
+                area.setAreaId(id);
+                foto.setAREAareaid(area);
+            }
+            break;
+            case 4: {
+                Planta planta = new Planta();
+                planta.setPlantaId(id);
+                foto.setPLANTAplantaid(planta);
+            }
+            break;
+            case 5: {
+                Vertebrado vertebrado = new Vertebrado();
+                vertebrado.setVertebradoId(id);
+                foto.setVERTEBRADOvertebradoid(vertebrado);
+            }
+            break;
+        }
+
         foto.setFotoId(fotoId);
         foto.setDescripcion(descripcion);
         foto.setComentario(comentario);
@@ -259,6 +327,50 @@ public class ElementoResource {
         elemento.setElementoId(elementoId);
         System.out.println("***->Busqueda Exitosa Fotos");
         return fotoServicio.buscarFoto_ElementoId(elemento);
+    }
+
+    @GET
+    @Path("/buscarFotos/sitio/{sitioId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Foto> buscarFoto_SitioId(@PathParam("sitioId") Integer sitioId) {
+        Sitio sitio = new Sitio();
+        sitio.setSitioId(sitioId);
+        System.out.println("***->Busqueda Exitosa Fotos");
+        return fotoServicio.buscarFoto_SitioId(sitio);
+    }
+
+    @GET
+    @Path("/buscarFotos/area/{areaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Foto> buscarFoto_AreaId(@PathParam("areaId") Integer areaId) {
+        Area area = new Area();
+        area.setAreaId(areaId);
+        System.out.println("***->Busqueda Exitosa Fotos");
+        return fotoServicio.buscarFoto_AreaId(area);
+    }
+
+    @GET
+    @Path("/buscarFotos/planta/{plantaId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Foto> buscarFoto_PlantaId(@PathParam("plantaId") Integer plantaId) {
+        Planta planta = new Planta();
+        planta.setPlantaId(plantaId);
+        System.out.println("***->Busqueda Exitosa Fotos");
+        return fotoServicio.buscarFoto_PlantaId(planta);
+    }
+
+    @GET
+    @Path("/buscarFotos/vertebrado/{vertebradoId}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Foto> buscarFoto_VertebradoId(@PathParam("vertebradoId") Integer vertebradoId) {
+        Vertebrado vertebrado = new Vertebrado();
+        vertebrado.setVertebradoId(vertebradoId);
+        System.out.println("***->Busqueda Exitosa Fotos");
+        return fotoServicio.buscarFoto_VertebradoId(vertebrado);
     }
 
     @POST

@@ -5,8 +5,12 @@
  */
 package cdc.com.api.dao;
 
+import cdc.com.api.modelo.Area;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Foto;
+import cdc.com.api.modelo.Planta;
+import cdc.com.api.modelo.Sitio;
+import cdc.com.api.modelo.Vertebrado;
 import java.util.List;
 
 /**
@@ -26,4 +30,13 @@ public interface FotoDao {
     public List<Foto> all();
 
     public List<Foto> buscarFoto_ElementoId(Elemento elemento);
+
+    public List<Foto> buscarFoto_SitioId(Sitio sitio);
+
+    public List<Foto> buscarFoto_AreaId(Area area);
+
+    public List<Foto> buscarFoto_PlantaId(Planta planta);
+
+    public List<Foto> buscarFoto_VertebradoId(Vertebrado vertebrado);
+
 }
