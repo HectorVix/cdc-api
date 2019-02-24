@@ -30,7 +30,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-@Path("sitio")
+@Path("/cecon/sitio")
 @ManagedBean
 public class SitioResource {
 
@@ -43,13 +43,6 @@ public class SitioResource {
 
     List<Macsitio> lista_macsitio;
     List<Subdivision> lista_subdivision;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Sitio> all() {
-        System.out.println("***->Lista de Sitio");
-        return sitioServicio.all();
-    }
 
     @POST
     @Path("/registro")

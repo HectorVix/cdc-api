@@ -62,7 +62,7 @@ import static jdk.nashorn.internal.objects.Global.undefined;
  *
  * @author Héctor Vix
  */
-@Path("elemento")
+@Path("/cecon/elemento")
 @ManagedBean
 public class ElementoResource {
 
@@ -70,13 +70,6 @@ public class ElementoResource {
     ElementoService elementoServicio;
     @Inject
     FotoService fotoServicio;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Elemento> all() {
-        System.out.println("***->Lista de Elementos");
-        return elementoServicio.all();
-    }
 
     @GET
     @Path("/buscar/{codigo}/{nombrecomun}/{nombrecientifico}")
@@ -151,6 +144,8 @@ public class ElementoResource {
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         String uploadedFileLocation = "/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
         File ruta = new File(uploadedFileLocation);
@@ -231,6 +226,8 @@ public class ElementoResource {
             throws JSONException, FileNotFoundException, IOException {
         JSONObject object = new JSONObject();
         String uploadedFileLocation = "/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/FLORA/Documents/ServiciosCDC/temporal/" + fileDetail.getFileName();
+        //String uploadedFileLocation = "C://Users/HP/Documents/AplicacionServicios/temporal/" + fileDetail.getFileName();
         int tam = (int) contentLength;
         escribirArchivoTemporal(uploadedInputStream, uploadedFileLocation, tam);
         File ruta = new File(uploadedFileLocation);

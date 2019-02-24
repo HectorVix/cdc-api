@@ -29,7 +29,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("protocolo")
+@Path("/cecon/protocolo")
 @ManagedBean
 public class ProtocoloResource {
 
@@ -41,13 +41,6 @@ public class ProtocoloResource {
     DispersionService dispersionServicio;
 
     List<Dispersion> lista_dispersion;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Protocolo> all() {
-        System.out.println("***->Lista de Protocolo");
-        return protocoloServicio.all();
-    }
 
     @POST
     @Path("/registro")

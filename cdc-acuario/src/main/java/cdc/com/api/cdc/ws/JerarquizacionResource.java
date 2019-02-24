@@ -34,7 +34,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("jerarquizacion")
+@Path("/cecon/jerarquizacion")
 @ManagedBean
 public class JerarquizacionResource {
 
@@ -48,13 +48,6 @@ public class JerarquizacionResource {
     NacionalService nacionalServicio;
     @Inject
     SubnacionalService subnacionalServicio;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Jerarquizacion> all() {
-        System.out.println("***->Lista de Jeraquia");
-        return jerarquizacionServicio.all();
-    }
 
     @POST
     @Path("/registro/global")

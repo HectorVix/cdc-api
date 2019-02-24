@@ -25,19 +25,12 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("observaciones")
+@Path("/cecon/observaciones")
 @ManagedBean
 public class ObservacionesResource {
 
     @Inject
     ObservacionesService observacionesServicio;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Observaciones> all() {
-        System.out.println("***->Lista de Observaciones");
-        return observacionesServicio.all();
-    }
 
     @POST
     @Path("/registro")

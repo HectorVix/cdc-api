@@ -28,7 +28,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-@Path("localizacion")
+@Path("/cecon/localizacion")
 @ManagedBean
 public class LocalizacionResource {
 
@@ -38,13 +38,6 @@ public class LocalizacionResource {
     ProteccionService proteccionServicio;
 
     List<Proteccion> lista_proteccion;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Localizacion> all() {
-        System.out.println("***->Lista de Localizacion");
-        return localizacionServicio.all();
-    }
 
     @POST
     @Path("/registro")

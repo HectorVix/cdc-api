@@ -40,7 +40,7 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
  *
  * @author Héctor Vix
  */
-@Path("usuario")
+@Path("/cecon/usuario")
 @ManagedBean
 public class UsuarioResource {
 
@@ -51,13 +51,6 @@ public class UsuarioResource {
     private KeyGenerator keyGenerator;
     @Context
     private UriInfo uriInfo;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Usuario> all() {
-        System.out.println("***->Lista de usuarios");
-        return usuarioService.all();
-    }
 
     @GET
     @Path("/{id}")

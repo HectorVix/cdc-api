@@ -28,7 +28,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("area")
+@Path("/cecon/area")
 @ManagedBean
 public class AreaResource {
 
@@ -38,13 +38,6 @@ public class AreaResource {
     ListaElementoService listaElementoServicio;
 
     List<ListaElemento> lista_elemento;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Area> all() {
-        System.out.println("***->Lista de Areas");
-        return areaServicio.all();
-    }
 
     @POST
     @Path("/registro")

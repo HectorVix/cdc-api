@@ -36,7 +36,7 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("caracterizacion")
+@Path("/cecon/caracterizacion")
 @ManagedBean
 public class CaracterizacionResource {
 
@@ -56,12 +56,6 @@ public class CaracterizacionResource {
     List<Distribucion> lista_distribucion;
     List<Distribucion2> lista_distribucion2;
 
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Caracterizacion> all() {
-        System.out.println("***->Lista de Caracterizacion");
-        return caracterizacionServicio.all();
-    }
 
     @Path("planta")
     @GET

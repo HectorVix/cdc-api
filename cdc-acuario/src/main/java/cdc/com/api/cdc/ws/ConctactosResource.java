@@ -25,19 +25,12 @@ import org.codehaus.jettison.json.JSONObject;
  *
  * @author Héctor Vix
  */
-@Path("contacto")
+@Path("/cecon/contacto")
 @ManagedBean
 public class ConctactosResource {
 
     @Inject
     ContactosService contactosServicio;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Contactos> all() {
-        System.out.println("***->Lista de Contactos");
-        return contactosServicio.all();
-    }
 
     @POST
     @Path("/registro/{id}")

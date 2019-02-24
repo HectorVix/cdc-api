@@ -27,7 +27,7 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-@Path("rastreo")
+@Path("/cecon/rastreo")
 @ManagedBean
 public class RastreoResource {
 
@@ -35,13 +35,6 @@ public class RastreoResource {
     RastreoService rastreoServicio;
     @Inject
     ElementoService elementoServicio;
-
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Rastreo> all() {
-        System.out.println("***->Lista de Rastreo");
-        return rastreoServicio.all();
-    }
 
     @POST
     @Path("/registro")
