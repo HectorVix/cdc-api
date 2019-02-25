@@ -144,13 +144,12 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/global")
+    @Path("/editar/global/{id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Global(Global global) throws JSONException {
+    public Response editarJerarquizacion_Global(Global global, @PathParam("id") int jerarquia_id) throws JSONException {
         Jerarquizacion jerarquizacion = new Jerarquizacion();
-        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
-        global.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+        jerarquizacion.setJerarquizacionId(jerarquia_id);
         globalServicio.update(global);
         JSONObject object = new JSONObject();
         object.put("codigoe", global.getCodigoe());
@@ -175,9 +174,6 @@ public class JerarquizacionResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarJerarquizacion_Nacional(Nacional nacional) throws JSONException {
-        Jerarquizacion jerarquizacion = new Jerarquizacion();
-        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
-        nacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
         nacionalServicio.update(nacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", nacional.getCodigoe());
@@ -204,9 +200,6 @@ public class JerarquizacionResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response editarJerarquizacion_Subnacional(Subnacional subnacional) throws JSONException {
-        Jerarquizacion jerarquizacion = new Jerarquizacion();
-        //jerarquizacion.setJerarquizacionId(Integer.MAX_VALUE);
-        subnacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
         subnacionalServicio.update(subnacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", subnacional.getCodigoe());

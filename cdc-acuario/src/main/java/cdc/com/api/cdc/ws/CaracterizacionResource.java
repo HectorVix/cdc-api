@@ -52,26 +52,10 @@ public class CaracterizacionResource {
     DistribucionService distribucionServicio;
     @Inject
     Distribucion2Service distribucion2Servicio;
-
+ 
     List<Distribucion> lista_distribucion;
     List<Distribucion2> lista_distribucion2;
 
-
-    @Path("planta")
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Planta> ListaPlantas() {
-        System.out.println("***->Lista de Plantas");
-        return plantaServicio.all();
-    }
-
-    @Path("vertebrado")
-    @GET
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Vertebrado> ListaVertebrados() {
-        System.out.println("***->Lista de Vertebrados");
-        return vertebradoServicio.all();
-    }
 
     @POST
     @Path("/registro/planta")

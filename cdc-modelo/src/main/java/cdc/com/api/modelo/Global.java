@@ -31,7 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Global.findAll", query = "SELECT g FROM Global g")
-    , @NamedQuery(name = "Global.findByGloblalId", query = "SELECT g FROM Global g WHERE g.globlalId = :globlalId")
+    , @NamedQuery(name = "Global.findByGlobalId", query = "SELECT g FROM Global g WHERE g.globalId = :globalId")
     , @NamedQuery(name = "Global.findByCodigoe", query = "SELECT g FROM Global g WHERE g.codigoe = :codigoe")
     , @NamedQuery(name = "Global.findByNombreg", query = "SELECT g FROM Global g WHERE g.nombreg = :nombreg")
     , @NamedQuery(name = "Global.findByDescrielem", query = "SELECT g FROM Global g WHERE g.descrielem = :descrielem")
@@ -74,8 +74,8 @@ public class Global implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "globlal_id")
-    private Integer globlalId;
+    @Column(name = "global_id")
+    private Integer globalId;
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "nombreg")
@@ -158,16 +158,16 @@ public class Global implements Serializable {
     public Global() {
     }
 
-    public Global(Integer globlalId) {
-        this.globlalId = globlalId;
+    public Global(Integer globalId) {
+        this.globalId = globalId;
     }
 
-    public Integer getGloblalId() {
-        return globlalId;
+    public Integer getGlobalId() {
+        return globalId;
     }
 
-    public void setGloblalId(Integer globlalId) {
-        this.globlalId = globlalId;
+    public void setGlobalId(Integer globalId) {
+        this.globalId = globalId;
     }
 
     public String getCodigoe() {
@@ -469,7 +469,7 @@ public class Global implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (globlalId != null ? globlalId.hashCode() : 0);
+        hash += (globalId != null ? globalId.hashCode() : 0);
         return hash;
     }
 
@@ -480,7 +480,7 @@ public class Global implements Serializable {
             return false;
         }
         Global other = (Global) object;
-        if ((this.globlalId == null && other.globlalId != null) || (this.globlalId != null && !this.globlalId.equals(other.globlalId))) {
+        if ((this.globalId == null && other.globalId != null) || (this.globalId != null && !this.globalId.equals(other.globalId))) {
             return false;
         }
         return true;
@@ -488,7 +488,7 @@ public class Global implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Global[ globlalId=" + globlalId + " ]";
+        return "cdc.com.api.modelo.Global[ globalId=" + globalId + " ]";
     }
     
 }

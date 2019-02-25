@@ -101,19 +101,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Localizacion.findByCc", query = "SELECT l FROM Localizacion l WHERE l.cc = :cc")
     , @NamedQuery(name = "Localizacion.findByCartografo", query = "SELECT l FROM Localizacion l WHERE l.cartografo = :cartografo")
     , @NamedQuery(name = "Localizacion.findByRespdatos", query = "SELECT l FROM Localizacion l WHERE l.respdatos = :respdatos")
-    , @NamedQuery(name = "Localizacion.findByActualizar", query = "SELECT l FROM Localizacion l WHERE l.actualizar = :actualizar")})
+    , @NamedQuery(name = "Localizacion.findByActualizar", query = "SELECT l FROM Localizacion l WHERE l.actualizar = :actualizar")
+    , @NamedQuery(name = "Localizacion.findByNombres", query = "SELECT l FROM Localizacion l WHERE l.nombres = :nombres")
+    , @NamedQuery(name = "Localizacion.findByNomcomuns", query = "SELECT l FROM Localizacion l WHERE l.nomcomuns = :nomcomuns")
+    , @NamedQuery(name = "Localizacion.findByRangog", query = "SELECT l FROM Localizacion l WHERE l.rangog = :rangog")
+    , @NamedQuery(name = "Localizacion.findByRangon", query = "SELECT l FROM Localizacion l WHERE l.rangon = :rangon")
+    , @NamedQuery(name = "Localizacion.findByRangos", query = "SELECT l FROM Localizacion l WHERE l.rangos = :rangos")})
 public class Localizacion implements Serializable {
-
-    @Column(name = "nombres")
-    private String nombres;
-    @Column(name = "nomcomuns")
-    private String nomcomuns;
-    @Column(name = "rangog")
-    private String rangog;
-    @Column(name = "rangon")
-    private String rangon;
-    @Column(name = "rangos")
-    private String rangos;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -258,6 +252,16 @@ public class Localizacion implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
+    @Column(name = "nombres")
+    private String nombres;
+    @Column(name = "nomcomuns")
+    private String nomcomuns;
+    @Column(name = "rangog")
+    private String rangog;
+    @Column(name = "rangon")
+    private String rangon;
+    @Column(name = "rangos")
+    private String rangos;
     @JoinTable(name = "localizacion_has_sitio", joinColumns = {
         @JoinColumn(name = "LOCALIZACION_localizacion_id", referencedColumnName = "localizacion_id")}, inverseJoinColumns = {
         @JoinColumn(name = "SITIO_sitio_id", referencedColumnName = "sitio_id")})
@@ -806,6 +810,46 @@ public class Localizacion implements Serializable {
         this.actualizar = actualizar;
     }
 
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public String getNomcomuns() {
+        return nomcomuns;
+    }
+
+    public void setNomcomuns(String nomcomuns) {
+        this.nomcomuns = nomcomuns;
+    }
+
+    public String getRangog() {
+        return rangog;
+    }
+
+    public void setRangog(String rangog) {
+        this.rangog = rangog;
+    }
+
+    public String getRangon() {
+        return rangon;
+    }
+
+    public void setRangon(String rangon) {
+        this.rangon = rangon;
+    }
+
+    public String getRangos() {
+        return rangos;
+    }
+
+    public void setRangos(String rangos) {
+        this.rangos = rangos;
+    }
+
     @XmlTransient
     public List<Sitio> getSitioList() {
         return sitioList;
@@ -864,46 +908,6 @@ public class Localizacion implements Serializable {
     @Override
     public String toString() {
         return "cdc.com.api.modelo.Localizacion[ localizacionId=" + localizacionId + " ]";
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getNomcomuns() {
-        return nomcomuns;
-    }
-
-    public void setNomcomuns(String nomcomuns) {
-        this.nomcomuns = nomcomuns;
-    }
-
-    public String getRangog() {
-        return rangog;
-    }
-
-    public void setRangog(String rangog) {
-        this.rangog = rangog;
-    }
-
-    public String getRangon() {
-        return rangon;
-    }
-
-    public void setRangon(String rangon) {
-        this.rangon = rangon;
-    }
-
-    public String getRangos() {
-        return rangos;
-    }
-
-    public void setRangos(String rangos) {
-        this.rangos = rangos;
     }
     
 }

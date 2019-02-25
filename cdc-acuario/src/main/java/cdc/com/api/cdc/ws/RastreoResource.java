@@ -42,7 +42,10 @@ public class RastreoResource {
     @Produces(APPLICATION_JSON)
     public Response registrarRastreo(Rastreo rastreo) throws JSONException, Exception {
         JSONObject object = new JSONObject();
+        Elemento elemento = new Elemento();
         validarElemento(rastreo.getCodigoe());
+        elemento.setElementoId(elementoServicio.getElemento_id());
+        rastreo.setELEMENTOelementoid(elemento);
         rastreoServicio.save(rastreo);
         object.put("codigoe", rastreo.getCodigoe());
         System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
