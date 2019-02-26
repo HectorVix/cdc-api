@@ -171,10 +171,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/nacional")
+    @Path("/editar/nacional/{jerarquia_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Nacional(Nacional nacional) throws JSONException {
+    public Response editarJerarquizacion_Nacional(Nacional nacional, @PathParam("jerarquia_id") int jerarquia_id) throws JSONException {
+        Jerarquizacion jerarquizacion = new Jerarquizacion();
+        jerarquizacion.setJerarquizacionId(jerarquia_id);
+        nacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
         nacionalServicio.update(nacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", nacional.getCodigoe());
@@ -197,10 +200,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/subnacional")
+    @Path("/editar/subnacional/{jerarquia_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Subnacional(Subnacional subnacional) throws JSONException {
+    public Response editarJerarquizacion_Subnacional(Subnacional subnacional,@PathParam("jerarquia_id") int jerarquia_id)throws JSONException {
+        Jerarquizacion jerarquizacion = new Jerarquizacion();
+        jerarquizacion.setJerarquizacionId(jerarquia_id);
+        subnacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
         subnacionalServicio.update(subnacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", subnacional.getCodigoe());
