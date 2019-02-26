@@ -144,12 +144,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/global/{id}")
+    @Path("/editar/global/{jerarquia_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Global(Global global, @PathParam("id") int jerarquia_id) throws JSONException {
+    public Response editarJerarquizacion_Global(Global global, @PathParam("jerarquia_id") int jerarquia_id) throws JSONException {
         Jerarquizacion jerarquizacion = new Jerarquizacion();
         jerarquizacion.setJerarquizacionId(jerarquia_id);
+        global.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
         globalServicio.update(global);
         JSONObject object = new JSONObject();
         object.put("codigoe", global.getCodigoe());
