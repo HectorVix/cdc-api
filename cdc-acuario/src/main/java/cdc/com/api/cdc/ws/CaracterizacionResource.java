@@ -52,10 +52,9 @@ public class CaracterizacionResource {
     DistribucionService distribucionServicio;
     @Inject
     Distribucion2Service distribucion2Servicio;
- 
+
     List<Distribucion> lista_distribucion;
     List<Distribucion2> lista_distribucion2;
-
 
     @POST
     @Path("/registro/planta")
@@ -186,10 +185,13 @@ public class CaracterizacionResource {
     }
 
     @POST
-    @Path("/editar/planta")
+    @Path("/editar/planta/{caracterizacion_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarPlanta(Planta planta) throws JSONException {
+    public Response editarPlanta(Planta planta, @PathParam("caracterizacion_id") int caracterizacion_id) throws JSONException {
+        Caracterizacion caracterizacion = new Caracterizacion();
+        caracterizacion.setCaracterizacionId(caracterizacion_id);
+        planta.setCARACTERIZACIONcaracterizacionid(caracterizacion);
         plantaServicio.update(planta);
         JSONObject object = new JSONObject();
         object.put("codigoe", planta.getCodigoe());
@@ -213,10 +215,13 @@ public class CaracterizacionResource {
     }
 
     @POST
-    @Path("/editar/vertebrado")
+    @Path("/editar/vertebrado/{caracterizacion_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarVertebrado(Vertebrado vertebrado) throws JSONException {
+    public Response editarVertebrado(Vertebrado vertebrado, @PathParam("caracterizacion_id") int caracterizacion_id) throws JSONException {
+        Caracterizacion caracterizacion = new Caracterizacion();
+        caracterizacion.setCaracterizacionId(caracterizacion_id);
+        vertebrado.setCARACTERIZACIONcaracterizacionid(caracterizacion);
         vertebradoServicio.update(vertebrado);
         JSONObject object = new JSONObject();
         object.put("codigoe", vertebrado.getCodigoe());

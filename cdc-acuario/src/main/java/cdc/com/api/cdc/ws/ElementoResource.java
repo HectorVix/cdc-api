@@ -19,44 +19,44 @@ import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Usuario;
 import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.FotoService;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
+//import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 import static javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA;
 import java.io.InputStream;
 import java.io.OutputStream;
 import com.sun.jersey.multipart.FormDataParam;
 import com.sun.jersey.core.header.FormDataContentDisposition;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+//import java.awt.image.BufferedImage;
+//import java.io.ByteArrayInputStream;
+//import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.List;
-import javax.imageio.ImageIO;
+//import java.util.List;
+//import javax.imageio.ImageIO;
 import javax.ws.rs.HeaderParam;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.StreamingOutput;
-import static jdk.nashorn.internal.objects.Global.undefined;
+//import javax.ws.rs.WebApplicationException;
+//import javax.ws.rs.core.StreamingOutput;
+//import static jdk.nashorn.internal.objects.Global.undefined;
 
 /**
  *
@@ -94,12 +94,12 @@ public class ElementoResource {
     @GET
     @Path("/validar/{codigoe}")
     @Produces(APPLICATION_JSON)
-    public Elemento findElemento(@PathParam("codigoe") String codigoe) throws JSONException, Exception {
+    public Response findElemento(@PathParam("codigoe") String codigoe) throws JSONException, Exception {
         System.out.println("***->Encontrando elemento:" + codigoe);
         validarElemento(codigoe);
-        Elemento el = new Elemento();
-        el.setElementoId(elementoServicio.getElemento_id());
-        return el;
+        JSONObject object = new JSONObject();
+        object.put("codigoe", codigoe);
+        return Response.status(202).entity(object.toString()).build();
     }
 
     private void validarElemento(String codigoe) throws Exception {
@@ -114,11 +114,12 @@ public class ElementoResource {
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public Response registrarElemento(Elemento elemento, @PathParam("id") int id) throws JSONException {
-        System.out.println("***->Registro Elemento Exitoso" + elemento.getCodigo());
+
         Usuario us = new Usuario();
         us.setUsuarioId(id);
         elemento.setUSUARIOusuarioid(us);
         int elemento_id = elementoServicio.save(elemento);
+        System.out.println("***->Registro Elemento Exitoso" + elemento.getCodigo());
         JSONObject object = new JSONObject();
         object.put("codigo", elemento.getCodigo());
         object.put("elementoId", elemento_id);

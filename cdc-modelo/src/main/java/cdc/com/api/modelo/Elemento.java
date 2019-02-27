@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,7 +63,7 @@ public class Elemento implements Serializable {
     private List<Protocolo> protocoloList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Rastreo> rastreoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "eLEMENTOelementoid")
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Caracterizacion> caracterizacionList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Jerarquizacion> jerarquizacionList;

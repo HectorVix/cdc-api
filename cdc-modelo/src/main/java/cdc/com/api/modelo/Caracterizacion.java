@@ -47,7 +47,7 @@ public class Caracterizacion implements Serializable {
     @Column(name = "tipo")
     private Integer tipo;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Elemento eLEMENTOelementoid;
     @OneToMany(mappedBy = "cARACTERIZACIONcaracterizacionid")
     private List<Planta> plantaList;

@@ -4,9 +4,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import cdc.com.api.servicio.UsuarioService;
-import cdc.com.api.servicio.ElementoService;
+//import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.modelo.Usuario;
-import cdc.com.api.modelo.Elemento;
+//import cdc.com.api.modelo.Elemento;
 
 import javax.annotation.ManagedBean;
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-import javax.transaction.Transactional;
+//import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
@@ -23,17 +23,17 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 import java.security.Key;
-import java.util.logging.Level;
+//import java.util.logging.Level;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
+//import java.util.List;
+//import java.util.logging.Logger;
 
 import static javax.ws.rs.core.HttpHeaders.AUTHORIZATION;
 import static javax.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.Response.Status.NOT_FOUND;
+//import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
 /**
