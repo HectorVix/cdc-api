@@ -21,7 +21,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
@@ -75,17 +75,17 @@ public class RastreoResource {
     }
 
     @POST
-    @Path("/editar")
+    @Path("/editar/{elemento_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarRastreoElemento(Rastreo re) throws JSONException {
-        //Elemento el = new Elemento();
-        // el.setElementoId(4);
-        // re.setELEMENTOelementoid(el);   
-        rastreoServicio.update(re);
+    public Response editarRastreoElemento(Rastreo rastreo, @PathParam("elemento_id") int elemento_id) throws JSONException {
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elemento_id);
+        rastreo.setELEMENTOelementoid(elemento);
+        rastreoServicio.update(rastreo);
         JSONObject object = new JSONObject();
-        object.put("codigoe", re.getCodigoe());
-        System.out.println("***->Editado exitoso RE:" + re.getCodigoe());
+        object.put("codigoe", rastreo.getCodigoe());
+        System.out.println("***->Editado exitoso RE:" + rastreo.getCodigoe());
         return Response.status(202).entity(object.toString()).build();
     }
 }
