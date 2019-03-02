@@ -96,16 +96,13 @@ public class ElementoResource {
     @Produces(APPLICATION_JSON)
     public Response findElemento(@PathParam("codigoe") String codigoe) throws JSONException, Exception {
         System.out.println("***->Encontrando elemento:" + codigoe);
-        validarElemento(codigoe);
+        boolean elemento = elementoServicio.findElemento(codigoe);
         JSONObject object = new JSONObject();
         object.put("codigoe", codigoe);
-        return Response.status(202).entity(object.toString()).build();
-    }
-
-    private void validarElemento(String codigoe) throws Exception {
-        boolean elemento = elementoServicio.findElemento(codigoe);
-        if (elemento == false) {
-            throw new SecurityException("No existe el elemento");
+        if (elemento) {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
         }
     }
 

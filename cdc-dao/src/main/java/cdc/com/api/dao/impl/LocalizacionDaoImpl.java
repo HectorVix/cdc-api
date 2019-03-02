@@ -7,6 +7,7 @@ package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.LocalizacionDao;
 import cdc.com.api.modelo.Localizacion;
+import cdc.com.api.modelo.Rastreo;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -22,6 +23,7 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
 
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
+    private int rastreo_id;
 
     public int save(Localizacion localizacion) {
         entityManager.persist(localizacion);
@@ -33,20 +35,6 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
         entityManager.merge(localizacion);
     }
 
-    public void delete(Long id) {
-        Localizacion localizacion = find(id);
-        entityManager.remove(localizacion);
-    }
-
-    public Localizacion find(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Localizacion> all() {
-        return entityManager.createQuery("SELECT l.codigole FROM Localizacion l", Localizacion.class).getResultList();
-    }
-
     public List<Localizacion> buscarLocalizacion(String codigole) {
         System.out.print("codigole:" + codigole);
         TypedQuery<Localizacion> query = entityManager.createQuery("SELECT l FROM Localizacion l"
@@ -54,4 +42,19 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
         return query.getResultList();
     }
 
+    public boolean findRastreo(String codigoe) {
+        TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r WHERE r.codigoe = :codigoe", Rastreo.class);
+        query.setParameter("codigoe", codigoe);
+        Rastreo re = query.getSingleResult();
+        if (re == null) {
+            return false;
+        } else {
+            rastreo_id = re.getRastreoId();
+            return true;
+        }
+    }
+
+    public int getRastreo_id() {
+        return rastreo_id;
+    }
 }

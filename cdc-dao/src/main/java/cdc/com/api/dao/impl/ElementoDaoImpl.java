@@ -66,7 +66,7 @@ public class ElementoDaoImpl implements ElementoDao {
     public boolean findElemento(String codigoe) {
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.codigo = :codigo", Elemento.class);
         query.setParameter("codigo", codigoe);
-        Elemento elemento = query.getSingleResult();
+        Elemento elemento = query.getResultList().stream().findFirst().orElse(null);
         if (elemento == null) {
             return false;
         } else {
@@ -74,7 +74,8 @@ public class ElementoDaoImpl implements ElementoDao {
             return true;
         }
     }
-      public int getElemento_id() {
+
+    public int getElemento_id() {
         return elemento_id;
     }
 }

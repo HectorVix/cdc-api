@@ -18,11 +18,9 @@ public interface LocalizacionDao {
 
     public void update(Localizacion localizacion);
 
-    public void delete(Long id);
+    public boolean findRastreo(String codigoe);
 
-    public Localizacion find(Long id);
-
-    public List<Localizacion> all();
+    public int getRastreo_id();
 
     public List<Localizacion> buscarLocalizacion(String codigole);
 }

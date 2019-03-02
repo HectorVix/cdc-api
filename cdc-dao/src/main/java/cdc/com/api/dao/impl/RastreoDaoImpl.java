@@ -37,7 +37,10 @@ public class RastreoDaoImpl implements RastreoDao {
     }
 
     public Rastreo find(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r WHERE r.rastreoId = :rastreoId", Rastreo.class);
+        query.setParameter("rastreoId", id);
+        Rastreo rastreo = query.getSingleResult();
+        return rastreo;
     }
 
     @Override
@@ -57,5 +60,12 @@ public class RastreoDaoImpl implements RastreoDao {
                 + "OR r.nombren like '%" + nombren + "%'"
                 + " OR r.nomcomunn like '%" + nombrecomunnn + "%')", Rastreo.class);
         return query.getResultList();
+    }
+
+    public Rastreo buscarRastreo_Codigoe(String codigoe) {
+        TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r WHERE r.codigoe = :codigoe", Rastreo.class);
+        query.setParameter("codigoe", codigoe);
+        Rastreo rastreo = query.getSingleResult();
+        return rastreo;
     }
 }

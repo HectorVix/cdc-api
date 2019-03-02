@@ -40,16 +40,17 @@ public class RastreoResource {
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarRastreo(Rastreo rastreo) throws JSONException, Exception {
+    public Response registrarRastreo(Rastreo rastreo) throws JSONException {
         JSONObject object = new JSONObject();
         Elemento elemento = new Elemento();
-        validarElemento(rastreo.getCodigoe());
-        elemento.setElementoId(elementoServicio.getElemento_id());
-        rastreo.setELEMENTOelementoid(elemento);
-        rastreoServicio.save(rastreo);
-        object.put("codigoe", rastreo.getCodigoe());
-        System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
-        return Response.status(202).entity(object.toString()).build();
+        if (elementoServicio.findElemento(rastreo.getCodigoe())) {
+            elemento.setElementoId(elementoServicio.getElemento_id());
+            rastreo.setELEMENTOelementoid(elemento);
+            rastreoServicio.save(rastreo);
+            object.put("codigoe", rastreo.getCodigoe());
+            System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
+        }
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @GET
@@ -65,13 +66,6 @@ public class RastreoResource {
         System.out.println("***->Busqueda Exitosa de RE");
         return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
 
-    }
-
-    private void validarElemento(String codigoe) throws Exception {
-        boolean elemento = elementoServicio.findElemento(codigoe);
-        if (elemento == false) {
-            throw new SecurityException("No existe el elemento");
-        }
     }
 
     @POST

@@ -30,21 +30,16 @@ public class LocalizacionServiceImpl implements LocalizacionService {
         localizacionDao.update(localizacion);
     }
 
-    public void delete(Long id) {
-        localizacionDao.delete(id);
-    }
-
-    public Localizacion find(Long id) {
-        return localizacionDao.find(id);
-    }
-
-    @Override
-    public List<Localizacion> all() {
-        return localizacionDao.all();
-    }
-
     public List<Localizacion> buscarLocalizacion(String codigole) {
         return localizacionDao.buscarLocalizacion(codigole);
+    }
+
+    public boolean findRastreo(String codigoe) {
+        return localizacionDao.findRastreo(codigoe);
+    }
+
+    public int getRastreo_id() {
+        return localizacionDao.getRastreo_id();
     }
 
 }

@@ -22,6 +22,8 @@ public interface RastreoDao {
 
     public Rastreo find(Long id);
 
+    public Rastreo buscarRastreo_Codigoe(String codigoe);
+
     public List<Rastreo> all();
 
     public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn);

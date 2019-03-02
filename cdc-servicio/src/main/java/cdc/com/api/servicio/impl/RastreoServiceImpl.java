@@ -47,4 +47,8 @@ public class RastreoServiceImpl implements RastreoService {
         return rastreoDao.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
     }
 
+    public Rastreo buscarRastreo_Codigoe(String codigoe) {
+        return rastreoDao.buscarRastreo_Codigoe(codigoe);
+    }
+
 }
