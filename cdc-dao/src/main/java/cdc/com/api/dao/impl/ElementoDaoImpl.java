@@ -25,12 +25,14 @@ public class ElementoDaoImpl implements ElementoDao {
     private int elemento_id;
 
     public int save(Elemento elemento) {
+        elemento.setCodigo(elemento.getCodigo().replaceAll("\\s", ""));
         entityManager.persist(elemento);
         entityManager.flush();
         return elemento.getElementoId();
     }
 
     public void update(Elemento elemento) {
+        elemento.setCodigo(elemento.getCodigo().replaceAll("\\s", ""));
         entityManager.merge(elemento);
     }
 
@@ -53,6 +55,7 @@ public class ElementoDaoImpl implements ElementoDao {
     }
 
     public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico) {
+        codigo = codigo.replaceAll("\\s", "");
         System.out.print("codigo:" + codigo);
         System.out.print("nombrecomun:" + nombrecomun);
         System.out.print("nombrecientifico:" + nombrecientifico);
@@ -64,6 +67,7 @@ public class ElementoDaoImpl implements ElementoDao {
     }
 
     public boolean findElemento(String codigoe) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.codigo = :codigo", Elemento.class);
         query.setParameter("codigo", codigoe);
         Elemento elemento = query.getResultList().stream().findFirst().orElse(null);

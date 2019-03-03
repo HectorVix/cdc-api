@@ -24,12 +24,14 @@ public class PlantaDaoImpl implements PlantaDao {
     private EntityManager entityManager;
 
     public int save(Planta planta) {
+        planta.setCodigoe(planta.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(planta);
         entityManager.flush();
         return planta.getPlantaId();
     }
 
     public void update(Planta planta) {
+        planta.setCodigoe(planta.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(planta);
     }
 
@@ -56,6 +58,7 @@ public class PlantaDaoImpl implements PlantaDao {
     }
 
     public List<Planta> buscarPlanta(String codigoe, String nacion, String nombren, String nomcomunn) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Planta> query = entityManager.createQuery("SELECT p FROM Planta p"
                 + " WHERE (p.codigoe like '%" + codigoe + "%'"
                 + "OR p.nacion like '%" + nacion + "%'"

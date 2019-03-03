@@ -24,10 +24,12 @@ public class NacionalDaoImpl implements NacionalDao {
     private EntityManager entityManager;
 
     public void save(Nacional nacional) {
+        nacional.setCodigoe(nacional.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(nacional);
     }
 
     public void update(Nacional nacional) {
+        nacional.setCodigoe(nacional.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(nacional);
     }
 
@@ -46,6 +48,7 @@ public class NacionalDaoImpl implements NacionalDao {
     }
 
     public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Nacional> query = entityManager.createQuery("SELECT n FROM Nacional n"
                 + " WHERE (n.codigoe like '%" + codigoe + "%'"
                 + "OR n.nombren like '%" + nombren + "%'"

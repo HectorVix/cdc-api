@@ -24,10 +24,12 @@ public class RastreoDaoImpl implements RastreoDao {
     private EntityManager entityManager;
 
     public void save(Rastreo rastreo) {
+        rastreo.setCodigoe(rastreo.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(rastreo);
     }
 
     public void update(Rastreo rastreo) {
+        rastreo.setCodigoe(rastreo.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(rastreo);
     }
 
@@ -53,6 +55,7 @@ public class RastreoDaoImpl implements RastreoDao {
         System.out.print("subnacion:" + subnacion);
         System.out.print("nombreg:" + nombreg);
         System.out.print("nombrecomunnn:" + nombrecomunnn);
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r"
                 + " WHERE (r.codigoe like '%" + codigoe + "%'"
                 + "OR r.subnacion like '%" + subnacion + "%'"
@@ -63,9 +66,10 @@ public class RastreoDaoImpl implements RastreoDao {
     }
 
     public Rastreo buscarRastreo_Codigoe(String codigoe) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r WHERE r.codigoe = :codigoe", Rastreo.class);
         query.setParameter("codigoe", codigoe);
-        Rastreo rastreo = query.getSingleResult();
+        Rastreo rastreo = query.getResultList().stream().findFirst().orElse(null);
         return rastreo;
     }
 }

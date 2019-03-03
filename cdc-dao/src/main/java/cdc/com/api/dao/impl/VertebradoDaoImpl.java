@@ -24,12 +24,14 @@ public class VertebradoDaoImpl implements VertebradoDao {
     private EntityManager entityManager;
 
     public int save(Vertebrado vertebrado) {
+        vertebrado.setCodigoe(vertebrado.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(vertebrado);
         entityManager.flush();
         return vertebrado.getVertebradoId();
     }
 
     public void update(Vertebrado vertebrado) {
+        vertebrado.setCodigoe(vertebrado.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(vertebrado);
     }
 
@@ -62,6 +64,7 @@ public class VertebradoDaoImpl implements VertebradoDao {
             String autor,
             String nombren,
             String nomcomunn) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Vertebrado> query = entityManager.createQuery("SELECT v FROM Vertebrado v"
                 + " WHERE (v.codigoe like '%" + codigoe + "%'"
                 + "OR v.nacion like '%" + nacion + "%'"

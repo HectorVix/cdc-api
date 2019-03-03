@@ -56,9 +56,7 @@ public class LocalizacionResource {
         Proteccion proteccion = new Proteccion();
         Rastreo rastreo = new Rastreo();
         StringTokenizer codigole = new StringTokenizer(localizacion.getCodigole(), ".");
-
         String codigoe = codigole.nextToken();
-        codigoe = codigoe.replaceAll("\\s", "");
         if (elementoServicio.findElemento(codigoe)) {
             lista_proteccion = localizacion.getProteccionList();
             localizacion.setProteccionList(null);

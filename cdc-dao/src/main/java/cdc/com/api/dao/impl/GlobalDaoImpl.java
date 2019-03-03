@@ -24,10 +24,12 @@ public class GlobalDaoImpl implements GlobalDao {
     private EntityManager entityManager;
 
     public void save(Global global) {
+        global.setCodigoe(global.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(global);
     }
 
     public void update(Global global) {
+        global.setCodigoe(global.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(global);
     }
 
@@ -47,6 +49,7 @@ public class GlobalDaoImpl implements GlobalDao {
     }
 
     public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Global> query = entityManager.createQuery("SELECT g FROM Global g"
                 + " WHERE (g.codigoe like '%" + codigoe + "%'"
                 + "OR g.nombreg like '%" + nombreg + "%'"

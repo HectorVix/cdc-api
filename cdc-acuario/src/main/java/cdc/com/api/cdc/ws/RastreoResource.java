@@ -49,8 +49,11 @@ public class RastreoResource {
             rastreoServicio.save(rastreo);
             object.put("codigoe", rastreo.getCodigoe());
             System.out.println("***->Registro Exitoso Rastreo :" + rastreo.getCodigoe());
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
         }
-        return Response.status(200).entity(object.toString()).build();
+
     }
 
     @GET

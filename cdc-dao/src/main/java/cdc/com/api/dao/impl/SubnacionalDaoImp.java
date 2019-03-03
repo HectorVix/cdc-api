@@ -24,10 +24,12 @@ public class SubnacionalDaoImp implements SubnacionalDao {
     private EntityManager entityManager;
 
     public void save(Subnacional subnacional) {
+        subnacional.setCodigoe(subnacional.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(subnacional);
     }
 
     public void update(Subnacional subnacional) {
+        subnacional.setCodigoe(subnacional.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(subnacional);
     }
 
@@ -51,6 +53,7 @@ public class SubnacionalDaoImp implements SubnacionalDao {
             String subnacion,
             String nombres,
             String loctips) {
+        codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Subnacional> query = entityManager.createQuery("SELECT s FROM Subnacional s"
                 + " WHERE (s.codigoe like '%" + codigoe + "%'"
                 + "OR s.nacion like '%" + nacion + "%'"
