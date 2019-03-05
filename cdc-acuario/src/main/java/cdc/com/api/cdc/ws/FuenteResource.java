@@ -7,7 +7,7 @@ package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Archivo;
 import cdc.com.api.modelo.Fuente;
-import cdc.com.api.modelo.Rastreo;
+//import cdc.com.api.modelo.Rastreo;
 import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.ArchivoService;
 import cdc.com.api.servicio.FuenteService;
@@ -20,9 +20,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
+//import java.nio.file.Files;
+//import java.nio.file.Paths;
+//import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -32,13 +32,13 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.WebApplicationException;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM;
+//import static javax.ws.rs.core.MediaType.APPLICATION_OCTET_STREAM;
 import static javax.ws.rs.core.MediaType.MULTIPART_FORM_DATA;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.StreamingOutput;
+//import javax.ws.rs.core.StreamingOutput;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -70,7 +70,7 @@ public class FuenteResource {
         object.put("codfuente", fuente.getCodfuente());
         object.put("fuenteId", fuente_id);
         System.out.println("***->Registro Exitoso Fuente:" + fuente.getCodfuente());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -159,7 +159,7 @@ public class FuenteResource {
         JSONObject object = new JSONObject();
         object.put("codfuente", fuente.getCodfuente());
         System.out.println("***->Editado exitoso fuente:" + fuente.getCodfuente());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @GET

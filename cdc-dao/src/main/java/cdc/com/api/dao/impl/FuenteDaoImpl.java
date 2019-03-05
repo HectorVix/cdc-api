@@ -6,7 +6,7 @@
 package cdc.com.api.dao.impl;
 
 import cdc.com.api.dao.FuenteDao;
-import cdc.com.api.modelo.Area;
+//import cdc.com.api.modelo.Area;
 import cdc.com.api.modelo.Fuente;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -25,12 +25,14 @@ public class FuenteDaoImpl implements FuenteDao {
     private EntityManager entityManager;
 
     public int save(Fuente fuente) {
+        fuente.setCodfuente(fuente.getCodfuente().replaceAll("\\s", ""));
         entityManager.persist(fuente);
         entityManager.flush();
         return fuente.getFuenteId();
     }
 
     public void update(Fuente fuente) {
+        fuente.setCodfuente(fuente.getCodfuente().replaceAll("\\s", ""));
         entityManager.merge(fuente);
     }
 
@@ -58,6 +60,7 @@ public class FuenteDaoImpl implements FuenteDao {
             String cita,
             String archivado,
             String clave) {
+        codfuente = codfuente.replaceAll("\\s", "");
         TypedQuery<Fuente> query = entityManager.createQuery("SELECT f FROM Fuente f"
                 + " WHERE (f.naturalezadocumento like '%" + naturalezadocumento + "%'"
                 + "OR f.codfuente like '%" + codfuente + "%'"
