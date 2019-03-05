@@ -120,7 +120,7 @@ public class ElementoResource {
         JSONObject object = new JSONObject();
         object.put("codigo", elemento.getCodigo());
         object.put("elementoId", elemento_id);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -368,7 +368,7 @@ public class ElementoResource {
         JSONObject object = new JSONObject();
         object.put("codigo", elemento.getCodigo());
         System.out.println("***->Editado exitoso:" + elemento.getCodigo());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @DELETE
@@ -379,6 +379,6 @@ public class ElementoResource {
         JSONObject object = new JSONObject();
         object.put("fotoId", id);
         System.out.println("***->Delete exitoso:" + id);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 }
