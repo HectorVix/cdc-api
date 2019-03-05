@@ -51,10 +51,6 @@ public class RastreoDaoImpl implements RastreoDao {
     }
 
     public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn) {
-        System.out.print("codigoe:" + codigoe);
-        System.out.print("subnacion:" + subnacion);
-        System.out.print("nombreg:" + nombreg);
-        System.out.print("nombrecomunnn:" + nombrecomunnn);
         codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r"
                 + " WHERE (r.codigoe like '%" + codigoe + "%'"

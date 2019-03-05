@@ -35,7 +35,7 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("/cecon/localizacion")
 @ManagedBean
 public class LocalizacionResource {
-
+    
     @Inject
     LocalizacionService localizacionServicio;
     @Inject
@@ -44,9 +44,9 @@ public class LocalizacionResource {
     RastreoService rastreoServicio;
     @Inject
     ElementoService elementoServicio;
-
+    
     List<Proteccion> lista_proteccion;
-
+    
     @POST
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
@@ -58,6 +58,13 @@ public class LocalizacionResource {
         StringTokenizer codigole = new StringTokenizer(localizacion.getCodigole(), ".");
         String codigoe = codigole.nextToken();
         if (elementoServicio.findElemento(codigoe)) {
+            rastreo = rastreoServicio.buscarRastreo_Codigoe(codigoe);
+            if (rastreo == null) {
+                object.put("codigoe", codigoe);
+                return Response.status(406).entity(object.toString()).build();
+            } else {
+                localizacion.setRASTREOrastreoid(rastreo);
+            }
             lista_proteccion = localizacion.getProteccionList();
             localizacion.setProteccionList(null);
             int localizacion_id = localizacionServicio.save(localizacion);
@@ -74,15 +81,14 @@ public class LocalizacionResource {
             }
             object.put("codigole", localizacion.getCodigole());
             System.out.println("***->Registro Exitoso Localizacion :" + localizacion.getCodigole());
-            return Response.status(202).entity(object.toString()).build();
-        } //System.out.println("***->CODIGOE:" + codigoe);
-        else {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
             object.put("codigoe", codigoe);
             return Response.status(404).entity(object.toString()).build();
         }
-
+        
     }
-
+    
     @GET
     @Path("/buscar/{codigole}")
     @Consumes(APPLICATION_JSON)
@@ -91,22 +97,22 @@ public class LocalizacionResource {
         System.out.println("***->Busqueda Exitosa LE");
         return localizacionServicio.buscarLocalizacion(codigole);
     }
-
+    
     @POST
-    @Path("/editar")
+    @Path("/editar/{rastreo_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarLocalizacionElemento(Localizacion le) throws JSONException {
-        //Elemento el = new Elemento();
-        // el.setElementoId(4);
-        // le.setELEMENTOelementoid(le);   
+    public Response editarLocalizacionElemento(Localizacion le, @PathParam("rastreo_id") int rastreo_id) throws JSONException {
+        Rastreo rastreo = new Rastreo();
+        rastreo.setRastreoId(rastreo_id);
+        le.setRASTREOrastreoid(rastreo);
         localizacionServicio.update(le);
         JSONObject object = new JSONObject();
         object.put("codigole", le.getCodigole());
         System.out.println("***->Editado exitoso LE:" + le.getCodigole());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
-
+    
     @GET
     @Path("/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -117,7 +123,7 @@ public class LocalizacionResource {
         le.setLocalizacionId(localizacionId);
         return proteccionServicio.buscarProteccion_LocalizacionId(le);
     }
-
+    
     @POST
     @Path("/registrar/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -131,9 +137,9 @@ public class LocalizacionResource {
         proteccionServicio.save(proteccion);
         object.put("codigoam", proteccion.getCodigoam());
         System.out.println("***->Registro Exitoso Proteccion :" + proteccion.getCodigoam());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
-
+    
     @POST
     @Path("/delete/proteccion/{proteccionId}")
     @Consumes(APPLICATION_JSON)
@@ -143,9 +149,9 @@ public class LocalizacionResource {
         proteccionServicio.delete(proteccionId);
         object.put("proteccionId", proteccionId);
         System.out.println("***->Delete Exitoso Proteccion :" + proteccionId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
-
+    
     @POST
     @Path("/update/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -158,6 +164,6 @@ public class LocalizacionResource {
         proteccionServicio.update(proteccion);
         object.put("proteccionId", proteccion.getProteccionId());
         System.out.println("***->Update Exitoso Proteccion :" + proteccion.getProteccionId());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 }

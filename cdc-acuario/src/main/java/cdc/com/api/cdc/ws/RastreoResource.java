@@ -83,6 +83,6 @@ public class RastreoResource {
         JSONObject object = new JSONObject();
         object.put("codigoe", rastreo.getCodigoe());
         System.out.println("***->Editado exitoso RE:" + rastreo.getCodigoe());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 }
