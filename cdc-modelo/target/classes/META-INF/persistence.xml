@@ -55,5 +55,15 @@
     <class>cdc.com.api.modelo.Subdivision</class>
     <class>cdc.com.api.modelo.ListaElemento</class>
     <class>cdc.com.api.modelo.Protocolo_1</class>
+    <class>cdc.com.api.modelo.ContactosHasFuente</class>
+    <class>cdc.com.api.modelo.ContactosHasSitio</class>
+    <class>cdc.com.api.modelo.AreaHasLote</class>
+    <class>cdc.com.api.modelo.ContactoHasSitio</class>
+    <class>cdc.com.api.modelo.SitioHasLote</class>
+    <class>cdc.com.api.modelo.Lote</class>
+    <class>cdc.com.api.modelo.ContactoHasLote</class>
+    <class>cdc.com.api.modelo.ContactoHasFuente</class>
+    <class>cdc.com.api.modelo.Contacto</class>
+    <class>cdc.com.api.modelo.ContactoHasArea</class>
   </persistence-unit>
 </persistence>

@@ -269,6 +269,8 @@ public class Fuente implements Serializable {
     private Usuario uSUARIOusuarioid;
     @OneToMany(mappedBy = "fUENTEfuenteid")
     private List<Archivo> archivoList;
+    @OneToMany(mappedBy = "fUENTEfuenteid")
+    private List<ContactoHasFuente> contactoHasFuenteList;
 
     public Fuente() {
     }
@@ -884,6 +886,15 @@ public class Fuente implements Serializable {
 
     public void setArchivoList(List<Archivo> archivoList) {
         this.archivoList = archivoList;
+    }
+
+    @XmlTransient
+    public List<ContactoHasFuente> getContactoHasFuenteList() {
+        return contactoHasFuenteList;
+    }
+
+    public void setContactoHasFuenteList(List<ContactoHasFuente> contactoHasFuenteList) {
+        this.contactoHasFuenteList = contactoHasFuenteList;
     }
 
     @Override

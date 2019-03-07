@@ -74,9 +74,9 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Area> areaList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Elemento> elementoList;
+    private List<Contacto> contactoList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Contactos> contactosList;
+    private List<Elemento> elementoList;
     @JoinColumn(name = "Rol_rol_id", referencedColumnName = "rol_id")
     @ManyToOne
     private Rol rolrolid;
@@ -189,21 +189,21 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Contacto> getContactoList() {
+        return contactoList;
+    }
+
+    public void setContactoList(List<Contacto> contactoList) {
+        this.contactoList = contactoList;
+    }
+
+    @XmlTransient
     public List<Elemento> getElementoList() {
         return elementoList;
     }
 
     public void setElementoList(List<Elemento> elementoList) {
         this.elementoList = elementoList;
-    }
-
-    @XmlTransient
-    public List<Contactos> getContactosList() {
-        return contactosList;
-    }
-
-    public void setContactosList(List<Contactos> contactosList) {
-        this.contactosList = contactosList;
     }
 
     public Rol getRolrolid() {

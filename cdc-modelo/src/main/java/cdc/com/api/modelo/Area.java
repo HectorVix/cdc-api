@@ -200,6 +200,8 @@ public class Area implements Serializable {
     @ManyToMany
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "aREAareaid")
+    private List<ContactoHasArea> contactoHasAreaList;
+    @OneToMany(mappedBy = "aREAareaid")
     private List<ListaElemento> listaElementoList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
@@ -208,6 +210,8 @@ public class Area implements Serializable {
     private List<Foto> fotoList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<Observaciones> observacionesList;
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<AreaHasLote> areaHasLoteList;
 
     public Area() {
     }
@@ -626,6 +630,15 @@ public class Area implements Serializable {
     }
 
     @XmlTransient
+    public List<ContactoHasArea> getContactoHasAreaList() {
+        return contactoHasAreaList;
+    }
+
+    public void setContactoHasAreaList(List<ContactoHasArea> contactoHasAreaList) {
+        this.contactoHasAreaList = contactoHasAreaList;
+    }
+
+    @XmlTransient
     public List<ListaElemento> getListaElementoList() {
         return listaElementoList;
     }
@@ -658,6 +671,15 @@ public class Area implements Serializable {
 
     public void setObservacionesList(List<Observaciones> observacionesList) {
         this.observacionesList = observacionesList;
+    }
+
+    @XmlTransient
+    public List<AreaHasLote> getAreaHasLoteList() {
+        return areaHasLoteList;
+    }
+
+    public void setAreaHasLoteList(List<AreaHasLote> areaHasLoteList) {
+        this.areaHasLoteList = areaHasLoteList;
     }
 
     @Override

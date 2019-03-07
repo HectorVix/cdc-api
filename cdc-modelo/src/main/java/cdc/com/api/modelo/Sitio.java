@@ -220,6 +220,10 @@ public class Sitio implements Serializable {
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<Subdivision> subdivisionList;
     @OneToMany(mappedBy = "sITIOsitioid")
+    private List<ContactoHasSitio> contactoHasSitioList;
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<SitioHasLote> sitioHasLoteList;
+    @OneToMany(mappedBy = "sITIOsitioid")
     private List<Foto> fotoList;
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<Observaciones> observacionesList;
@@ -713,6 +717,24 @@ public class Sitio implements Serializable {
 
     public void setSubdivisionList(List<Subdivision> subdivisionList) {
         this.subdivisionList = subdivisionList;
+    }
+
+    @XmlTransient
+    public List<ContactoHasSitio> getContactoHasSitioList() {
+        return contactoHasSitioList;
+    }
+
+    public void setContactoHasSitioList(List<ContactoHasSitio> contactoHasSitioList) {
+        this.contactoHasSitioList = contactoHasSitioList;
+    }
+
+    @XmlTransient
+    public List<SitioHasLote> getSitioHasLoteList() {
+        return sitioHasLoteList;
+    }
+
+    public void setSitioHasLoteList(List<SitioHasLote> sitioHasLoteList) {
+        this.sitioHasLoteList = sitioHasLoteList;
     }
 
     @XmlTransient

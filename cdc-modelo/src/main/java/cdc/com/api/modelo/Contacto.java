@@ -7,6 +7,7 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,55 +18,57 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Héctor Vix
  */
 @Entity
-@Table(name = "contactos")
+@Table(name = "contacto")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Contactos.findAll", query = "SELECT c FROM Contactos c")
-    , @NamedQuery(name = "Contactos.findByContactosId", query = "SELECT c FROM Contactos c WHERE c.contactosId = :contactosId")
-    , @NamedQuery(name = "Contactos.findByNumident", query = "SELECT c FROM Contactos c WHERE c.numident = :numident")
-    , @NamedQuery(name = "Contactos.findByNombreident", query = "SELECT c FROM Contactos c WHERE c.nombreident = :nombreident")
-    , @NamedQuery(name = "Contactos.findByTitulo", query = "SELECT c FROM Contactos c WHERE c.titulo = :titulo")
-    , @NamedQuery(name = "Contactos.findByNombre", query = "SELECT c FROM Contactos c WHERE c.nombre = :nombre")
-    , @NamedQuery(name = "Contactos.findByApellido1", query = "SELECT c FROM Contactos c WHERE c.apellido1 = :apellido1")
-    , @NamedQuery(name = "Contactos.findByApellido2", query = "SELECT c FROM Contactos c WHERE c.apellido2 = :apellido2")
-    , @NamedQuery(name = "Contactos.findBySufijo", query = "SELECT c FROM Contactos c WHERE c.sufijo = :sufijo")
-    , @NamedQuery(name = "Contactos.findByPosicion", query = "SELECT c FROM Contactos c WHERE c.posicion = :posicion")
-    , @NamedQuery(name = "Contactos.findByInstitucion", query = "SELECT c FROM Contactos c WHERE c.institucion = :institucion")
-    , @NamedQuery(name = "Contactos.findByEmail", query = "SELECT c FROM Contactos c WHERE c.email = :email")
-    , @NamedQuery(name = "Contactos.findByDir1", query = "SELECT c FROM Contactos c WHERE c.dir1 = :dir1")
-    , @NamedQuery(name = "Contactos.findByDir2", query = "SELECT c FROM Contactos c WHERE c.dir2 = :dir2")
-    , @NamedQuery(name = "Contactos.findByDir3", query = "SELECT c FROM Contactos c WHERE c.dir3 = :dir3")
-    , @NamedQuery(name = "Contactos.findByPais", query = "SELECT c FROM Contactos c WHERE c.pais = :pais")
-    , @NamedQuery(name = "Contactos.findByCiudad", query = "SELECT c FROM Contactos c WHERE c.ciudad = :ciudad")
-    , @NamedQuery(name = "Contactos.findBySubnacion", query = "SELECT c FROM Contactos c WHERE c.subnacion = :subnacion")
-    , @NamedQuery(name = "Contactos.findByCodpostal", query = "SELECT c FROM Contactos c WHERE c.codpostal = :codpostal")
-    , @NamedQuery(name = "Contactos.findByMasident", query = "SELECT c FROM Contactos c WHERE c.masident = :masident")
-    , @NamedQuery(name = "Contactos.findBySmsa", query = "SELECT c FROM Contactos c WHERE c.smsa = :smsa")
-    , @NamedQuery(name = "Contactos.findByTeleftrabajo", query = "SELECT c FROM Contactos c WHERE c.teleftrabajo = :teleftrabajo")
-    , @NamedQuery(name = "Contactos.findByTelefhogar", query = "SELECT c FROM Contactos c WHERE c.telefhogar = :telefhogar")
-    , @NamedQuery(name = "Contactos.findByTipocont", query = "SELECT c FROM Contactos c WHERE c.tipocont = :tipocont")
-    , @NamedQuery(name = "Contactos.findByActivcont", query = "SELECT c FROM Contactos c WHERE c.activcont = :activcont")
-    , @NamedQuery(name = "Contactos.findByResumen", query = "SELECT c FROM Contactos c WHERE c.resumen = :resumen")
-    , @NamedQuery(name = "Contactos.findByCoddirp", query = "SELECT c FROM Contactos c WHERE c.coddirp = :coddirp")
-    , @NamedQuery(name = "Contactos.findByActualizar", query = "SELECT c FROM Contactos c WHERE c.actualizar = :actualizar")})
-public class Contactos implements Serializable {
+    @NamedQuery(name = "Contacto.findAll", query = "SELECT c FROM Contacto c")
+    , @NamedQuery(name = "Contacto.findByContactoId", query = "SELECT c FROM Contacto c WHERE c.contactoId = :contactoId")
+    , @NamedQuery(name = "Contacto.findByNumident", query = "SELECT c FROM Contacto c WHERE c.numident = :numident")
+    , @NamedQuery(name = "Contacto.findByNombreident", query = "SELECT c FROM Contacto c WHERE c.nombreident = :nombreident")
+    , @NamedQuery(name = "Contacto.findByTitulo", query = "SELECT c FROM Contacto c WHERE c.titulo = :titulo")
+    , @NamedQuery(name = "Contacto.findByNombre", query = "SELECT c FROM Contacto c WHERE c.nombre = :nombre")
+    , @NamedQuery(name = "Contacto.findByApellido1", query = "SELECT c FROM Contacto c WHERE c.apellido1 = :apellido1")
+    , @NamedQuery(name = "Contacto.findByApellido2", query = "SELECT c FROM Contacto c WHERE c.apellido2 = :apellido2")
+    , @NamedQuery(name = "Contacto.findBySufijo", query = "SELECT c FROM Contacto c WHERE c.sufijo = :sufijo")
+    , @NamedQuery(name = "Contacto.findByPosicion", query = "SELECT c FROM Contacto c WHERE c.posicion = :posicion")
+    , @NamedQuery(name = "Contacto.findByInstitucion", query = "SELECT c FROM Contacto c WHERE c.institucion = :institucion")
+    , @NamedQuery(name = "Contacto.findByEmail", query = "SELECT c FROM Contacto c WHERE c.email = :email")
+    , @NamedQuery(name = "Contacto.findByDir1", query = "SELECT c FROM Contacto c WHERE c.dir1 = :dir1")
+    , @NamedQuery(name = "Contacto.findByDir2", query = "SELECT c FROM Contacto c WHERE c.dir2 = :dir2")
+    , @NamedQuery(name = "Contacto.findByDir3", query = "SELECT c FROM Contacto c WHERE c.dir3 = :dir3")
+    , @NamedQuery(name = "Contacto.findByPais", query = "SELECT c FROM Contacto c WHERE c.pais = :pais")
+    , @NamedQuery(name = "Contacto.findByCiudad", query = "SELECT c FROM Contacto c WHERE c.ciudad = :ciudad")
+    , @NamedQuery(name = "Contacto.findBySubnacion", query = "SELECT c FROM Contacto c WHERE c.subnacion = :subnacion")
+    , @NamedQuery(name = "Contacto.findByCodpostal", query = "SELECT c FROM Contacto c WHERE c.codpostal = :codpostal")
+    , @NamedQuery(name = "Contacto.findByMasident", query = "SELECT c FROM Contacto c WHERE c.masident = :masident")
+    , @NamedQuery(name = "Contacto.findBySmsa", query = "SELECT c FROM Contacto c WHERE c.smsa = :smsa")
+    , @NamedQuery(name = "Contacto.findByTeleftrabajo", query = "SELECT c FROM Contacto c WHERE c.teleftrabajo = :teleftrabajo")
+    , @NamedQuery(name = "Contacto.findByTelefhogar", query = "SELECT c FROM Contacto c WHERE c.telefhogar = :telefhogar")
+    , @NamedQuery(name = "Contacto.findByTipocont", query = "SELECT c FROM Contacto c WHERE c.tipocont = :tipocont")
+    , @NamedQuery(name = "Contacto.findByActivcont", query = "SELECT c FROM Contacto c WHERE c.activcont = :activcont")
+    , @NamedQuery(name = "Contacto.findByResumen", query = "SELECT c FROM Contacto c WHERE c.resumen = :resumen")
+    , @NamedQuery(name = "Contacto.findByCoddirp", query = "SELECT c FROM Contacto c WHERE c.coddirp = :coddirp")
+    , @NamedQuery(name = "Contacto.findByActualizar", query = "SELECT c FROM Contacto c WHERE c.actualizar = :actualizar")})
+public class Contacto implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "contactos_id")
-    private Integer contactosId;
+    @Column(name = "contacto_id")
+    private Integer contactoId;
     @Column(name = "numident")
     private String numident;
     @Column(name = "nombreident")
@@ -119,23 +122,31 @@ public class Contactos implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
+    @OneToMany(mappedBy = "cONTACTOcontactoid")
+    private List<ContactoHasArea> contactoHasAreaList;
+    @OneToMany(mappedBy = "cONTACTOcontactoid")
+    private List<ContactoHasSitio> contactoHasSitioList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
+    @OneToMany(mappedBy = "cONTACTOcontactoid")
+    private List<ContactoHasLote> contactoHasLoteList;
+    @OneToMany(mappedBy = "cONTACTOcontactoid")
+    private List<ContactoHasFuente> contactoHasFuenteList;
 
-    public Contactos() {
+    public Contacto() {
     }
 
-    public Contactos(Integer contactosId) {
-        this.contactosId = contactosId;
+    public Contacto(Integer contactoId) {
+        this.contactoId = contactoId;
     }
 
-    public Integer getContactosId() {
-        return contactosId;
+    public Integer getContactoId() {
+        return contactoId;
     }
 
-    public void setContactosId(Integer contactosId) {
-        this.contactosId = contactosId;
+    public void setContactoId(Integer contactoId) {
+        this.contactoId = contactoId;
     }
 
     public String getNumident() {
@@ -346,6 +357,24 @@ public class Contactos implements Serializable {
         this.actualizar = actualizar;
     }
 
+    @XmlTransient
+    public List<ContactoHasArea> getContactoHasAreaList() {
+        return contactoHasAreaList;
+    }
+
+    public void setContactoHasAreaList(List<ContactoHasArea> contactoHasAreaList) {
+        this.contactoHasAreaList = contactoHasAreaList;
+    }
+
+    @XmlTransient
+    public List<ContactoHasSitio> getContactoHasSitioList() {
+        return contactoHasSitioList;
+    }
+
+    public void setContactoHasSitioList(List<ContactoHasSitio> contactoHasSitioList) {
+        this.contactoHasSitioList = contactoHasSitioList;
+    }
+
     public Usuario getUSUARIOusuarioid() {
         return uSUARIOusuarioid;
     }
@@ -354,21 +383,39 @@ public class Contactos implements Serializable {
         this.uSUARIOusuarioid = uSUARIOusuarioid;
     }
 
+    @XmlTransient
+    public List<ContactoHasLote> getContactoHasLoteList() {
+        return contactoHasLoteList;
+    }
+
+    public void setContactoHasLoteList(List<ContactoHasLote> contactoHasLoteList) {
+        this.contactoHasLoteList = contactoHasLoteList;
+    }
+
+    @XmlTransient
+    public List<ContactoHasFuente> getContactoHasFuenteList() {
+        return contactoHasFuenteList;
+    }
+
+    public void setContactoHasFuenteList(List<ContactoHasFuente> contactoHasFuenteList) {
+        this.contactoHasFuenteList = contactoHasFuenteList;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (contactosId != null ? contactosId.hashCode() : 0);
+        hash += (contactoId != null ? contactoId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Contactos)) {
+        if (!(object instanceof Contacto)) {
             return false;
         }
-        Contactos other = (Contactos) object;
-        if ((this.contactosId == null && other.contactosId != null) || (this.contactosId != null && !this.contactosId.equals(other.contactosId))) {
+        Contacto other = (Contacto) object;
+        if ((this.contactoId == null && other.contactoId != null) || (this.contactoId != null && !this.contactoId.equals(other.contactoId))) {
             return false;
         }
         return true;
@@ -376,7 +423,7 @@ public class Contactos implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Contactos[ contactosId=" + contactosId + " ]";
+        return "cdc.com.api.modelo.Contacto[ contactoId=" + contactoId + " ]";
     }
     
 }

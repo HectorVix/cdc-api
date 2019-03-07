@@ -5,26 +5,26 @@
  */
 package cdc.com.api.servicio;
 
-import cdc.com.api.modelo.Contactos;
+import cdc.com.api.modelo.Contacto;
 import java.util.List;
 
 /**
  *
  * @author Héctor Vix
  */
-public interface ContactosService {
+public interface ContactoService {
 
-    public void save(Contactos contactos);
+    public void save(Contacto contacto);
 
-    public void update(Contactos contactos);
+    public void update(Contacto contacto);
 
     public void delete(Long id);
 
-    public Contactos find(Long id);
+    public Contacto find(Long id);
 
-    public List<Contactos> all();
+    public List<Contacto> all();
 
-    public List<Contactos> buscarContacto(
+    public List<Contacto> buscarContacto(
             String numident,
             String nombreident,
             String nombre,
