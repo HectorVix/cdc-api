@@ -12,6 +12,7 @@ package cdc.com.api.cdc.ws;
 import cdc.com.api.modelo.Macsitio;
 import cdc.com.api.modelo.Sitio;
 import cdc.com.api.modelo.Subdivision;
+import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.MacsitioService;
 import cdc.com.api.servicio.SitioService;
 import cdc.com.api.servicio.SubdivisionService;
@@ -24,7 +25,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
@@ -45,18 +46,21 @@ public class SitioResource {
     List<Subdivision> lista_subdivision;
 
     @POST
-    @Path("/registro")
+    @Path("/registro/{usuario_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarSitio(Sitio sitio) throws JSONException {
+    public Response registrarSitio(Sitio sitio, @PathParam("usuario_id") int usuario_id) throws JSONException {
         Macsitio macsitio = new Macsitio();
         Subdivision subdivision = new Subdivision();
+        JSONObject object = new JSONObject();
+        Usuario usuario = new Usuario();
 
         lista_macsitio = sitio.getMacsitioList();
         lista_subdivision = sitio.getSubdivisionList();
+        usuario.setUsuarioId(usuario_id);
         sitio.setMacsitioList(null);
         sitio.setSubdivisionList(null);
-        JSONObject object = new JSONObject();
+        sitio.setUSUARIOusuarioid(usuario);
         int sitio_id = sitioServicio.save(sitio);
         sitio.setSitioId(sitio_id);
         //Macsitio
@@ -83,7 +87,7 @@ public class SitioResource {
         object.put("sitioId", sitio_id);
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Registro Exitoso Sitio :" + sitio.getCodsitio());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @GET
@@ -101,15 +105,18 @@ public class SitioResource {
     }
 
     @POST
-    @Path("/editar")
+    @Path("/editar/{usuario_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarSitio(Sitio sitio) throws JSONException {
-        sitioServicio.update(sitio);
+    public Response editarSitio(Sitio sitio, @PathParam("usuario_id") int usuario_id) throws JSONException {
         JSONObject object = new JSONObject();
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(usuario_id);
+        sitio.setUSUARIOusuarioid(usuario);
+        sitioServicio.update(sitio);
         object.put("codsitio", sitio.getCodsitio());
         System.out.println("***->Editado exitoso sitio:" + sitio.getCodsitio());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 //-----------------------MACSITIO
 
@@ -136,7 +143,7 @@ public class SitioResource {
         macsitioServicio.save(macsitio);
         object.put("sitioId", sitioId);
         System.out.println("***->Registro Exitoso Macsitio :" + sitioId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -148,7 +155,7 @@ public class SitioResource {
         macsitioServicio.delete(macsitioId);
         object.put("macsitioId", macsitioId);
         System.out.println("***->Delete Exitoso Macsitio :" + macsitioId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -163,7 +170,7 @@ public class SitioResource {
         macsitioServicio.update(macsitio);
         object.put("sitioId", sitioId);
         System.out.println("***->Update Exitoso Macsitio :" + sitioId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 //-----------------------------SUBDIVISION---------------
 
@@ -190,7 +197,7 @@ public class SitioResource {
         subdivisionServicio.save(subdivision);
         object.put("sitioId", sitioId);
         System.out.println("***->Registro Exitoso Subdivision :" + sitioId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -202,7 +209,7 @@ public class SitioResource {
         subdivisionServicio.delete(subdivisionId);
         object.put("subdivisionId", subdivisionId);
         System.out.println("***->Delete Exitoso Subdivision :" + subdivisionId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -217,6 +224,6 @@ public class SitioResource {
         subdivisionServicio.update(subdivision);
         object.put("sitioId", sitioId);
         System.out.println("***->Update Exitoso Subdivision :" + sitioId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 }

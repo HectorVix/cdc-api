@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -200,6 +201,9 @@ public class Area implements Serializable {
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<ListaElemento> listaElementoList;
+    @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
+    @ManyToOne
+    private Usuario uSUARIOusuarioid;
     @OneToMany(mappedBy = "aREAareaid")
     private List<Foto> fotoList;
     @OneToMany(mappedBy = "aREAareaid")
@@ -628,6 +632,14 @@ public class Area implements Serializable {
 
     public void setListaElementoList(List<ListaElemento> listaElementoList) {
         this.listaElementoList = listaElementoList;
+    }
+
+    public Usuario getUSUARIOusuarioid() {
+        return uSUARIOusuarioid;
+    }
+
+    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
+        this.uSUARIOusuarioid = uSUARIOusuarioid;
     }
 
     @XmlTransient

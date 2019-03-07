@@ -68,7 +68,11 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Accion> accionList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Sitio> sitioList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Fuente> fuenteList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Area> areaList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Elemento> elementoList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
@@ -158,12 +162,30 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Sitio> getSitioList() {
+        return sitioList;
+    }
+
+    public void setSitioList(List<Sitio> sitioList) {
+        this.sitioList = sitioList;
+    }
+
+    @XmlTransient
     public List<Fuente> getFuenteList() {
         return fuenteList;
     }
 
     public void setFuenteList(List<Fuente> fuenteList) {
         this.fuenteList = fuenteList;
+    }
+
+    @XmlTransient
+    public List<Area> getAreaList() {
+        return areaList;
+    }
+
+    public void setAreaList(List<Area> areaList) {
+        this.areaList = areaList;
     }
 
     @XmlTransient

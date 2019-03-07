@@ -7,6 +7,7 @@ package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Area;
 import cdc.com.api.modelo.ListaElemento;
+import cdc.com.api.modelo.Usuario;
 import cdc.com.api.servicio.AreaService;
 import cdc.com.api.servicio.ListaElementoService;
 import java.util.List;
@@ -18,7 +19,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONException;
@@ -40,15 +41,17 @@ public class AreaResource {
     List<ListaElemento> lista_elemento;
 
     @POST
-    @Path("/registro")
+    @Path("/registro/{usuario_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarAreasManejadas(Area area) throws JSONException {
+    public Response registrarAreasManejadas(Area area, @PathParam("usuario_id") int usuario_id) throws JSONException {
         ListaElemento listaElemento = new ListaElemento();
-
+        JSONObject object = new JSONObject();
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(usuario_id);
         lista_elemento = area.getListaElementoList();
         area.setListaElementoList(null);
-        JSONObject object = new JSONObject();
+        area.setUSUARIOusuarioid(usuario);
         int areaManejada_id = areaServicio.save(area);
         area.setAreaId(areaManejada_id);
 
@@ -65,7 +68,7 @@ public class AreaResource {
         object.put("areaId", areaManejada_id);
         object.put("codigoam", area.getCodigoam());
         System.out.println("***->Registro Exitoso Area :" + area.getCodigoam());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @GET
@@ -86,15 +89,18 @@ public class AreaResource {
     }
 
     @POST
-    @Path("/editar")
+    @Path("/editar/{usuario_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarArea(Area area) throws JSONException {
-        areaServicio.update(area);
+    public Response editarArea(Area area, @PathParam("usuario_id") int usuario_id) throws JSONException {
         JSONObject object = new JSONObject();
+        Usuario usuario = new Usuario();
+        usuario.setUsuarioId(usuario_id);
+        area.setUSUARIOusuarioid(usuario);
+        areaServicio.update(area);
         object.put("codigoam", area.getCodigoam());
         System.out.println("***->Editado exitoso area:" + area.getCodigoam());
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     //------LISTA ELEMENTOS-----------
@@ -121,7 +127,7 @@ public class AreaResource {
         listaElementoServicio.save(listaElemento);
         object.put("areaId", areaId);
         System.out.println("***->Registro Exitoso ListaElemento :" + areaId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -133,7 +139,7 @@ public class AreaResource {
         listaElementoServicio.delete(listaElementoId);
         object.put("listaElementoId", listaElementoId);
         System.out.println("***->Delete Exitoso ListaElemento :" + listaElementoId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 
     @POST
@@ -148,6 +154,6 @@ public class AreaResource {
         listaElementoServicio.update(listaElemento);
         object.put("areaId", areaId);
         System.out.println("***->Update Exitoso ListaElemento :" + areaId);
-        return Response.status(202).entity(object.toString()).build();
+        return Response.status(200).entity(object.toString()).build();
     }
 }
