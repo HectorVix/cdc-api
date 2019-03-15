@@ -27,4 +27,6 @@ public interface FuenteDao {
     public List<Fuente> buscarFuente(String naturalezadocumento, String codfuente, String cita, String archivado, String clave);
 
     public boolean findFuente(String codfuente);
+
+    public int getFuente_id();
 }

@@ -32,4 +32,6 @@ public interface AreaService {
             String nacion, String subnacion, String subdivision);
 
     public boolean findArea(String codigoam);
+
+    public int getArea_Id();
 }

@@ -22,6 +22,7 @@ public class AreaDaoImpl implements AreaDao {
 
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
+    private int area_id;
 
     public int save(Area area) {
         entityManager.persist(area);
@@ -50,10 +51,6 @@ public class AreaDaoImpl implements AreaDao {
         return entityManager.createQuery("SELECT a FROM Area a", Area.class).getResultList();
     }
 
-    public boolean findArea(String codigoam) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     public List<Area> buscarArea(String codigoam,
             String nombream,
             String sinam,
@@ -70,6 +67,23 @@ public class AreaDaoImpl implements AreaDao {
                 + "OR a.subnacion like '%" + subnacion + "%'"
                 + " OR a.subdivision like '%" + subdivision + "%')", Area.class);
         return query.getResultList();
+    }
+
+    public boolean findArea(String codigoam) {
+        codigoam = codigoam.replaceAll("\\s", "");
+        TypedQuery<Area> query = entityManager.createQuery("SELECT a FROM Area a WHERE a.codigoam = :codigoam", Area.class);
+        query.setParameter("codigoam", codigoam);
+        Area area = query.getResultList().stream().findFirst().orElse(null);
+        if (area == null) {
+            return false;
+        } else {
+            area_id = area.getAreaId();
+            return true;
+        }
+    }
+
+    public int getArea_Id() {
+        return area_id;
     }
 
 }

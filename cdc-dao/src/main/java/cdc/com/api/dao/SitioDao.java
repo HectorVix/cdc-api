@@ -22,9 +22,9 @@ public interface SitioDao {
 
     public Sitio find(Long id);
 
-    public boolean find_Sitio(String codigositio, String nombre);
+    public boolean findSitio(String codsitio);
 
-    public int getSitio_id();
+    public int getSitio_Id();
 
     public List<Sitio> all();
 

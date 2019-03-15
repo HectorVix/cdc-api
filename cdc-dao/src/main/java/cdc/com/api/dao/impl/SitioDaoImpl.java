@@ -23,6 +23,7 @@ public class SitioDaoImpl implements SitioDao {
 
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
+    private int sitio_id;
 
     public int save(Sitio sitio) {
         entityManager.persist(sitio);
@@ -47,12 +48,21 @@ public class SitioDaoImpl implements SitioDao {
         return user;
     }
 
-    public boolean find_Sitio(String codsitio, String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean findSitio(String codsitio) {
+        codsitio = codsitio.replaceAll("\\s", "");
+        TypedQuery<Sitio> query = entityManager.createQuery("SELECT s FROM Sitio s WHERE s.codsitio = :codsitio", Sitio.class);
+        query.setParameter("codsitio", codsitio);
+        Sitio sitio = query.getResultList().stream().findFirst().orElse(null);
+        if (sitio == null) {
+            return false;
+        } else {
+            sitio_id = sitio.getSitioId();
+            return true;
+        }
     }
 
-    public int getSitio_id() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int getSitio_Id() {
+        return sitio_id;
     }
 
     @Override

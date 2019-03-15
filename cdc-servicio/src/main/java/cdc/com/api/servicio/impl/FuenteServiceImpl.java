@@ -48,7 +48,11 @@ public class FuenteServiceImpl implements FuenteService {
     }
 
     public boolean findFuente(String codfuente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return fuenteDao.findFuente(codfuente);
+    }
+
+    public int getFuente_id() {
+        return fuenteDao.getFuente_id();
     }
 
 }

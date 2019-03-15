@@ -7,7 +7,10 @@ package cdc.com.api.cdc.ws;
 
 import cdc.com.api.modelo.Contacto;
 import cdc.com.api.modelo.Usuario;
+import cdc.com.api.servicio.AreaService;
 import cdc.com.api.servicio.ContactoService;
+import cdc.com.api.servicio.FuenteService;
+import cdc.com.api.servicio.SitioService;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -31,6 +34,12 @@ public class ConctactoResource {
 
     @Inject
     ContactoService contactoServicio;
+    @Inject
+    FuenteService fuenteServicio;
+    @Inject
+    AreaService areaServicio;
+    @Inject
+    SitioService sitioServicio;
 
     @POST
     @Path("/registro/{id}")
@@ -75,5 +84,53 @@ public class ConctactoResource {
         object.put("numident", contacto.getNumident());
         System.out.println("***->Editado exitoso contacto:" + contacto.getNumident());
         return Response.status(200).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/validar/fuente/{codfuente}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response validarFuente(@PathParam("codfuente") String codfuente) throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("codfuente", codfuente);
+        System.out.println("***->Encontrando fuente:" + codfuente);
+        boolean fuente = fuenteServicio.findFuente(codfuente);
+        if (fuente) {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
+        }
+    }
+
+    @GET
+    @Path("/validar/area/{codigoam}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response validarArea(@PathParam("codigoam") String codigoam) throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("codigoam", codigoam);
+        System.out.println("***->Encontrando area:" + codigoam);
+        boolean area = areaServicio.findArea(codigoam);
+        if (area) {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
+        }
+    }
+
+    @GET
+    @Path("/validar/sitio/{codsitio}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response validarSitio(@PathParam("codsitio") String codsitio) throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("codsitio", codsitio);
+        System.out.println("***->Encontrando sitio:" + codsitio);
+        boolean sitio = sitioServicio.findSitio(codsitio);
+        if (sitio) {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
+        }
     }
 }

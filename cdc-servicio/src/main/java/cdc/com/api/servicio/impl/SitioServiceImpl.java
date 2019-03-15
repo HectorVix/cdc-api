@@ -38,11 +38,11 @@ public class SitioServiceImpl implements SitioService {
         return sitioDao.find(id);
     }
 
-    public boolean find_Sitio(String codigositio, String nombre) {
-        return sitioDao.find_Sitio(codigositio, nombre);
+    public boolean findSitio(String codigositio) {
+        return sitioDao.findSitio(codigositio);
     }
 
-    public int getSitio_id() {
+    public int getSitio_Id() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

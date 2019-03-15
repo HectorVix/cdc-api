@@ -23,6 +23,7 @@ public class FuenteDaoImpl implements FuenteDao {
 
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
+    private int fuente_id;
 
     public int save(Fuente fuente) {
         fuente.setCodfuente(fuente.getCodfuente().replaceAll("\\s", ""));
@@ -71,7 +72,20 @@ public class FuenteDaoImpl implements FuenteDao {
     }
 
     public boolean findFuente(String codfuente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        codfuente = codfuente.replaceAll("\\s", "");
+        TypedQuery<Fuente> query = entityManager.createQuery("SELECT f FROM Fuente f WHERE f.codfuente = :codfuente", Fuente.class);
+        query.setParameter("codfuente", codfuente);
+        Fuente fuente = query.getResultList().stream().findFirst().orElse(null);
+        if (fuente == null) {
+            return false;
+        } else {
+            fuente_id = fuente.getFuenteId();
+            return true;
+        }
+    }
+
+    public int getFuente_id() {
+        return fuente_id;
     }
 
 }
