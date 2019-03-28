@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -22,20 +23,23 @@ public class ContactoHasFuenteImpl implements ContactoHasFuenteDao {
     @PersistenceContext(unitName = "cdcPU")
     private EntityManager entityManager;
 
-    public int save(ContactoHasFuente ContactoHasFuente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void save(ContactoHasFuente ContactoHasFuente) {
+        entityManager.persist(ContactoHasFuente);
     }
 
     public void update(ContactoHasFuente ContactoHasFuente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.merge(ContactoHasFuente);
     }
 
     public void delete(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        entityManager.remove(id);
     }
 
     public ContactoHasFuente find(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<ContactoHasFuente> query = entityManager.createQuery("SELECT c FROM ContactoHasFuente c WHERE c.contactoId = :contactoId", ContactoHasFuente.class);
+        query.setParameter("contactoId", id);
+        ContactoHasFuente ContactoHasFuente = query.getSingleResult();
+        return ContactoHasFuente;
     }
 
     public List<ContactoHasFuente> all() {
@@ -43,7 +47,10 @@ public class ContactoHasFuenteImpl implements ContactoHasFuenteDao {
     }
 
     public List<ContactoHasFuente> buscarContactoHasArea(int contactoId, int codfuente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<ContactoHasFuente> query = entityManager.createQuery("SELECT c FROM ContactoHasFuente c"
+                + " WHERE (c.contactoId like '%" + contactoId + "%'"
+                + "OR c.codfuente like '%" + codfuente + "%')", ContactoHasFuente.class);
+        return query.getResultList();
     }
 
 }

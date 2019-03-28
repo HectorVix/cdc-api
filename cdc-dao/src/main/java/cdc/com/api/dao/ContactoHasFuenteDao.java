@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface ContactoHasFuenteDao {
 
-    public int save(ContactoHasFuente ContactoHasFuente);
+    public void save(ContactoHasFuente ContactoHasFuente);
 
     public void update(ContactoHasFuente ContactoHasFuente);
 
