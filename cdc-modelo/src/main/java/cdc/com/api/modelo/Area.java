@@ -42,6 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Area.findBySinam", query = "SELECT a FROM Area a WHERE a.sinam = :sinam")
     , @NamedQuery(name = "Area.findByAmmayor", query = "SELECT a FROM Area a WHERE a.ammayor = :ammayor")
     , @NamedQuery(name = "Area.findByCoddueno", query = "SELECT a FROM Area a WHERE a.coddueno = :coddueno")
+    , @NamedQuery(name = "Area.findByAreatot1", query = "SELECT a FROM Area a WHERE a.areatot1 = :areatot1")
     , @NamedQuery(name = "Area.findByCodsitio", query = "SELECT a FROM Area a WHERE a.codsitio = :codsitio")
     , @NamedQuery(name = "Area.findByNomsitio", query = "SELECT a FROM Area a WHERE a.nomsitio = :nomsitio")
     , @NamedQuery(name = "Area.findByNacion", query = "SELECT a FROM Area a WHERE a.nacion = :nacion")
@@ -57,7 +58,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Area.findByCoorde", query = "SELECT a FROM Area a WHERE a.coorde = :coorde")
     , @NamedQuery(name = "Area.findByCoordo", query = "SELECT a FROM Area a WHERE a.coordo = :coordo")
     , @NamedQuery(name = "Area.findByDescripcion", query = "SELECT a FROM Area a WHERE a.descripcion = :descripcion")
-    , @NamedQuery(name = "Area.findByAreatot1", query = "SELECT a FROM Area a WHERE a.areatot1 = :areatot1")
     , @NamedQuery(name = "Area.findByAreatot2", query = "SELECT a FROM Area a WHERE a.areatot2 = :areatot2")
     , @NamedQuery(name = "Area.findByAreasubnac1", query = "SELECT a FROM Area a WHERE a.areasubnac1 = :areasubnac1")
     , @NamedQuery(name = "Area.findByAreasubnac2", query = "SELECT a FROM Area a WHERE a.areasubnac2 = :areasubnac2")
@@ -104,6 +104,8 @@ public class Area implements Serializable {
     private String ammayor;
     @Column(name = "coddueno")
     private String coddueno;
+    @Column(name = "areatot1")
+    private Integer areatot1;
     @Column(name = "codsitio")
     private String codsitio;
     @Column(name = "nomsitio")
@@ -134,8 +136,6 @@ public class Area implements Serializable {
     private String coordo;
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "areatot1")
-    private Integer areatot1;
     @Column(name = "areatot2")
     private Integer areatot2;
     @Column(name = "areasubnac1")
@@ -268,6 +268,14 @@ public class Area implements Serializable {
         this.coddueno = coddueno;
     }
 
+    public Integer getAreatot1() {
+        return areatot1;
+    }
+
+    public void setAreatot1(Integer areatot1) {
+        this.areatot1 = areatot1;
+    }
+
     public String getCodsitio() {
         return codsitio;
     }
@@ -386,14 +394,6 @@ public class Area implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Integer getAreatot1() {
-        return areatot1;
-    }
-
-    public void setAreatot1(Integer areatot1) {
-        this.areatot1 = areatot1;
     }
 
     public Integer getAreatot2() {

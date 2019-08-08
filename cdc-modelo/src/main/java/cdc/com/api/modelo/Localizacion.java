@@ -247,8 +247,7 @@ public class Localizacion implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date cartografo;
     @Column(name = "respdatos")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date respdatos;
+    private String respdatos;
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
@@ -794,11 +793,11 @@ public class Localizacion implements Serializable {
         this.cartografo = cartografo;
     }
 
-    public Date getRespdatos() {
+    public String getRespdatos() {
         return respdatos;
     }
 
-    public void setRespdatos(Date respdatos) {
+    public void setRespdatos(String respdatos) {
         this.respdatos = respdatos;
     }
 
