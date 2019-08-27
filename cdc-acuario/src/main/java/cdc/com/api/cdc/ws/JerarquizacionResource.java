@@ -15,9 +15,21 @@ import cdc.com.api.modelo.Jerarquizacion;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.GlobalService;
 import cdc.com.api.modelo.Global;
+import cdc.com.api.modelo.Municipio;
+import cdc.com.api.modelo.Nacion;
 import cdc.com.api.modelo.Nacional;
+import cdc.com.api.modelo.Rangog;
+import cdc.com.api.modelo.Rangon;
+import cdc.com.api.modelo.Rangos;
+import cdc.com.api.modelo.Subnacion;
 import cdc.com.api.modelo.Subnacional;
+import cdc.com.api.servicio.MunicipioService;
+import cdc.com.api.servicio.NacionService;
 import cdc.com.api.servicio.NacionalService;
+import cdc.com.api.servicio.RangogService;
+import cdc.com.api.servicio.RangonService;
+import cdc.com.api.servicio.RangosService;
+import cdc.com.api.servicio.SubnacionService;
 import cdc.com.api.servicio.SubnacionalService;
 
 import javax.inject.Inject;
@@ -48,6 +60,18 @@ public class JerarquizacionResource {
     NacionalService nacionalServicio;
     @Inject
     SubnacionalService subnacionalServicio;
+    @Inject
+    RangogService rangogServicio;
+    @Inject
+    RangonService rangonServicio;
+    @Inject
+    RangosService rangosServicio;
+    @Inject
+    NacionService nacionServicio;
+    @Inject
+    SubnacionService subnacionServicio;
+    @Inject
+    MunicipioService municipioServicio;
 
     @POST
     @Path("/registro/global")
@@ -61,6 +85,7 @@ public class JerarquizacionResource {
             elemento.setElementoId(elementoServicio.getElemento_id());
             Jerarquizacion jer = new Jerarquizacion();
             jer.setCodigoe(codigoe);
+            jer.setEstado(codigoe);
             jer.setELEMENTOelementoid(elemento);
             int jeraquia_id = jerarquizacionServicio.save(jer);
             Global global = new Global();
@@ -90,11 +115,12 @@ public class JerarquizacionResource {
             elemento.setElementoId(elementoServicio.getElemento_id());
             Jerarquizacion jer = new Jerarquizacion();
             jer.setCodigoe(codigoe);
+            jer.setEstado(codigoe);
             jer.setELEMENTOelementoid(elemento);
-            int jeraquia_id = jerarquizacionServicio.save(jer);
-            System.out.println("***->Id ligadura jerararquizacion nacional:" + jeraquia_id);
             Nacional nacional = new Nacional();
             nacional = jerarquizacion.getNacionalList().get(0);
+            jer.setEstado(codigoe + nacional.getNacion());
+            int jeraquia_id = jerarquizacionServicio.save(jer);
             jer.setJerarquizacionId(jeraquia_id);
             nacional.setJERARQUIZACIONjerarquizacionid(jer);
             nacionalServicio.save(nacional);
@@ -121,9 +147,9 @@ public class JerarquizacionResource {
             Jerarquizacion jer = new Jerarquizacion();
             jer.setCodigoe(codigoe);
             jer.setELEMENTOelementoid(elemento);
-            int jeraquia_id = jerarquizacionServicio.save(jer);
-            System.out.println("***->Id ligadura jerararquizacion sub nacional:" + jeraquia_id);
             Subnacional subnacional = jerarquizacion.getSubnacionalList().get(0);
+            jer.setEstado(codigoe + subnacional.getSubnacion());
+            int jeraquia_id = jerarquizacionServicio.save(jer);
             jer.setJerarquizacionId(jeraquia_id);
             subnacional.setJERARQUIZACIONjerarquizacionid(jer);
             subnacionalServicio.save(subnacional);
@@ -217,5 +243,61 @@ public class JerarquizacionResource {
         object.put("codigoe", subnacional.getCodigoe());
         System.out.println("***->Editado exitoso jerarquizacion subnacional:" + subnacional.getCodigoe());
         return Response.status(200).entity(object.toString()).build();
+    }
+
+    //Catalogos de rango
+    @GET
+    @Path("/rangog")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Rangog> catalogo_Rangog() {
+        System.out.println("***->Obteniendo rangog");
+        return rangogServicio.all();
+    }
+
+    @GET
+    @Path("/rangon")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Rangon> catalogo_Rangon() {
+        System.out.println("***->Obteniendo rangon");
+        return rangonServicio.all();
+    }
+
+    @GET
+    @Path("/rangos")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Rangos> catalogo_Rangos() {
+        System.out.println("***->Obteniendo rangos");
+        return rangosServicio.all();
+    }
+
+    //Catalogos de Nación, Subnacion(Depto.) y Municipio
+    @GET
+    @Path("/nacion")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Nacion> catalogo_Nacion() {
+        System.out.println("***->Obteniendo nacion");
+        return nacionServicio.all();
+    }
+
+    @GET
+    @Path("/subnacion")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Subnacion> catalogo_Subnacion() {
+        System.out.println("***->Obteniendo subnacion");
+        return subnacionServicio.all();
+    }
+
+    @GET
+    @Path("/municipio")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public java.util.List<Municipio> catalogo_Municipio() {
+        System.out.println("***->Obteniendo municipio");
+        return municipioServicio.all();
     }
 }

@@ -7,6 +7,7 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -62,9 +65,19 @@ public class Elemento implements Serializable {
     private String clase;
     @Column(name = "comunidad")
     private String comunidad;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Protocolo> protocoloList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Rastreo> rastreoList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Caracterizacion> caracterizacionList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Jerarquizacion> jerarquizacionList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Foto> fotoList;
 
     public Elemento() {
     }
@@ -137,12 +150,57 @@ public class Elemento implements Serializable {
         this.comunidad = comunidad;
     }
 
+    @XmlTransient
+    public List<Protocolo> getProtocoloList() {
+        return protocoloList;
+    }
+
+    public void setProtocoloList(List<Protocolo> protocoloList) {
+        this.protocoloList = protocoloList;
+    }
+
+    @XmlTransient
+    public List<Rastreo> getRastreoList() {
+        return rastreoList;
+    }
+
+    public void setRastreoList(List<Rastreo> rastreoList) {
+        this.rastreoList = rastreoList;
+    }
+
+    @XmlTransient
+    public List<Caracterizacion> getCaracterizacionList() {
+        return caracterizacionList;
+    }
+
+    public void setCaracterizacionList(List<Caracterizacion> caracterizacionList) {
+        this.caracterizacionList = caracterizacionList;
+    }
+
+    @XmlTransient
+    public List<Jerarquizacion> getJerarquizacionList() {
+        return jerarquizacionList;
+    }
+
+    public void setJerarquizacionList(List<Jerarquizacion> jerarquizacionList) {
+        this.jerarquizacionList = jerarquizacionList;
+    }
+
     public Usuario getUSUARIOusuarioid() {
         return uSUARIOusuarioid;
     }
 
     public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
         this.uSUARIOusuarioid = uSUARIOusuarioid;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
     }
 
     @Override

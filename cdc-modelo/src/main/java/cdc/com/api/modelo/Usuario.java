@@ -68,11 +68,21 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Accion> accionList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Nacion> nacionList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Rangog> rangogList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Rangon> rangonList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Rangos> rangosList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Area> areaList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Fenelogia> fenelogiaList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Contacto> contactoList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
@@ -162,6 +172,15 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Nacion> getNacionList() {
+        return nacionList;
+    }
+
+    public void setNacionList(List<Nacion> nacionList) {
+        this.nacionList = nacionList;
+    }
+
+    @XmlTransient
     public List<Sitio> getSitioList() {
         return sitioList;
     }
@@ -180,12 +199,48 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Rangog> getRangogList() {
+        return rangogList;
+    }
+
+    public void setRangogList(List<Rangog> rangogList) {
+        this.rangogList = rangogList;
+    }
+
+    @XmlTransient
+    public List<Rangon> getRangonList() {
+        return rangonList;
+    }
+
+    public void setRangonList(List<Rangon> rangonList) {
+        this.rangonList = rangonList;
+    }
+
+    @XmlTransient
+    public List<Rangos> getRangosList() {
+        return rangosList;
+    }
+
+    public void setRangosList(List<Rangos> rangosList) {
+        this.rangosList = rangosList;
+    }
+
+    @XmlTransient
     public List<Area> getAreaList() {
         return areaList;
     }
 
     public void setAreaList(List<Area> areaList) {
         this.areaList = areaList;
+    }
+
+    @XmlTransient
+    public List<Fenelogia> getFenelogiaList() {
+        return fenelogiaList;
+    }
+
+    public void setFenelogiaList(List<Fenelogia> fenelogiaList) {
+        this.fenelogiaList = fenelogiaList;
     }
 
     @XmlTransient

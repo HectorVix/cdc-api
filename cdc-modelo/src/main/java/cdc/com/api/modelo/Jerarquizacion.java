@@ -45,7 +45,7 @@ public class Jerarquizacion implements Serializable {
     @Column(name = "codigoe")
     private String codigoe;
     @Column(name = "estado")
-    private Integer estado;
+    private String estado;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
     private List<Global> globalList;
     @OneToMany(mappedBy = "jERARQUIZACIONjerarquizacionid")
@@ -79,11 +79,11 @@ public class Jerarquizacion implements Serializable {
         this.codigoe = codigoe;
     }
 
-    public Integer getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

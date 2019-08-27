@@ -65,5 +65,12 @@
     <class>cdc.com.api.modelo.ContactoHasFuente</class>
     <class>cdc.com.api.modelo.Contacto</class>
     <class>cdc.com.api.modelo.ContactoHasArea</class>
+    <class>cdc.com.api.modelo.Rangon</class>
+    <class>cdc.com.api.modelo.Rangog</class>
+    <class>cdc.com.api.modelo.Rangos</class>
+    <class>cdc.com.api.modelo.Fenelogia</class>
+    <class>cdc.com.api.modelo.Nacion</class>
+    <class>cdc.com.api.modelo.Subnacion</class>
+    <class>cdc.com.api.modelo.Municipio</class>
   </persistence-unit>
 </persistence>
