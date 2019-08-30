@@ -6,7 +6,9 @@
 package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.RastreoDao;
+import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import cdc.com.api.servicio.RastreoService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -49,6 +51,18 @@ public class RastreoServiceImpl implements RastreoService {
 
     public Rastreo buscarRastreo_Codigoe(String codigoe) {
         return rastreoDao.buscarRastreo_Codigoe(codigoe);
+    }
+
+    public Object status_Global(String codigoe) {
+        return rastreoDao.status_Global(codigoe);
+    }
+
+    public Object status_Nacional(String codigoe) {
+        return rastreoDao.status_Nacional(codigoe);
+    }
+
+    public Object status_Subnacional(String codigoe, String subnacion) {
+        return rastreoDao.status_Subnacional(codigoe, subnacion);
     }
 
 }

@@ -5,7 +5,9 @@
  */
 package cdc.com.api.servicio;
 
+import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import java.util.List;
 
 /**
@@ -27,4 +29,10 @@ public interface RastreoService {
     public List<Rastreo> all();
 
     public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn);
+
+    public Object status_Global(String codigoe);
+
+    public Object status_Nacional(String codigoe);
+
+    public Object status_Subnacional(String codigoe, String subnacion);
 }

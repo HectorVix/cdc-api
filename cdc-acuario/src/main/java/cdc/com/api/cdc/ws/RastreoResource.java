@@ -10,9 +10,12 @@ package cdc.com.api.cdc.ws;
  * @author Héctor Vix
  */
 import cdc.com.api.modelo.Elemento;
+import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.RastreoService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -84,5 +87,32 @@ public class RastreoResource {
         object.put("codigoe", rastreo.getCodigoe());
         System.out.println("***->Editado exitoso RE:" + rastreo.getCodigoe());
         return Response.status(200).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/status/global/{codigoe}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Object status_Global(@PathParam("codigoe") String codigoe) {
+        System.out.println("***->Status global");
+        return rastreoServicio.status_Global(codigoe);
+    }
+
+    @GET
+    @Path("/status/nacional/{codigoe}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Object status_Nacional(@PathParam("codigoe") String codigoe) {
+        System.out.println("***->Status nacional");
+        return rastreoServicio.status_Nacional(codigoe);
+    }
+
+    @GET
+    @Path("/status/subnacional/{codigoe}/{subnacion}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Object status_Subnacional(@PathParam("codigoe") String codigoe, @PathParam("subnacion") String subnacion) {
+        System.out.println("***->Status subnacional");
+        return rastreoServicio.status_Subnacional(codigoe, subnacion);
     }
 }
