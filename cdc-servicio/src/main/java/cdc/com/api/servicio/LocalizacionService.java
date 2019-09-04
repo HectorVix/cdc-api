@@ -6,6 +6,7 @@
 package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Localizacion;
+import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
 import java.util.List;
 
 /**
@@ -23,5 +24,13 @@ public interface LocalizacionService {
     public int getRastreo_id();
 
     public List<Localizacion> buscarLocalizacion(String codigole);
+
+    public IdentificadoresLE buscar_Identificadores_NombreS_RangoS(String codigoe, String departamento);
+
+    public IdentificadoresLE buscar_Identificadores_RangoG(String codigoe);
+
+    public IdentificadoresLE buscar_Identificadores_RangoN(String codigoe);
+
+    public IdentificadoresLE buscar_Identificadores_NombreComunN(String codigoe);
 
 }

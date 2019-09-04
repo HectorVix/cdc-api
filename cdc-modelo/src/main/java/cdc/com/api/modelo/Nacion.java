@@ -7,9 +7,12 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -28,39 +31,48 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Nacion.findAll", query = "SELECT n FROM Nacion n")
-    , @NamedQuery(name = "Nacion.findByNacionId", query = "SELECT n FROM Nacion n WHERE n.nacionPK.nacionId = :nacionId")
-    , @NamedQuery(name = "Nacion.findByCodigo", query = "SELECT n FROM Nacion n WHERE n.nacionPK.codigo = :codigo")
+    , @NamedQuery(name = "Nacion.findByNacionId", query = "SELECT n FROM Nacion n WHERE n.nacionId = :nacionId")
+    , @NamedQuery(name = "Nacion.findByCodigo", query = "SELECT n FROM Nacion n WHERE n.codigo = :codigo")
     , @NamedQuery(name = "Nacion.findByNombre", query = "SELECT n FROM Nacion n WHERE n.nombre = :nombre")})
 public class Nacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected NacionPK nacionPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "nacion_id")
+    private Integer nacionId;
+    @Column(name = "codigo")
+    private String codigo;
     @Column(name = "nombre")
     private String nombre;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
-    @OneToMany(mappedBy = "nacion")
+    @OneToMany(mappedBy = "nACIONnacionid")
     private List<Subnacion> subnacionList;
 
     public Nacion() {
     }
 
-    public Nacion(NacionPK nacionPK) {
-        this.nacionPK = nacionPK;
+    public Nacion(Integer nacionId) {
+        this.nacionId = nacionId;
     }
 
-    public Nacion(int nacionId, String codigo) {
-        this.nacionPK = new NacionPK(nacionId, codigo);
+    public Integer getNacionId() {
+        return nacionId;
     }
 
-    public NacionPK getNacionPK() {
-        return nacionPK;
+    public void setNacionId(Integer nacionId) {
+        this.nacionId = nacionId;
     }
 
-    public void setNacionPK(NacionPK nacionPK) {
-        this.nacionPK = nacionPK;
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -91,7 +103,7 @@ public class Nacion implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (nacionPK != null ? nacionPK.hashCode() : 0);
+        hash += (nacionId != null ? nacionId.hashCode() : 0);
         return hash;
     }
 
@@ -102,7 +114,7 @@ public class Nacion implements Serializable {
             return false;
         }
         Nacion other = (Nacion) object;
-        if ((this.nacionPK == null && other.nacionPK != null) || (this.nacionPK != null && !this.nacionPK.equals(other.nacionPK))) {
+        if ((this.nacionId == null && other.nacionId != null) || (this.nacionId != null && !this.nacionId.equals(other.nacionId))) {
             return false;
         }
         return true;
@@ -110,7 +122,7 @@ public class Nacion implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Nacion[ nacionPK=" + nacionPK + " ]";
+        return "cdc.com.api.modelo.Nacion[ nacionId=" + nacionId + " ]";
     }
     
 }

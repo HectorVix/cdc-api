@@ -7,6 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.MunicipioDao;
 import cdc.com.api.modelo.Municipio;
+import cdc.com.api.modelo.Subnacion;
 import cdc.com.api.servicio.MunicipioService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -22,8 +23,7 @@ public class MunicipioServiceImpl implements MunicipioService {
     @Inject
     private MunicipioDao municipioDao;
 
-    public List<Municipio> all() {
-        return municipioDao.all();
+    public List<Municipio> all(Subnacion subnacion) {
+        return municipioDao.all(subnacion);
     }
-
 }

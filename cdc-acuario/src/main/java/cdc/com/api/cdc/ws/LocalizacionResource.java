@@ -12,6 +12,7 @@ package cdc.com.api.cdc.ws;
 import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.LocalizacionService;
 import cdc.com.api.servicio.ProteccionService;
@@ -35,7 +36,7 @@ import org.codehaus.jettison.json.JSONObject;
 @Path("/cecon/localizacion")
 @ManagedBean
 public class LocalizacionResource {
-    
+
     @Inject
     LocalizacionService localizacionServicio;
     @Inject
@@ -44,9 +45,9 @@ public class LocalizacionResource {
     RastreoService rastreoServicio;
     @Inject
     ElementoService elementoServicio;
-    
+
     List<Proteccion> lista_proteccion;
-    
+
     @POST
     @Path("/registro")
     @Consumes(APPLICATION_JSON)
@@ -67,6 +68,7 @@ public class LocalizacionResource {
             }
             lista_proteccion = localizacion.getProteccionList();
             localizacion.setProteccionList(null);
+            localizacion.setCodigole(localizacion.getCodigole().replaceAll("\\s", ""));
             int localizacion_id = localizacionServicio.save(localizacion);
             localizacion.setLocalizacionId(localizacion_id);
             //Protección LE
@@ -86,9 +88,9 @@ public class LocalizacionResource {
             object.put("codigoe", codigoe);
             return Response.status(404).entity(object.toString()).build();
         }
-        
+
     }
-    
+
     @GET
     @Path("/buscar/{codigole}")
     @Consumes(APPLICATION_JSON)
@@ -97,7 +99,7 @@ public class LocalizacionResource {
         System.out.println("***->Busqueda Exitosa LE");
         return localizacionServicio.buscarLocalizacion(codigole);
     }
-    
+
     @POST
     @Path("/editar/{rastreo_id}")
     @Consumes(APPLICATION_JSON)
@@ -112,7 +114,7 @@ public class LocalizacionResource {
         System.out.println("***->Editado exitoso LE:" + le.getCodigole());
         return Response.status(200).entity(object.toString()).build();
     }
-    
+
     @GET
     @Path("/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -123,7 +125,7 @@ public class LocalizacionResource {
         le.setLocalizacionId(localizacionId);
         return proteccionServicio.buscarProteccion_LocalizacionId(le);
     }
-    
+
     @POST
     @Path("/registrar/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -139,7 +141,7 @@ public class LocalizacionResource {
         System.out.println("***->Registro Exitoso Proteccion :" + proteccion.getCodigoam());
         return Response.status(200).entity(object.toString()).build();
     }
-    
+
     @POST
     @Path("/delete/proteccion/{proteccionId}")
     @Consumes(APPLICATION_JSON)
@@ -151,7 +153,7 @@ public class LocalizacionResource {
         System.out.println("***->Delete Exitoso Proteccion :" + proteccionId);
         return Response.status(200).entity(object.toString()).build();
     }
-    
+
     @POST
     @Path("/update/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
@@ -166,4 +168,49 @@ public class LocalizacionResource {
         System.out.println("***->Update Exitoso Proteccion :" + proteccion.getProteccionId());
         return Response.status(200).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/validar/{codigole}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response validarCodigoLE(@PathParam("codigole") String codigole) throws JSONException {
+        System.out.println("***->Validando CODIGOLE:" + codigole);
+        JSONObject object = new JSONObject();
+        StringTokenizer codigo_le = new StringTokenizer(codigole, ".");
+        String codigoe = codigo_le.nextToken();
+        object.put("codigoe", codigoe);
+        if (elementoServicio.findElemento(codigoe)) {
+            return Response.status(200).entity(object.toString()).build();
+        } else {
+            return Response.status(404).entity(object.toString()).build();
+        }
+    }
+
+    @GET
+    @Path("/identificadores/NombreS/RangoS/{codigoe}/{departamento}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public IdentificadoresLE buscar_IdentificadoresLE_NombresS_RangoS(@PathParam("codigoe") String codigoe, @PathParam("departamento") String departamento) {
+        System.out.println("***->Buscando identificadores LE: NombreS y RangoS");
+        return localizacionServicio.buscar_Identificadores_NombreS_RangoS(codigoe, departamento);
+    }
+
+    @GET
+    @Path("/identificadores/RangoN/{codigoe}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public IdentificadoresLE buscar_IdentificadoresLE_RangoN(@PathParam("codigoe") String codigoe) throws JSONException {
+        System.out.println("***->Buscando identificadores LE: RangoN");
+        return localizacionServicio.buscar_Identificadores_RangoN(codigoe);
+    }
+
+    @GET
+    @Path("/identificadores/RangoG/{codigoe}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public IdentificadoresLE buscar_IdentificadoresLE_RangoG(@PathParam("codigoe") String codigoe) throws JSONException {
+        System.out.println("***->Buscando identificadores LE: RangoG");
+        return localizacionServicio.buscar_Identificadores_RangoG(codigoe);
+    }
+
 }

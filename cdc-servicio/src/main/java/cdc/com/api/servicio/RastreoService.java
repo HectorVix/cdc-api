@@ -7,7 +7,6 @@ package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import java.util.List;
 
 /**

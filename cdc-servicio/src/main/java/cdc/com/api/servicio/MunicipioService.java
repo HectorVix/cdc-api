@@ -6,6 +6,7 @@
 package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Municipio;
+import cdc.com.api.modelo.Subnacion;
 import java.util.List;
 
 /**
@@ -14,5 +15,5 @@ import java.util.List;
  */
 public interface MunicipioService {
 
-    public List<Municipio> all();
+    public List<Municipio> all(Subnacion subnacion);
 }

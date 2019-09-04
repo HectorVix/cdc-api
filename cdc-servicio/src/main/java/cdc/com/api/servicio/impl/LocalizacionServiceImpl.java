@@ -7,6 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.LocalizacionDao;
 import cdc.com.api.modelo.Localizacion;
+import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
 import cdc.com.api.servicio.LocalizacionService;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -40,6 +41,22 @@ public class LocalizacionServiceImpl implements LocalizacionService {
 
     public int getRastreo_id() {
         return localizacionDao.getRastreo_id();
+    }
+
+    public IdentificadoresLE buscar_Identificadores_NombreS_RangoS(String codigoe, String departamento) {
+        return localizacionDao.buscar_Identificadores_NombreS_RangoS(codigoe, departamento);
+    }
+
+    public IdentificadoresLE buscar_Identificadores_RangoG(String codigoe) {
+        return localizacionDao.buscar_Identificadores_RangoG(codigoe);
+    }
+
+    public IdentificadoresLE buscar_Identificadores_RangoN(String codigoe) {
+        return localizacionDao.buscar_Identificadores_RangoN(codigoe);
+    }
+
+    public IdentificadoresLE buscar_Identificadores_NombreComunN(String codigoe) {
+        return localizacionDao.buscar_Identificadores_NombreComunN(codigoe);
     }
 
 }

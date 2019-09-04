@@ -12,7 +12,6 @@ package cdc.com.api.cdc.ws;
 import cdc.com.api.modelo.Elemento;
 import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.RastreoService;
 import java.util.List;

@@ -25,14 +25,14 @@ public class ElementoDaoImpl implements ElementoDao {
     private int elemento_id;
 
     public int save(Elemento elemento) {
-        elemento.setCodigo(elemento.getCodigo().replaceAll("\\s", ""));
+        elemento.setCodigoe(elemento.getCodigoe().replaceAll("\\s", ""));
         entityManager.persist(elemento);
         entityManager.flush();
         return elemento.getElementoId();
     }
 
     public void update(Elemento elemento) {
-        elemento.setCodigo(elemento.getCodigo().replaceAll("\\s", ""));
+        elemento.setCodigoe(elemento.getCodigoe().replaceAll("\\s", ""));
         entityManager.merge(elemento);
     }
 
@@ -54,22 +54,22 @@ public class ElementoDaoImpl implements ElementoDao {
 
     }
 
-    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico) {
-        codigo = codigo.replaceAll("\\s", "");
-        System.out.print("codigo:" + codigo);
-        System.out.print("nombrecomun:" + nombrecomun);
+    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombrecientifico) {
+        codigoe = codigoe.replaceAll("\\s", "");
+        System.out.print("codigoe:" + codigoe);
+        System.out.print("nombrecomunn:" + nombrecomunn);
         System.out.print("nombrecientifico:" + nombrecientifico);
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e"
-                + " WHERE (e.codigo like '%" + codigo + "%'"
-                + "OR e.nombrecomun like '%" + nombrecomun + "%'"
+                + " WHERE (e.codigoe like '%" + codigoe + "%'"
+                + "OR e.nombrecomunn like '%" + nombrecomunn + "%'"
                 + " OR e.nombrecientifico like '%" + nombrecientifico + "%')", Elemento.class);
         return query.getResultList();
     }
 
     public boolean findElemento(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.codigo = :codigo", Elemento.class);
-        query.setParameter("codigo", codigoe);
+        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.codigoe = :codigoe", Elemento.class);
+        query.setParameter("codigoe", codigoe);
         Elemento elemento = query.getResultList().stream().findFirst().orElse(null);
         if (elemento == null) {
             return false;

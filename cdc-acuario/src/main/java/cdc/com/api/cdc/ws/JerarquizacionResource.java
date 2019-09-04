@@ -293,11 +293,13 @@ public class JerarquizacionResource {
     }
 
     @GET
-    @Path("/municipio")
+    @Path("/municipio/{departamento_codigo}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Municipio> catalogo_Municipio() {
-        System.out.println("***->Obteniendo municipio");
-        return municipioServicio.all();
+    public java.util.List<Municipio> catalogo_Municipio(@PathParam("departamento_codigo") int departamento_codigo) {
+        Subnacion subnacion = new Subnacion();
+        subnacion.setSubnacionId(departamento_codigo);
+        System.out.println("***->Obteniendo municipios");
+        return municipioServicio.all(subnacion);
     }
 }

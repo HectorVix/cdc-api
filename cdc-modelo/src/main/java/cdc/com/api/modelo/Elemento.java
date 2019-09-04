@@ -35,8 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Elemento.findAll", query = "SELECT e FROM Elemento e")
     , @NamedQuery(name = "Elemento.findByElementoId", query = "SELECT e FROM Elemento e WHERE e.elementoId = :elementoId")
-    , @NamedQuery(name = "Elemento.findByCodigo", query = "SELECT e FROM Elemento e WHERE e.codigo = :codigo")
-    , @NamedQuery(name = "Elemento.findByNombrecomun", query = "SELECT e FROM Elemento e WHERE e.nombrecomun = :nombrecomun")
+    , @NamedQuery(name = "Elemento.findByCodigoe", query = "SELECT e FROM Elemento e WHERE e.codigoe = :codigoe")
+    , @NamedQuery(name = "Elemento.findByNombrecomunn", query = "SELECT e FROM Elemento e WHERE e.nombrecomunn = :nombrecomunn")
     , @NamedQuery(name = "Elemento.findByNombrecientifico", query = "SELECT e FROM Elemento e WHERE e.nombrecientifico = :nombrecientifico")
     , @NamedQuery(name = "Elemento.findByComentario", query = "SELECT e FROM Elemento e WHERE e.comentario = :comentario")
     , @NamedQuery(name = "Elemento.findByFecha", query = "SELECT e FROM Elemento e WHERE e.fecha = :fecha")
@@ -50,10 +50,10 @@ public class Elemento implements Serializable {
     @Basic(optional = false)
     @Column(name = "elemento_id")
     private Integer elementoId;
-    @Column(name = "codigo")
-    private String codigo;
-    @Column(name = "nombrecomun")
-    private String nombrecomun;
+    @Column(name = "codigoe")
+    private String codigoe;
+    @Column(name = "nombrecomunn")
+    private String nombrecomunn;
     @Column(name = "nombrecientifico")
     private String nombrecientifico;
     @Column(name = "comentario")
@@ -94,20 +94,20 @@ public class Elemento implements Serializable {
         this.elementoId = elementoId;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCodigoe() {
+        return codigoe;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigoe(String codigoe) {
+        this.codigoe = codigoe;
     }
 
-    public String getNombrecomun() {
-        return nombrecomun;
+    public String getNombrecomunn() {
+        return nombrecomunn;
     }
 
-    public void setNombrecomun(String nombrecomun) {
-        this.nombrecomun = nombrecomun;
+    public void setNombrecomunn(String nombrecomunn) {
+        this.nombrecomunn = nombrecomunn;
     }
 
     public String getNombrecientifico() {

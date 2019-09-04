@@ -6,7 +6,6 @@
 package cdc.com.api.dao;
 
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import java.util.List;
 
 /**

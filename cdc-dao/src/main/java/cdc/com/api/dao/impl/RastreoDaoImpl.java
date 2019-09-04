@@ -8,7 +8,6 @@ package cdc.com.api.dao.impl;
 import cdc.com.api.dao.RastreoDao;
 import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.rastreo.elemento.StatusGlobal;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

@@ -7,11 +7,13 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -29,41 +31,48 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Subnacion.findAll", query = "SELECT s FROM Subnacion s")
-    , @NamedQuery(name = "Subnacion.findBySubnacionId", query = "SELECT s FROM Subnacion s WHERE s.subnacionPK.subnacionId = :subnacionId")
-    , @NamedQuery(name = "Subnacion.findByCodigo", query = "SELECT s FROM Subnacion s WHERE s.subnacionPK.codigo = :codigo")
+    , @NamedQuery(name = "Subnacion.findBySubnacionId", query = "SELECT s FROM Subnacion s WHERE s.subnacionId = :subnacionId")
+    , @NamedQuery(name = "Subnacion.findByCodigo", query = "SELECT s FROM Subnacion s WHERE s.codigo = :codigo")
     , @NamedQuery(name = "Subnacion.findByNombre", query = "SELECT s FROM Subnacion s WHERE s.nombre = :nombre")})
 public class Subnacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected SubnacionPK subnacionPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "subnacion_id")
+    private Integer subnacionId;
+    @Column(name = "codigo")
+    private Integer codigo;
     @Column(name = "nombre")
     private String nombre;
-    @OneToMany(mappedBy = "subnacion")
+    @OneToMany(mappedBy = "sUBNACIONsubnacionid")
     private List<Municipio> municipioList;
-    @JoinColumns({
-        @JoinColumn(name = "NACION_nacion_id", referencedColumnName = "nacion_id")
-        , @JoinColumn(name = "NACION_codigo", referencedColumnName = "codigo")})
+    @JoinColumn(name = "NACION_nacion_id", referencedColumnName = "nacion_id")
     @ManyToOne
-    private Nacion nacion;
+    private Nacion nACIONnacionid;
 
     public Subnacion() {
     }
 
-    public Subnacion(SubnacionPK subnacionPK) {
-        this.subnacionPK = subnacionPK;
+    public Subnacion(Integer subnacionId) {
+        this.subnacionId = subnacionId;
     }
 
-    public Subnacion(int subnacionId, int codigo) {
-        this.subnacionPK = new SubnacionPK(subnacionId, codigo);
+    public Integer getSubnacionId() {
+        return subnacionId;
     }
 
-    public SubnacionPK getSubnacionPK() {
-        return subnacionPK;
+    public void setSubnacionId(Integer subnacionId) {
+        this.subnacionId = subnacionId;
     }
 
-    public void setSubnacionPK(SubnacionPK subnacionPK) {
-        this.subnacionPK = subnacionPK;
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -83,18 +92,18 @@ public class Subnacion implements Serializable {
         this.municipioList = municipioList;
     }
 
-    public Nacion getNacion() {
-        return nacion;
+    public Nacion getNACIONnacionid() {
+        return nACIONnacionid;
     }
 
-    public void setNacion(Nacion nacion) {
-        this.nacion = nacion;
+    public void setNACIONnacionid(Nacion nACIONnacionid) {
+        this.nACIONnacionid = nACIONnacionid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (subnacionPK != null ? subnacionPK.hashCode() : 0);
+        hash += (subnacionId != null ? subnacionId.hashCode() : 0);
         return hash;
     }
 
@@ -105,7 +114,7 @@ public class Subnacion implements Serializable {
             return false;
         }
         Subnacion other = (Subnacion) object;
-        if ((this.subnacionPK == null && other.subnacionPK != null) || (this.subnacionPK != null && !this.subnacionPK.equals(other.subnacionPK))) {
+        if ((this.subnacionId == null && other.subnacionId != null) || (this.subnacionId != null && !this.subnacionId.equals(other.subnacionId))) {
             return false;
         }
         return true;
@@ -113,7 +122,7 @@ public class Subnacion implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Subnacion[ subnacionPK=" + subnacionPK + " ]";
+        return "cdc.com.api.modelo.Subnacion[ subnacionId=" + subnacionId + " ]";
     }
     
 }

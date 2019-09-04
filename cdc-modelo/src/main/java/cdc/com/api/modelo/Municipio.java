@@ -6,11 +6,13 @@
 package cdc.com.api.modelo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,39 +28,46 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Municipio.findAll", query = "SELECT m FROM Municipio m")
-    , @NamedQuery(name = "Municipio.findByMunicipioId", query = "SELECT m FROM Municipio m WHERE m.municipioPK.municipioId = :municipioId")
-    , @NamedQuery(name = "Municipio.findByCodigo", query = "SELECT m FROM Municipio m WHERE m.municipioPK.codigo = :codigo")
+    , @NamedQuery(name = "Municipio.findByMunicipioId", query = "SELECT m FROM Municipio m WHERE m.municipioId = :municipioId")
+    , @NamedQuery(name = "Municipio.findByCodigo", query = "SELECT m FROM Municipio m WHERE m.codigo = :codigo")
     , @NamedQuery(name = "Municipio.findByNombre", query = "SELECT m FROM Municipio m WHERE m.nombre = :nombre")})
 public class Municipio implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected MunicipioPK municipioPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "municipio_id")
+    private Integer municipioId;
+    @Column(name = "codigo")
+    private Integer codigo;
     @Column(name = "nombre")
     private String nombre;
-    @JoinColumns({
-        @JoinColumn(name = "SUBNACION_subnacion_id", referencedColumnName = "subnacion_id")
-        , @JoinColumn(name = "SUBNACION_codigo", referencedColumnName = "codigo")})
+    @JoinColumn(name = "SUBNACION_subnacion_id", referencedColumnName = "subnacion_id")
     @ManyToOne
-    private Subnacion subnacion;
+    private Subnacion sUBNACIONsubnacionid;
 
     public Municipio() {
     }
 
-    public Municipio(MunicipioPK municipioPK) {
-        this.municipioPK = municipioPK;
+    public Municipio(Integer municipioId) {
+        this.municipioId = municipioId;
     }
 
-    public Municipio(int municipioId, int codigo) {
-        this.municipioPK = new MunicipioPK(municipioId, codigo);
+    public Integer getMunicipioId() {
+        return municipioId;
     }
 
-    public MunicipioPK getMunicipioPK() {
-        return municipioPK;
+    public void setMunicipioId(Integer municipioId) {
+        this.municipioId = municipioId;
     }
 
-    public void setMunicipioPK(MunicipioPK municipioPK) {
-        this.municipioPK = municipioPK;
+    public Integer getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Integer codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {
@@ -69,18 +78,18 @@ public class Municipio implements Serializable {
         this.nombre = nombre;
     }
 
-    public Subnacion getSubnacion() {
-        return subnacion;
+    public Subnacion getSUBNACIONsubnacionid() {
+        return sUBNACIONsubnacionid;
     }
 
-    public void setSubnacion(Subnacion subnacion) {
-        this.subnacion = subnacion;
+    public void setSUBNACIONsubnacionid(Subnacion sUBNACIONsubnacionid) {
+        this.sUBNACIONsubnacionid = sUBNACIONsubnacionid;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (municipioPK != null ? municipioPK.hashCode() : 0);
+        hash += (municipioId != null ? municipioId.hashCode() : 0);
         return hash;
     }
 
@@ -91,7 +100,7 @@ public class Municipio implements Serializable {
             return false;
         }
         Municipio other = (Municipio) object;
-        if ((this.municipioPK == null && other.municipioPK != null) || (this.municipioPK != null && !this.municipioPK.equals(other.municipioPK))) {
+        if ((this.municipioId == null && other.municipioId != null) || (this.municipioId != null && !this.municipioId.equals(other.municipioId))) {
             return false;
         }
         return true;
@@ -99,7 +108,7 @@ public class Municipio implements Serializable {
 
     @Override
     public String toString() {
-        return "cdc.com.api.modelo.Municipio[ municipioPK=" + municipioPK + " ]";
+        return "cdc.com.api.modelo.Municipio[ municipioId=" + municipioId + " ]";
     }
     
 }

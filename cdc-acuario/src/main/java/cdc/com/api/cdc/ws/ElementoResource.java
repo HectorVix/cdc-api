@@ -72,14 +72,14 @@ public class ElementoResource {
     FotoService fotoServicio;
 
     @GET
-    @Path("/buscar/{codigo}/{nombrecomun}/{nombrecientifico}")
+    @Path("/buscar/{codigoe}/{nombrecomunn}/{nombrecientifico}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Elemento> buscarElemento(@PathParam("codigo") String codigo,
-            @PathParam("nombrecomun") String nombrecomun,
+    public java.util.List<Elemento> buscarElemento(@PathParam("codigoe") String codigoe,
+            @PathParam("nombrecomunn") String nombrecomunn,
             @PathParam("nombrecientifico") String nombrecientifico) {
         System.out.println("***->Busqueda Exitosa de Elementos");
-        return elementoServicio.buscarElemento(codigo, nombrecomun, nombrecientifico);
+        return elementoServicio.buscarElemento(codigoe, nombrecomunn, nombrecientifico);
     }
 
     @GET
@@ -116,9 +116,9 @@ public class ElementoResource {
         us.setUsuarioId(id);
         elemento.setUSUARIOusuarioid(us);
         int elemento_id = elementoServicio.save(elemento);
-        System.out.println("***->Registro Elemento Exitoso" + elemento.getCodigo());
+        System.out.println("***->Registro Elemento Exitoso" + elemento.getCodigoe());
         JSONObject object = new JSONObject();
-        object.put("codigo", elemento.getCodigo());
+        object.put("codigoe", elemento.getCodigoe());
         object.put("elementoId", elemento_id);
         return Response.status(200).entity(object.toString()).build();
     }
@@ -366,8 +366,8 @@ public class ElementoResource {
         elemento.setUSUARIOusuarioid(us);
         elementoServicio.update(elemento);
         JSONObject object = new JSONObject();
-        object.put("codigo", elemento.getCodigo());
-        System.out.println("***->Editado exitoso:" + elemento.getCodigo());
+        object.put("codigoe", elemento.getCodigoe());
+        System.out.println("***->Editado exitoso:" + elemento.getCodigoe());
         return Response.status(200).entity(object.toString()).build();
     }
 
