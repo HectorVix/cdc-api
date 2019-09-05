@@ -14,6 +14,7 @@ import cdc.com.api.modelo.Global;
 import cdc.com.api.modelo.Rastreo;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.RastreoService;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -26,6 +27,10 @@ import javax.ws.rs.Produces;
 //import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
+import modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.StatusGlobal;
+import modelo.datos.representativos.StatusNacional;
+import modelo.datos.representativos.StatusSubnacional;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -92,7 +97,7 @@ public class RastreoResource {
     @Path("/status/global/{codigoe}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Object status_Global(@PathParam("codigoe") String codigoe) {
+    public StatusGlobal status_Global(@PathParam("codigoe") String codigoe) {
         System.out.println("***->Status global");
         return rastreoServicio.status_Global(codigoe);
     }
@@ -101,7 +106,7 @@ public class RastreoResource {
     @Path("/status/nacional/{codigoe}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Object status_Nacional(@PathParam("codigoe") String codigoe) {
+    public StatusNacional status_Nacional(@PathParam("codigoe") String codigoe) {
         System.out.println("***->Status nacional");
         return rastreoServicio.status_Nacional(codigoe);
     }
@@ -110,7 +115,7 @@ public class RastreoResource {
     @Path("/status/subnacional/{codigoe}/{subnacion}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Object status_Subnacional(@PathParam("codigoe") String codigoe, @PathParam("subnacion") String subnacion) {
+    public StatusSubnacional status_Subnacional(@PathParam("codigoe") String codigoe, @PathParam("subnacion") String subnacion) {
         System.out.println("***->Status subnacional");
         return rastreoServicio.status_Subnacional(codigoe, subnacion);
     }

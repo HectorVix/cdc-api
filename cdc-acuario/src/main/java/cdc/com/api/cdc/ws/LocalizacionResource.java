@@ -12,7 +12,7 @@ package cdc.com.api.cdc.ws;
 import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Proteccion;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.IdentificadoresLE;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.LocalizacionService;
 import cdc.com.api.servicio.ProteccionService;
@@ -211,6 +211,15 @@ public class LocalizacionResource {
     public IdentificadoresLE buscar_IdentificadoresLE_RangoG(@PathParam("codigoe") String codigoe) throws JSONException {
         System.out.println("***->Buscando identificadores LE: RangoG");
         return localizacionServicio.buscar_Identificadores_RangoG(codigoe);
+    }
+
+    @GET
+    @Path("/identificadores/NombreComunN/{codigoe}")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public IdentificadoresLE buscar_IdentificadoresLE_NombreComunN(@PathParam("codigoe") String codigoe) throws JSONException {
+        System.out.println("***->Buscando identificadores LE: NombreComunN");
+        return localizacionServicio.buscar_Identificadores_NombreComunN(codigoe);
     }
 
 }

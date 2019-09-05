@@ -8,7 +8,7 @@ package cdc.com.api.dao.impl;
 import cdc.com.api.dao.LocalizacionDao;
 import cdc.com.api.modelo.Localizacion;
 import cdc.com.api.modelo.Rastreo;
-import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.IdentificadoresLE;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -63,7 +63,7 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     public IdentificadoresLE buscar_Identificadores_NombreS_RangoS(String codigoe, String departamento) {
         codigoe = codigoe.replaceAll("\\s", "");
         String queryStr
-                = "SELECT NEW cdc.com.api.modelo.datos.representativos.IdentificadoresLE "
+                = "SELECT NEW modelo.datos.representativos.IdentificadoresLE "
                 + "(s.nombres,s.rangos) "
                 + "FROM Subnacional s "
                 + "WHERE  "
@@ -81,7 +81,7 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     public IdentificadoresLE buscar_Identificadores_RangoG(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
         String queryStr
-                = "SELECT NEW cdc.com.api.modelo.datos.representativos.IdentificadoresLE "
+                = "SELECT NEW modelo.datos.representativos.IdentificadoresLE "
                 + "(g.rangog,1) "
                 + "FROM Global g "
                 + "WHERE  g.codigoe = :codigoe";
@@ -95,7 +95,7 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     public IdentificadoresLE buscar_Identificadores_RangoN(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
         String queryStr
-                = "SELECT NEW cdc.com.api.modelo.datos.representativos.IdentificadoresLE "
+                = "SELECT NEW modelo.datos.representativos.IdentificadoresLE "
                 + "(n.rangon,2) "
                 + "FROM Nacional n "
                 + "WHERE  n.codigoe = :codigoe";
@@ -109,10 +109,10 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
     public IdentificadoresLE buscar_Identificadores_NombreComunN(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
         String queryStr
-                = "SELECT NEW cdc.com.api.modelo.datos.representativos.IdentificadoresLE "
-                + "(e.nombrecomun ,3) "
+                = "SELECT NEW modelo.datos.representativos.IdentificadoresLE "
+                + "(e.nombrecomunn,3) "
                 + "FROM Elemento e "
-                + "WHERE  e.codigo = :codigoe";
+                + "WHERE  e.codigoe = :codigoe";
         TypedQuery<IdentificadoresLE> query
                 = entityManager.createQuery(queryStr, IdentificadoresLE.class);
         query.setParameter("codigoe", codigoe);

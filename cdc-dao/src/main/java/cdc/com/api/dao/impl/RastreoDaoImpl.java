@@ -13,6 +13,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.StatusGlobal;
+import modelo.datos.representativos.StatusNacional;
+import modelo.datos.representativos.StatusSubnacional;
 
 /**
  *
@@ -70,29 +74,48 @@ public class RastreoDaoImpl implements RastreoDao {
         return rastreo;
     }
 
-    public Object status_Global(String codigoe) {
+    public StatusGlobal status_Global(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery query = (TypedQuery) entityManager.createQuery("SELECT g.nombreg,g.rangog,g.resrg,g.fecharg from Global g WHERE g.codigoe = :codigoe");
+        String queryStr
+                = "SELECT NEW modelo.datos.representativos.StatusGlobal "
+                + "(g.nombreg,g.rangog,g.resrg,g.fecharg) "
+                + "FROM Global g "
+                + "WHERE  g.codigoe = :codigoe";
+        TypedQuery<StatusGlobal> query
+                = entityManager.createQuery(queryStr, StatusGlobal.class);
         query.setParameter("codigoe", codigoe);
-        Object global = query.getSingleResult();
-        return global;
+        StatusGlobal statusGlobal = query.getResultList().stream().findFirst().orElse(null);
+        return statusGlobal;
     }
 
-    public Object status_Nacional(String codigoe) {
+    public StatusNacional status_Nacional(String codigoe) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery query = (TypedQuery) entityManager.createQuery("SELECT n.rangon,n.fecharn,n.nlestim,n.nleprot,n.nabund from Nacional n WHERE n.codigoe = :codigoe");
+        String queryStr
+                = "SELECT NEW modelo.datos.representativos.StatusNacional "
+                + "(n.rangon,n.fecharn,n.nlestim,n.nleprot,n.nabund ) "
+                + "FROM Nacional n "
+                + "WHERE  n.codigoe = :codigoe";
+        TypedQuery<StatusNacional> query
+                = entityManager.createQuery(queryStr, StatusNacional.class);
         query.setParameter("codigoe", codigoe);
-        Object global = query.getSingleResult();
-        return global;
+        StatusNacional statusNacional = query.getSingleResult();
+        return statusNacional;
     }
 
-    public Object status_Subnacional(String codigoe, String subnacion) {
+    public StatusSubnacional status_Subnacional(String codigoe, String departamento) {
         codigoe = codigoe.replaceAll("\\s", "");
-        subnacion = subnacion.replaceAll("\\s", "");
-        TypedQuery query = (TypedQuery) entityManager.createQuery("SELECT s.rangos,s.fecharevrs,s.lestims,s.leprots,s.abunds from Subnacional s WHERE s.codigoe = :codigoe AND s.subnacion=:subnacion");
+        String queryStr
+                = "SELECT NEW modelo.datos.representativos.StatusSubnacional "
+                + "(s.rangos,s.fecharevrs,s.lestims,s.leprots,s.abunds) "
+                + "FROM Subnacional s "
+                + "WHERE  "
+                + "s.subnacion = :departamento "
+                + "AND   s.codigoe = :codigoe";
+        TypedQuery<StatusSubnacional> query
+                = entityManager.createQuery(queryStr, StatusSubnacional.class);
+        query.setParameter("departamento", departamento);
         query.setParameter("codigoe", codigoe);
-        query.setParameter("subnacion", subnacion);
-        Object subnacional = query.getSingleResult();
-        return subnacional;
+        StatusSubnacional statusSubnacional = query.getSingleResult();
+        return statusSubnacional;
     }
 }

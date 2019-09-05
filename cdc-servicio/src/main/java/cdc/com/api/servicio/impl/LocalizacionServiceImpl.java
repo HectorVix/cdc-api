@@ -7,7 +7,7 @@ package cdc.com.api.servicio.impl;
 
 import cdc.com.api.dao.LocalizacionDao;
 import cdc.com.api.modelo.Localizacion;
-import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.IdentificadoresLE;
 import cdc.com.api.servicio.LocalizacionService;
 import java.util.List;
 import javax.ejb.Stateless;

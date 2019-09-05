@@ -12,6 +12,10 @@ import cdc.com.api.servicio.RastreoService;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.StatusGlobal;
+import modelo.datos.representativos.StatusNacional;
+import modelo.datos.representativos.StatusSubnacional;
 
 /**
  *
@@ -52,15 +56,15 @@ public class RastreoServiceImpl implements RastreoService {
         return rastreoDao.buscarRastreo_Codigoe(codigoe);
     }
 
-    public Object status_Global(String codigoe) {
+    public StatusGlobal status_Global(String codigoe) {
         return rastreoDao.status_Global(codigoe);
     }
 
-    public Object status_Nacional(String codigoe) {
+    public StatusNacional status_Nacional(String codigoe) {
         return rastreoDao.status_Nacional(codigoe);
     }
 
-    public Object status_Subnacional(String codigoe, String subnacion) {
+    public StatusSubnacional status_Subnacional(String codigoe, String subnacion) {
         return rastreoDao.status_Subnacional(codigoe, subnacion);
     }
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cdc.com.api.modelo.datos.representativos;
+package modelo.datos.representativos;
 
 /**
  *

@@ -6,7 +6,7 @@
 package cdc.com.api.servicio;
 
 import cdc.com.api.modelo.Localizacion;
-import cdc.com.api.modelo.datos.representativos.IdentificadoresLE;
+import modelo.datos.representativos.IdentificadoresLE;
 import java.util.List;
 
 /**
