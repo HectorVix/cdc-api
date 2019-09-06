@@ -156,4 +156,12 @@ public class AreaResource {
         System.out.println("***->Update Exitoso ListaElemento :" + areaId);
         return Response.status(200).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Area> all2() {
+        System.out.println("***->All");
+        return areaServicio.all();
+    }
 }

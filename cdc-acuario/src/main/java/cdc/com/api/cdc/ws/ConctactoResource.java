@@ -11,6 +11,7 @@ import cdc.com.api.servicio.AreaService;
 import cdc.com.api.servicio.ContactoService;
 import cdc.com.api.servicio.FuenteService;
 import cdc.com.api.servicio.SitioService;
+import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -132,5 +133,13 @@ public class ConctactoResource {
         } else {
             return Response.status(404).entity(object.toString()).build();
         }
+    }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Contacto> all2() {
+        System.out.println("***->All");
+        return contactoServicio.all();
     }
 }

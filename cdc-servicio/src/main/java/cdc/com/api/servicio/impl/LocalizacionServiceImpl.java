@@ -59,4 +59,8 @@ public class LocalizacionServiceImpl implements LocalizacionService {
         return localizacionDao.buscar_Identificadores_NombreComunN(codigoe);
     }
 
+    public List<Localizacion> all() {
+        return localizacionDao.all();
+    }
+
 }

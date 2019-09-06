@@ -119,4 +119,12 @@ public class RastreoResource {
         System.out.println("***->Status subnacional");
         return rastreoServicio.status_Subnacional(codigoe, subnacion);
     }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Rastreo> all() {
+        System.out.println("***->All");
+        return rastreoServicio.all();
+    }
 }

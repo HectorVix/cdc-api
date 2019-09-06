@@ -54,7 +54,7 @@ public class ElementoDaoImpl implements ElementoDao {
 
     }
 
-    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombrecientifico) {
+    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombrecientifico, String clase, String comunidad) {
         codigoe = codigoe.replaceAll("\\s", "");
         System.out.print("codigoe:" + codigoe);
         System.out.print("nombrecomunn:" + nombrecomunn);
@@ -62,7 +62,9 @@ public class ElementoDaoImpl implements ElementoDao {
         TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e"
                 + " WHERE (e.codigoe like '%" + codigoe + "%'"
                 + "OR e.nombrecomunn like '%" + nombrecomunn + "%'"
-                + " OR e.nombrecientifico like '%" + nombrecientifico + "%')", Elemento.class);
+                + "OR e.nombrecientifico like '%" + nombrecientifico + "%'"
+                + "OR e.clase like '%" + clase + "%'"
+                + " OR e.comunidad like '%" + comunidad + "%')", Elemento.class);
         return query.getResultList();
     }
 

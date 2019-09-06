@@ -51,6 +51,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.List;
 //import java.util.List;
 //import javax.imageio.ImageIO;
 import javax.ws.rs.HeaderParam;
@@ -72,14 +73,16 @@ public class ElementoResource {
     FotoService fotoServicio;
 
     @GET
-    @Path("/buscar/{codigoe}/{nombrecomunn}/{nombrecientifico}")
+    @Path("/buscar/{codigoe}/{nombrecomunn}/{nombrecientifico}/{clase}/{comunidad}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Elemento> buscarElemento(@PathParam("codigoe") String codigoe,
             @PathParam("nombrecomunn") String nombrecomunn,
-            @PathParam("nombrecientifico") String nombrecientifico) {
+            @PathParam("nombrecientifico") String nombrecientifico,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad) {
         System.out.println("***->Busqueda Exitosa de Elementos");
-        return elementoServicio.buscarElemento(codigoe, nombrecomunn, nombrecientifico);
+        return elementoServicio.buscarElemento(codigoe, nombrecomunn, nombrecientifico, clase, comunidad);
     }
 
     @GET
@@ -380,5 +383,13 @@ public class ElementoResource {
         object.put("fotoId", id);
         System.out.println("***->Delete exitoso:" + id);
         return Response.status(200).entity(object.toString()).build();
+    }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Elemento> all() {
+        System.out.println("***->All");
+        return elementoServicio.all();
     }
 }

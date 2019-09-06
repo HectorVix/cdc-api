@@ -438,4 +438,20 @@ public class CaracterizacionResource {
         System.out.println("***->Obteniendo fenelogia");
         return fenelogiaServicio.all();
     }
+
+    @GET
+    @Path("/planta/all")
+    @Produces(APPLICATION_JSON)
+    public List<Planta> all() {
+        System.out.println("***->All");
+        return plantaServicio.all();
+    }
+
+    @GET
+    @Path("/vertebrado/all")
+    @Produces(APPLICATION_JSON)
+    public List<Vertebrado> all2() {
+        System.out.println("***->All2");
+        return vertebradoServicio.all();
+    }
 }

@@ -226,4 +226,12 @@ public class SitioResource {
         System.out.println("***->Update Exitoso Subdivision :" + sitioId);
         return Response.status(200).entity(object.toString()).build();
     }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Sitio> all() {
+        System.out.println("***->All");
+        return sitioServicio.all();
+    }
 }

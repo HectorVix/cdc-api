@@ -119,4 +119,8 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
         IdentificadoresLE idenLE = query.getSingleResult();
         return idenLE;
     }
+
+    public List<Localizacion> all() {
+        return entityManager.createQuery("SELECT l FROM Localizacion l", Localizacion.class).getResultList();
+    }
 }

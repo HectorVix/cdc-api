@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 //import java.nio.file.Files;
 //import java.nio.file.Paths;
 //import java.util.List;
@@ -137,7 +138,7 @@ public class FuenteResource {
     @Path("/buscar/{naturalezadocumento}/{codfuente}/{cita}/{archivado}/{clave}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Fuente> buscarRastreo(
+    public List<Fuente> buscarRastreo(
             @PathParam("naturalezadocumento") String naturalezadocumento,
             @PathParam("codfuente") String codfuente,
             @PathParam("cita") String cita,
@@ -166,10 +167,18 @@ public class FuenteResource {
     @Path("/buscarArchivos/{fuenteId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Archivo> buscarArchivo_FuenteId(@PathParam("fuenteId") Integer fuenteId) {
+    public List<Archivo> buscarArchivo_FuenteId(@PathParam("fuenteId") Integer fuenteId) {
         Fuente fuente = new Fuente();
         fuente.setFuenteId(fuenteId);
         System.out.println("***->Busqueda Exitosa Fuentes:" + fuenteId);
         return archivoServicio.buscarArchivo_FuenteId(fuente);
+    }
+
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Fuente> all() {
+        System.out.println("***->All");
+        return fuenteServicio.all();
     }
 }

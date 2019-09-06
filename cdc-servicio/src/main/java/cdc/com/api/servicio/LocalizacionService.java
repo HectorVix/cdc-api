@@ -23,6 +23,8 @@ public interface LocalizacionService {
 
     public int getRastreo_id();
 
+    public List<Localizacion> all();
+
     public List<Localizacion> buscarLocalizacion(String codigole);
 
     public IdentificadoresLE buscar_Identificadores_NombreS_RangoS(String codigoe, String departamento);

@@ -23,7 +23,7 @@ public class ElementoServiceImpl implements ElementoService {
     private ElementoDao elementoDao;
 
     public int save(Elemento elemento) {
-       return elementoDao.save(elemento);
+        return elementoDao.save(elemento);
     }
 
     public void update(Elemento elemento) {
@@ -43,16 +43,16 @@ public class ElementoServiceImpl implements ElementoService {
         return elementoDao.all();
     }
 
-    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico) {
-        return elementoDao.buscarElemento(codigo, nombrecomun, nombrecientifico);
+    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico, String clase, String comunidad) {
+        return elementoDao.buscarElemento(codigo, nombrecomun, nombrecientifico, clase, comunidad);
     }
 
     public boolean findElemento(String codigoe) {
-       return elementoDao.findElemento(codigoe);
+        return elementoDao.findElemento(codigoe);
     }
 
     public int getElemento_id() {
-      return elementoDao.getElemento_id();
+        return elementoDao.getElemento_id();
     }
 
 }

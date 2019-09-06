@@ -95,7 +95,7 @@ public class LocalizacionResource {
     @Path("/buscar/{codigole}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Localizacion> buscarLocalizacion(@PathParam("codigole") String codigole) {
+    public List<Localizacion> buscarLocalizacion(@PathParam("codigole") String codigole) {
         System.out.println("***->Busqueda Exitosa LE");
         return localizacionServicio.buscarLocalizacion(codigole);
     }
@@ -119,7 +119,7 @@ public class LocalizacionResource {
     @Path("/proteccion/{localizacionId}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public java.util.List<Proteccion> buscarProteccion(@PathParam("localizacionId") Integer localizacionId) {
+    public List<Proteccion> buscarProteccion(@PathParam("localizacionId") Integer localizacionId) {
         System.out.println("***->Busqueda Exitosa Proteccion:" + localizacionId);
         Localizacion le = new Localizacion();
         le.setLocalizacionId(localizacionId);
@@ -222,4 +222,11 @@ public class LocalizacionResource {
         return localizacionServicio.buscar_Identificadores_NombreComunN(codigoe);
     }
 
+    @GET
+    @Path("/all")
+    @Produces(APPLICATION_JSON)
+    public List<Localizacion> all() {
+        System.out.println("***->All");
+        return localizacionServicio.all();
+    }
 }

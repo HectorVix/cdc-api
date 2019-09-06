@@ -31,6 +31,7 @@ import cdc.com.api.servicio.RangonService;
 import cdc.com.api.servicio.RangosService;
 import cdc.com.api.servicio.SubnacionService;
 import cdc.com.api.servicio.SubnacionalService;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -301,5 +302,29 @@ public class JerarquizacionResource {
         subnacion.setSubnacionId(departamento_codigo);
         System.out.println("***->Obteniendo municipios");
         return municipioServicio.all(subnacion);
+    }
+
+    @GET
+    @Path("/global/all")
+    @Produces(APPLICATION_JSON)
+    public List<Global> all() {
+        System.out.println("***->All");
+        return globalServicio.all();
+    }
+
+    @GET
+    @Path("/nacional/all")
+    @Produces(APPLICATION_JSON)
+    public List<Nacional> all2() {
+        System.out.println("***->All2");
+        return nacionalServicio.all();
+    }
+
+    @GET
+    @Path("/subnacional/all")
+    @Produces(APPLICATION_JSON)
+    public List<Subnacional> all3() {
+        System.out.println("***->All3");
+        return subnacionalServicio.all();
     }
 }
