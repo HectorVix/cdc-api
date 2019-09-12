@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Elemento.findByElementoId", query = "SELECT e FROM Elemento e WHERE e.elementoId = :elementoId")
     , @NamedQuery(name = "Elemento.findByCodigoe", query = "SELECT e FROM Elemento e WHERE e.codigoe = :codigoe")
     , @NamedQuery(name = "Elemento.findByNombrecomunn", query = "SELECT e FROM Elemento e WHERE e.nombrecomunn = :nombrecomunn")
-    , @NamedQuery(name = "Elemento.findByNombrecientifico", query = "SELECT e FROM Elemento e WHERE e.nombrecientifico = :nombrecientifico")
+    , @NamedQuery(name = "Elemento.findByNombren", query = "SELECT e FROM Elemento e WHERE e.nombren = :nombren")
     , @NamedQuery(name = "Elemento.findByComentario", query = "SELECT e FROM Elemento e WHERE e.comentario = :comentario")
     , @NamedQuery(name = "Elemento.findByFecha", query = "SELECT e FROM Elemento e WHERE e.fecha = :fecha")
     , @NamedQuery(name = "Elemento.findByClase", query = "SELECT e FROM Elemento e WHERE e.clase = :clase")
@@ -54,8 +54,8 @@ public class Elemento implements Serializable {
     private String codigoe;
     @Column(name = "nombrecomunn")
     private String nombrecomunn;
-    @Column(name = "nombrecientifico")
-    private String nombrecientifico;
+    @Column(name = "nombren")
+    private String nombren;
     @Column(name = "comentario")
     private String comentario;
     @Column(name = "fecha")
@@ -66,13 +66,17 @@ public class Elemento implements Serializable {
     @Column(name = "comunidad")
     private String comunidad;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Global> globalList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Nacional> nacionalList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Subnacional> subnacionalList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Protocolo> protocoloList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Rastreo> rastreoList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Caracterizacion> caracterizacionList;
-    @OneToMany(mappedBy = "eLEMENTOelementoid")
-    private List<Jerarquizacion> jerarquizacionList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
@@ -110,12 +114,12 @@ public class Elemento implements Serializable {
         this.nombrecomunn = nombrecomunn;
     }
 
-    public String getNombrecientifico() {
-        return nombrecientifico;
+    public String getNombren() {
+        return nombren;
     }
 
-    public void setNombrecientifico(String nombrecientifico) {
-        this.nombrecientifico = nombrecientifico;
+    public void setNombren(String nombren) {
+        this.nombren = nombren;
     }
 
     public String getComentario() {
@@ -151,6 +155,33 @@ public class Elemento implements Serializable {
     }
 
     @XmlTransient
+    public List<Global> getGlobalList() {
+        return globalList;
+    }
+
+    public void setGlobalList(List<Global> globalList) {
+        this.globalList = globalList;
+    }
+
+    @XmlTransient
+    public List<Nacional> getNacionalList() {
+        return nacionalList;
+    }
+
+    public void setNacionalList(List<Nacional> nacionalList) {
+        this.nacionalList = nacionalList;
+    }
+
+    @XmlTransient
+    public List<Subnacional> getSubnacionalList() {
+        return subnacionalList;
+    }
+
+    public void setSubnacionalList(List<Subnacional> subnacionalList) {
+        this.subnacionalList = subnacionalList;
+    }
+
+    @XmlTransient
     public List<Protocolo> getProtocoloList() {
         return protocoloList;
     }
@@ -175,15 +206,6 @@ public class Elemento implements Serializable {
 
     public void setCaracterizacionList(List<Caracterizacion> caracterizacionList) {
         this.caracterizacionList = caracterizacionList;
-    }
-
-    @XmlTransient
-    public List<Jerarquizacion> getJerarquizacionList() {
-        return jerarquizacionList;
-    }
-
-    public void setJerarquizacionList(List<Jerarquizacion> jerarquizacionList) {
-        this.jerarquizacionList = jerarquizacionList;
     }
 
     public Usuario getUSUARIOusuarioid() {

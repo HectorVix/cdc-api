@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -50,8 +51,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Localizacion.findByNummarg", query = "SELECT l FROM Localizacion l WHERE l.nummarg = :nummarg")
     , @NamedQuery(name = "Localizacion.findByNumpunto", query = "SELECT l FROM Localizacion l WHERE l.numpunto = :numpunto")
     , @NamedQuery(name = "Localizacion.findByDiezdiez", query = "SELECT l FROM Localizacion l WHERE l.diezdiez = :diezdiez")
-    , @NamedQuery(name = "Localizacion.findByLatitud", query = "SELECT l FROM Localizacion l WHERE l.latitud = :latitud")
-    , @NamedQuery(name = "Localizacion.findByLongitud", query = "SELECT l FROM Localizacion l WHERE l.longitud = :longitud")
     , @NamedQuery(name = "Localizacion.findByCoords", query = "SELECT l FROM Localizacion l WHERE l.coords = :coords")
     , @NamedQuery(name = "Localizacion.findByCoordn", query = "SELECT l FROM Localizacion l WHERE l.coordn = :coordn")
     , @NamedQuery(name = "Localizacion.findByCoorde", query = "SELECT l FROM Localizacion l WHERE l.coorde = :coorde")
@@ -141,8 +140,10 @@ public class Localizacion implements Serializable {
     private String numpunto;
     @Column(name = "diezdiez")
     private String diezdiez;
+    @Lob
     @Column(name = "latitud")
     private String latitud;
+    @Lob
     @Column(name = "longitud")
     private String longitud;
     @Column(name = "coords")

@@ -73,16 +73,16 @@ public class ElementoResource {
     FotoService fotoServicio;
 
     @GET
-    @Path("/buscar/{codigoe}/{nombrecomunn}/{nombrecientifico}/{clase}/{comunidad}")
+    @Path("/buscar/{codigoe}/{nombren}/{nombrecomunn}/{clase}/{comunidad}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Elemento> buscarElemento(@PathParam("codigoe") String codigoe,
+            @PathParam("nombren") String nombren,
             @PathParam("nombrecomunn") String nombrecomunn,
-            @PathParam("nombrecientifico") String nombrecientifico,
             @PathParam("clase") String clase,
             @PathParam("comunidad") String comunidad) {
         System.out.println("***->Busqueda Exitosa de Elementos");
-        return elementoServicio.buscarElemento(codigoe, nombrecomunn, nombrecientifico, clase, comunidad);
+        return elementoServicio.buscarElemento(codigoe, nombren, nombrecomunn, clase, comunidad);
     }
 
     @GET

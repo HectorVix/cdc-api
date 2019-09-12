@@ -6,6 +6,7 @@
 package cdc.com.api.modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,8 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,6 +49,8 @@ public class Municipio implements Serializable {
     @JoinColumn(name = "SUBNACION_subnacion_id", referencedColumnName = "subnacion_id")
     @ManyToOne
     private Subnacion sUBNACIONsubnacionid;
+    @OneToMany(mappedBy = "mUNICIPIOmunicipioid")
+    private List<Poligono> poligonoList;
 
     public Municipio() {
     }
@@ -84,6 +89,15 @@ public class Municipio implements Serializable {
 
     public void setSUBNACIONsubnacionid(Subnacion sUBNACIONsubnacionid) {
         this.sUBNACIONsubnacionid = sUBNACIONsubnacionid;
+    }
+
+    @XmlTransient
+    public List<Poligono> getPoligonoList() {
+        return poligonoList;
+    }
+
+    public void setPoligonoList(List<Poligono> poligonoList) {
+        this.poligonoList = poligonoList;
     }
 
     @Override

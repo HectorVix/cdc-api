@@ -121,9 +121,9 @@ public class Nacional implements Serializable {
     @Column(name = "actualizar")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
-    @JoinColumn(name = "JERARQUIZACION_jerarquizacion_id", referencedColumnName = "jerarquizacion_id")
+    @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
-    private Jerarquizacion jERARQUIZACIONjerarquizacionid;
+    private Elemento eLEMENTOelementoid;
 
     public Nacional() {
     }
@@ -348,12 +348,12 @@ public class Nacional implements Serializable {
         this.actualizar = actualizar;
     }
 
-    public Jerarquizacion getJERARQUIZACIONjerarquizacionid() {
-        return jERARQUIZACIONjerarquizacionid;
+    public Elemento getELEMENTOelementoid() {
+        return eLEMENTOelementoid;
     }
 
-    public void setJERARQUIZACIONjerarquizacionid(Jerarquizacion jERARQUIZACIONjerarquizacionid) {
-        this.jERARQUIZACIONjerarquizacionid = jERARQUIZACIONjerarquizacionid;
+    public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
+        this.eLEMENTOelementoid = eLEMENTOelementoid;
     }
 
     @Override

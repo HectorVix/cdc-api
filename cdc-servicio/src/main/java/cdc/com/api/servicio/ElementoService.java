@@ -24,7 +24,7 @@ public interface ElementoService {
 
     public List<Elemento> all();
 
-    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico, String clase, String comunidad);
+    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad);
 
     public boolean findElemento(String codigoe);
 

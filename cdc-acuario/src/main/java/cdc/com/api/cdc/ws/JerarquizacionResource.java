@@ -10,8 +10,6 @@ import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import cdc.com.api.servicio.JerarquizacionService;
-import cdc.com.api.modelo.Jerarquizacion;
 import cdc.com.api.servicio.ElementoService;
 import cdc.com.api.servicio.GlobalService;
 import cdc.com.api.modelo.Global;
@@ -52,8 +50,6 @@ import org.codehaus.jettison.json.JSONObject;
 public class JerarquizacionResource {
 
     @Inject
-    JerarquizacionService jerarquizacionServicio;
-    @Inject
     ElementoService elementoServicio;
     @Inject
     GlobalService globalServicio;
@@ -78,27 +74,18 @@ public class JerarquizacionResource {
     @Path("/registro/global")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarJerarquizacionGlobal(Jerarquizacion jerarquizacion) throws JSONException {
+    public Response registrarJerarquizacionGlobal(Global global) throws JSONException {
         Elemento elemento = new Elemento();
         JSONObject object = new JSONObject();
-        String codigoe = jerarquizacion.getGlobalList().get(0).getCodigoe();
-        if (elementoServicio.findElemento(codigoe)) {
+        if (elementoServicio.findElemento(global.getCodigoe())) {
             elemento.setElementoId(elementoServicio.getElemento_id());
-            Jerarquizacion jer = new Jerarquizacion();
-            jer.setCodigoe(codigoe);
-            jer.setEstado(codigoe);
-            jer.setELEMENTOelementoid(elemento);
-            int jeraquia_id = jerarquizacionServicio.save(jer);
-            Global global = new Global();
-            global = jerarquizacion.getGlobalList().get(0);
-            jer.setJerarquizacionId(jeraquia_id);
-            global.setJERARQUIZACIONjerarquizacionid(jer);
+            global.setELEMENTOelementoid(elemento);
             globalServicio.save(global);
-            object.put("codigoe", jerarquizacion.getCodigoe());
-            System.out.println("***->Registro jeraquizacion Global:" + codigoe);
+            object.put("codigoe", global.getCodigoe());
+            System.out.println("***->Registro jeraquizacion Global:" + global.getCodigoe());
             return Response.status(200).entity(object.toString()).build();
         } else {
-            object.put("codigoe", jerarquizacion.getCodigoe());
+            object.put("codigoe", global.getCodigoe());
             return Response.status(404).entity(object.toString()).build();
         }
 
@@ -108,28 +95,19 @@ public class JerarquizacionResource {
     @Path("/registro/nacional")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarJerarquizacionNacional(Jerarquizacion jerarquizacion) throws JSONException {
+    public Response registrarJerarquizacionNacional(Nacional nacional) throws JSONException {
         Elemento elemento = new Elemento();
         JSONObject object = new JSONObject();
-        String codigoe = jerarquizacion.getNacionalList().get(0).getCodigoe();
-        if (elementoServicio.findElemento(codigoe)) {
+
+        if (elementoServicio.findElemento(nacional.getCodigoe())) {
             elemento.setElementoId(elementoServicio.getElemento_id());
-            Jerarquizacion jer = new Jerarquizacion();
-            jer.setCodigoe(codigoe);
-            jer.setEstado(codigoe);
-            jer.setELEMENTOelementoid(elemento);
-            Nacional nacional = new Nacional();
-            nacional = jerarquizacion.getNacionalList().get(0);
-            jer.setEstado(codigoe + nacional.getNacion());
-            int jeraquia_id = jerarquizacionServicio.save(jer);
-            jer.setJerarquizacionId(jeraquia_id);
-            nacional.setJERARQUIZACIONjerarquizacionid(jer);
+            nacional.setELEMENTOelementoid(elemento);
             nacionalServicio.save(nacional);
-            object.put("codigoe", jerarquizacion.getCodigoe());
-            System.out.println("***->Registro jeraquizacion Nacional:" + jerarquizacion.getCodigoe());
+            object.put("codigoe", nacional.getCodigoe());
+            System.out.println("***->Registro jeraquizacion Nacional:" + nacional.getCodigoe());
             return Response.status(200).entity(object.toString()).build();
         } else {
-            object.put("codigoe", jerarquizacion.getCodigoe());
+            object.put("codigoe", nacional.getCodigoe());
             return Response.status(404).entity(object.toString()).build();
         }
 
@@ -139,26 +117,18 @@ public class JerarquizacionResource {
     @Path("/registro/subnacional")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response registrarJerarquizacionSubNacional(Jerarquizacion jerarquizacion) throws JSONException {
+    public Response registrarJerarquizacionSubNacional(Subnacional subnacional) throws JSONException {
         Elemento elemento = new Elemento();
         JSONObject object = new JSONObject();
-        String codigoe = jerarquizacion.getSubnacionalList().get(0).getCodigoe();
-        if (elementoServicio.findElemento(codigoe)) {
+        if (elementoServicio.findElemento(subnacional.getCodigoe())) {
             elemento.setElementoId(elementoServicio.getElemento_id());
-            Jerarquizacion jer = new Jerarquizacion();
-            jer.setCodigoe(codigoe);
-            jer.setELEMENTOelementoid(elemento);
-            Subnacional subnacional = jerarquizacion.getSubnacionalList().get(0);
-            jer.setEstado(codigoe + subnacional.getSubnacion());
-            int jeraquia_id = jerarquizacionServicio.save(jer);
-            jer.setJerarquizacionId(jeraquia_id);
-            subnacional.setJERARQUIZACIONjerarquizacionid(jer);
+            subnacional.setELEMENTOelementoid(elemento);
             subnacionalServicio.save(subnacional);
-            object.put("codigoe", jerarquizacion.getCodigoe());
-            System.out.println("***->Registro jeraquizacion Subnacional:" + jerarquizacion.getCodigoe());
+            object.put("codigoe", subnacional.getCodigoe());
+            System.out.println("***->Registro jeraquizacion Subnacional:" + subnacional.getCodigoe());
             return Response.status(200).entity(object.toString()).build();
         } else {
-            object.put("codigoe", jerarquizacion.getCodigoe());
+            object.put("codigoe", subnacional.getCodigoe());
             return Response.status(404).entity(object.toString()).build();
         }
     }
@@ -176,13 +146,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/global/{jerarquia_id}")
+    @Path("/editar/global/{elemento_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Global(Global global, @PathParam("jerarquia_id") int jerarquia_id) throws JSONException {
-        Jerarquizacion jerarquizacion = new Jerarquizacion();
-        jerarquizacion.setJerarquizacionId(jerarquia_id);
-        global.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+    public Response editarJerarquizacion_Global(Global global, @PathParam("elemento_id") int elemento_id) throws JSONException {
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elemento_id);
+        global.setELEMENTOelementoid(elemento);
         globalServicio.update(global);
         JSONObject object = new JSONObject();
         object.put("codigoe", global.getCodigoe());
@@ -203,13 +173,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/nacional/{jerarquia_id}")
+    @Path("/editar/nacional/{elemento_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Nacional(Nacional nacional, @PathParam("jerarquia_id") int jerarquia_id) throws JSONException {
-        Jerarquizacion jerarquizacion = new Jerarquizacion();
-        jerarquizacion.setJerarquizacionId(jerarquia_id);
-        nacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+    public Response editarJerarquizacion_Nacional(Nacional nacional, @PathParam("elemento_id") int elemento_id) throws JSONException {
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elemento_id);
+        nacional.setELEMENTOelementoid(elemento);
         nacionalServicio.update(nacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", nacional.getCodigoe());
@@ -232,13 +202,13 @@ public class JerarquizacionResource {
     }
 
     @POST
-    @Path("/editar/subnacional/{jerarquia_id}")
+    @Path("/editar/subnacional/{elemento_id}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public Response editarJerarquizacion_Subnacional(Subnacional subnacional, @PathParam("jerarquia_id") int jerarquia_id) throws JSONException {
-        Jerarquizacion jerarquizacion = new Jerarquizacion();
-        jerarquizacion.setJerarquizacionId(jerarquia_id);
-        subnacional.setJERARQUIZACIONjerarquizacionid(jerarquizacion);
+    public Response editarJerarquizacion_Subnacional(Subnacional subnacional, @PathParam("elemento_id") int elemento_id) throws JSONException {
+        Elemento elemento = new Elemento();
+        elemento.setElementoId(elemento_id);
+        subnacional.setELEMENTOelementoid(elemento);
         subnacionalServicio.update(subnacional);
         JSONObject object = new JSONObject();
         object.put("codigoe", subnacional.getCodigoe());

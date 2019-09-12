@@ -43,8 +43,8 @@ public class ElementoServiceImpl implements ElementoService {
         return elementoDao.all();
     }
 
-    public List<Elemento> buscarElemento(String codigo, String nombrecomun, String nombrecientifico, String clase, String comunidad) {
-        return elementoDao.buscarElemento(codigo, nombrecomun, nombrecientifico, clase, comunidad);
+    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad) {
+        return elementoDao.buscarElemento(codigo, nombren, nombrecomun, clase, comunidad);
     }
 
     public boolean findElemento(String codigoe) {

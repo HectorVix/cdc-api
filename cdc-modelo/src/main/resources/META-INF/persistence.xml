@@ -72,5 +72,6 @@
     <class>cdc.com.api.modelo.Nacion</class>
     <class>cdc.com.api.modelo.Subnacion</class>
     <class>cdc.com.api.modelo.Municipio</class>
+    <class>cdc.com.api.modelo.Poligono</class>
   </persistence-unit>
 </persistence>
