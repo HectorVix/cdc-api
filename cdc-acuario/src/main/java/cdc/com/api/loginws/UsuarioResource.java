@@ -71,7 +71,7 @@ public class UsuarioResource {
         System.out.println("***->logiando..." + password);
         try {
             authenticate(username, password);
-            String token = issueToken(username, usuarioService.getUsuario_id());
+            String token = issueToken(usuarioService.getUsuario_id());
             System.out.println("***->Id usuario..." + usuarioService.getUsuario_id());
             JSONObject object = new JSONObject();
             object.put("access_token", token);
@@ -90,10 +90,11 @@ public class UsuarioResource {
         }
     }
 
-    private String issueToken(String username, int Usuario_id) {
+    private String issueToken(int Usuario_id) {
+        Usuario us = usuarioService.find((long) Usuario_id);
         Key key = keyGenerator.generateKey();
         String jwtToken = Jwts.builder()
-                .setSubject(username)
+                .setSubject(us.getRolrolid().getNombre())
                 .setId(String.valueOf(Usuario_id))
                 .setIssuer(uriInfo.getAbsolutePath().toString())
                 .setIssuedAt(new Date())

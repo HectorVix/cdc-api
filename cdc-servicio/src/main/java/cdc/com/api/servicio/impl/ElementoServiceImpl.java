@@ -39,12 +39,13 @@ public class ElementoServiceImpl implements ElementoService {
     }
 
     @Override
-    public List<Elemento> all() {
-        return elementoDao.all();
+    public List<Elemento> all(String rol) {
+        return elementoDao.all(rol);
     }
 
-    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad) {
-        return elementoDao.buscarElemento(codigo, nombren, nombrecomun, clase, comunidad);
+    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad,
+            String rol) {
+        return elementoDao.buscarElemento(codigo, nombren, nombrecomun, clase, comunidad, rol);
     }
 
     public boolean findElemento(String codigoe) {

@@ -22,9 +22,10 @@ public interface ElementoDao {
 
     public Elemento find(Long id);
 
-    public List<Elemento> all();
+    public List<Elemento> all(String rol);
 
-    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad);
+    public List<Elemento> buscarElemento(String codigo, String nombren, String nombrecomun, String clase, String comunidad,
+            String rol);
 
     public boolean findElemento(String codigoe);
 

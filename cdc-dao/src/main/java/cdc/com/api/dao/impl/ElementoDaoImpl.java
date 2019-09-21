@@ -49,23 +49,54 @@ public class ElementoDaoImpl implements ElementoDao {
     }
 
     @Override
-    public List<Elemento> all() {
-        return entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class).getResultList();
+    public List<Elemento> all(String rol) {
+        TypedQuery<Elemento> query = null;
+        if (rol.equals("Admin")) {
+            query = entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class);
+            return query.getResultList();
+
+        } else {
+            query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.clase !=:clase", Elemento.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+            } else {
+                query.setParameter("clase", "P");
+            }
+
+            return query.getResultList();
+        }
 
     }
 
-    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombren, String clase, String comunidad) {
+    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombren, String clase, String comunidad,
+             String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        System.out.print("codigoe:" + codigoe);
-        System.out.print("nombrecomunn:" + nombrecomunn);
-        System.out.print("nombren:" + nombren);
-        TypedQuery<Elemento> query = entityManager.createQuery("SELECT e FROM Elemento e"
-                + " WHERE (e.codigoe like '%" + codigoe + "%'"
-                + "OR e.nombrecomunn like '%" + nombrecomunn + "%'"
-                + "OR e.nombren like '%" + nombren + "%'"
-                + "OR e.clase like '%" + clase + "%'"
-                + " OR e.comunidad like '%" + comunidad + "%')", Elemento.class);
-        return query.getResultList();
+        TypedQuery<Elemento> query = null;
+        if (rol.equals("Admin")) {
+            query = entityManager.createQuery("SELECT e FROM Elemento e"
+                    + " WHERE (e.codigoe like '%" + codigoe + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.clase = '" + clase + "'"
+                    + " OR e.comunidad ='" + comunidad + "')", Elemento.class);
+            return query.getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT e FROM Elemento e"
+                    + " WHERE (e.codigoe like '%" + codigoe + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.comunidad = '" + comunidad + "'"
+                    + " OR e.clase = '" + clase + "')"
+                    + " AND e.clase !=:clase",
+                    Elemento.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+            } else {
+                query.setParameter("clase", "P");
+            }
+            return query.getResultList();
+        }
+
     }
 
     public boolean findElemento(String codigoe) {

@@ -73,16 +73,17 @@ public class ElementoResource {
     FotoService fotoServicio;
 
     @GET
-    @Path("/buscar/{codigoe}/{nombren}/{nombrecomunn}/{clase}/{comunidad}")
+    @Path("/buscar/{codigoe}/{nombren}/{nombrecomunn}/{clase}/{comunidad}/{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Elemento> buscarElemento(@PathParam("codigoe") String codigoe,
             @PathParam("nombren") String nombren,
             @PathParam("nombrecomunn") String nombrecomunn,
             @PathParam("clase") String clase,
-            @PathParam("comunidad") String comunidad) {
+            @PathParam("comunidad") String comunidad,
+            @PathParam("rol") String rol) {
         System.out.println("***->Busqueda Exitosa de Elementos");
-        return elementoServicio.buscarElemento(codigoe, nombren, nombrecomunn, clase, comunidad);
+        return elementoServicio.buscarElemento(codigoe, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
     @GET
@@ -291,6 +292,7 @@ public class ElementoResource {
     }
 
     private Date toFecha(String fecha) {
+        System.out.println("Fecha foto:" + fecha);
         SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaCreacion;
         try {
@@ -386,10 +388,10 @@ public class ElementoResource {
     }
 
     @GET
-    @Path("/all")
+    @Path("/all/{rol}")
     @Produces(APPLICATION_JSON)
-    public List<Elemento> all() {
+    public List<Elemento> all(@PathParam("rol") String rol) {
         System.out.println("***->All");
-        return elementoServicio.all();
+        return elementoServicio.all(rol);
     }
 }

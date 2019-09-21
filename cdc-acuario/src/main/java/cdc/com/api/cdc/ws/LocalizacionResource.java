@@ -56,7 +56,7 @@ public class LocalizacionResource {
         JSONObject object = new JSONObject();
         Proteccion proteccion = new Proteccion();
         Rastreo rastreo = new Rastreo();
-        StringTokenizer codigole = new StringTokenizer(localizacion.getCodigole(), ".");
+        StringTokenizer codigole = new StringTokenizer(localizacion.getCodigole(), "*");
         String codigoe = codigole.nextToken();
         if (elementoServicio.findElemento(codigoe)) {
             rastreo = rastreoServicio.buscarRastreo_Codigoe(codigoe);
@@ -176,7 +176,7 @@ public class LocalizacionResource {
     public Response validarCodigoLE(@PathParam("codigole") String codigole) throws JSONException {
         System.out.println("***->Validando CODIGOLE:" + codigole);
         JSONObject object = new JSONObject();
-        StringTokenizer codigo_le = new StringTokenizer(codigole, ".");
+        StringTokenizer codigo_le = new StringTokenizer(codigole, "*");
         String codigoe = codigo_le.nextToken();
         object.put("codigoe", codigoe);
         if (elementoServicio.findElemento(codigoe)) {
