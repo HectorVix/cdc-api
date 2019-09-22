@@ -52,24 +52,25 @@ public class ElementoDaoImpl implements ElementoDao {
     public List<Elemento> all(String rol) {
         TypedQuery<Elemento> query = null;
         if (rol.equals("Admin")) {
-            query = entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class);
-            return query.getResultList();
-
+            return entityManager.createQuery("SELECT e FROM Elemento e", Elemento.class).getResultList();
         } else {
             query = entityManager.createQuery("SELECT e FROM Elemento e WHERE e.clase !=:clase", Elemento.class);
             if (rol.equals("Botanica")) {
                 query.setParameter("clase", "A");
-            } else {
-                query.setParameter("clase", "P");
+                return query.getResultList();
             }
-
-            return query.getResultList();
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
         }
 
     }
 
-    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombren, String clase, String comunidad,
-             String rol) {
+    public List<Elemento> buscarElemento(String codigoe, String nombrecomunn, String nombren,
+            String clase, String comunidad,
+            String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
         TypedQuery<Elemento> query = null;
         if (rol.equals("Admin")) {
@@ -91,10 +92,13 @@ public class ElementoDaoImpl implements ElementoDao {
                     Elemento.class);
             if (rol.equals("Botanica")) {
                 query.setParameter("clase", "A");
-            } else {
-                query.setParameter("clase", "P");
+                return query.getResultList();
             }
-            return query.getResultList();
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
         }
 
     }

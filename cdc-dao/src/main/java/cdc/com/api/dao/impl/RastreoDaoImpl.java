@@ -51,19 +51,67 @@ public class RastreoDaoImpl implements RastreoDao {
     }
 
     @Override
-    public List<Rastreo> all() {
-        return entityManager.createQuery("SELECT r FROM Rastreo r", Rastreo.class).getResultList();
+    public List<Rastreo> all(String rol) {
+        TypedQuery<Rastreo> query = null;
+        if (rol.equals("Admin")) {
+           return entityManager.createQuery("SELECT r FROM Rastreo r", Rastreo.class).getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT r FROM Rastreo r"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE e.clase !=:clase ",
+                    Rastreo.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
     }
 
-    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn) {
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombren, String nombrecomunnn,
+            String clase, String comunidad, String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery<Rastreo> query = entityManager.createQuery("SELECT r FROM Rastreo r"
-                + " WHERE (r.codigoe like '%" + codigoe + "%'"
-                + "OR r.subnacion like '%" + subnacion + "%'"
-                + "OR r.nombreg like '%" + nombreg + "%'"
-                + "OR r.nombren like '%" + nombren + "%'"
-                + " OR r.nomcomunn like '%" + nombrecomunnn + "%')", Rastreo.class);
-        return query.getResultList();
+        TypedQuery<Rastreo> query = null;
+        if (rol.equals("Admin")) {
+            query = entityManager.createQuery("SELECT r FROM Rastreo r"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (r.codigoe like '%" + codigoe + "%'"
+                    + " OR r.subnacion like '%" + subnacion + "%'"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunnn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')",
+                    Rastreo.class);
+            return query.getResultList();
+
+        } else {
+            query = entityManager.createQuery("SELECT r FROM Rastreo r"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (r.codigoe like '%" + codigoe + "%'"
+                    + " OR r.subnacion like '%" + subnacion + "%'"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunnn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')"
+                    +" AND e.clase !=:clase",
+                    Rastreo.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
     }
 
     public Rastreo buscarRastreo_Codigoe(String codigoe) {

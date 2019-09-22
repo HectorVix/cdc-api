@@ -44,12 +44,13 @@ public class RastreoServiceImpl implements RastreoService {
     }
 
     @Override
-    public List<Rastreo> all() {
-        return rastreoDao.all();
+    public List<Rastreo> all(String rol) {
+        return rastreoDao.all(rol);
     }
 
-    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn) {
-        return rastreoDao.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombren, String nombrecomunnn,
+            String clase, String comunidad, String rol) {
+        return rastreoDao.buscarRastreo(codigoe, subnacion, nombren, nombrecomunnn, clase, comunidad, rol);
     }
 
     public Rastreo buscarRastreo_Codigoe(String codigoe) {

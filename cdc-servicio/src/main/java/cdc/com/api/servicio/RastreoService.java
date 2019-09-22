@@ -29,9 +29,10 @@ public interface RastreoService {
 
     public Rastreo buscarRastreo_Codigoe(String codigoe);
 
-    public List<Rastreo> all();
+    public List<Rastreo> all(String rol);
 
-    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombreg, String nombren, String nombrecomunnn);
+    public List<Rastreo> buscarRastreo(String codigoe, String subnacion, String nombren, String nombrecomunnn,
+            String clase, String comunidad, String rol);
 
     public StatusGlobal status_Global(String codigoe);
 

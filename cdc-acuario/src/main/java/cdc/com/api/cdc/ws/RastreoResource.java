@@ -64,17 +64,19 @@ public class RastreoResource {
     }
 
     @GET
-    @Path("/buscar/{codigoe}/{subnacion}/{nombreg}/{nombren}/{nombrecomunnn}")
+    @Path("/buscar/{codigoe}/{subnacion}/{nombren}/{nombrecomunnn}/{clase}/{comunidad}/{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Rastreo> buscarRastreo(
             @PathParam("codigoe") String codigoe,
             @PathParam("subnacion") String subnacion,
-            @PathParam("nombreg") String nombreg,
             @PathParam("nombren") String nombren,
-            @PathParam("nombrecomunnn") String nombrecomunnn) {
+            @PathParam("nombrecomunnn") String nombrecomunnn,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad,
+            @PathParam("rol") String rol) {
         System.out.println("***->Busqueda Exitosa de RE");
-        return rastreoServicio.buscarRastreo(codigoe, subnacion, nombreg, nombren, nombrecomunnn);
+        return rastreoServicio.buscarRastreo(codigoe, subnacion, nombren, nombrecomunnn, clase, comunidad, rol);
 
     }
 
@@ -121,10 +123,10 @@ public class RastreoResource {
     }
 
     @GET
-    @Path("/all")
+    @Path("/all/{rol}")
     @Produces(APPLICATION_JSON)
-    public List<Rastreo> all() {
+    public List<Rastreo> all(@PathParam("rol") String rol) {
         System.out.println("***->All");
-        return rastreoServicio.all();
+        return rastreoServicio.all(rol);
     }
 }

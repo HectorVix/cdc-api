@@ -7,7 +7,6 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +17,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -43,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rastreo.findByOrden", query = "SELECT r FROM Rastreo r WHERE r.orden = :orden")
     , @NamedQuery(name = "Rastreo.findByFamilia", query = "SELECT r FROM Rastreo r WHERE r.familia = :familia")
     , @NamedQuery(name = "Rastreo.findByGenero", query = "SELECT r FROM Rastreo r WHERE r.genero = :genero")
-    , @NamedQuery(name = "Rastreo.findByNombreg", query = "SELECT r FROM Rastreo r WHERE r.nombreg = :nombreg")
     , @NamedQuery(name = "Rastreo.findByAutor", query = "SELECT r FROM Rastreo r WHERE r.autor = :autor")
     , @NamedQuery(name = "Rastreo.findByFuentenom", query = "SELECT r FROM Rastreo r WHERE r.fuentenom = :fuentenom")
     , @NamedQuery(name = "Rastreo.findByRefnombreg", query = "SELECT r FROM Rastreo r WHERE r.refnombreg = :refnombreg")
@@ -124,8 +120,6 @@ public class Rastreo implements Serializable {
     private String familia;
     @Column(name = "genero")
     private String genero;
-    @Column(name = "nombreg")
-    private String nombreg;
     @Column(name = "autor")
     private String autor;
     @Column(name = "fuentenom")
@@ -245,15 +239,9 @@ public class Rastreo implements Serializable {
     @Column(name = "actualizas")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizas;
-    @OneToMany(mappedBy = "rASTREOrastreoid")
-    private List<Fuente> fuenteList;
-    @OneToMany(mappedBy = "rASTREOrastreoid")
-    private List<Localizacion> localizacionList;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
     private Elemento eLEMENTOelementoid;
-    @OneToMany(mappedBy = "rASTREOrastreoid")
-    private List<Observaciones> observacionesList;
 
     public Rastreo() {
     }
@@ -332,14 +320,6 @@ public class Rastreo implements Serializable {
 
     public void setGenero(String genero) {
         this.genero = genero;
-    }
-
-    public String getNombreg() {
-        return nombreg;
-    }
-
-    public void setNombreg(String nombreg) {
-        this.nombreg = nombreg;
     }
 
     public String getAutor() {
@@ -790,39 +770,12 @@ public class Rastreo implements Serializable {
         this.actualizas = actualizas;
     }
 
-    @XmlTransient
-    public List<Fuente> getFuenteList() {
-        return fuenteList;
-    }
-
-    public void setFuenteList(List<Fuente> fuenteList) {
-        this.fuenteList = fuenteList;
-    }
-
-    @XmlTransient
-    public List<Localizacion> getLocalizacionList() {
-        return localizacionList;
-    }
-
-    public void setLocalizacionList(List<Localizacion> localizacionList) {
-        this.localizacionList = localizacionList;
-    }
-
     public Elemento getELEMENTOelementoid() {
         return eLEMENTOelementoid;
     }
 
     public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
         this.eLEMENTOelementoid = eLEMENTOelementoid;
-    }
-
-    @XmlTransient
-    public List<Observaciones> getObservacionesList() {
-        return observacionesList;
-    }
-
-    public void setObservacionesList(List<Observaciones> observacionesList) {
-        this.observacionesList = observacionesList;
     }
 
     @Override
