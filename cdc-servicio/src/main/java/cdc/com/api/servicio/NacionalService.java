@@ -22,7 +22,7 @@ public interface NacionalService {
 
     public Nacional find(Long id);
 
-    public List<Nacional> all();
+    public List<Nacional> all(String rol);
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion);
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion, String rol);
 }

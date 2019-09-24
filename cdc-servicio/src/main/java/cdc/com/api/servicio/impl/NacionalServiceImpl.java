@@ -39,12 +39,12 @@ public class NacionalServiceImpl implements NacionalService {
     }
 
     @Override
-    public List<Nacional> all() {
-        return nacionalDao.all();
+    public List<Nacional> all(String rol) {
+        return nacionalDao.all(rol);
     }
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion) {
-        return nacionalDao.buscarNacional(codigoe, nombren, nacion);
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion,String rol) {
+        return nacionalDao.buscarNacional(codigoe, nombren, nacion,rol);
     }
 
 }

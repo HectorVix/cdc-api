@@ -22,13 +22,14 @@ public interface SubnacionalService {
 
     public Subnacional find(Long id);
 
-    public List<Subnacional> all();
+    public List<Subnacional> all(String rol);
 
     public List<Subnacional> buscarSubnacional(
             String codigoe,
             String nacion,
             String subnacion,
             String nombres,
-            String loctips);
+            String loctips,
+            String rol);
 
 }

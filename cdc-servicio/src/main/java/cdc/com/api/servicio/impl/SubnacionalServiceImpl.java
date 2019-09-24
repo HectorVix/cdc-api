@@ -39,11 +39,12 @@ public class SubnacionalServiceImpl implements SubnacionalService {
     }
 
     @Override
-    public List<Subnacional> all() {
-        return subnacionalDao.all();
+    public List<Subnacional> all(String rol) {
+        return subnacionalDao.all(rol);
     }
 
-    public List<Subnacional> buscarSubnacional(String codigoe, String nacion, String subnacion, String nombres, String loctips) {
-        return subnacionalDao.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips);
+    public List<Subnacional> buscarSubnacional(String codigoe, String nacion, String subnacion, String nombres, String loctips,
+            String rol) {
+        return subnacionalDao.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips, rol);
     }
 }

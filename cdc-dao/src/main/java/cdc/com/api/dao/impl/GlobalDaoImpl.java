@@ -43,18 +43,67 @@ public class GlobalDaoImpl implements GlobalDao {
     }
 
     @Override
-    public List<Global> all() {
-        return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
-
+    public List<Global> all(String rol) {
+        // return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
+        TypedQuery<Global> query = null;
+        if (rol.equals("Admin")) {
+            return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT g FROM Global g"
+                    + " INNER JOIN Elemento as e"
+                    + " ON g.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE e.clase !=:clase ",
+                    Global.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
     }
 
-    public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem) {
+    public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem,
+            String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery<Global> query = entityManager.createQuery("SELECT g FROM Global g"
+        /* TypedQuery<Global> query = entityManager.createQuery("SELECT g FROM Global g"
                 + " WHERE (g.codigoe like '%" + codigoe + "%'"
                 + "OR g.nombreg like '%" + nombreg + "%'"
                 + " OR g.descrielem like '%" + descrielem + "%')", Global.class);
         return query.getResultList();
+
+         */
+        TypedQuery<Global> query = null;
+        if (rol.equals("Admin")) {
+            return entityManager.createQuery("SELECT g FROM Global g"
+                    + " INNER JOIN Elemento as e"
+                    + " ON g.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (g.codigoe like '%" + codigoe + "%'"
+                    + " OR g.nombreg like '%" + nombreg + "%'"
+                    + " OR g.descrielem like '%" + descrielem + "%')", Global.class).getResultList();
+
+        } else {
+            query = entityManager.createQuery("SELECT g FROM Global g"
+                    + " INNER JOIN Elemento as e"
+                    + " ON g.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (g.codigoe like '%" + codigoe + "%'"
+                    + " OR g.nombreg like '%" + nombreg + "%'"
+                    + " OR g.descrielem like '%" + descrielem + "%')"
+                    + " AND e.clase !=:clase",
+                    Global.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
     }
 
 }

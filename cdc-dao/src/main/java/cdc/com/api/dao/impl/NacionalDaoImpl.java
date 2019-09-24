@@ -42,17 +42,65 @@ public class NacionalDaoImpl implements NacionalDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Nacional> all() {
-        return entityManager.createQuery("SELECT n FROM Nacional n", Nacional.class).getResultList();
+    public List<Nacional> all(String rol) {
+        // return entityManager.createQuery("SELECT n FROM Nacional n", Nacional.class).getResultList();
+        TypedQuery<Nacional> query = null;
+        if (rol.equals("Admin")) {
+            return entityManager.createQuery("SELECT n FROM Nacional n", Nacional.class).getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT n FROM Nacional n"
+                    + " INNER JOIN Elemento as e"
+                    + " ON n.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE e.clase !=:clase ",
+                    Nacional.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
 
     }
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion) {
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion,
+            String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        TypedQuery<Nacional> query = entityManager.createQuery("SELECT n FROM Nacional n"
+        /*  TypedQuery<Nacional> query = entityManager.createQuery("SELECT n FROM Nacional n"
                 + " WHERE (n.codigoe like '%" + codigoe + "%'"
                 + "OR n.nombren like '%" + nombren + "%'"
                 + " OR n.nacion like '%" + nacion + "%')", Nacional.class);
-        return query.getResultList();
+        return query.getResultList();*/
+        TypedQuery<Nacional> query = null;
+        if (rol.equals("Admin")) {
+            return entityManager.createQuery("SELECT n FROM Nacional n"
+                    + " INNER JOIN Elemento as e"
+                    + " ON n.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (n.codigoe like '%" + codigoe + "%'"
+                    + " OR n.nombren like '%" + nombren + "%'"
+                    + " OR n.nacion like '%" + nacion + "%')", Nacional.class).getResultList();
+
+        } else {
+            query = entityManager.createQuery("SELECT n FROM Nacional n"
+                    + " INNER JOIN Elemento as e"
+                    + " ON n.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (n.codigoe like '%" + codigoe + "%'"
+                    + " OR n.nombren like '%" + nombren + "%'"
+                    + " OR n.nacion like '%" + nacion + "%')"
+                    + " AND e.clase !=:clase",
+                    Nacional.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
     }
 }

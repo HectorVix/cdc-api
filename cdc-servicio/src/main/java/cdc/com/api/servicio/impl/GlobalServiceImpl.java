@@ -39,12 +39,13 @@ public class GlobalServiceImpl implements GlobalService {
     }
 
     @Override
-    public List<Global> all() {
-        return globalDao.all();
+    public List<Global> all(String rol) {
+        return globalDao.all(rol);
     }
 
-    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem) {
-        return globalDao.buscarGlobal(codigo, nombreg, descrielem);
+    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem,
+            String rol) {
+        return globalDao.buscarGlobal(codigo, nombreg, descrielem, rol);
     }
 
 }
