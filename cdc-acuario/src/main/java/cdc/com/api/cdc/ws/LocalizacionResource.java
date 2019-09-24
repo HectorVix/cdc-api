@@ -92,12 +92,19 @@ public class LocalizacionResource {
     }
 
     @GET
-    @Path("/buscar/{codigole}")
+    @Path("/buscar/{codigole}/{depto}/{municipio}/{nombren}/{nombrecomunn}/{clase}/{comunidad}/{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
-    public List<Localizacion> buscarLocalizacion(@PathParam("codigole") String codigole) {
+    public List<Localizacion> buscarLocalizacion(@PathParam("codigole") String codigole,
+            @PathParam("depto") String depto,
+            @PathParam("municipio") String municipio,
+            @PathParam("nombren") String nombren,
+            @PathParam("nombrecomunn") String nombrecomunn,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad,
+            @PathParam("rol") String rol) {
         System.out.println("***->Busqueda Exitosa LE");
-        return localizacionServicio.buscarLocalizacion(codigole);
+        return localizacionServicio.buscarLocalizacion(codigole, depto, municipio, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
     @POST
@@ -223,10 +230,10 @@ public class LocalizacionResource {
     }
 
     @GET
-    @Path("/all")
+    @Path("/all/{rol}")
     @Produces(APPLICATION_JSON)
-    public List<Localizacion> all() {
+    public List<Localizacion> all(@PathParam("rol") String rol) {
         System.out.println("***->All");
-        return localizacionServicio.all();
+        return localizacionServicio.all(rol);
     }
 }

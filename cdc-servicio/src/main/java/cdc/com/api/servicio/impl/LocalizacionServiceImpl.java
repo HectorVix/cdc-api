@@ -31,8 +31,9 @@ public class LocalizacionServiceImpl implements LocalizacionService {
         localizacionDao.update(localizacion);
     }
 
-    public List<Localizacion> buscarLocalizacion(String codigole) {
-        return localizacionDao.buscarLocalizacion(codigole);
+    public List<Localizacion> buscarLocalizacion(String codigole, String depto, String municipio, String nombren, String nombrecomunn,
+            String clase, String comunidad, String rol) {
+        return localizacionDao.buscarLocalizacion(codigole, depto, municipio, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
     public boolean findRastreo(String codigoe) {
@@ -59,8 +60,9 @@ public class LocalizacionServiceImpl implements LocalizacionService {
         return localizacionDao.buscar_Identificadores_NombreComunN(codigoe);
     }
 
-    public List<Localizacion> all() {
-        return localizacionDao.all();
+    public List<Localizacion> all(String rol)
+    {
+        return localizacionDao.all(rol);
     }
 
 }

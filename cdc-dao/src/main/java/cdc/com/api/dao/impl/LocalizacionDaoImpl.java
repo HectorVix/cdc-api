@@ -37,11 +37,52 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
         entityManager.merge(localizacion);
     }
 
-    public List<Localizacion> buscarLocalizacion(String codigole) {
-        System.out.print("codigole:" + codigole);
-        TypedQuery<Localizacion> query = entityManager.createQuery("SELECT l FROM Localizacion l"
-                + " WHERE (l.codigole like '%" + codigole + "%')", Localizacion.class);
-        return query.getResultList();
+    public List<Localizacion> buscarLocalizacion(String codigole, String depto, String municipio, String nombren, String nombrecomunn,
+            String clase, String comunidad, String rol) {
+        TypedQuery<Localizacion> query = null;
+        if (rol.equals("Admin")) {
+            query = entityManager.createQuery("SELECT l FROM Localizacion l"
+                    + " INNER JOIN Rastreo as r"
+                    + " ON l.rASTREOrastreoid.rastreo_id=r.rastreo_id"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (l.codigole like '%" + codigole + "%'"
+                    + " OR l.subnacion =:depto"
+                    + " OR l.subdivision =:municipio"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase = '" + clase + "'"
+                    + " OR e.comunidad ='" + comunidad + "')", Localizacion.class);
+            query.setParameter("depto", depto);
+            query.setParameter("municipio", municipio);
+            return query.getResultList();
+
+        } else {
+            query = entityManager.createQuery("SELECT l FROM Localizacion l"
+                    + " INNER JOIN Rastreo as r"
+                    + " ON l.rASTREOrastreoid.rastreo_id=r.rastreo_id"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE (l.codigole like '%" + codigole + "%'"
+                    + " OR l.subnacion like '%" + depto + "%'"
+                    + " OR l.subdivision like '%" + municipio + "%'"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase = '" + clase + "'"
+                    + " OR e.comunidad ='" + comunidad + "')"
+                    + " AND e.clase !=:clase",
+                    Localizacion.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
+
     }
 
     public boolean findRastreo(String codigoe) {
@@ -120,7 +161,27 @@ public class LocalizacionDaoImpl implements LocalizacionDao {
         return idenLE;
     }
 
-    public List<Localizacion> all() {
-        return entityManager.createQuery("SELECT l FROM Localizacion l", Localizacion.class).getResultList();
+    public List<Localizacion> all(String rol) {
+        TypedQuery<Localizacion> query = null;
+        if (rol.equals("Admin")) {
+            return entityManager.createQuery("SELECT l FROM Localizacion l", Localizacion.class).getResultList();
+        } else {
+            query = entityManager.createQuery("SELECT l FROM Localizacion l"
+                    + " INNER JOIN Rastreo as r"
+                    + " ON l.rASTREOrastreoid.rastreo_id=r.rastreo_id"
+                    + " INNER JOIN Elemento as e"
+                    + " ON r.eLEMENTOelementoid.elemento_id=e.elemento_id"
+                    + " WHERE e.clase !=:clase", Localizacion.class);
+            if (rol.equals("Botanica")) {
+                query.setParameter("clase", "A");
+                return query.getResultList();
+            }
+            if (rol.equals("Zoologia")) {
+                query.setParameter("clase", "P");
+                return query.getResultList();
+            }
+            return null;
+        }
+
     }
 }

@@ -23,9 +23,10 @@ public interface LocalizacionService {
 
     public int getRastreo_id();
 
-    public List<Localizacion> all();
+    public List<Localizacion> all(String rol);
 
-    public List<Localizacion> buscarLocalizacion(String codigole);
+    public List<Localizacion> buscarLocalizacion(String codigole, String depto, String municipio, String nombren, String nombrecomunn,
+            String clase, String comunidad, String rol);
 
     public IdentificadoresLE buscar_Identificadores_NombreS_RangoS(String codigoe, String departamento);
 
