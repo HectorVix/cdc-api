@@ -134,16 +134,20 @@ public class JerarquizacionResource {
     }
 
     @GET
-    @Path("/buscar/global/{codigoe}/{nombreg}/{descrielem}/{rol}")
+    @Path("/buscar/global/{codigoe}/"
+            + "{nombren}/{nombrecomunn}/{clase}/{comunidad}/"
+            + "{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Global> buscarJeraquizacion_Global(
             @PathParam("codigoe") String codigoe,
-            @PathParam("nombreg") String nombre,
-            @PathParam("descrielem") String nomcomun,
+            @PathParam("nombren") String nombren,
+            @PathParam("nombrecomunn") String nombrecomunn,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad,
             @PathParam("rol") String rol) {
         System.out.println("***->Busqueda exitosa jerarquizacion global");
-        return globalServicio.buscarGlobal(codigoe, nombre, nombre, rol);
+        return globalServicio.buscarGlobal(codigoe, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
     @POST
@@ -162,16 +166,20 @@ public class JerarquizacionResource {
     }
 
     @GET
-    @Path("/buscar/nacional/{codigoe}/{nombren}/{nacion}/{rol}")
+    @Path("/buscar/nacional/{codigoe}/"
+            + "{nombren}/{nombrecomunn}/{clase}/{comunidad}/"
+            + "{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Nacional> buscarJeraquizacion_Nacional(
             @PathParam("codigoe") String codigoe,
             @PathParam("nombren") String nombre,
-            @PathParam("nacion") String nomcomun,
+            @PathParam("nombrecomunn") String nombrecomunn,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad,
             @PathParam("rol") String rol) {
         System.out.println("***->Busqueda exitosa jerarquizacion nacional");
-        return nacionalServicio.buscarNacional(codigoe, nombre, nomcomun, rol);
+        return nacionalServicio.buscarNacional(codigoe, nombre, nombrecomunn, clase, comunidad, rol);
     }
 
     @POST
@@ -190,18 +198,24 @@ public class JerarquizacionResource {
     }
 
     @GET
-    @Path("/buscar/subnacional/{codigoe}/{nacion}/{subnacion}/{nombres}/{loctips}/{rol}")
+    @Path("/buscar/subnacional/{codigoe}/"
+            + "{depto}/{nombres}/"
+            + "{nombren}/{nombrecomunn}/{clase}/{comunidad}/"
+            + "{rol}")
     @Consumes(APPLICATION_JSON)
     @Produces(APPLICATION_JSON)
     public java.util.List<Subnacional> buscarJeraquizacion_Subnacional(
             @PathParam("codigoe") String codigoe,
-            @PathParam("nacion") String nacion,
-            @PathParam("subnacion") String subnacion,
+            @PathParam("depto") String depto,
+            @PathParam("municipio") String municipio,
             @PathParam("nombres") String nombres,
-            @PathParam("loctips") String loctips,
+            @PathParam("nombren") String nombren,
+            @PathParam("nombrecomunn") String nombrecomunn,
+            @PathParam("clase") String clase,
+            @PathParam("comunidad") String comunidad,
             @PathParam("rol") String rol) {
         System.out.println("***->Busqueda exitosa jerarquizacion subnacional");
-        return subnacionalServicio.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips, rol);
+        return subnacionalServicio.buscarSubnacional(codigoe, depto, nombres, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
     @POST

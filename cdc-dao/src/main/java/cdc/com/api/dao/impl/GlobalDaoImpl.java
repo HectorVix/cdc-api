@@ -44,7 +44,6 @@ public class GlobalDaoImpl implements GlobalDao {
 
     @Override
     public List<Global> all(String rol) {
-        // return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
         TypedQuery<Global> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT g FROM Global g", Global.class).getResultList();
@@ -66,32 +65,29 @@ public class GlobalDaoImpl implements GlobalDao {
         }
     }
 
-    public List<Global> buscarGlobal(String codigoe, String nombreg, String descrielem,
+    public List<Global> buscarGlobal(String codigoe, String nombren, String nombrecomunn, String clase, String comunidad,
             String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        /* TypedQuery<Global> query = entityManager.createQuery("SELECT g FROM Global g"
-                + " WHERE (g.codigoe like '%" + codigoe + "%'"
-                + "OR g.nombreg like '%" + nombreg + "%'"
-                + " OR g.descrielem like '%" + descrielem + "%')", Global.class);
-        return query.getResultList();
-
-         */
         TypedQuery<Global> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT g FROM Global g"
                     + " INNER JOIN Elemento as e"
                     + " ON g.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (g.codigoe like '%" + codigoe + "%'"
-                    + " OR g.nombreg like '%" + nombreg + "%'"
-                    + " OR g.descrielem like '%" + descrielem + "%')", Global.class).getResultList();
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')", Global.class).getResultList();
 
         } else {
             query = entityManager.createQuery("SELECT g FROM Global g"
                     + " INNER JOIN Elemento as e"
                     + " ON g.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (g.codigoe like '%" + codigoe + "%'"
-                    + " OR g.nombreg like '%" + nombreg + "%'"
-                    + " OR g.descrielem like '%" + descrielem + "%')"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')"
                     + " AND e.clase !=:clase",
                     Global.class);
             if (rol.equals("Botanica")) {

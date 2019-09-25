@@ -43,8 +43,11 @@ public class SubnacionalServiceImpl implements SubnacionalService {
         return subnacionalDao.all(rol);
     }
 
-    public List<Subnacional> buscarSubnacional(String codigoe, String nacion, String subnacion, String nombres, String loctips,
+    public List<Subnacional> buscarSubnacional(String codigoe,
+            String depto,
+            String nombres,
+            String nombren, String nombrecomunnn, String clase, String comunidad,
             String rol) {
-        return subnacionalDao.buscarSubnacional(codigoe, nacion, subnacion, nombres, loctips, rol);
+        return subnacionalDao.buscarSubnacional(codigoe, depto, nombres, nombren, nombrecomunnn, clase, comunidad, rol);
     }
 }

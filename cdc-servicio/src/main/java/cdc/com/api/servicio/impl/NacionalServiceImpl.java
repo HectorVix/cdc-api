@@ -43,8 +43,9 @@ public class NacionalServiceImpl implements NacionalService {
         return nacionalDao.all(rol);
     }
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion,String rol) {
-        return nacionalDao.buscarNacional(codigoe, nombren, nacion,rol);
+    public List<Nacional> buscarNacional(String codigoe,
+            String nombren, String nombrecomunn, String clase, String comunidad,
+            String rol) {
+        return nacionalDao.buscarNacional(codigoe, nombren, nombrecomunn, clase, comunidad, rol);
     }
-
 }

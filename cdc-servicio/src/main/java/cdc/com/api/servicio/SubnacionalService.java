@@ -26,10 +26,9 @@ public interface SubnacionalService {
 
     public List<Subnacional> buscarSubnacional(
             String codigoe,
-            String nacion,
-            String subnacion,
+            String depto,
             String nombres,
-            String loctips,
+            String nombren, String nombrecomunn, String clase, String comunidad,
             String rol);
 
 }

@@ -24,6 +24,8 @@ public interface NacionalDao {
 
     public List<Nacional> all(String rol);
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion,String rol);
+    public List<Nacional> buscarNacional(String codigoe,
+            String nombren, String nombrecomunn, String clase, String comunidad,
+            String rol);
 
 }

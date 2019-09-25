@@ -43,9 +43,10 @@ public class GlobalServiceImpl implements GlobalService {
         return globalDao.all(rol);
     }
 
-    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem,
+    public List<Global> buscarGlobal(String codigoe,
+            String nombren, String nombrecomunn, String clase, String comunidad,
             String rol) {
-        return globalDao.buscarGlobal(codigo, nombreg, descrielem, rol);
+        return globalDao.buscarGlobal(codigoe, nombren, nombrecomunn, clase, comunidad, rol);
     }
 
 }

@@ -43,7 +43,6 @@ public class NacionalDaoImpl implements NacionalDao {
     }
 
     public List<Nacional> all(String rol) {
-        // return entityManager.createQuery("SELECT n FROM Nacional n", Nacional.class).getResultList();
         TypedQuery<Nacional> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT n FROM Nacional n", Nacional.class).getResultList();
@@ -66,30 +65,29 @@ public class NacionalDaoImpl implements NacionalDao {
 
     }
 
-    public List<Nacional> buscarNacional(String codigoe, String nombren, String nacion,
+    public List<Nacional> buscarNacional(String codigoe, String nombren, String nombrecomunn, String clase, String comunidad,
             String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        /*  TypedQuery<Nacional> query = entityManager.createQuery("SELECT n FROM Nacional n"
-                + " WHERE (n.codigoe like '%" + codigoe + "%'"
-                + "OR n.nombren like '%" + nombren + "%'"
-                + " OR n.nacion like '%" + nacion + "%')", Nacional.class);
-        return query.getResultList();*/
         TypedQuery<Nacional> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT n FROM Nacional n"
                     + " INNER JOIN Elemento as e"
                     + " ON n.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (n.codigoe like '%" + codigoe + "%'"
-                    + " OR n.nombren like '%" + nombren + "%'"
-                    + " OR n.nacion like '%" + nacion + "%')", Nacional.class).getResultList();
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')", Nacional.class).getResultList();
 
         } else {
             query = entityManager.createQuery("SELECT n FROM Nacional n"
                     + " INNER JOIN Elemento as e"
                     + " ON n.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (n.codigoe like '%" + codigoe + "%'"
-                    + " OR n.nombren like '%" + nombren + "%'"
-                    + " OR n.nacion like '%" + nacion + "%')"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')"
                     + " AND e.clase !=:clase",
                     Nacional.class);
             if (rol.equals("Botanica")) {

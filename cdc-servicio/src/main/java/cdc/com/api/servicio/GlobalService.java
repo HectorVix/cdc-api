@@ -24,6 +24,7 @@ public interface GlobalService {
 
     public List<Global> all(String rol);
 
-    public List<Global> buscarGlobal(String codigo, String nombreg, String descrielem,
+    public List<Global> buscarGlobal(String codigo,
+            String nombren, String nombrecomunn, String clase, String comunidad,
             String rol);
 }

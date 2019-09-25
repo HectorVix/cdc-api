@@ -44,7 +44,6 @@ public class SubnacionalDaoImp implements SubnacionalDao {
 
     @Override
     public List<Subnacional> all(String rol) {
-        // return entityManager.createQuery("SELECT s FROM Subnacional s", Subnacional.class).getResultList();
         TypedQuery<Subnacional> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT s FROM Subnacional s", Subnacional.class).getResultList();
@@ -68,40 +67,33 @@ public class SubnacionalDaoImp implements SubnacionalDao {
 
     public List<Subnacional> buscarSubnacional(
             String codigoe,
-            String nacion,
-            String subnacion,
+            String depto,
             String nombres,
-            String loctips,
+            String nombren, String nombrecomunn, String clase, String comunidad,
             String rol) {
         codigoe = codigoe.replaceAll("\\s", "");
-        /* TypedQuery<Subnacional> query = entityManager.createQuery("SELECT s FROM Subnacional s"
-                + " WHERE (s.codigoe like '%" + codigoe + "%'"
-                + "OR s.nacion like '%" + nacion + "%'"
-                + "OR s.subnacion like '%" + subnacion + "%'"
-                + "OR s.nombres like '%" + nombres + "%'"
-                + " OR s.loctips like '%" + loctips + "%')", Subnacional.class);
-        return query.getResultList();*/
         TypedQuery<Subnacional> query = null;
         if (rol.equals("Admin")) {
             return entityManager.createQuery("SELECT s FROM Subnacional s"
                     + " INNER JOIN Elemento as e"
                     + " ON s.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (s.codigoe like '%" + codigoe + "%'"
-                    + " OR s.nacion like '%" + nacion + "%'"
-                    + " OR s.subnacion like '%" + subnacion + "%'"
-                    + " OR s.nombres like '%" + nombres + "%'"
-                    + " OR s.loctips like '%" + loctips + "%')", Subnacional.class).getResultList();
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')", Subnacional.class).getResultList();
         } else {
             query = entityManager.createQuery("SELECT s FROM Subnacional s"
                     + " INNER JOIN Elemento as e"
                     + " ON s.eLEMENTOelementoid.elemento_id=e.elemento_id"
                     + " WHERE (s.codigoe like '%" + codigoe + "%'"
-                    + " OR s.nacion like '%" + nacion + "%'"
-                    + " OR s.subnacion like '%" + subnacion + "%'"
-                    + " OR s.nombres like '%" + nombres + "%'"
-                    + " OR s.loctips like '%" + loctips + "%')"
+                    + " OR e.nombren like '%" + nombren + "%'"
+                    + " OR e.nombrecomunn like '%" + nombrecomunn + "%'"
+                    + " OR e.clase like '%" + clase + "%'"
+                    + " OR e.comunidad like '%" + comunidad + "%')"
                     + " AND e.clase !=:clase",
-                    Subnacional.class);
+                    Subnacional.class
+            );
             if (rol.equals("Botanica")) {
                 query.setParameter("clase", "A");
                 return query.getResultList();
