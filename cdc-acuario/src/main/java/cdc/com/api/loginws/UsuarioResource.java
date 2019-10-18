@@ -120,4 +120,16 @@ public class UsuarioResource {
         System.out.println("***->All");
         return rolServicio.all();
     }
+
+    @POST
+    @Path("/update/perfil")
+    @Consumes(APPLICATION_JSON)
+    @Produces(APPLICATION_JSON)
+    public Response actualizarPerfil(Usuario us) throws JSONException {
+        JSONObject object = new JSONObject();
+        object.put("perfil", us.getEmail());
+        usuarioService.update(us);
+        System.out.println("***->Update Exitoso Perfil");
+        return Response.status(200).entity(object.toString()).build();
+    }
 }
