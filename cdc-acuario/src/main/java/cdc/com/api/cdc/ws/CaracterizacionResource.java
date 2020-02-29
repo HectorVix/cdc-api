@@ -9,14 +9,12 @@ import cdc.com.api.modelo.Caracterizacion;
 import cdc.com.api.modelo.Distribucion;
 import cdc.com.api.modelo.Distribucion2;
 import cdc.com.api.modelo.Elemento;
-import cdc.com.api.modelo.Fenelogia;
 import cdc.com.api.modelo.Planta;
 import cdc.com.api.modelo.Vertebrado;
 import cdc.com.api.servicio.CaracterizacionService;
 import cdc.com.api.servicio.Distribucion2Service;
 import cdc.com.api.servicio.DistribucionService;
 import cdc.com.api.servicio.ElementoService;
-import cdc.com.api.servicio.FenelogiaService;
 import cdc.com.api.servicio.PlantaService;
 import cdc.com.api.servicio.VertebradoService;
 import java.util.List;
@@ -57,9 +55,6 @@ public class CaracterizacionResource {
 
     List<Distribucion> lista_distribucion;
     List<Distribucion2> lista_distribucion2;
-
-    @Inject
-    FenelogiaService fenelogiaServicio;
 
     @POST
     @Path("/registro/planta")
@@ -427,16 +422,6 @@ public class CaracterizacionResource {
         object.put("vertebradoId", vertebradoId);
         System.out.println("***->Update Exitoso Distribucion2:" + vertebradoId);
         return Response.status(202).entity(object.toString()).build();
-    }
-
-    //Catalogo fenelogía
-    @GET
-    @Path("/fenelogia")
-    @Consumes(APPLICATION_JSON)
-    @Produces(APPLICATION_JSON)
-    public java.util.List<Fenelogia> catalogo_Fenelogia() {
-        System.out.println("***->Obteniendo fenelogia");
-        return fenelogiaServicio.all();
     }
 
     @GET

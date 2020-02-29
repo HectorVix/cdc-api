@@ -82,8 +82,6 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Area> areaList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Fenelogia> fenelogiaList;
-    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Contacto> contactoList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Elemento> elementoList;
@@ -232,15 +230,6 @@ public class Usuario implements Serializable {
 
     public void setAreaList(List<Area> areaList) {
         this.areaList = areaList;
-    }
-
-    @XmlTransient
-    public List<Fenelogia> getFenelogiaList() {
-        return fenelogiaList;
-    }
-
-    public void setFenelogiaList(List<Fenelogia> fenelogiaList) {
-        this.fenelogiaList = fenelogiaList;
     }
 
     @XmlTransient

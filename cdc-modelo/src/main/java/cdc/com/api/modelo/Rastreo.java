@@ -7,6 +7,7 @@ package cdc.com.api.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +18,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -239,9 +242,15 @@ public class Rastreo implements Serializable {
     @Column(name = "actualizas")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizas;
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Fuente> fuenteList;
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Localizacion> localizacionList;
     @JoinColumn(name = "ELEMENTO_elemento_id", referencedColumnName = "elemento_id")
     @ManyToOne
     private Elemento eLEMENTOelementoid;
+    @OneToMany(mappedBy = "rASTREOrastreoid")
+    private List<Observaciones> observacionesList;
 
     public Rastreo() {
     }
@@ -770,12 +779,39 @@ public class Rastreo implements Serializable {
         this.actualizas = actualizas;
     }
 
+    @XmlTransient
+    public List<Fuente> getFuenteList() {
+        return fuenteList;
+    }
+
+    public void setFuenteList(List<Fuente> fuenteList) {
+        this.fuenteList = fuenteList;
+    }
+
+    @XmlTransient
+    public List<Localizacion> getLocalizacionList() {
+        return localizacionList;
+    }
+
+    public void setLocalizacionList(List<Localizacion> localizacionList) {
+        this.localizacionList = localizacionList;
+    }
+
     public Elemento getELEMENTOelementoid() {
         return eLEMENTOelementoid;
     }
 
     public void setELEMENTOelementoid(Elemento eLEMENTOelementoid) {
         this.eLEMENTOelementoid = eLEMENTOelementoid;
+    }
+
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
     }
 
     @Override
