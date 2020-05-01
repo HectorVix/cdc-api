@@ -123,6 +123,8 @@ public class Contacto implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizar;
     @OneToMany(mappedBy = "cONTACTOcontactoid")
+    private List<ContactoHasFuente> contactoHasFuenteList;
+    @OneToMany(mappedBy = "cONTACTOcontactoid")
     private List<ContactoHasArea> contactoHasAreaList;
     @OneToMany(mappedBy = "cONTACTOcontactoid")
     private List<ContactoHasSitio> contactoHasSitioList;
@@ -131,8 +133,6 @@ public class Contacto implements Serializable {
     private Usuario uSUARIOusuarioid;
     @OneToMany(mappedBy = "cONTACTOcontactoid")
     private List<ContactoHasLote> contactoHasLoteList;
-    @OneToMany(mappedBy = "cONTACTOcontactoid")
-    private List<ContactoHasFuente> contactoHasFuenteList;
 
     public Contacto() {
     }
@@ -358,6 +358,15 @@ public class Contacto implements Serializable {
     }
 
     @XmlTransient
+    public List<ContactoHasFuente> getContactoHasFuenteList() {
+        return contactoHasFuenteList;
+    }
+
+    public void setContactoHasFuenteList(List<ContactoHasFuente> contactoHasFuenteList) {
+        this.contactoHasFuenteList = contactoHasFuenteList;
+    }
+
+    @XmlTransient
     public List<ContactoHasArea> getContactoHasAreaList() {
         return contactoHasAreaList;
     }
@@ -390,15 +399,6 @@ public class Contacto implements Serializable {
 
     public void setContactoHasLoteList(List<ContactoHasLote> contactoHasLoteList) {
         this.contactoHasLoteList = contactoHasLoteList;
-    }
-
-    @XmlTransient
-    public List<ContactoHasFuente> getContactoHasFuenteList() {
-        return contactoHasFuenteList;
-    }
-
-    public void setContactoHasFuenteList(List<ContactoHasFuente> contactoHasFuenteList) {
-        this.contactoHasFuenteList = contactoHasFuenteList;
     }
 
     @Override

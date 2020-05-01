@@ -73,5 +73,13 @@
     <class>cdc.com.api.modelo.Subnacion</class>
     <class>cdc.com.api.modelo.Municipio</class>
     <class>cdc.com.api.modelo.Poligono</class>
+    <class>cdc.com.api.modelo.Infraspecificepithet</class>
+    <class>cdc.com.api.modelo.Clase</class>
+    <class>cdc.com.api.modelo.Orden</class>
+    <class>cdc.com.api.modelo.Phylum</class>
+    <class>cdc.com.api.modelo.Reino</class>
+    <class>cdc.com.api.modelo.Genero</class>
+    <class>cdc.com.api.modelo.Especie</class>
+    <class>cdc.com.api.modelo.Familia</class>
   </persistence-unit>
 </persistence>

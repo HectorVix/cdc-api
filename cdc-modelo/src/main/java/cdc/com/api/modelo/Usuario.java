@@ -66,10 +66,6 @@ public class Usuario implements Serializable {
     @Column(name = "contrasena")
     private String contrasena;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Accion> accionList;
-    @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Nacion> nacionList;
-    @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Fuente> fuenteList;
@@ -82,12 +78,18 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "uSUARIOusuarioid")
     private List<Area> areaList;
     @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Contacto> contactoList;
-    @OneToMany(mappedBy = "uSUARIOusuarioid")
-    private List<Elemento> elementoList;
+    private List<Reino> reinoList;
     @JoinColumn(name = "Rol_rol_id", referencedColumnName = "rol_id")
     @ManyToOne
     private Rol rolrolid;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Accion> accionList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Nacion> nacionList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Contacto> contactoList;
+    @OneToMany(mappedBy = "uSUARIOusuarioid")
+    private List<Elemento> elementoList;
 
     public Usuario() {
     }
@@ -161,24 +163,6 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public List<Accion> getAccionList() {
-        return accionList;
-    }
-
-    public void setAccionList(List<Accion> accionList) {
-        this.accionList = accionList;
-    }
-
-    @XmlTransient
-    public List<Nacion> getNacionList() {
-        return nacionList;
-    }
-
-    public void setNacionList(List<Nacion> nacionList) {
-        this.nacionList = nacionList;
-    }
-
-    @XmlTransient
     public List<Sitio> getSitioList() {
         return sitioList;
     }
@@ -233,6 +217,41 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
+    public List<Reino> getReinoList() {
+        return reinoList;
+    }
+
+    public void setReinoList(List<Reino> reinoList) {
+        this.reinoList = reinoList;
+    }
+
+    public Rol getRolrolid() {
+        return rolrolid;
+    }
+
+    public void setRolrolid(Rol rolrolid) {
+        this.rolrolid = rolrolid;
+    }
+
+    @XmlTransient
+    public List<Accion> getAccionList() {
+        return accionList;
+    }
+
+    public void setAccionList(List<Accion> accionList) {
+        this.accionList = accionList;
+    }
+
+    @XmlTransient
+    public List<Nacion> getNacionList() {
+        return nacionList;
+    }
+
+    public void setNacionList(List<Nacion> nacionList) {
+        this.nacionList = nacionList;
+    }
+
+    @XmlTransient
     public List<Contacto> getContactoList() {
         return contactoList;
     }
@@ -248,14 +267,6 @@ public class Usuario implements Serializable {
 
     public void setElementoList(List<Elemento> elementoList) {
         this.elementoList = elementoList;
-    }
-
-    public Rol getRolrolid() {
-        return rolrolid;
-    }
-
-    public void setRolrolid(Rol rolrolid) {
-        this.rolrolid = rolrolid;
     }
 
     @Override

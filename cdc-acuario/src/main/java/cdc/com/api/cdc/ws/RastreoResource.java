@@ -9,12 +9,28 @@ package cdc.com.api.cdc.ws;
  *
  * @author Héctor Vix
  */
+import cdc.com.api.modelo.Clase;
 import cdc.com.api.modelo.Elemento;
-import cdc.com.api.modelo.Global;
+import cdc.com.api.modelo.Especie;
+import cdc.com.api.modelo.Familia;
+import cdc.com.api.modelo.Genero;
+import cdc.com.api.modelo.Infraspecificepithet;
+import cdc.com.api.modelo.Orden;
+//import cdc.com.api.modelo.Global;
+import cdc.com.api.modelo.Phylum;
 import cdc.com.api.modelo.Rastreo;
+import cdc.com.api.modelo.Reino;
+import cdc.com.api.servicio.ClaseService;
 import cdc.com.api.servicio.ElementoService;
+import cdc.com.api.servicio.EspecieService;
+import cdc.com.api.servicio.FamiliaService;
+import cdc.com.api.servicio.GeneroService;
+import cdc.com.api.servicio.InfraspecificepithetService;
+import cdc.com.api.servicio.OrdenService;
+import cdc.com.api.servicio.PhylumService;
 import cdc.com.api.servicio.RastreoService;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import cdc.com.api.servicio.ReinoService;
+//import com.fasterxml.jackson.databind.SerializationFeature;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.ws.rs.GET;
@@ -27,7 +43,7 @@ import javax.ws.rs.Produces;
 //import javax.ws.rs.core.MediaType;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import javax.ws.rs.core.Response;
-import modelo.datos.representativos.IdentificadoresLE;
+//import modelo.datos.representativos.IdentificadoresLE;
 import modelo.datos.representativos.StatusGlobal;
 import modelo.datos.representativos.StatusNacional;
 import modelo.datos.representativos.StatusSubnacional;
@@ -42,6 +58,22 @@ public class RastreoResource {
     RastreoService rastreoServicio;
     @Inject
     ElementoService elementoServicio;
+    @Inject
+    ReinoService reinoServicio;
+    @Inject
+    PhylumService phylumServicio;
+    @Inject
+    ClaseService claseServicio;
+    @Inject
+    OrdenService ordenServicio;
+    @Inject
+    FamiliaService familiaServicio;
+    @Inject
+    GeneroService generoServicio;
+    @Inject
+    EspecieService especieServicio;
+    @Inject
+    InfraspecificepithetService infraspecificepithetServicio;
 
     @POST
     @Path("/registro")
@@ -128,5 +160,84 @@ public class RastreoResource {
     public List<Rastreo> all(@PathParam("rol") String rol) {
         System.out.println("***->All");
         return rastreoServicio.all(rol);
+    }
+
+    //Catalogos Taxones
+    @GET
+    @Path("/all/reino")
+    @Produces(APPLICATION_JSON)
+    public List<Reino> all() {
+        System.out.println("***->Catalogo Reino");
+        return reinoServicio.buscar_Reino();
+    }
+
+    @GET
+    @Path("/phylum/{reino_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Phylum> buscar_Phylum(@PathParam("reino_id") int reino_id) {
+        System.out.println("***->Catalogo Phylum");
+        Reino r = new Reino();
+        r.setReinoId(reino_id);
+        return phylumServicio.buscar_Phylum(r);
+    }
+
+    @GET
+    @Path("/clase/{phylum_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Clase> buscar_Clase(@PathParam("phylum_id") int phylum_id) {
+        System.out.println("***->Catalogo Clase");
+        Phylum p = new Phylum();
+        p.setPhylumId(phylum_id);
+        return claseServicio.buscar_Clase(p);
+    }
+
+    @GET
+    @Path("/orden/{clase_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Orden> buscar_Orden(@PathParam("clase_id") int clase_id) {
+        System.out.println("***->Catalogo Orden");
+        Clase c = new Clase();
+        c.setClaseId(clase_id);
+        return ordenServicio.buscar_Orden(c);
+    }
+
+    @GET
+    @Path("/familia/{orden_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Familia> buscar_Familia(@PathParam("orden_id") int orden_id) {
+        System.out.println("***->Catalogo Familia");
+        Orden o = new Orden();
+        o.setOrdenId(orden_id);
+        return familiaServicio.buscar_Familia(o);
+    }
+
+    @GET
+    @Path("/genero/{familia_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Genero> buscar_Genero(@PathParam("familia_id") int familia_id) {
+        System.out.println("***->Catalogo Genero");
+        Familia f = new Familia();
+        f.setFamiliaId(familia_id);
+        return generoServicio.buscar_Genero(f);
+    }
+
+    @GET
+    @Path("/especie/{genero_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Especie> buscar_Especie(@PathParam("genero_id") int genero_id) {
+        System.out.println("***->Catalogo Especie");
+        Genero g = new Genero();
+        g.setGeneroId(genero_id);
+        return especieServicio.buscar_Especie(g);
+    }
+
+    @GET
+    @Path("/infraspecificepithet/{especie_id}")
+    @Produces(APPLICATION_JSON)
+    public List<Infraspecificepithet> buscar_Infraspecificepithet(@PathParam("especie_id") int especie_id) {
+        System.out.println("***->Catalogo Infraspecificepithet");
+        Especie e = new Especie();
+        e.setEspecieId(especie_id);
+        return infraspecificepithetServicio.buscar_Infraspecificepithet(e);
     }
 }

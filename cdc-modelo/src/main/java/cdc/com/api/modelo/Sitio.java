@@ -218,15 +218,15 @@ public class Sitio implements Serializable {
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<Macsitio> macsitioList;
     @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Foto> fotoList;
+    @OneToMany(mappedBy = "sITIOsitioid")
+    private List<Observaciones> observacionesList;
+    @OneToMany(mappedBy = "sITIOsitioid")
     private List<Subdivision> subdivisionList;
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<ContactoHasSitio> contactoHasSitioList;
     @OneToMany(mappedBy = "sITIOsitioid")
     private List<SitioHasLote> sitioHasLoteList;
-    @OneToMany(mappedBy = "sITIOsitioid")
-    private List<Foto> fotoList;
-    @OneToMany(mappedBy = "sITIOsitioid")
-    private List<Observaciones> observacionesList;
 
     public Sitio() {
     }
@@ -711,6 +711,24 @@ public class Sitio implements Serializable {
     }
 
     @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Observaciones> getObservacionesList() {
+        return observacionesList;
+    }
+
+    public void setObservacionesList(List<Observaciones> observacionesList) {
+        this.observacionesList = observacionesList;
+    }
+
+    @XmlTransient
     public List<Subdivision> getSubdivisionList() {
         return subdivisionList;
     }
@@ -735,24 +753,6 @@ public class Sitio implements Serializable {
 
     public void setSitioHasLoteList(List<SitioHasLote> sitioHasLoteList) {
         this.sitioHasLoteList = sitioHasLoteList;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
-    }
-
-    @XmlTransient
-    public List<Observaciones> getObservacionesList() {
-        return observacionesList;
-    }
-
-    public void setObservacionesList(List<Observaciones> observacionesList) {
-        this.observacionesList = observacionesList;
     }
 
     @Override

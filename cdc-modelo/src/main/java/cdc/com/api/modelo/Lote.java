@@ -39,11 +39,11 @@ public class Lote implements Serializable {
     @Column(name = "lote_id")
     private Integer loteId;
     @OneToMany(mappedBy = "lOTEloteid")
+    private List<AreaHasLote> areaHasLoteList;
+    @OneToMany(mappedBy = "lOTEloteid")
     private List<SitioHasLote> sitioHasLoteList;
     @OneToMany(mappedBy = "lOTEloteid")
     private List<ContactoHasLote> contactoHasLoteList;
-    @OneToMany(mappedBy = "lOTEloteid")
-    private List<AreaHasLote> areaHasLoteList;
 
     public Lote() {
     }
@@ -58,6 +58,15 @@ public class Lote implements Serializable {
 
     public void setLoteId(Integer loteId) {
         this.loteId = loteId;
+    }
+
+    @XmlTransient
+    public List<AreaHasLote> getAreaHasLoteList() {
+        return areaHasLoteList;
+    }
+
+    public void setAreaHasLoteList(List<AreaHasLote> areaHasLoteList) {
+        this.areaHasLoteList = areaHasLoteList;
     }
 
     @XmlTransient
@@ -76,15 +85,6 @@ public class Lote implements Serializable {
 
     public void setContactoHasLoteList(List<ContactoHasLote> contactoHasLoteList) {
         this.contactoHasLoteList = contactoHasLoteList;
-    }
-
-    @XmlTransient
-    public List<AreaHasLote> getAreaHasLoteList() {
-        return areaHasLoteList;
-    }
-
-    public void setAreaHasLoteList(List<AreaHasLote> areaHasLoteList) {
-        this.areaHasLoteList = areaHasLoteList;
     }
 
     @Override

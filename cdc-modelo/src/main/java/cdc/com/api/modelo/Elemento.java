@@ -66,13 +66,15 @@ public class Elemento implements Serializable {
     @Column(name = "comunidad")
     private String comunidad;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
-    private List<Global> globalList;
-    @OneToMany(mappedBy = "eLEMENTOelementoid")
-    private List<Nacional> nacionalList;
-    @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Subnacional> subnacionalList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Protocolo> protocoloList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Foto> fotoList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Global> globalList;
+    @OneToMany(mappedBy = "eLEMENTOelementoid")
+    private List<Nacional> nacionalList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
     private List<Rastreo> rastreoList;
     @OneToMany(mappedBy = "eLEMENTOelementoid")
@@ -80,8 +82,6 @@ public class Elemento implements Serializable {
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
-    @OneToMany(mappedBy = "eLEMENTOelementoid")
-    private List<Foto> fotoList;
 
     public Elemento() {
     }
@@ -155,24 +155,6 @@ public class Elemento implements Serializable {
     }
 
     @XmlTransient
-    public List<Global> getGlobalList() {
-        return globalList;
-    }
-
-    public void setGlobalList(List<Global> globalList) {
-        this.globalList = globalList;
-    }
-
-    @XmlTransient
-    public List<Nacional> getNacionalList() {
-        return nacionalList;
-    }
-
-    public void setNacionalList(List<Nacional> nacionalList) {
-        this.nacionalList = nacionalList;
-    }
-
-    @XmlTransient
     public List<Subnacional> getSubnacionalList() {
         return subnacionalList;
     }
@@ -188,6 +170,33 @@ public class Elemento implements Serializable {
 
     public void setProtocoloList(List<Protocolo> protocoloList) {
         this.protocoloList = protocoloList;
+    }
+
+    @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
+    public List<Global> getGlobalList() {
+        return globalList;
+    }
+
+    public void setGlobalList(List<Global> globalList) {
+        this.globalList = globalList;
+    }
+
+    @XmlTransient
+    public List<Nacional> getNacionalList() {
+        return nacionalList;
+    }
+
+    public void setNacionalList(List<Nacional> nacionalList) {
+        this.nacionalList = nacionalList;
     }
 
     @XmlTransient
@@ -214,15 +223,6 @@ public class Elemento implements Serializable {
 
     public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
         this.uSUARIOusuarioid = uSUARIOusuarioid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
     }
 
     @Override

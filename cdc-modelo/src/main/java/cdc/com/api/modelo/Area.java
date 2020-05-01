@@ -199,10 +199,6 @@ public class Area implements Serializable {
         @JoinColumn(name = "SITIO_sitio_id", referencedColumnName = "sitio_id")})
     @ManyToMany
     private List<Sitio> sitioList;
-    @OneToMany(mappedBy = "aREAareaid")
-    private List<ContactoHasArea> contactoHasAreaList;
-    @OneToMany(mappedBy = "aREAareaid")
-    private List<ListaElemento> listaElementoList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
@@ -212,6 +208,10 @@ public class Area implements Serializable {
     private List<Observaciones> observacionesList;
     @OneToMany(mappedBy = "aREAareaid")
     private List<AreaHasLote> areaHasLoteList;
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<ContactoHasArea> contactoHasAreaList;
+    @OneToMany(mappedBy = "aREAareaid")
+    private List<ListaElemento> listaElementoList;
 
     public Area() {
     }
@@ -629,24 +629,6 @@ public class Area implements Serializable {
         this.sitioList = sitioList;
     }
 
-    @XmlTransient
-    public List<ContactoHasArea> getContactoHasAreaList() {
-        return contactoHasAreaList;
-    }
-
-    public void setContactoHasAreaList(List<ContactoHasArea> contactoHasAreaList) {
-        this.contactoHasAreaList = contactoHasAreaList;
-    }
-
-    @XmlTransient
-    public List<ListaElemento> getListaElementoList() {
-        return listaElementoList;
-    }
-
-    public void setListaElementoList(List<ListaElemento> listaElementoList) {
-        this.listaElementoList = listaElementoList;
-    }
-
     public Usuario getUSUARIOusuarioid() {
         return uSUARIOusuarioid;
     }
@@ -680,6 +662,24 @@ public class Area implements Serializable {
 
     public void setAreaHasLoteList(List<AreaHasLote> areaHasLoteList) {
         this.areaHasLoteList = areaHasLoteList;
+    }
+
+    @XmlTransient
+    public List<ContactoHasArea> getContactoHasAreaList() {
+        return contactoHasAreaList;
+    }
+
+    public void setContactoHasAreaList(List<ContactoHasArea> contactoHasAreaList) {
+        this.contactoHasAreaList = contactoHasAreaList;
+    }
+
+    @XmlTransient
+    public List<ListaElemento> getListaElementoList() {
+        return listaElementoList;
+    }
+
+    public void setListaElementoList(List<ListaElemento> listaElementoList) {
+        this.listaElementoList = listaElementoList;
     }
 
     @Override

@@ -46,11 +46,11 @@ public class Nacion implements Serializable {
     private String codigo;
     @Column(name = "nombre")
     private String nombre;
+    @OneToMany(mappedBy = "nACIONnacionid")
+    private List<Subnacion> subnacionList;
     @JoinColumn(name = "USUARIO_usuario_id", referencedColumnName = "usuario_id")
     @ManyToOne
     private Usuario uSUARIOusuarioid;
-    @OneToMany(mappedBy = "nACIONnacionid")
-    private List<Subnacion> subnacionList;
 
     public Nacion() {
     }
@@ -83,14 +83,6 @@ public class Nacion implements Serializable {
         this.nombre = nombre;
     }
 
-    public Usuario getUSUARIOusuarioid() {
-        return uSUARIOusuarioid;
-    }
-
-    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
-        this.uSUARIOusuarioid = uSUARIOusuarioid;
-    }
-
     @XmlTransient
     public List<Subnacion> getSubnacionList() {
         return subnacionList;
@@ -98,6 +90,14 @@ public class Nacion implements Serializable {
 
     public void setSubnacionList(List<Subnacion> subnacionList) {
         this.subnacionList = subnacionList;
+    }
+
+    public Usuario getUSUARIOusuarioid() {
+        return uSUARIOusuarioid;
+    }
+
+    public void setUSUARIOusuarioid(Usuario uSUARIOusuarioid) {
+        this.uSUARIOusuarioid = uSUARIOusuarioid;
     }
 
     @Override

@@ -269,11 +269,11 @@ public class Localizacion implements Serializable {
     private List<Sitio> sitioList;
     @OneToMany(mappedBy = "lOCALIZACIONlocalizacionid")
     private List<Proteccion> proteccionList;
+    @OneToMany(mappedBy = "lOCALIZACIONlocalizacionid")
+    private List<Observaciones> observacionesList;
     @JoinColumn(name = "RASTREO_rastreo_id", referencedColumnName = "rastreo_id")
     @ManyToOne
     private Rastreo rASTREOrastreoid;
-    @OneToMany(mappedBy = "lOCALIZACIONlocalizacionid")
-    private List<Observaciones> observacionesList;
 
     public Localizacion() {
     }
@@ -868,14 +868,6 @@ public class Localizacion implements Serializable {
         this.proteccionList = proteccionList;
     }
 
-    public Rastreo getRASTREOrastreoid() {
-        return rASTREOrastreoid;
-    }
-
-    public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
-        this.rASTREOrastreoid = rASTREOrastreoid;
-    }
-
     @XmlTransient
     public List<Observaciones> getObservacionesList() {
         return observacionesList;
@@ -883,6 +875,14 @@ public class Localizacion implements Serializable {
 
     public void setObservacionesList(List<Observaciones> observacionesList) {
         this.observacionesList = observacionesList;
+    }
+
+    public Rastreo getRASTREOrastreoid() {
+        return rASTREOrastreoid;
+    }
+
+    public void setRASTREOrastreoid(Rastreo rASTREOrastreoid) {
+        this.rASTREOrastreoid = rASTREOrastreoid;
     }
 
     @Override

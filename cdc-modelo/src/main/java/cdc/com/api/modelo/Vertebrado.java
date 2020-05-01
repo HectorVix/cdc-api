@@ -364,12 +364,12 @@ public class Vertebrado implements Serializable {
     @Column(name = "ndicb")
     private String ndicb;
     @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
+    private List<Foto> fotoList;
+    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
     private List<Distribucion2> distribucion2List;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
-    @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
-    private List<Foto> fotoList;
     @OneToMany(mappedBy = "vERTEBRADOvertebradoid")
     private List<Distribucion> distribucionList;
 
@@ -1229,6 +1229,15 @@ public class Vertebrado implements Serializable {
     }
 
     @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
     public List<Distribucion2> getDistribucion2List() {
         return distribucion2List;
     }
@@ -1243,15 +1252,6 @@ public class Vertebrado implements Serializable {
 
     public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
         this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
     }
 
     @XmlTransient

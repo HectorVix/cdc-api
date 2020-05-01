@@ -203,12 +203,12 @@ public class Planta implements Serializable {
     @Column(name = "fenologia")
     private String fenologia;
     @OneToMany(mappedBy = "pLANTAplantaid")
+    private List<Foto> fotoList;
+    @OneToMany(mappedBy = "pLANTAplantaid")
     private List<Distribucion2> distribucion2List;
     @JoinColumn(name = "CARACTERIZACION_caracterizacion_id", referencedColumnName = "caracterizacion_id")
     @ManyToOne
     private Caracterizacion cARACTERIZACIONcaracterizacionid;
-    @OneToMany(mappedBy = "pLANTAplantaid")
-    private List<Foto> fotoList;
     @OneToMany(mappedBy = "pLANTAplantaid")
     private List<Distribucion> distribucionList;
 
@@ -644,6 +644,15 @@ public class Planta implements Serializable {
     }
 
     @XmlTransient
+    public List<Foto> getFotoList() {
+        return fotoList;
+    }
+
+    public void setFotoList(List<Foto> fotoList) {
+        this.fotoList = fotoList;
+    }
+
+    @XmlTransient
     public List<Distribucion2> getDistribucion2List() {
         return distribucion2List;
     }
@@ -658,15 +667,6 @@ public class Planta implements Serializable {
 
     public void setCARACTERIZACIONcaracterizacionid(Caracterizacion cARACTERIZACIONcaracterizacionid) {
         this.cARACTERIZACIONcaracterizacionid = cARACTERIZACIONcaracterizacionid;
-    }
-
-    @XmlTransient
-    public List<Foto> getFotoList() {
-        return fotoList;
-    }
-
-    public void setFotoList(List<Foto> fotoList) {
-        this.fotoList = fotoList;
     }
 
     @XmlTransient
