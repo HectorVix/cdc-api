@@ -98,7 +98,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Rastreo.findByCodfuentes", query = "SELECT r FROM Rastreo r WHERE r.codfuentes = :codfuentes")
     , @NamedQuery(name = "Rastreo.findByActualizag", query = "SELECT r FROM Rastreo r WHERE r.actualizag = :actualizag")
     , @NamedQuery(name = "Rastreo.findByActualizan", query = "SELECT r FROM Rastreo r WHERE r.actualizan = :actualizan")
-    , @NamedQuery(name = "Rastreo.findByActualizas", query = "SELECT r FROM Rastreo r WHERE r.actualizas = :actualizas")})
+    , @NamedQuery(name = "Rastreo.findByActualizas", query = "SELECT r FROM Rastreo r WHERE r.actualizas = :actualizas")
+    , @NamedQuery(name = "Rastreo.findByReinoId", query = "SELECT r FROM Rastreo r WHERE r.reinoId = :reinoId")
+    , @NamedQuery(name = "Rastreo.findByPhylumId", query = "SELECT r FROM Rastreo r WHERE r.phylumId = :phylumId")
+    , @NamedQuery(name = "Rastreo.findByClaseId", query = "SELECT r FROM Rastreo r WHERE r.claseId = :claseId")
+    , @NamedQuery(name = "Rastreo.findByOrdenId", query = "SELECT r FROM Rastreo r WHERE r.ordenId = :ordenId")
+    , @NamedQuery(name = "Rastreo.findByFamiliaId", query = "SELECT r FROM Rastreo r WHERE r.familiaId = :familiaId")
+    , @NamedQuery(name = "Rastreo.findByGeneroId", query = "SELECT r FROM Rastreo r WHERE r.generoId = :generoId")
+    , @NamedQuery(name = "Rastreo.findByEspecieId", query = "SELECT r FROM Rastreo r WHERE r.especieId = :especieId")
+    , @NamedQuery(name = "Rastreo.findByInfraspecificepithetId", query = "SELECT r FROM Rastreo r WHERE r.infraspecificepithetId = :infraspecificepithetId")})
 public class Rastreo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -242,6 +250,22 @@ public class Rastreo implements Serializable {
     @Column(name = "actualizas")
     @Temporal(TemporalType.TIMESTAMP)
     private Date actualizas;
+    @Column(name = "reino_id")
+    private Integer reinoId;
+    @Column(name = "phylum_id")
+    private Integer phylumId;
+    @Column(name = "clase_id")
+    private Integer claseId;
+    @Column(name = "orden_id")
+    private Integer ordenId;
+    @Column(name = "familia_id")
+    private Integer familiaId;
+    @Column(name = "genero_id")
+    private Integer generoId;
+    @Column(name = "especie_id")
+    private Integer especieId;
+    @Column(name = "infraspecificepithet_id")
+    private Integer infraspecificepithetId;
     @OneToMany(mappedBy = "rASTREOrastreoid")
     private List<Fuente> fuenteList;
     @OneToMany(mappedBy = "rASTREOrastreoid")
@@ -777,6 +801,70 @@ public class Rastreo implements Serializable {
 
     public void setActualizas(Date actualizas) {
         this.actualizas = actualizas;
+    }
+
+    public Integer getReinoId() {
+        return reinoId;
+    }
+
+    public void setReinoId(Integer reinoId) {
+        this.reinoId = reinoId;
+    }
+
+    public Integer getPhylumId() {
+        return phylumId;
+    }
+
+    public void setPhylumId(Integer phylumId) {
+        this.phylumId = phylumId;
+    }
+
+    public Integer getClaseId() {
+        return claseId;
+    }
+
+    public void setClaseId(Integer claseId) {
+        this.claseId = claseId;
+    }
+
+    public Integer getOrdenId() {
+        return ordenId;
+    }
+
+    public void setOrdenId(Integer ordenId) {
+        this.ordenId = ordenId;
+    }
+
+    public Integer getFamiliaId() {
+        return familiaId;
+    }
+
+    public void setFamiliaId(Integer familiaId) {
+        this.familiaId = familiaId;
+    }
+
+    public Integer getGeneroId() {
+        return generoId;
+    }
+
+    public void setGeneroId(Integer generoId) {
+        this.generoId = generoId;
+    }
+
+    public Integer getEspecieId() {
+        return especieId;
+    }
+
+    public void setEspecieId(Integer especieId) {
+        this.especieId = especieId;
+    }
+
+    public Integer getInfraspecificepithetId() {
+        return infraspecificepithetId;
+    }
+
+    public void setInfraspecificepithetId(Integer infraspecificepithetId) {
+        this.infraspecificepithetId = infraspecificepithetId;
     }
 
     @XmlTransient
